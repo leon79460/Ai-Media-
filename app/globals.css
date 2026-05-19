@@ -1,0 +1,328 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import "tailwindcss";
+
+/* ============================================================
+   globals.css — AI Media Website
+   HOW TO EDIT: Change colors/speeds here to update whole site
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --gray: #3d3d3d;
+  --light: #f5f5f5;
+  --border: #e3e3e3;
+  
+  --font: 'Satoshi', 'Inter', sans-serif;
+  
+  --font-main: var(--font);
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.06), 0 14px 14px rgba(0, 0, 0, 0.05), inset 0 3px 1px white;
+  --max-width: 1200px;
+}
+
+/* ── Keyframes ── */
+@keyframes navDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes badgePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(20px)
+  }
+
+  60% {
+    transform: scale(1.08) translateY(-4px)
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0)
+  }
+}
+
+@keyframes sphereIn {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-180deg)
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg)
+  }
+}
+
+@keyframes sphereFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg)
+  }
+
+  40% {
+    transform: translateY(-14px) rotate(2deg)
+  }
+
+  70% {
+    transform: translateY(-7px) rotate(-1deg)
+  }
+}
+
+@keyframes letterUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) skewX(-12deg)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) skewX(0deg)
+  }
+}
+
+@keyframes linkDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes btnPop {
+  from {
+    opacity: 0;
+    transform: scale(0.75)
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1)
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8
+  }
+
+  100% {
+    transform: scale(2.6);
+    opacity: 0
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%
+  }
+
+  30% {
+    left: 160%
+  }
+
+  100% {
+    left: 160%
+  }
+}
+
+@keyframes scrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4
+  }
+
+  50% {
+    transform: translateY(6px);
+    opacity: 1
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0)
+  }
+
+  to {
+    transform: translateX(-50%)
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+/* ── Hover helpers ── */
+.nav-link:hover {
+  background: rgba(0, 0, 0, 0.07) !important;
+}
+
+.btn-p:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+.btn-s:hover {
+  transform: translateY(-3px) !important;
+  background: #e6e6e6 !important;
+}
+
+.nav-cta:hover {
+  opacity: 0.85 !important;
+  transform: scale(1.04) !important;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.1) !important;
+}
+
+.blog-card:hover .read-more {
+  text-decoration: underline;
+}
+
+/* ── Section shared styles ── */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--light);
+  border: 1px solid rgba(200, 200, 200, 0.6);
+  border-radius: 60px;
+  padding: 6px 16px;
+  height: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 white;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 12px;
+  color: #000;
+  white-space: nowrap;
+}
+
+.section-title {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 56px);
+  text-align: center;
+  line-height: 1.4;
+  background: linear-gradient(to bottom, #e5e5e5 0%, #000 30%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-sub {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 16px;
+  color: #3d3d3d;
+  opacity: 0.8;
+  text-align: center;
+  line-height: 1.64;
+}
+
+/* ── Responsive ── */
+@media (max-width:1024px) {
+  .pricing-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width:768px) {
+  .nav-links {
+    display: none !important;
+  }
+
+  .hero-title {
+    font-size: 48px !important;
+    letter-spacing: -3px !important;
+  }
+
+  .sphere {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .sphere-inner {
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  .section-inner {
+    padding: 60px 20px !important;
+  }
+
+  .compare-wrap {
+    overflow-x: auto !important;
+  }
+}
+body {
+  font-family: var(--font-main);
+}
+
+
