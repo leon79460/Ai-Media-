@@ -220,24 +220,32 @@ function BuildArt() {
 
 function GrowArt() {
   const bars = [
-    { height: 112 },
-    { height: 74 },
-    { height: 158 },
-    { height: 102 },
-    { height: 78 },
+    { left: 75, top: 118, width: 44, height: 74 },
+    { left: 130, top: 35, width: 44, height: 158 },
+    { left: 186, top: 92, width: 44, height: 101 },
+    { left: 241, top: 116, width: 44, height: 77 },
   ];
 
   return (
-    <div style={{ position: 'relative', height: 176 }}>
+    <div
+      style={{
+        position: 'relative',
+        width: 320,
+        height: 214,
+        margin: '0 auto',
+      }}
+    >
       <div
         style={{
           position: 'absolute',
-          left: '50%',
+          left: 143,
           top: 0,
-          transform: 'translateX(-50%)',
           borderRadius: 6,
           background: '#f5f5f5',
-          padding: '7px 13px',
+          minWidth: 96,
+          height: 26,
+          display: 'grid',
+          placeItems: 'center',
           fontFamily: 'var(--font)',
           fontSize: 12,
           color: '#000',
@@ -251,9 +259,9 @@ function GrowArt() {
       <div
         style={{
           position: 'absolute',
-          left: 0,
-          top: 90,
-          width: 34,
+          left: 31,
+          top: 80,
+          width: 25,
           height: 112,
           borderRadius: 6,
           background: '#f5f5f5',
@@ -277,39 +285,33 @@ function GrowArt() {
           AFTER
         </span>
       </div>
-      <div
-        style={{
-          position: 'absolute',
-          left: 48,
-          right: 35,
-          bottom: 0,
-          display: 'flex',
-          alignItems: 'end',
-          gap: 16,
-        }}
-      >
-        {bars.map((bar, index) => (
-          <div
-            key={index}
-            style={{
-              width: 44,
-              height: bar.height,
-              borderRadius: 7,
-              background: '#f5f5f5',
-              boxShadow:
-                'inset 0 3px 1px rgba(255,255,255,0.95), 0 16px 24px rgba(0,0,0,0.12)',
-            }}
-          />
-        ))}
-      </div>
+      {bars.map((bar, index) => (
+        <div
+          key={index}
+          style={{
+            position: 'absolute',
+            left: bar.left,
+            top: bar.top,
+            width: bar.width,
+            height: bar.height,
+            borderRadius: 7,
+            background: '#f5f5f5',
+            boxShadow:
+              'inset 0 3px 1px rgba(255,255,255,0.95), 0 16px 24px rgba(0,0,0,0.12)',
+          }}
+        />
+      ))}
       <div
         style={{
           position: 'absolute',
           right: 0,
-          top: 112,
+          top: 125,
           borderRadius: 6,
           background: '#f5f5f5',
-          padding: '7px 11px',
+          width: 64,
+          height: 26,
+          display: 'grid',
+          placeItems: 'center',
           fontFamily: 'var(--font)',
           fontSize: 12,
           color: '#000',
@@ -402,7 +404,12 @@ function ProcessCard({ card, delay }) {
         flexDirection: 'column',
       }}
     >
-      <div style={{ height: 214, marginBottom: 42 }}>
+      <div
+        style={{
+          height: 214,
+          marginBottom: card.id === 'grow' ? 28 : 42,
+        }}
+      >
         <CardArt id={card.id} />
       </div>
 
