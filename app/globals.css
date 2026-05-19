@@ -428,7 +428,7 @@ body {
 }
 
 .reveal-motion {
-  opacity: 0 !important;
+  opacity: 0;
   filter: blur(14px);
   transform: translate3d(0, 34px, 0) scale(0.985);
   transition:

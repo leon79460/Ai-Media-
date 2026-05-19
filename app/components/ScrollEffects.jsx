@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 
 const REVEAL_SELECTOR = [
-  'section:not(#home)',
   '.section-badge',
   '.section-title',
   '.section-sub',
@@ -47,12 +46,17 @@ export default function ScrollEffects() {
         });
       },
       {
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.12,
+        rootMargin: '0px 0px 120px 0px',
+        threshold: 0.04,
       },
     );
 
     revealTargets.forEach(el => observer.observe(el));
+
+    // Safety net: content should never stay hidden if an observer is delayed.
+    const revealFallback = window.setTimeout(() => {
+      revealTargets.forEach(el => el.classList.add('is-visible'));
+    }, 1400);
 
     const glowTargets = Array.from(
       document.querySelectorAll('.card-hover, .process-card, .blog-card'),
@@ -104,6 +108,7 @@ export default function ScrollEffects() {
 
     return () => {
       observer.disconnect();
+      window.clearTimeout(revealFallback);
       glowTargets.forEach(el => {
         el.removeEventListener('pointermove', updateGlow);
       });
