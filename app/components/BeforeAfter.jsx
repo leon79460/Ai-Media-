@@ -216,7 +216,7 @@ export default function BeforeAfter() {
                   fontWeight: 500,
                   fontSize: '20px',
                   color: '#f5f5f5',
-                  letterSpacing: '-0.4px',
+                  letterSpacing: 0,
                 }}
               >
                 Before
@@ -235,7 +235,7 @@ export default function BeforeAfter() {
                   fontWeight: 500,
                   fontSize: '20px',
                   color: '#f5f5f5',
-                  letterSpacing: '-0.4px',
+                  letterSpacing: 0,
                 }}
               >
                 After

@@ -108,7 +108,7 @@ function BlogCard({ post, delay }) {
               fontWeight: 500,
               fontSize: '20px',
               color: '#000',
-              letterSpacing: '-0.2px',
+              letterSpacing: 0,
               lineHeight: 1.4,
             }}
           >

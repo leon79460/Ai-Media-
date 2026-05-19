@@ -182,7 +182,7 @@ function AnimatedTitle({ text }) {
         fontFamily: 'var(--font-main)',
         fontWeight: 700,
         fontSize: '100px',
-        letterSpacing: '-6px',
+        letterSpacing: 0,
         textTransform: 'uppercase',
         lineHeight: 1.1,
         color: '#000',
@@ -445,7 +445,7 @@ export default function Hero() {
           {/* Black button */}
           <a
             href={BTN_PRIMARY.href}
-            className="btn-primary"
+            className="btn-p"
             style={{
               position: 'relative',
               overflow: 'hidden',
@@ -487,7 +487,7 @@ export default function Hero() {
           {/* Light gray button */}
           <a
             href={BTN_SECONDARY.href}
-            className="btn-secondary"
+            className="btn-s"
             style={{
               backgroundColor: '#f5f5f5',
               color: '#000',

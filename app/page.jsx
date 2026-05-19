@@ -1,13 +1,29 @@
-/* eslint-disable @next/next/no-img-element */
+'use client';
+
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import IntroVideo from './components/IntroVideo';
+import Process from './components/Process';
+import Features from './components/Features';
+import BeforeAfter from './components/BeforeAfter';
+import Pricing from './components/Pricing';
+import Blogs from './components/Blogs';
+import WhyUs from './components/WhyUs';
+import Footer from './components/Footer';
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#f5f5f5]">
-      <img
-        src="/home-design.svg"
-        alt="AI Media homepage"
-        className="block h-auto w-full"
-      />
-    </main>
+    <>
+      <Navbar />
+      <Hero />
+      <IntroVideo />
+      <Process />
+      <Features />
+      <BeforeAfter />
+      <Pricing />
+      <Blogs />
+      <WhyUs />
+      <Footer />
+    </>
   );
 }

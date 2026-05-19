@@ -7,7 +7,7 @@
 import { useState } from 'react';
 
 // ⚠️ Save to /public/ before going live
-const BG_IMAGE = 'footer-bg.jpg';
+const BG_IMAGE = '/footer-bg.jpg.png';
 const LOGO_IMAGE = 'logo.png';
 const ICON_X =
   'https://www.figma.com/api/mcp/asset/692032a9-1b13-44d9-9fc0-700b191bc32c';
@@ -161,12 +161,13 @@ export default function Footer() {
                 </div>
                 {/* Brand name — EDIT to change */}
                 <span
+                  className="footer-brand"
                   style={{
                     fontFamily: 'var(--font)',
                     fontWeight: 500,
-                    fontSize: 'clamp(28px,4vw,64px)',
+                    fontSize: '64px',
                     color: '#f5f5f5',
-                    letterSpacing: '-2px',
+                    letterSpacing: 0,
                     textTransform: 'uppercase',
                     lineHeight: 1.64,
                     whiteSpace: 'nowrap',

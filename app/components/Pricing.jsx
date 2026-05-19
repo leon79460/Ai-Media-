@@ -184,7 +184,7 @@ function PricingCard({ plan, isYearly, delay }) {
             fontWeight: 500,
             fontSize: '44px',
             color: '#000',
-            letterSpacing: '-1px',
+            letterSpacing: 0,
             lineHeight: 1,
           }}
         >

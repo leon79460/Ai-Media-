@@ -44,7 +44,7 @@ export default function Navbar() {
           fontWeight: 700,
           fontSize: '22px',
           color: '#030303',
-          letterSpacing: '-0.5px',
+          letterSpacing: 0,
           userSelect: 'none',
         }}
       >

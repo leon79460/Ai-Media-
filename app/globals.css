@@ -262,7 +262,7 @@ body {
 .section-title {
   font-family: var(--font);
   font-weight: 500;
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: 56px;
   text-align: center;
   line-height: 1.4;
   background: linear-gradient(to bottom, #e5e5e5 0%, #000 30%);
@@ -300,7 +300,7 @@ body {
 
   .hero-title {
     font-size: 48px !important;
-    letter-spacing: -3px !important;
+    letter-spacing: 0 !important;
   }
 
   .sphere {
@@ -308,9 +308,17 @@ body {
     height: 70px !important;
   }
 
-  .sphere-inner {
+  .sphere-in {
     width: 58px !important;
     height: 58px !important;
+  }
+
+  .section-title {
+    font-size: 40px !important;
+  }
+
+  .footer-brand {
+    font-size: 38px !important;
   }
 
   .section-inner {

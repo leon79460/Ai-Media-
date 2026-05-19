@@ -147,7 +147,7 @@ export default function WhyUs() {
             style={{
               fontFamily: 'var(--font)',
               fontWeight: 500,
-              fontSize: 'clamp(32px,4vw,56px)',
+              fontSize: '56px',
               color: '#030303',
               lineHeight: 1.4,
               textAlign: 'center',
