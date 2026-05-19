@@ -1,4 +1,5 @@
 import "./globals.css";
+import ScrollEffects from "./components/ScrollEffects";
 
 export const metadata = {
   title: "AI Media - AI Powered Creative Agency",
@@ -9,7 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="m-0 bg-[#f5f5f5] p-0 antialiased">{children}</body>
+      <body className="m-0 bg-[#f5f5f5] p-0 antialiased">
+        <ScrollEffects />
+        {children}
+      </body>
     </html>
   );
 }
