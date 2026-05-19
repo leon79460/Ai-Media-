@@ -317,6 +317,16 @@ body {
     font-size: 40px !important;
   }
 
+  .process-title {
+    font-size: 40px !important;
+    line-height: 1.16 !important;
+  }
+
+  .process-card {
+    max-width: 100% !important;
+    min-height: auto !important;
+  }
+
   .footer-brand {
     font-size: 38px !important;
   }
