@@ -7,7 +7,7 @@
 import { useState } from 'react';
 
 // ⚠️ Save to /public/ before going live
-const BG_IMAGE = 'footer-bg.jpg';
+const BG_IMAGE = 'footer-bg.png';
 const LOGO_IMAGE = 'logo.png';
 const ICON_X =
   'https://www.figma.com/api/mcp/asset/692032a9-1b13-44d9-9fc0-700b191bc32c';
