@@ -1,20 +1,26 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 const REVEAL_SELECTOR = [
   '.section-badge',
   '.section-title',
   '.section-sub',
-  '.card-hover',
   '.process-card',
-  '.pricing-grid > *',
-  '.features-grid > *',
+  '.service-card',
+  '.pricing-card',
+  '.why-card',
   '.blog-card',
-  'footer > div > div',
+  '.blog-index-card',
+  '.blog-stat',
+  '.blog-tool',
+  '.blog-article',
+  '.blog-toc',
 ].join(',');
 
 export default function ScrollEffects() {
+  const pathname = usePathname();
   const progressRef = useRef(null);
 
   useEffect(() => {
@@ -53,13 +59,10 @@ export default function ScrollEffects() {
 
     revealTargets.forEach(el => observer.observe(el));
 
-    // Safety net: content should never stay hidden if an observer is delayed.
-    const revealFallback = window.setTimeout(() => {
-      revealTargets.forEach(el => el.classList.add('is-visible'));
-    }, 1400);
-
     const glowTargets = Array.from(
-      document.querySelectorAll('.card-hover, .process-card, .blog-card'),
+      document.querySelectorAll(
+        '.card-hover, .process-card, .blog-card, .service-card, .pricing-card, .why-card, .about-card',
+      ),
     );
 
     const updateGlow = event => {
@@ -106,9 +109,20 @@ export default function ScrollEffects() {
     window.addEventListener('scroll', updateProgress, { passive: true });
     window.addEventListener('resize', updateProgress);
 
+    const pendingTarget = sessionStorage.getItem('pendingScrollTarget');
+    if (pathname === '/' && pendingTarget) {
+      sessionStorage.removeItem('pendingScrollTarget');
+      window.setTimeout(() => {
+        document.getElementById(pendingTarget)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+        window.history.replaceState(null, '', '/');
+      }, 80);
+    }
+
     return () => {
       observer.disconnect();
-      window.clearTimeout(revealFallback);
       glowTargets.forEach(el => {
         el.removeEventListener('pointermove', updateGlow);
       });
@@ -116,7 +130,7 @@ export default function ScrollEffects() {
       window.removeEventListener('scroll', updateProgress);
       window.removeEventListener('resize', updateProgress);
     };
-  }, []);
+  }, [pathname]);
 
   return <div ref={progressRef} className="scroll-progress" aria-hidden="true" />;
 }

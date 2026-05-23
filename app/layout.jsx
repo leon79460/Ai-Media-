@@ -10,7 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="m-0 bg-[#f5f5f5] p-0 antialiased">
+      <body
+        className="m-0 bg-[#f5f5f5] p-0 antialiased"
+        suppressHydrationWarning
+      >
         <ScrollEffects />
         {children}
       </body>

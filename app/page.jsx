@@ -1,15 +1,13 @@
-'use client';
-
-import Navbar from './components/Navbar';
+import BeforeAfter from './components/BeforeAfter';
+import Blogs from './components/Blogs';
+import Features from './components/Services';
+import Footer from './components/Footer';
 import Hero from './components/Hero';
 import IntroVideo from './components/IntroVideo';
-import Process from './components/Process';
-import Features from './components/Features';
-import BeforeAfter from './components/BeforeAfter';
+import Navbar from './components/Navbar';
 import Pricing from './components/Pricing';
-import Blogs from './components/Blogs';
+import Process from './components/Process';
 import WhyUs from './components/WhyUs';
-import Footer from './components/Footer';
 
 export default function HomePage() {
   return (

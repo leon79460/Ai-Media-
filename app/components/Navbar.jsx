@@ -1,19 +1,95 @@
-// ============================================================
-// components/Navbar.jsx — AI Media Website
-// ─────────────────────────────────────────────────────────────
-// HOW TO EDIT:
-// - To change nav links: edit the LINKS array below
-// - To change logo text: find "AI Media" and change it
-// - To change button text: find "Get Started" and change it
-// - To change button link: change href="#contact"
-// ============================================================
-
 'use client';
 
-// ── Nav link labels — EDIT THESE to change menu items ────────
-const LINKS = ['Home', 'Services', 'About us', 'Works', 'Blogs'];
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+
+const LINKS = [
+  { label: 'Home', target: 'home' },
+  { label: 'Services', target: 'services' },
+  { label: 'Pricing', target: 'pricing' },
+  { label: 'Works', target: 'works' },
+  { label: 'About us', href: '/about' },
+];
+
+const MORE_LINKS = [
+  { label: 'Contact', href: '/contact' },
+  { label: 'Blogs', href: '/blog' },
+];
+const MOBILE_LINKS = [...LINKS, ...MORE_LINKS];
 
 export default function Navbar() {
+  const moreRef = useRef(null);
+  const pathname = usePathname();
+  const router = useRouter();
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileNav, setIsMobileNav] = useState(false);
+  // Logo is hidden on the home page until user scrolls past hero logos.
+  // On all other pages it is always visible.
+  const [logoRevealed, setLogoRevealed] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 1024px)');
+    const update = () => setIsMobileNav(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  // Reveal navbar logo when the flying clone animation is nearly complete.
+  // Bidirectional: hides again if the user scrolls back up.
+  // On non-home pages the logo is always shown.
+  useEffect(() => {
+    if (pathname !== '/') {
+      setLogoRevealed(true);
+      return;
+    }
+
+    setLogoRevealed(false);
+
+    // Hero.jsx runs the animation over SCROLL_END=300px.
+    // Reveal at ~73% (220px) — clone is fading out and arriving at the slot.
+    const REVEAL_AT = 220;
+
+    function onScroll() {
+      setLogoRevealed(window.scrollY >= REVEAL_AT);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Run once in case page loads mid-scroll
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [pathname]);
+
+  useEffect(() => {
+    function closeMoreOnOutsideClick(event) {
+      if (!moreRef.current?.contains(event.target)) {
+        setMoreOpen(false);
+      }
+    }
+    document.addEventListener('pointerdown', closeMoreOnOutsideClick);
+    return () => document.removeEventListener('pointerdown', closeMoreOnOutsideClick);
+  }, []);
+
+  function scrollToSection(target) {
+    setMobileOpen(false);
+    setMoreOpen(false);
+
+    if (pathname !== '/') {
+      sessionStorage.setItem('pendingScrollTarget', target);
+      router.push('/');
+      return;
+    }
+
+    document.getElementById(target)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    window.history.replaceState(null, '', '/');
+  }
+
   return (
     <nav
       style={{
@@ -22,90 +98,240 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        height: '74px',
+        height: '78px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 40px',
-        /* Frosted glass effect */
-        backdropFilter: 'blur(6px)',
-        WebkitBackdropFilter: 'blur(6px)',
-        backgroundColor: 'rgba(245,245,245,0.18)',
-        borderBottom: '1px solid #e3e3e3',
-        /* Slide down animation on page load */
-        animation: 'navDown 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both',
+        justifyContent: 'center',
+        padding: '0 24px',
+        background: 'rgba(245,245,245,0.82)',
+        backdropFilter: 'blur(18px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        borderBottom: '1px solid rgba(0,0,0,0.06)',
+        animation: 'navDown 0.72s cubic-bezier(0.16, 1, 0.3, 1) both',
       }}
     >
-      {/* ── Logo / Brand Name ────────────────────────────────
-          EDIT: Change "AI Media" to your brand name         */}
-      <span
-        style={{
-          fontFamily: 'var(--font-main)',
-          fontWeight: 700,
-          fontSize: '22px',
-          color: '#030303',
-          letterSpacing: 0,
-          userSelect: 'none',
-        }}
-      >
-        AI Media
-      </span>
-
-      {/* ── Nav Links ────────────────────────────────────────
-          Each link drops in one-by-one with staggered delay  */}
-      <div className="nav-links" style={{ display: 'flex', gap: '2px' }}>
-        {LINKS.map((link, i) => (
-          <a
-            key={link}
-            href={`#${link.toLowerCase().replace(' ', '')}`}
-            className="nav-link"
+      <div className="nav-shell">
+        {/* Logo — hidden until user scrolls past the hero logo on the home page */}
+        <button
+          type="button"
+          aria-label="AI Media home"
+          className="nav-logo"
+          onClick={() => scrollToSection('home')}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            border: 0,
+            background: 'transparent',
+            cursor: 'pointer',
+            padding: 0,
+            // Reveal animation: fade + slide down from above
+            opacity: logoRevealed ? 1 : 0,
+            transform: logoRevealed ? 'translateY(0)' : 'translateY(-16px)',
+            transition: 'opacity 0.5s cubic-bezier(0.33, 1, 0.68, 1), transform 0.54s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            pointerEvents: logoRevealed ? 'auto' : 'none',
+          }}
+        >
+          <Image
+            src="/logos/logo.png"
+            alt="AI Media"
+            width={200}
+            height={200}
+            priority
             style={{
+              width: 'auto',
+              height: '54px',
+              maxWidth: '170px',
+              objectFit: 'contain',
+              display: 'block',
+            }}
+          />
+        </button>
+
+        {/* Desktop pill nav */}
+        <div
+          className="nav-links"
+          style={{
+            borderColor: 'rgba(0,0,0,0.08)',
+            background: 'rgba(255,255,255,0.72)',
+            boxShadow: '0 12px 28px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.88)',
+          }}
+        >
+          {LINKS.map((link, i) => {
+            const isActive =
+              (pathname === '/' && i === 0) ||
+              (link.href && pathname === link.href);
+
+            const commonStyle = {
               padding: '8px 16px',
+              border: 0,
+              background: 'transparent',
+              cursor: 'pointer',
               fontFamily: 'var(--font-main)',
-              fontWeight: i === 0 ? 600 : 400,
+              fontWeight: isActive ? 600 : 400,
               fontSize: '15px',
-              color: i === 0 ? '#000' : '#3d3d3d',
+              color: isActive ? '#030303' : 'rgba(3,3,3,0.62)',
               textDecoration: 'none',
               borderRadius: '6px',
-              transition: 'background 0.2s',
-              /* Staggered drop-in: each link 0.1s later than prev */
+              transition: 'background 0.2s cubic-bezier(0.33, 1, 0.68, 1), color 0.2s cubic-bezier(0.33, 1, 0.68, 1)',
               opacity: 0,
-              animation: `linkDrop 0.4s ease ${0.4 + i * 0.1}s forwards`,
+              animation: `linkDrop 0.48s cubic-bezier(0.16, 1, 0.3, 1) ${0.22 + i * 0.07}s forwards`,
+            };
+
+            return link.href ? (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="nav-link"
+                onClick={() => { setMobileOpen(false); setMoreOpen(false); }}
+                style={commonStyle}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <button
+                key={link.label}
+                type="button"
+                className="nav-link"
+                onClick={() => scrollToSection(link.target)}
+                style={commonStyle}
+              >
+                {link.label}
+              </button>
+            );
+          })}
+
+          {/* More dropdown */}
+          <div
+            ref={moreRef}
+            className={`nav-more${moreOpen ? ' is-open' : ''}`}
+            onMouseEnter={() => setMoreOpen(true)}
+            onMouseLeave={() => setMoreOpen(false)}
+            style={{
+              position: 'relative',
+              opacity: 0,
+              animation: `linkDrop 0.48s cubic-bezier(0.16, 1, 0.3, 1) ${0.22 + LINKS.length * 0.07}s forwards`,
             }}
           >
-            {link}
-          </a>
-        ))}
-      </div>
+            <button
+              type="button"
+              className="nav-link nav-more-trigger"
+              aria-haspopup="menu"
+              aria-expanded={moreOpen}
+              onClick={() => setMoreOpen((o) => !o)}
+              onBlur={(e) => {
+                if (!e.currentTarget.parentElement?.contains(e.relatedTarget)) {
+                  setMoreOpen(false);
+                }
+              }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                padding: '8px 16px',
+                border: 0,
+                background: 'transparent',
+                color: 'rgba(3,3,3,0.62)',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-main)',
+                fontWeight: 400,
+                fontSize: '15px',
+                lineHeight: 1,
+                borderRadius: '6px',
+                transition: 'background 0.2s cubic-bezier(0.33, 1, 0.68, 1)',
+              }}
+            >
+              More
+              <span className="nav-more-caret" aria-hidden="true" />
+            </button>
 
-      {/* ── Get Started Button ───────────────────────────────
-          EDIT: Change text or href below                     */}
-      <a
-        href="#contact"
-        className="nav-cta"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          backgroundColor: '#000',
-          color: '#fff',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          padding: '0 20px',
-          height: '46px',
-          fontFamily: 'var(--font-main)',
-          fontWeight: 700,
-          fontSize: '14px',
-          cursor: 'pointer',
-          transition: 'opacity 0.2s, transform 0.2s',
-          boxShadow: '0 3px 10px rgba(0,0,0,0.3)',
-          /* Pops in last, after all links */
-          opacity: 0,
-          animation: 'btnPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 1s forwards',
-        }}
-      >
-        ✦ Get Started
-      </a>
+            <div className="nav-more-menu nav-more-menu-light" role="menu">
+              {MORE_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  role="menuitem"
+                  onClick={() => setMoreOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right actions */}
+        <div className="nav-actions">
+          {!isMobileNav && (
+            <Link
+              href="/"
+              className="nav-cta nav-desktop-cta"
+              onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: '#050505',
+                color: '#f5f5f5',
+                textDecoration: 'none',
+                borderRadius: '999px',
+                padding: '0 22px',
+                height: '42px',
+                fontFamily: 'var(--font-main)',
+                fontWeight: 700,
+                fontSize: '14px',
+                cursor: 'pointer',
+                transition: 'opacity 0.22s ease, transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                boxShadow: '0 3px 10px rgba(0,0,0,0.22)',
+                opacity: 0,
+                animation: 'btnPop 0.54s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
+              }}
+            >
+              Get Started
+            </Link>
+          )}
+
+          <button
+            className={`nav-mobile-toggle nav-mobile-toggle-light${mobileOpen ? ' is-open' : ''}`}
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((o) => !o)}
+          >
+            <span />
+            <span />
+          </button>
+        </div>
+
+        {/* Mobile panel */}
+        <div className={`nav-mobile-panel nav-mobile-panel-light${mobileOpen ? ' is-open' : ''}`}>
+          {MOBILE_LINKS.map((link) =>
+            link.target ? (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => scrollToSection(link.target)}
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+          <button
+            type="button"
+            className="nav-mobile-cta"
+            onClick={() => scrollToSection('contact')}
+          >
+            Get Started
+          </button>
+        </div>
+      </div>
     </nav>
   );
 }

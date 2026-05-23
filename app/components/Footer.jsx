@@ -1,20 +1,12 @@
-// ============================================================
-// Footer.jsx — Exact Figma match
-// EDIT: TAGLINE, COPYRIGHT, MENU_LINKS, SERVICE_LINKS
-// EDIT: SOCIAL_LINKS — replace # with your real social URLs
-// ============================================================
 'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 // ⚠️ Save to /public/ before going live
-const BG_IMAGE = '/footer-bg.jpg.png';
-const LOGO_IMAGE = 'logo.png';
-const ICON_X =
-  'https://www.figma.com/api/mcp/asset/692032a9-1b13-44d9-9fc0-700b191bc32c';
-const ICON_INSTA =
-  'https://www.figma.com/api/mcp/asset/620475f7-c1ee-4e71-89fc-7e93cb9d6831';
-const ICON_LINKEDIN =
-  'https://www.figma.com/api/mcp/asset/2cec57d9-b83e-4f9e-88a7-c7a2ff3cb4b3';
+const BG_VIDEO = '/video/footer-bg.mp4';
+const AI_LOGO_IMAGE = '/logos/hero-logo-1.png';
 
 // EDIT these
 const TAGLINE =
@@ -22,26 +14,90 @@ const TAGLINE =
 const COPYRIGHT = '© 2026 AI MEDIA · ALL RIGHTS RESERVED';
 
 const MENU_LINKS = [
-  { label: 'Blog', href: '#blogs' },
-  { label: 'Work', href: '#works' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Work', target: 'works' },
 ];
 
 const SERVICE_LINKS = [
-  { label: 'Design', href: '#services' },
-  { label: 'Development', href: '#services' },
-  { label: 'Marketing', href: '#services' },
-  { label: 'Content', href: '#services' },
-  { label: 'Privacy', href: '#' },
+  { label: 'Design', target: 'services' },
+  { label: 'Development', target: 'services' },
+  { label: 'Marketing', target: 'services' },
+  { label: 'Content', target: 'services' },
+  { label: 'Privacy', href: '/' },
 ];
 
 const SOCIAL_LINKS = [
-  { icon: ICON_X, href: 'https://x.com', label: 'X' },
-  { icon: ICON_INSTA, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: ICON_LINKEDIN, href: 'https://linkedin.com', label: 'LinkedIn' },
+  { href: 'https://x.com', label: 'X' },
+  { href: 'https://instagram.com', label: 'Instagram' },
+  { href: 'https://linkedin.com', label: 'LinkedIn' },
 ];
 
+function SocialIcon({ label }) {
+  if (label === 'X') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M18.9 3H22l-6.78 7.75L23 21h-6.1l-4.78-6.26L6.63 21H3.5l7.24-8.27L1 3h6.25l4.31 5.73L18.9 3zm-1.07 16h1.69L6.33 4.9H4.52L17.83 19z"
+          fill="#f5f5f5"
+        />
+      </svg>
+    );
+  }
+
+  if (label === 'Instagram') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="4" width="16" height="16" rx="4" stroke="#f5f5f5" strokeWidth="2" fill="none" />
+        <circle cx="12" cy="12" r="3.5" stroke="#f5f5f5" strokeWidth="2" fill="none" />
+        <circle cx="17.2" cy="6.8" r="1.1" fill="#f5f5f5" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M7 9.5h3V21H7V9.5zM8.5 8.1a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6zM13 9.5h2.9v1.6h.04c.4-.8 1.4-1.8 3-1.8 3.2 0 3.8 2.1 3.8 4.9V21h-3v-5.8c0-1.4-.02-3.2-1.95-3.2-1.95 0-2.25 1.5-2.25 3.1V21H13V9.5z"
+        fill="#f5f5f5"
+      />
+    </svg>
+  );
+}
+
 export default function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [email, setEmail] = useState('');
+
+  const footerLinkStyle = {
+    background: 'transparent',
+    border: 0,
+    cursor: 'pointer',
+    fontFamily: 'var(--font)',
+    fontWeight: 400,
+    fontSize: '16px',
+    color: '#f5f5f5',
+    textDecoration: 'none',
+    lineHeight: 1.64,
+    whiteSpace: 'nowrap',
+    transition: 'opacity 0.2s',
+    padding: 0,
+    textAlign: 'left',
+  };
+
+  function scrollToSection(target) {
+    if (pathname !== '/') {
+      sessionStorage.setItem('pendingScrollTarget', target);
+      router.push('/');
+      return;
+    }
+
+    document.getElementById(target)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    window.history.replaceState(null, '', '/');
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -53,12 +109,16 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      style={{ position: 'relative', overflow: 'hidden', minHeight: '699px' }}
+      style={{ position: 'relative', overflow: 'hidden' }}
     >
-      {/* Dark background image */}
-      <img
-        src={BG_IMAGE}
-        alt=""
+      {/* Dark background video */}
+      <video
+        aria-hidden="true"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
         style={{
           position: 'absolute',
           inset: 0,
@@ -67,7 +127,9 @@ export default function Footer() {
           objectFit: 'cover',
           pointerEvents: 'none',
         }}
-      />
+      >
+        <source src={BG_VIDEO} type="video/mp4" />
+      </video>
       {/* Semi-transparent blur overlay */}
       <div
         style={{
@@ -86,10 +148,10 @@ export default function Footer() {
           zIndex: 1,
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '118px 40px',
+          padding: '72px 40px 48px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '124px',
+          gap: '72px',
         }}
       >
         {/* ── TOP ROW: left content + right nav columns ── */}
@@ -117,63 +179,35 @@ export default function Footer() {
               style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}
             >
               <div
-                style={{ display: 'flex', alignItems: 'center', gap: '24px' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '14px' }}
               >
-                {/* Mini sphere */}
-                <div
+                <Image
+                  src={AI_LOGO_IMAGE}
+                  alt="AI"
+                  width={64}
+                  height={64}
                   style={{
                     width: '64px',
                     height: '64px',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(to bottom, #000, #fff)',
-                    position: 'relative',
+                    objectFit: 'contain',
                     flexShrink: 0,
-                    boxShadow: '0 2px 8px rgba(122,122,122,0.4)',
+                    filter: 'drop-shadow(0 8px 18px rgba(0,0,0,0.35))',
                   }}
-                >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%,-50%)',
-                      width: '53px',
-                      height: '53px',
-                      borderRadius: '50%',
-                      background:
-                        'linear-gradient(to right, #000, rgba(0,0,0,0.4))',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <img
-                      src={LOGO_IMAGE}
-                      alt="AI Media"
-                      style={{
-                        width: '49px',
-                        height: '49px',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </div>
-                </div>
-                {/* Brand name — EDIT to change */}
+                />
                 <span
                   className="footer-brand"
                   style={{
                     fontFamily: 'var(--font)',
-                    fontWeight: 500,
-                    fontSize: '64px',
+                    fontWeight: 400,
+                    fontSize: '50px',
                     color: '#f5f5f5',
                     letterSpacing: 0,
                     textTransform: 'uppercase',
-                    lineHeight: 1.64,
+                    lineHeight: 1,
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  AI Media
+                  MEDIA
                 </span>
               </div>
 
@@ -298,26 +332,30 @@ export default function Footer() {
                   gap: '10px',
                 }}
               >
-                {MENU_LINKS.map(l => (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    style={{
-                      fontFamily: 'var(--font)',
-                      fontWeight: 400,
-                      fontSize: '16px',
-                      color: '#f5f5f5',
-                      textDecoration: 'none',
-                      lineHeight: 1.64,
-                      whiteSpace: 'nowrap',
-                      transition: 'opacity 0.2s',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                    onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-                  >
-                    {l.label}
-                  </a>
-                ))}
+                {MENU_LINKS.map(l =>
+                  l.target ? (
+                    <button
+                      key={l.label}
+                      type="button"
+                      style={footerLinkStyle}
+                      onClick={() => scrollToSection(l.target)}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                    >
+                      {l.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={l.label}
+                      href={l.href}
+                      style={footerLinkStyle}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                    >
+                      {l.label}
+                    </Link>
+                  ),
+                )}
               </div>
             </div>
 
@@ -343,26 +381,30 @@ export default function Footer() {
                   gap: '10px',
                 }}
               >
-                {SERVICE_LINKS.map(l => (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    style={{
-                      fontFamily: 'var(--font)',
-                      fontWeight: 400,
-                      fontSize: '16px',
-                      color: '#f5f5f5',
-                      textDecoration: 'none',
-                      lineHeight: 1.64,
-                      whiteSpace: 'nowrap',
-                      transition: 'opacity 0.2s',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                    onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-                  >
-                    {l.label}
-                  </a>
-                ))}
+                {SERVICE_LINKS.map(l =>
+                  l.target ? (
+                    <button
+                      key={l.label}
+                      type="button"
+                      style={footerLinkStyle}
+                      onClick={() => scrollToSection(l.target)}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                    >
+                      {l.label}
+                    </button>
+                  ) : (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      style={footerLinkStyle}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                    >
+                      {l.label}
+                    </a>
+                  ),
+                )}
               </div>
             </div>
           </div>
@@ -393,7 +435,7 @@ export default function Footer() {
           </p>
 
           {/* Social icon buttons — EDIT: SOCIAL_LINKS */}
-          <div style={{ display: 'flex', gap: '16px' }}>
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             {SOCIAL_LINKS.map((s, i) => (
               <a
                 key={i}
@@ -415,23 +457,15 @@ export default function Footer() {
                   textDecoration: 'none',
                 }}
                 onMouseEnter={e =>
-                  (e.currentTarget.style.backgroundColor =
-                    'rgba(255,255,255,0.22)')
+                (e.currentTarget.style.backgroundColor =
+                  'rgba(255,255,255,0.22)')
                 }
                 onMouseLeave={e =>
-                  (e.currentTarget.style.backgroundColor =
-                    'rgba(255,255,255,0.1)')
+                (e.currentTarget.style.backgroundColor =
+                  'rgba(255,255,255,0.1)')
                 }
               >
-                <img
-                  src={s.icon}
-                  alt={s.label}
-                  style={{
-                    width: '16px',
-                    height: '16px',
-                    objectFit: 'contain',
-                  }}
-                />
+                <SocialIcon label={s.label} />
               </a>
             ))}
           </div>

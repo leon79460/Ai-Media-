@@ -1,9 +1,3 @@
-// ============================================================
-// IntroVideo.jsx — Clean video player, no browser control bar
-// Only shows a mute/unmute button overlay
-// EDIT: VIDEO_SRC — your video file in /public/ folder
-// EDIT: POSTER_IMG — thumbnail shown before play (optional)
-// ============================================================
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
@@ -26,7 +20,7 @@ export default function IntroVideo() {
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          video.play().catch(() => { });
           setPlaying(true);
           section.style.animation = 'revealUp 0.8s ease forwards';
         } else {

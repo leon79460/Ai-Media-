@@ -1,8 +1,6 @@
-// ============================================================
-// Process.jsx - "One system. Built to compound." section
-// ============================================================
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
 const SECTION_BADGE = 'Process';
@@ -44,6 +42,12 @@ const TICKER_ITEMS = [
   { label: 'Cost Effective', icon: 'coin' },
   { label: 'Real-Time Insights', icon: 'plus' },
 ];
+
+const BADGE_ICON_STYLE = {
+  width: 18,
+  height: 18,
+  flex: '0 0 18px',
+};
 
 function useReveal(ref, delay = 0) {
   useEffect(() => {
@@ -122,16 +126,6 @@ function MiniIcon({ type }) {
     );
   }
 
-  if (type === 'gear') {
-    return (
-      <svg {...common}>
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 2.8v2M12 19.2v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.8 12h2M19.2 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-        <path d="M7.1 9.1 6 7.3l1.3-1.3 1.8 1.1M14.9 7.1 16.7 6l1.3 1.3-1.1 1.8M16.9 14.9l1.1 1.8-1.3 1.3-1.8-1.1M9.1 16.9 7.3 18 6 16.7l1.1-1.8" />
-      </svg>
-    );
-  }
-
   return (
     <svg {...common}>
       <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
@@ -140,246 +134,39 @@ function MiniIcon({ type }) {
   );
 }
 
-function BuildArt() {
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width: 176,
-        height: 176,
-        margin: '0 auto',
-        borderRadius: '50%',
-        background: '#f5f5f5',
-        boxShadow:
-          'inset 0 3px 1px rgba(255,255,255,0.95), 0 22px 34px rgba(0,0,0,0.13)',
-      }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          inset: 2,
-          borderRadius: '50%',
-          border: '2px solid rgba(255,255,255,0.85)',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          left: 82,
-          top: 75,
-          width: 96,
-          height: 18,
-          borderRadius: 99,
-          background: '#f5f5f5',
-          boxShadow:
-            'inset 0 3px 1px rgba(255,255,255,0.95), 0 12px 24px rgba(0,0,0,0.16)',
-          transform: 'rotate(-22deg)',
-          transformOrigin: '9px 9px',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          left: 75,
-          top: 82,
-          width: 18,
-          height: 18,
-          borderRadius: '50%',
-          background: '#9f9f9f',
-          boxShadow: '0 5px 10px rgba(0,0,0,0.2)',
-        }}
-      >
-        <span
-          style={{
-            position: 'absolute',
-            left: 5,
-            top: 5,
-            width: 8,
-            height: 8,
-            borderRadius: '50%',
-            background: '#030303',
-          }}
-        />
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          right: 54,
-          top: 34,
-          width: 22,
-          height: 22,
-          borderRadius: '50%',
-          background: '#f5f5f5',
-          boxShadow:
-            'inset 0 3px 1px rgba(255,255,255,0.95), 0 8px 16px rgba(0,0,0,0.12)',
-        }}
-      />
-    </div>
-  );
-}
-
-function GrowArt() {
-  const bars = [
-    { left: 75, top: 118, width: 44, height: 74 },
-    { left: 130, top: 35, width: 44, height: 158 },
-    { left: 186, top: 92, width: 44, height: 101 },
-    { left: 241, top: 116, width: 44, height: 77 },
-  ];
-
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width: 320,
-        height: 214,
-        margin: '0 auto',
-      }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          left: 143,
-          top: 0,
-          borderRadius: 6,
-          background: '#f5f5f5',
-          minWidth: 96,
-          height: 26,
-          display: 'grid',
-          placeItems: 'center',
-          fontFamily: 'var(--font)',
-          fontSize: 12,
-          color: '#000',
-          whiteSpace: 'nowrap',
-          boxShadow:
-            'inset 0 3px 1px rgba(255,255,255,0.95), 0 12px 24px rgba(0,0,0,0.16)',
-        }}
-      >
-        80% Automation
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          left: 31,
-          top: 80,
-          width: 25,
-          height: 112,
-          borderRadius: 6,
-          background: '#f5f5f5',
-          boxShadow:
-            'inset 0 3px 1px rgba(255,255,255,0.95), 0 14px 28px rgba(0,0,0,0.12)',
-        }}
-      >
-        <span
-          style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'grid',
-            placeItems: 'center',
-            fontFamily: 'var(--font)',
-            fontSize: 11,
-            fontWeight: 600,
-            color: '#000',
-            transform: 'rotate(-90deg)',
-          }}
-        >
-          AFTER
-        </span>
-      </div>
-      {bars.map((bar, index) => (
-        <div
-          key={index}
-          style={{
-            position: 'absolute',
-            left: bar.left,
-            top: bar.top,
-            width: bar.width,
-            height: bar.height,
-            borderRadius: 7,
-            background: '#f5f5f5',
-            boxShadow:
-              'inset 0 3px 1px rgba(255,255,255,0.95), 0 16px 24px rgba(0,0,0,0.12)',
-          }}
-        />
-      ))}
-      <div
-        style={{
-          position: 'absolute',
-          right: 0,
-          top: 125,
-          borderRadius: 6,
-          background: '#f5f5f5',
-          width: 64,
-          height: 26,
-          display: 'grid',
-          placeItems: 'center',
-          fontFamily: 'var(--font)',
-          fontSize: 12,
-          color: '#000',
-          whiteSpace: 'nowrap',
-          boxShadow:
-            'inset 0 3px 1px rgba(255,255,255,0.95), 0 12px 24px rgba(0,0,0,0.16)',
-        }}
-      >
-        10% Cost
-      </div>
-    </div>
-  );
-}
-
-function OwnArt() {
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width: 176,
-        height: 176,
-        margin: '0 auto',
-        display: 'grid',
-        placeItems: 'center',
-      }}
-    >
-      {[144, 122, 100].map((size, index) => (
-        <div
-          key={size}
-          style={{
-            position: 'absolute',
-            width: size,
-            height: size,
-            borderRadius: '50%',
-            background: '#f5f5f5',
-            boxShadow:
-              'inset 0 3px 1px rgba(255,255,255,0.95), 0 16px 28px rgba(0,0,0,0.13)',
-            opacity: index === 0 ? 0.6 : 1,
-          }}
-        />
-      ))}
-      <div
-        style={{
-          position: 'relative',
-          width: 88,
-          height: 88,
-          borderRadius: '50%',
-          background: '#f5f5f5',
-          display: 'grid',
-          placeItems: 'center',
-          boxShadow:
-            'inset 0 3px 1px rgba(255,255,255,0.95), 0 16px 24px rgba(0,0,0,0.13)',
-          fontFamily: 'var(--font)',
-          fontSize: 42,
-          lineHeight: 1,
-          color: '#000',
-        }}
-      >
-        AI
-      </div>
-    </div>
-  );
-}
+const CARD_VIDEO = {
+  build: '/video/Build.mp4',
+  grow: '/video/grow.mp4',
+  own: '/video/own.mp4',
+};
 
 function CardArt({ id }) {
-  if (id === 'grow') return <GrowArt />;
-  if (id === 'own') return <OwnArt />;
-  return <BuildArt />;
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        borderRadius: 14,
+        overflow: 'hidden',
+      }}
+    >
+      <video
+        src={CARD_VIDEO[id]}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          display: 'block',
+          backgroundColor: '#ececec',
+        }}
+      />
+    </div>
+  );
 }
 
 function ProcessCard({ card, delay }) {
@@ -407,7 +194,7 @@ function ProcessCard({ card, delay }) {
       <div
         style={{
           height: 214,
-          marginBottom: card.id === 'grow' ? 28 : 42,
+          marginBottom: 32,
         }}
       >
         <CardArt id={card.id} />
@@ -468,7 +255,14 @@ function ProcessCard({ card, delay }) {
 function ProcessBadge() {
   return (
     <span className="section-badge process-badge">
-      <MiniIcon type="gear" />
+      <Image
+        src="/icons/process.svg"
+        alt=""
+        aria-hidden="true"
+        width={18}
+        height={18}
+        style={BADGE_ICON_STYLE}
+      />
       {SECTION_BADGE}
     </span>
   );

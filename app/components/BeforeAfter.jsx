@@ -1,19 +1,16 @@
-// ============================================================
-// BeforeAfter.jsx — "We built AI Media for ourselves first"
-// EDIT: TITLE, SUBTITLE, BEFORE_IMG, AFTER_IMG
-// ============================================================
 'use client';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 // EDIT section text
-const SECTION_BADGE = 'Services';
+const SECTION_BADGE = 'Case Study';
 const TITLE = 'We built AI Media for ourselves first.';
 const SUBTITLE =
   'Project: Automate $3M/year luxury AV integration company. We rebuilt their online presence using the exact system we sell to you.';
 
 // ⚠️ Save to /public/ before going live
-const BEFORE_IMG = 'before.png';
-const AFTER_IMG = 'after.png';
+const BEFORE_IMG = '/before.png';
+const AFTER_IMG = '/after.png';
 
 export default function BeforeAfter() {
   const [sliderPos, setSliderPos] = useState(50); // % from left
@@ -127,14 +124,12 @@ export default function BeforeAfter() {
             }}
           >
             {/* AFTER image (full width, behind) — EDIT: AFTER_IMG */}
-            <img
+            <Image
               src={AFTER_IMG}
               alt="After"
+              fill
+              sizes="(max-width: 768px) 100vw, 1200px"
               style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
                 objectFit: 'cover',
                 objectPosition: 'bottom',
                 borderRadius: '8px',
@@ -150,19 +145,26 @@ export default function BeforeAfter() {
                 overflow: 'hidden',
               }}
             >
-              <img
-                src={BEFORE_IMG}
-                alt="Before"
+              <div
                 style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
                   width: `${100 / (sliderPos / 100)}%`,
                   height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: '8px 0 0 8px',
                 }}
-              />
+              >
+                <Image
+                  src={BEFORE_IMG}
+                  alt="Before"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  style={{
+                    objectFit: 'cover',
+                    borderRadius: '8px 0 0 8px',
+                  }}
+                />
+              </div>
             </div>
 
             {/* Vertical divider line */}
