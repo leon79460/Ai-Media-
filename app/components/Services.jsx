@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 const SECTION_BADGE = 'Services';
@@ -12,6 +13,7 @@ const FEATURES = [
   {
     icon: '/icons/design.svg',
     title: 'Design',
+    href: '/services/design',
     description:
       'Create modern visual experiences that strengthen your brand identity, improve usability, and leave a lasting impression.',
     items: ['UI/UX design', 'Branding design', 'Graphic design'],
@@ -19,6 +21,7 @@ const FEATURES = [
   {
     icon: '/icons/development.svg',
     title: 'Development',
+    href: '/services/development',
     description:
       'Create modern visual experiences that strengthen your brand identity, improve usability, and leave a lasting impression.',
     items: ['Web Development', 'Website Maintenance'],
@@ -26,6 +29,7 @@ const FEATURES = [
   {
     icon: '/icons/marketing.svg',
     title: 'Marketing',
+    href: '/services/marketing',
     description:
       'Increase visibility, attract qualified leads, and grow your online presence through strategic digital marketing.',
     items: ['SEO', 'Social Media', 'Email Marketing'],
@@ -33,6 +37,7 @@ const FEATURES = [
   {
     icon: '/icons/content.svg',
     title: 'Content',
+    href: '/services/content',
     description:
       'Produce engaging content and creative media designed to capture attention, build trust, and drive engagement.',
     items: ['AI Content Creation', 'Video Editing'],
@@ -92,6 +97,12 @@ function FeatureCard({ feature, delay }) {
           <li key={item}>{item}</li>
         ))}
       </ul>
+
+      {feature.href && (
+        <Link href={feature.href} className="service-card-link">
+          → Explore {feature.title}
+        </Link>
+      )}
     </article>
   );
 }

@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
-const HERO_AI_LOGO = '/logo/hero-logo-1.png';
-const HERO_MEDIA_LOGO = '/logo/hero-logo-2.png';
+const HERO_AI_LOGO = '/logos/hero-logo-1.png';
+const HERO_MEDIA_LOGO = '/logos/hero-logo-2.png';
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
 const SUBTEXT =
