@@ -22,46 +22,45 @@ const MOBILE_LINKS = [...LINKS, ...MORE_LINKS];
 export default function Navbar() {
   const moreRef = useRef(null);
   const pathname = usePathname();
+  const isHome = pathname === '/';
   const router = useRouter();
   const [moreOpen, setMoreOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobileNav, setIsMobileNav] = useState(false);
   // Logo is hidden on the home page until user scrolls past hero logos.
   // On all other pages it is always visible.
-  const [logoRevealed, setLogoRevealed] = useState(false);
+  const [homeLogoRevealed, setHomeLogoRevealed] = useState(false);
+  const logoRevealed = !isHome || homeLogoRevealed;
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 1024px)');
     const update = () => setIsMobileNav(media.matches);
-    update();
+    const frameId = requestAnimationFrame(update);
     media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
+    return () => {
+      cancelAnimationFrame(frameId);
+      media.removeEventListener('change', update);
+    };
   }, []);
 
-  // Reveal navbar logo when the flying clone animation is nearly complete.
-  // Bidirectional: hides again if the user scrolls back up.
-  // On non-home pages the logo is always shown.
+
   useEffect(() => {
-    if (pathname !== '/') {
-      setLogoRevealed(true);
-      return;
-    }
+    if (!isHome) return;
 
-    setLogoRevealed(false);
-
-    // Hero.jsx runs the animation over SCROLL_END=300px.
-    // Reveal at ~73% (220px) — clone is fading out and arriving at the slot.
     const REVEAL_AT = 220;
 
     function onScroll() {
-      setLogoRevealed(window.scrollY >= REVEAL_AT);
+      setHomeLogoRevealed(window.scrollY >= REVEAL_AT);
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
     // Run once in case page loads mid-scroll
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [pathname]);
+    const frameId = requestAnimationFrame(onScroll);
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [isHome]);
 
   useEffect(() => {
     function closeMoreOnOutsideClick(event) {
