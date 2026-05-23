@@ -1,5 +1,5 @@
 import BeforeAfter from './components/BeforeAfter';
-import Blogs from './components/Blogs';
+import Blogs from './blog/components/Blogs';
 import Features from './components/Services';
 import Footer from './components/Footer';
 import Hero from './components/Hero';

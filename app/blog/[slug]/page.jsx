@@ -4,9 +4,9 @@ import Footer from '../../components/Footer';
 import {
   AdReadinessScorecard,
   MarketingBudgetCalculator,
-} from '../../components/MarketingBudgetTools';
+} from '../components/MarketingBudgetTools';
 import Navbar from '../../components/Navbar';
-import { blogPosts, getBlogPost } from '../../data/blogs';
+import { blogPosts, getBlogPost } from '../data/blogs';
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));

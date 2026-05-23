@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import { blogPosts } from '../data/blogs';
+import { blogPosts } from './data/blogs';
 
 export const metadata = {
   title: 'Blog - AI Media',

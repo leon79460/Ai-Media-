@@ -40,7 +40,7 @@ function useReveal(ref, delay = 0) {
 function BadgeIcon() {
   return (
     <Image
-      src="/icons/blog.svg"
+      src="/blog/blog.svg"
       alt="Blog"
       aria-hidden="true"
       width={18}
