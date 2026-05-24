@@ -3,8 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
-const HERO_AI_LOGO = '/logos/hero-logo-1.png';
-const HERO_MEDIA_LOGO = '/logos/hero-logo-2.png';
+const HERO_LOGO = '/logos/logo.png';
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
 const SUBTEXT =
@@ -62,18 +61,21 @@ export default function Hero() {
       const navLogoEl = document.querySelector('.nav-logo');
       let targetCx = 94;
       let targetCy = 39; // half of 78px navbar height (fallback)
+      let targetLogoHeight = 54;
       if (navLogoEl) {
         const nr = navLogoEl.getBoundingClientRect();
         targetCx = nr.left + nr.width / 2;
         targetCy = nr.top + nr.height / 2;
+        const navLogoImg = navLogoEl.querySelector('img');
+        targetLogoHeight = navLogoImg?.getBoundingClientRect().height || targetLogoHeight;
       }
 
       // ── Interpolate center position ──
       const cx = origCx + (targetCx - origCx) * eased;
       const cy = origCy + (targetCy - origCy) * eased;
 
-      // ── Scale: shrink so logo matches navbar logo height (~44px) ──
-      const targetScale = 44 / flyH;
+      // ── Scale: shrink so logo matches navbar logo height ──
+      const targetScale = targetLogoHeight / flyH;
       const scale = 1 + (targetScale - 1) * eased;
 
       // ── Translate so the clone's center lands at (cx, cy) ──
@@ -158,9 +160,6 @@ export default function Hero() {
           top: 0,
           left: 0,
           zIndex: 101,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '24px',
           opacity: 0,
           pointerEvents: 'none',
           willChange: 'transform, opacity',
@@ -168,25 +167,13 @@ export default function Hero() {
         }}
       >
         <Image
-          src={HERO_AI_LOGO}
+          src={HERO_LOGO}
           alt=""
-          width={147}
-          height={147}
+          width={2000}
+          height={800}
           priority
           style={{
-            width: 'clamp(118px, 14vw, 147px)',
-            height: 'auto',
-            objectFit: 'contain',
-          }}
-        />
-        <Image
-          src={HERO_MEDIA_LOGO}
-          alt=""
-          width={184}
-          height={131}
-          priority
-          style={{
-            width: 'clamp(150px, 20vw, 210px)',
+            width: 'min(100%, clamp(260px, 44vw, 470px))',
             height: 'auto',
             objectFit: 'contain',
             filter:
@@ -312,33 +299,19 @@ export default function Hero() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '24px',
-              flexWrap: 'wrap',
               // NO CSS transition — scroll-linked animations must update
               // instantaneously every rAF. A transition fights every scroll event.
               willChange: 'opacity, transform',
             }}
           >
             <Image
-              src={HERO_AI_LOGO}
-              alt="AI"
-              width={147}
-              height={147}
+              src={HERO_LOGO}
+              alt="AI Media"
+              width={2000}
+              height={800}
               priority
               style={{
-                width: 'clamp(118px, 14vw, 147px)',
-                height: 'auto',
-                objectFit: 'contain',
-              }}
-            />
-            <Image
-              src={HERO_MEDIA_LOGO}
-              alt="Media"
-              width={184}
-              height={131}
-              priority
-              style={{
-                width: 'clamp(150px, 20vw, 210px)',
+                width: 'min(100%, clamp(260px, 44vw, 470px))',
                 height: 'auto',
                 objectFit: 'contain',
                 filter:
