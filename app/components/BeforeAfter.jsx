@@ -63,7 +63,7 @@ export default function BeforeAfter() {
 
   return (
     <section
-      id="works"
+      id="case-study"
       style={{ backgroundColor: '#f5f5f5', padding: '100px 40px 60px' }}
     >
       <div

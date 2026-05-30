@@ -9,6 +9,7 @@ const REVEAL_SELECTOR = [
   '.section-sub',
   '.process-card',
   '.service-card',
+  '.portfolio-card',
   '.pricing-card',
   '.why-card',
   '.blog-card',
@@ -61,7 +62,7 @@ export default function ScrollEffects() {
 
     const glowTargets = Array.from(
       document.querySelectorAll(
-        '.card-hover, .process-card, .blog-card, .service-card, .pricing-card, .why-card, .about-card',
+        '.card-hover, .process-card, .blog-card, .service-card, .portfolio-card, .pricing-card, .why-card, .about-card',
       ),
     );
 

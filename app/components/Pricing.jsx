@@ -15,7 +15,7 @@ const PLANS = [
   {
     name: 'Grow',
     monthlyPrice: '$1,500',
-    yearlyPrice: '$1,050',
+    yearlyPrice: '$1,350',
     period: '/month',
     tagline: 'Per month \u2022 Cancel anytime',
     description: 'Integrators ready to stop relying on referrals alone',
@@ -36,7 +36,7 @@ const PLANS = [
   {
     name: 'Scale',
     monthlyPrice: '$2,500',
-    yearlyPrice: '$1,750',
+    yearlyPrice: '$2,250',
     period: '/month',
     tagline: 'Per month \u2022 Cancel anytime',
     description: 'Integrators doing $1M+ who are serious',
@@ -55,7 +55,7 @@ const PLANS = [
   {
     name: 'Dominate',
     monthlyPrice: '$4,000',
-    yearlyPrice: '$2,800',
+    yearlyPrice: '$3,600',
     period: '/month',
     tagline: 'Per month \u2022 Cancel anytime',
     description: 'Ambitious integrators owning markets',

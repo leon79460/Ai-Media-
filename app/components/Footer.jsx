@@ -15,6 +15,8 @@ const COPYRIGHT = '© 2026 AI MEDIA · ALL RIGHTS RESERVED';
 
 const MENU_LINKS = [
   { label: 'Blog', href: '/blog' },
+  { label: 'Terms', href: '/terms-and-conditions' },
+  { label: 'Privacy', href: '/privacy-policy' },
   { label: 'Work', target: 'works' },
 ];
 
@@ -23,7 +25,6 @@ const SERVICE_LINKS = [
   { label: 'Development', target: 'services' },
   { label: 'Marketing', target: 'services' },
   { label: 'Content', target: 'services' },
-  { label: 'Privacy', href: '/' },
 ];
 
 const SOCIAL_LINKS = [

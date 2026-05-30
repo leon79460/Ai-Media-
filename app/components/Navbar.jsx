@@ -9,13 +9,15 @@ const LINKS = [
   { label: 'Home', target: 'home' },
   { label: 'Services', target: 'services' },
   { label: 'Pricing', target: 'pricing' },
-  { label: 'Works', target: 'works' },
   { label: 'About us', href: '/about' },
 ];
 
 const MORE_LINKS = [
   { label: 'Contact', href: '/contact' },
+  { label: 'Portfolio', href: '/portfolio' },
   { label: 'Blogs', href: '/blog' },
+  { label: 'Terms & Conditions', href: '/terms-and-conditions' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
 ];
 const MOBILE_LINKS = [...LINKS, ...MORE_LINKS];
 
