@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 // ⚠️ Save to /public/ before going live
 const BG_VIDEO = '/video/footer-bg.mp4';
-const AI_LOGO_IMAGE = '/logos/hero-logo-1.png';
+const AI_LOGO_IMAGE = '/logos/logo.png';
 
 // EDIT these
 const TAGLINE =
@@ -175,7 +175,7 @@ export default function Footer() {
               minWidth: '280px',
             }}
           >
-            {/* Logo + brand name */}
+            {/* Logo */}
             <div
               style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}
             >
@@ -184,32 +184,18 @@ export default function Footer() {
               >
                 <Image
                   src={AI_LOGO_IMAGE}
-                  alt="AI"
-                  width={64}
-                  height={64}
+                  alt="AI Media"
+                  width={200}
+                  height={200}
                   style={{
-                    width: '64px',
+                    width: 'auto',
                     height: '64px',
+                    maxWidth: '200px',
                     objectFit: 'contain',
-                    flexShrink: 0,
+                    display: 'block',
                     filter: 'drop-shadow(0 8px 18px rgba(0,0,0,0.35))',
                   }}
                 />
-                <span
-                  className="footer-brand"
-                  style={{
-                    fontFamily: 'var(--font)',
-                    fontWeight: 400,
-                    fontSize: '50px',
-                    color: '#f5f5f5',
-                    letterSpacing: 0,
-                    textTransform: 'uppercase',
-                    lineHeight: 1,
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  MEDIA
-                </span>
               </div>
 
               {/* Tagline — EDIT: TAGLINE */}
