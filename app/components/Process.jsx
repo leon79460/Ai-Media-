@@ -1,46 +1,45 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 const SECTION_BADGE = 'Process';
-const SECTION_TITLE = 'One system.Built to compound.';
-const SECTION_SUB = 'Partner with an AI agency delivering smart solutions.';
+const SECTION_TITLE = 'One System. Built to Compound.';
+const SECTION_SUB =
+  'A complete growth system for AV and smart home integrators - built to launch fast, rank locally, generate leads, and improve every month.';
 
 const CARDS = [
   {
     id: 'build',
     title: 'Build',
-    price: 'From $1,800',
-    duration: '4-6 weeks',
     description:
-      'Your entire online presence rebuilt from scratch. Website, SEO foundation, Google Business Profile, brand identity. Delivered in 6 weeks.',
+      'Rebuild your online presence from the ground up: website, SEO foundation, Google Business Profile, service pages, and brand identity. Delivered in 6 weeks.',
   },
   {
     id: 'grow',
     title: 'Grow',
-    price: 'From $1,500/month',
-    duration: 'Ongoing',
     description:
-      'Monthly SEO, content, social media, and reporting running continuously. Organic rankings that compound every month.',
+      'Run monthly SEO, content, social media, tracking, and reporting that compounds over time - so your best clients can find you first.',
   },
   {
     id: 'own',
     title: 'Own',
-    price: 'From $1,500/month',
-    duration: '6-8 weeks',
     description:
-      'A branded client onboarding portal your homeowners use throughout every project. No other AV agency builds these.',
+      'Give clients a branded onboarding portal that keeps every project clear, organized, and premium from the first form to final handoff.',
   },
 ];
 
 const TICKER_ITEMS = [
-  { label: 'Faster Innovation', icon: 'spark' },
-  { label: 'Virtual Assistance', icon: 'calendar' },
-  { label: 'Scalable Solutions', icon: 'layers' },
-  { label: 'Personalized Experiences', icon: 'refresh' },
-  { label: 'Cost Effective', icon: 'coin' },
-  { label: 'Real-Time Insights', icon: 'plus' },
+  { label: 'AI Content Creation', icon: 'spark' },
+  { label: 'Social Media Management', icon: 'calendar' },
+  { label: 'Web Design', icon: 'layers' },
+  { label: 'Web Development', icon: 'refresh' },
+  { label: 'UX/UI', icon: 'plus' },
+  { label: 'Video Editing', icon: 'spark' },
+  { label: 'SEO/AEO', icon: 'coin' },
+  { label: 'Graphic Design', icon: 'layers' },
+  { label: 'Website Maintenance', icon: 'refresh' },
 ];
 
 const BADGE_ICON_STYLE = {
@@ -224,30 +223,11 @@ function ProcessCard({ card, delay }) {
       >
         {card.description}
       </p>
-      <p
-        style={{
-          fontFamily: 'var(--font)',
-          fontWeight: 500,
-          fontSize: 22,
-          color: '#000',
-          lineHeight: 1.3,
-          marginTop: 'auto',
-          marginBottom: 12,
-        }}
-      >
-        {card.price}
-      </p>
-      <p
-        style={{
-          fontFamily: 'var(--font)',
-          fontSize: 17,
-          color: '#3d3d3d',
-          opacity: 0.8,
-          lineHeight: 1.3,
-        }}
-      >
-        {card.duration}
-      </p>
+      <div className="process-card-bottom">
+        <Link href="/contact" className="process-card-cta">
+          Contact Us
+        </Link>
+      </div>
     </article>
   );
 }
@@ -307,7 +287,7 @@ export default function Process() {
             className="section-title process-title"
             style={{
               fontSize: 64,
-              lineHeight: 1.1,
+              lineHeight: 1.2,
               letterSpacing: 0,
             }}
           >

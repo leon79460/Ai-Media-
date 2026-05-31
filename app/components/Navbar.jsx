@@ -29,10 +29,6 @@ export default function Navbar() {
   const [moreOpen, setMoreOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobileNav, setIsMobileNav] = useState(false);
-  // Logo is hidden on the home page until user scrolls past hero logos.
-  // On all other pages it is always visible.
-  const [homeLogoRevealed, setHomeLogoRevealed] = useState(false);
-  const logoRevealed = !isHome || homeLogoRevealed;
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 1024px)');
@@ -44,25 +40,6 @@ export default function Navbar() {
       media.removeEventListener('change', update);
     };
   }, []);
-
-
-  useEffect(() => {
-    if (!isHome) return;
-
-    const REVEAL_AT = 220;
-
-    function onScroll() {
-      setHomeLogoRevealed(window.scrollY >= REVEAL_AT);
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    // Run once in case page loads mid-scroll
-    const frameId = requestAnimationFrame(onScroll);
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [isHome]);
 
   useEffect(() => {
     function closeMoreOnOutsideClick(event) {
@@ -125,11 +102,9 @@ export default function Navbar() {
             background: 'transparent',
             cursor: 'pointer',
             padding: 0,
-            // Reveal animation: fade + slide down from above
-            opacity: logoRevealed ? 1 : 0,
-            transform: logoRevealed ? 'translateY(0)' : 'translateY(-16px)',
-            transition: 'opacity 0.5s cubic-bezier(0.33, 1, 0.68, 1), transform 0.54s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            pointerEvents: logoRevealed ? 'auto' : 'none',
+            opacity: 1,
+            transform: 'translateY(0)',
+            pointerEvents: 'auto',
           }}
         >
           <Image

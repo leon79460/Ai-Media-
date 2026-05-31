@@ -7,6 +7,7 @@ export default function LegalDocument({
   intro,
   lastUpdated,
   highlights,
+  notice,
   sections,
 }) {
   return (
@@ -33,13 +34,27 @@ export default function LegalDocument({
               </div>
             ) : null}
 
+            {notice ? (
+              <div
+                className="blog-callout"
+                dangerouslySetInnerHTML={{ __html: notice }}
+              />
+            ) : null}
+
             {sections.map((section) => (
               <section id={section.id} key={section.id}>
                 <h2>{section.title}</h2>
-                {section.body.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-                {section.items?.length ? (
+                {section.content ? (
+                  <div
+                    className="legal-section-content"
+                    dangerouslySetInnerHTML={{ __html: section.content }}
+                  />
+                ) : (
+                  section.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))
+                )}
+                {!section.content && section.items?.length ? (
                   <ul>
                     {section.items.map((item) => (
                       <li key={item}>{item}</li>

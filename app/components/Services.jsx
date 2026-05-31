@@ -5,9 +5,10 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 const SECTION_BADGE = 'Services';
-const SECTION_TITLE_TOP = 'All Your Digital Growth';
-const SECTION_TITLE_BOTTOM = 'Services in One Place';
-const SECTION_SUB = 'Discover features that simplify workflows & grow your business.';
+const SECTION_TITLE_TOP = 'Everything Your AV Business';
+const SECTION_TITLE_BOTTOM = 'Needs to Grow Online';
+const SECTION_SUB =
+  'Websites, SEO, content, automation, and reporting - built into one system that helps integrators get found, trusted, and chosen.';
 
 const FEATURES = [
   {

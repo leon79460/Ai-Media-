@@ -17,7 +17,7 @@ const MENU_LINKS = [
   { label: 'Blog', href: '/blog' },
   { label: 'Terms', href: '/terms-and-conditions' },
   { label: 'Privacy', href: '/privacy-policy' },
-  { label: 'Work', target: 'works' },
+  { label: 'Careers', href: '/careers' },
 ];
 
 const SERVICE_LINKS = [
