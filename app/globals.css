@@ -3887,9 +3887,9 @@ footer [style*="opacity: 0"] {
 }
 
 .reveal-motion:not(.is-visible) {
-  opacity: 0 !important;
-  filter: blur(10px) !important;
-  transform: translate3d(0, 22px, 0) scale(0.988) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
 }
 
 .reveal-motion.is-visible {
