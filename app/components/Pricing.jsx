@@ -169,8 +169,8 @@ export default function Pricing() {
         <div ref={headRef} className="pricing-header">
           <span className="section-badge">
             <Image
-              src="/icons/why-us.svg"
-              alt="Pricing"
+              src="/icons/pricing.svg"
+              alt=""
               aria-hidden="true"
               width={18}
               height={18}

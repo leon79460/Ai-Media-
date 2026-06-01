@@ -276,8 +276,8 @@ export default function WhyUs() {
         <div ref={headRef} className="why-header" style={styles.header}>
           <span className="section-badge">
             <Image
-              src="/icons/why-us.svg"
-              alt="Why Ai Media"
+              src="/icons/why-us.png"
+              alt=""
               aria-hidden="true"
               width={18}
               height={18}

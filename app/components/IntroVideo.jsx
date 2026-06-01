@@ -85,6 +85,7 @@ export default function IntroVideo() {
             muted
             loop
             playsInline
+            preload="metadata"
             style={{
               position: 'absolute',
               inset: 0,

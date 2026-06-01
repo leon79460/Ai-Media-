@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 // EDIT section text
@@ -11,6 +12,12 @@ const SUBTITLE =
 // ⚠️ Save to /public/ before going live
 const BEFORE_IMG = '/before.png';
 const AFTER_IMG = '/after.png';
+
+const BADGE_ICON_STYLE = {
+  width: 18,
+  height: 18,
+  flex: '0 0 18px',
+};
 
 const PROJECT_DETAILS = [
   'Rebuilt the website experience to position Automate as a premium luxury AV integrator.',
@@ -98,7 +105,17 @@ export default function BeforeAfter() {
             opacity: 0,
           }}
         >
-          <span className="section-badge">📊 {SECTION_BADGE}</span>
+          <span className="section-badge">
+            <Image
+              src="/icons/case-studies.png"
+              alt=""
+              aria-hidden="true"
+              width={18}
+              height={18}
+              style={BADGE_ICON_STYLE}
+            />
+            {SECTION_BADGE}
+          </span>
           {/* EDIT: TITLE */}
           <h2 className="section-title">{TITLE}</h2>
           {/* EDIT: SUBTITLE */}
@@ -107,16 +124,17 @@ export default function BeforeAfter() {
           </p>
         </div>
 
-        {/* Before / After slider card */}
-        <div
-          style={{
-            width: '100%',
-            backgroundColor: '#f5f5f5',
-            borderRadius: '16px',
-            padding: '32px',
-            boxShadow: 'var(--card-shadow)',
-          }}
-        >
+        <div className="case-study-showcase">
+          {/* Before / After slider card */}
+          <div
+            style={{
+              width: '100%',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '16px',
+              padding: '32px',
+              boxShadow: 'var(--card-shadow)',
+            }}
+          >
           <div
             ref={wrapRef}
             onMouseDown={onMouseDown}
@@ -254,144 +272,110 @@ export default function BeforeAfter() {
             </div>
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '20px',
-              paddingTop: '28px',
-            }}
-          >
+        </div>
+
+          <div className="case-study-actions" aria-label="Case study actions">
             <button
               type="button"
               aria-expanded={detailsOpen}
               aria-controls="case-study-details"
+              className={`case-study-action${detailsOpen ? ' is-active' : ''}`}
               onClick={() => setDetailsOpen((open) => !open)}
-              style={{
-                display: 'inline-flex',
-                minWidth: '136px',
-                height: '46px',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid rgba(0,0,0,0.88)',
-                borderRadius: '10px',
-                background: detailsOpen
-                  ? 'linear-gradient(180deg, #252525 0%, #050505 100%)'
-                  : 'linear-gradient(180deg, #171717 0%, #030303 100%)',
-                color: '#fff',
-                cursor: 'pointer',
-                fontFamily: 'var(--font)',
-                fontSize: '14px',
-                fontWeight: 700,
-                lineHeight: 1,
-                boxShadow:
-                  '0 12px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.16)',
-                transition:
-                  'transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow =
-                  '0 16px 28px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.2)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow =
-                  '0 12px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.16)';
-              }}
             >
-              {detailsOpen ? 'Hide Details' : 'Details'}
+              Details
             </button>
+          <Link className="case-study-action" href="/portfolio">
+            More Case Study
+          </Link>
+        </div>
 
-            {detailsOpen && (
-              <div
-                id="case-study-details"
-                className="case-study-details-panel"
+        {detailsOpen && (
+          <div
+            id="case-study-details"
+            className="case-study-details-panel"
+            style={{
+              width: '100%',
+              display: 'grid',
+              gridTemplateColumns: 'minmax(0, 0.82fr) minmax(0, 1.18fr)',
+              gap: '24px',
+              padding: '28px',
+              border: '1px solid rgba(255,255,255,0.82)',
+              borderRadius: '14px',
+              background: 'rgba(255,255,255,0.56)',
+              boxShadow:
+                'inset 0 2px 1px rgba(255,255,255,0.96), 0 8px 18px rgba(0,0,0,0.08)',
+            }}
+          >
+            <div>
+              <span
                 style={{
-                  width: '100%',
-                  display: 'grid',
-                  gridTemplateColumns: 'minmax(0, 0.82fr) minmax(0, 1.18fr)',
-                  gap: '24px',
-                  padding: '28px',
-                  border: '1px solid rgba(255,255,255,0.82)',
-                  borderRadius: '14px',
-                  background: 'rgba(255,255,255,0.56)',
-                  boxShadow:
-                    'inset 0 2px 1px rgba(255,255,255,0.96), 0 8px 18px rgba(0,0,0,0.08)',
+                  display: 'inline-flex',
+                  marginBottom: '12px',
+                  padding: '7px 12px',
+                  borderRadius: '999px',
+                  background: '#000',
+                  color: '#fff',
+                  fontFamily: 'var(--font)',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  lineHeight: 1,
                 }}
               >
-                <div>
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      marginBottom: '12px',
-                      padding: '7px 12px',
-                      borderRadius: '999px',
-                      background: '#000',
-                      color: '#fff',
-                      fontFamily: 'var(--font)',
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      lineHeight: 1,
-                    }}
-                  >
-                    What We Did
-                  </span>
-                  <h3
-                    style={{
-                      margin: 0,
-                      color: '#000',
-                      fontFamily: 'var(--font)',
-                      fontSize: 'clamp(24px, 3vw, 36px)',
-                      fontWeight: 500,
-                      letterSpacing: '-0.04em',
-                      lineHeight: 1.08,
-                    }}
-                  >
-                    A complete website and growth-system rebuild.
-                  </h3>
-                </div>
+                What We Did
+              </span>
+              <h3
+                style={{
+                  margin: 0,
+                  color: '#000',
+                  fontFamily: 'var(--font)',
+                  fontSize: 'clamp(24px, 3vw, 36px)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.04em',
+                  lineHeight: 1.08,
+                }}
+              >
+                A complete website and growth-system rebuild.
+              </h3>
+            </div>
 
-                <ul
+            <ul
+              style={{
+                display: 'grid',
+                gap: '12px',
+                margin: 0,
+                padding: 0,
+                listStyle: 'none',
+              }}
+            >
+              {PROJECT_DETAILS.map((item) => (
+                <li
+                  key={item}
                   style={{
                     display: 'grid',
+                    gridTemplateColumns: '18px minmax(0, 1fr)',
                     gap: '12px',
-                    margin: 0,
-                    padding: 0,
-                    listStyle: 'none',
+                    color: 'rgba(29,29,29,0.82)',
+                    fontFamily: 'var(--font)',
+                    fontSize: '15px',
+                    lineHeight: 1.62,
                   }}
                 >
-                  {PROJECT_DETAILS.map((item) => (
-                    <li
-                      key={item}
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: '18px minmax(0, 1fr)',
-                        gap: '12px',
-                        color: 'rgba(29,29,29,0.82)',
-                        fontFamily: 'var(--font)',
-                        fontSize: '15px',
-                        lineHeight: 1.62,
-                      }}
-                    >
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          width: '8px',
-                          height: '8px',
-                          marginTop: '0.65em',
-                          borderRadius: '50%',
-                          background: '#000',
-                        }}
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      width: '8px',
+                      height: '8px',
+                      marginTop: '0.65em',
+                      borderRadius: '50%',
+                      background: '#000',
+                    }}
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
+        )}
         </div>
       </div>
     </section>

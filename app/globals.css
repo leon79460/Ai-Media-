@@ -624,7 +624,7 @@ body {
 .section-title {
   font-family: var(--font);
   font-weight: 500;
-  font-size: 56px;
+  font-size: 55px;
   text-align: center;
   line-height: 1.4;
   background: linear-gradient(to bottom, #e5e5e5 0%, #000 30%);
@@ -1220,6 +1220,58 @@ body {
   .portfolio-overlay {
     padding: 18px;
   }
+}
+
+.case-study-showcase {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.case-study-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 10px 20px;
+  border-radius: 34px;
+  background: #f5f5f5;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 0 2px 0 rgba(255, 255, 255, 0.96);
+}
+
+.case-study-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0 0 2px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.case-study-action.is-active,
+.case-study-action:hover,
+.case-study-action:focus-visible {
+  color: #000;
+  border-color: #000;
+}
+
+.case-study-action:focus-visible {
+  outline: 0;
 }
 
 .pricing-section {
@@ -3966,6 +4018,15 @@ main.about-page .section-sub.reveal-motion:not(.is-visible) {
   .pricing-toggle {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .case-study-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .case-study-action {
+    font-size: 14px;
   }
 
   .pricing-card {

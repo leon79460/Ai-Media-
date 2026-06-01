@@ -118,8 +118,8 @@ export default function Features() {
         <header ref={headRef} className="services-header" style={{ opacity: 0 }}>
           <span className="services-badge">
             <Image
-              src="/icons/services.svg"
-              alt="Why Ai Media"
+              src="/icons/services.png"
+              alt=""
               aria-hidden="true"
               width={18}
               height={18}

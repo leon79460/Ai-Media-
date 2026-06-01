@@ -82,7 +82,7 @@ export default function Portfolio() {
         <header className="portfolio-header">
           <span className="section-badge">
             <Image
-              src="/icons/process.svg"
+              src="/icons/portfolio.png"
               alt=""
               aria-hidden="true"
               width={18}
