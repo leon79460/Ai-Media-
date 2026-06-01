@@ -1,6 +1,32 @@
 import Footer from './Footer';
 import Navbar from './Navbar';
 
+function LegalBadgeIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="16"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <path
+        d="M12 3.5 18 6v5.2c0 3.7-2.4 7.1-6 8.3-3.6-1.2-6-4.6-6-8.3V6l6-2.5Z"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="m9.4 12 1.7 1.7 3.6-4"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
 export default function LegalDocument({
   badge,
   title,
@@ -15,7 +41,10 @@ export default function LegalDocument({
       <Navbar />
       <main className="legal-page">
         <section className="legal-hero" aria-labelledby="legal-title">
-          <span className="section-badge">{badge}</span>
+          <span className="section-badge">
+            <LegalBadgeIcon />
+            {badge}
+          </span>
           <h1 id="legal-title">{title}</h1>
           <p>{intro}</p>
           <small>Last updated: {lastUpdated}</small>

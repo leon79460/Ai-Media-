@@ -16,8 +16,6 @@ const MORE_LINKS = [
   { label: 'Contact', href: '/contact' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Blogs', href: '/blog' },
-  { label: 'Terms & Conditions', href: '/terms-and-conditions' },
-  { label: 'Privacy Policy', href: '/privacy-policy' },
 ];
 const MOBILE_LINKS = [...LINKS, ...MORE_LINKS];
 
