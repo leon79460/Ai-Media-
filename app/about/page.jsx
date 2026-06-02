@@ -154,7 +154,7 @@ export default function AboutPage() {
                 presence through website design, SEO, content, branding, and AI
                 powered marketing systems.
               </p>
-              <Link className="about-primary-btn" href="#contact">
+              <Link className="about-primary-btn" href="/contact">
                 → Book a Strategy Call
               </Link>
             </div>
@@ -360,7 +360,7 @@ export default function AboutPage() {
                   Let&apos;s create a website and marketing system that helps
                   your business stand out, rank better, and generate qualified leads.
                 </p>
-                <Link href="#contact" className="about-primary-btn about-dark-btn">
+                <Link href="/contact" className="about-primary-btn about-dark-btn">
                   → Get Started
                 </Link>
               </div>

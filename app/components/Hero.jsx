@@ -172,7 +172,7 @@ export default function Hero() {
         >
           <button
             type="button"
-            onClick={() => scrollToSection('contact')}
+            onClick={() => scrollToSection('pricing')}
             className="btn-p"
             style={{
               display: 'inline-flex',

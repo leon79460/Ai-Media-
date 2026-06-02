@@ -128,8 +128,8 @@ export default function ContactPage() {
                     <MailIcon />
                   </span>
                   <p>Feel free to email me if you have any questions or need more details!</p>
-                  <a href="mailto:orbai@support.com" className="contact-info-link">
-                    orbai@support.com
+                  <a href="mailto:info@aimedia.design" className="contact-info-link">
+                    info@aimedia.design
                   </a>
                 </article>
 
@@ -167,7 +167,7 @@ export default function ContactPage() {
                       id="cf-email"
                       name="email"
                       type="email"
-                      placeholder="orbai@support.com"
+                      placeholder="info@aimedia.design"
                       value={form.email}
                       onChange={handleChange}
                       required
@@ -244,7 +244,7 @@ export default function ContactPage() {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               Feel free to mail us for any enquiries :{' '}
-              <a href="mailto:orbai@support.com">orbai@support.com</a>
+              <a href="mailto:info@aimedia.design">info@aimedia.design</a>
             </p>
           </div>
         </section>

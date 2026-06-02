@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 
@@ -223,14 +224,6 @@ function useReveal(ref, delay = 0) {
 }
 
 function ComparisonCard({ title, items, variant, withCta, cardRef }) {
-  function scrollToContact() {
-    document.getElementById('contact')?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-    window.history.replaceState(null, '', '/');
-  }
-
   return (
     <article ref={cardRef} className="why-card" style={styles.card}>
       <header className="why-card-header" style={styles.cardHeader}>
@@ -247,15 +240,14 @@ function ComparisonCard({ title, items, variant, withCta, cardRef }) {
       </ul>
 
       {withCta && (
-        <button
-          type="button"
+        <Link
+          href="/contact"
           className="why-cta"
-          onClick={scrollToContact}
           style={styles.cta}
         >
           <span aria-hidden="true">→</span>
           {BTN_TEXT}
-        </button>
+        </Link>
       )}
     </article>
   );

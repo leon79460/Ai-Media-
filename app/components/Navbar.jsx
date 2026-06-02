@@ -237,9 +237,8 @@ export default function Navbar() {
         <div className="nav-actions">
           {!isMobileNav && (
             <Link
-              href="/"
+              href="/contact"
               className="nav-cta nav-desktop-cta"
-              onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -297,13 +296,13 @@ export default function Navbar() {
               </Link>
             )
           )}
-          <button
-            type="button"
+          <Link
+            href="/contact"
             className="nav-mobile-cta"
-            onClick={() => scrollToSection('contact')}
+            onClick={() => setMobileOpen(false)}
           >
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
