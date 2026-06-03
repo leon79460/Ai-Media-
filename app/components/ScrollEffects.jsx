@@ -208,7 +208,20 @@ export default function ScrollEffects() {
       aria-label="Back to top"
       onClick={scrollToTop}
     >
-      <span className="back-to-top-icon" aria-hidden="true" />
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#f5f5f5"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ position: 'relative', zIndex: 1 }}
+        aria-hidden="true"
+      >
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
     </button>
   );
 }

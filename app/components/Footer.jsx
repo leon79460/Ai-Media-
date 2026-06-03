@@ -32,7 +32,7 @@ const SOCIAL_LINKS = [
   { href: 'https://www.instagram.com/ai.media.design/', label: 'Instagram' },
   { href: 'https://www.youtube.com/@AIMedia.Design', label: 'YouTube' },
   { href: 'https://www.linkedin.com/company/ai-media-design/', label: 'LinkedIn' },
-  { href: 'https://tiktok.com', label: 'TikTok' },
+  { href: 'https://www.tiktok.com/@aimedia_co', label: 'TikTok' },
 ];
 
 function SocialIcon({ label }) {
