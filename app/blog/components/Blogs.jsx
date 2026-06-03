@@ -25,7 +25,7 @@ function useReveal(ref, delay = 0) {
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          el.style.animation = `revealUp 0.6s ease ${delay}s forwards`;
+          el.style.animation = `revealUp 1.2s ease ${delay}s forwards`;
           obs.disconnect();
         }
       },

@@ -118,24 +118,6 @@ export default function Features() {
 
   return (
     <section id="services" className="services-section">
-      <span
-        className="parallax-accent parallax-accent-left"
-        data-parallax
-        data-parallax-axis="xy"
-        data-parallax-speed="0.18"
-        data-parallax-distance="150"
-        data-parallax-rotate="-4"
-        aria-hidden="true"
-      />
-      <span
-        className="parallax-accent parallax-accent-right"
-        data-parallax
-        data-parallax-axis="xy"
-        data-parallax-speed="0.14"
-        data-parallax-distance="180"
-        data-parallax-rotate="5"
-        aria-hidden="true"
-      />
       <div className="services-shell">
         <header ref={headRef} className="services-header" style={{ opacity: 0 }}>
           <span className="services-badge">
@@ -162,7 +144,7 @@ export default function Features() {
             <FeatureCard
               key={feature.title}
               feature={feature}
-              delay={index * 0.1}
+              delay={index * 0.5}
             />
           ))}
         </div>
