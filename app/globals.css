@@ -272,6 +272,7 @@ body {
   padding: 4px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
+  overflow: visible;
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -286,7 +287,12 @@ body {
 
 .nav-link {
   min-height: 34px;
+  border-radius: 999px !important;
   transition: background 0.2s cubic-bezier(0.33, 1, 0.68, 1), color 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.nav-more {
+  z-index: 30;
 }
 
 .nav-cta {
@@ -335,7 +341,7 @@ body {
   position: absolute;
   left: 24px;
   right: 24px;
-  top: calc(100% + 8px);
+  top: calc(100% + 13px);
   display: none;
   flex-direction: column;
   gap: 6px;
@@ -433,6 +439,7 @@ body {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
+  z-index: 200;
   min-width: 198px;
   display: flex;
   flex-direction: column;
@@ -447,6 +454,7 @@ body {
     0 18px 30px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.88);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transform: translateY(-8px) scale(0.97);
   transform-origin: top right;
@@ -455,8 +463,10 @@ body {
 
 .nav-more:hover .nav-more-menu,
 .nav-more.is-open .nav-more-menu,
-.nav-more:focus-within .nav-more-menu {
+.nav-more:focus-within .nav-more-menu,
+.nav-more-menu.is-open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0) scale(1);
 }

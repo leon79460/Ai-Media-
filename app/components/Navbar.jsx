@@ -178,8 +178,6 @@ export default function Navbar() {
           <div
             ref={moreRef}
             className={`nav-more${moreOpen ? ' is-open' : ''}`}
-            onMouseEnter={() => setMoreOpen(true)}
-            onMouseLeave={() => setMoreOpen(false)}
             style={{
               position: 'relative',
               opacity: 0,
@@ -218,7 +216,7 @@ export default function Navbar() {
               <span className="nav-more-caret" aria-hidden="true" />
             </button>
 
-            <div className="nav-more-menu nav-more-menu-light" role="menu">
+            <div className={`nav-more-menu nav-more-menu-light${moreOpen ? ' is-open' : ''}`} role="menu">
               {MORE_LINKS.map((link) => (
                 <Link
                   key={link.label}
