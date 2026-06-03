@@ -80,9 +80,11 @@ export default function BeforeAfter() {
   return (
     <section
       id="case-study"
+      className="before-after-section"
       style={{ backgroundColor: '#f5f5f5', padding: '100px 40px 60px' }}
     >
       <div
+        className="before-after-shell"
         style={{
           maxWidth: 'var(--max-width)',
           margin: '0 auto',
@@ -127,6 +129,7 @@ export default function BeforeAfter() {
         <div className="case-study-showcase">
           {/* Before / After slider card */}
           <div
+            className="before-after-card"
             style={{
               width: '100%',
               backgroundColor: '#f5f5f5',

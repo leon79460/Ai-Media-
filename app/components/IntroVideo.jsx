@@ -56,14 +56,17 @@ export default function IntroVideo() {
   return (
     <section
       id="intro"
+      className="intro-video-section"
       style={{ backgroundColor: '#f5f5f5', padding: '80px 40px' }}
     >
       <div
         ref={sectionRef}
+        className="intro-video-shell"
         style={{ maxWidth: 'var(--max-width)', margin: '0 auto', opacity: 0 }}
       >
         {/* Video card — asymmetric rounded corners from Figma */}
         <div
+          className="intro-video-frame"
           style={{
             position: 'relative',
             width: '100%',
@@ -128,6 +131,7 @@ export default function IntroVideo() {
 
           {/* Mute / Unmute button — bottom right corner */}
           <button
+            className="intro-video-mute"
             onClick={e => {
               e.stopPropagation();
               toggleMute();

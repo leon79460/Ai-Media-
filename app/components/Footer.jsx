@@ -129,6 +129,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
+      className="site-footer"
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       {/* Dark background video */}
@@ -163,6 +164,7 @@ export default function Footer() {
 
       {/* All content sits above the background */}
       <div
+        className="site-footer-inner"
         style={{
           position: 'relative',
           zIndex: 1,

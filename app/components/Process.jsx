@@ -255,6 +255,7 @@ export default function Process() {
   return (
     <section
       id="process"
+      className="process-section"
       style={{
         backgroundColor: '#f5f5f5',
         padding: '88px 40px 0',
@@ -262,6 +263,7 @@ export default function Process() {
       }}
     >
       <div
+        className="process-shell"
         style={{
           maxWidth: 'var(--max-width)',
           margin: '0 auto',
@@ -272,6 +274,7 @@ export default function Process() {
       >
         <div
           ref={headRef}
+          className="process-header"
           style={{
             display: 'flex',
             flexDirection: 'column',

@@ -24,6 +24,13 @@ export default function ScrollEffects() {
   const pathname = usePathname();
   const progressRef = useRef(null);
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+
   useEffect(() => {
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
@@ -103,7 +110,9 @@ export default function ScrollEffects() {
       if (!progress) return;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = max > 0 ? window.scrollY / max : 0;
-      progress.style.transform = `scaleX(${Math.min(Math.max(ratio, 0), 1)})`;
+      const clamped = Math.min(Math.max(ratio, 0), 1);
+      progress.style.setProperty('--scroll-progress', `${clamped * 100}%`);
+      progress.classList.toggle('is-visible', window.scrollY > 260);
     };
 
     updateProgress();
@@ -133,5 +142,15 @@ export default function ScrollEffects() {
     };
   }, [pathname]);
 
-  return <div ref={progressRef} className="scroll-progress" aria-hidden="true" />;
+  return (
+    <button
+      ref={progressRef}
+      type="button"
+      className="back-to-top"
+      aria-label="Back to top"
+      onClick={scrollToTop}
+    >
+      <span className="back-to-top-icon" aria-hidden="true" />
+    </button>
+  );
 }

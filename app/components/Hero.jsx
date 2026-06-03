@@ -20,6 +20,7 @@ export default function Hero() {
   return (
     <section
       id="home"
+      className="hero-section"
       style={{
         position: 'relative',
         minHeight: '100vh',
@@ -52,6 +53,7 @@ export default function Hero() {
       </video>
 
       <div
+        className="hero-content"
         style={{
           position: 'absolute',
           inset: 0,
