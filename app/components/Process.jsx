@@ -191,6 +191,10 @@ function ProcessCard({ card, delay }) {
       }}
     >
       <div
+        data-parallax
+        data-parallax-speed={(0.1 + delay * 0.25).toFixed(2)}
+        data-parallax-distance="130"
+        data-parallax-scale="1.02"
         style={{
           height: 214,
           marginBottom: 32,

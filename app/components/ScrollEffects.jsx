@@ -20,6 +20,8 @@ const REVEAL_SELECTOR = [
   '.blog-toc',
 ].join(',');
 
+const PARALLAX_SELECTOR = '[data-parallax]';
+
 export default function ScrollEffects() {
   const pathname = usePathname();
   const progressRef = useRef(null);
@@ -45,27 +47,28 @@ export default function ScrollEffects() {
       el.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 70}ms`);
     });
 
+    let observer;
+
     if (reduceMotion) {
       revealTargets.forEach(el => el.classList.add('is-visible'));
-      return undefined;
+    } else {
+      observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          rootMargin: '0px 0px 120px 0px',
+          threshold: 0.04,
+        },
+      );
+
+      revealTargets.forEach(el => observer.observe(el));
     }
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        rootMargin: '0px 0px 120px 0px',
-        threshold: 0.04,
-      },
-    );
-
-    revealTargets.forEach(el => observer.observe(el));
 
     const glowTargets = Array.from(
       document.querySelectorAll(
@@ -104,7 +107,55 @@ export default function ScrollEffects() {
       heroTitle?.style.setProperty('--title-shift', `${x * 8}px`);
     };
 
-    hero?.addEventListener('pointermove', moveHero);
+    if (!reduceMotion) {
+      hero?.addEventListener('pointermove', moveHero);
+    }
+
+    const parallaxTargets = Array.from(
+      document.querySelectorAll(PARALLAX_SELECTOR),
+    );
+    let parallaxFrame = 0;
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const updateParallax = () => {
+      parallaxFrame = 0;
+      if (reduceMotion) return;
+
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+
+      parallaxTargets.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.bottom < -180 || rect.top > viewportHeight + 180) return;
+
+        const speed = Number(el.dataset.parallaxSpeed || 0.16);
+        const distance = Number(el.dataset.parallaxDistance || 120);
+        const rotate = Number(el.dataset.parallaxRotate || 0);
+        const scale = Number(el.dataset.parallaxScale || 1);
+        const axis = el.dataset.parallaxAxis || 'y';
+        const center = rect.top + rect.height / 2;
+        const range = viewportHeight / 2 + rect.height / 2;
+        const progress = clamp((center - viewportHeight / 2) / range, -1, 1);
+        const travel = progress * distance * speed;
+        const x = axis.includes('x') ? travel : 0;
+        const y = axis.includes('y') ? -travel : 0;
+
+        el.style.setProperty('--parallax-x', `${x.toFixed(2)}px`);
+        el.style.setProperty('--parallax-y', `${y.toFixed(2)}px`);
+        el.style.setProperty(
+          '--parallax-rotate',
+          `${(progress * rotate).toFixed(3)}deg`,
+        );
+        el.style.setProperty('--parallax-scale', scale.toString());
+      });
+    };
+
+    const requestParallax = () => {
+      if (reduceMotion || parallaxFrame) return;
+      parallaxFrame = requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
 
     const updateProgress = () => {
       if (!progress) return;
@@ -118,6 +169,10 @@ export default function ScrollEffects() {
     updateProgress();
     window.addEventListener('scroll', updateProgress, { passive: true });
     window.addEventListener('resize', updateProgress);
+    if (!reduceMotion) {
+      window.addEventListener('scroll', requestParallax, { passive: true });
+      window.addEventListener('resize', requestParallax);
+    }
 
     const pendingTarget = sessionStorage.getItem('pendingScrollTarget');
     if (pathname === '/' && pendingTarget) {
@@ -132,13 +187,16 @@ export default function ScrollEffects() {
     }
 
     return () => {
-      observer.disconnect();
+      observer?.disconnect();
+      cancelAnimationFrame(parallaxFrame);
       glowTargets.forEach(el => {
         el.removeEventListener('pointermove', updateGlow);
       });
       hero?.removeEventListener('pointermove', moveHero);
       window.removeEventListener('scroll', updateProgress);
       window.removeEventListener('resize', updateProgress);
+      window.removeEventListener('scroll', requestParallax);
+      window.removeEventListener('resize', requestParallax);
     };
   }, [pathname]);
 

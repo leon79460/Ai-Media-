@@ -112,6 +112,7 @@ export default function Navbar() {
             width={200}
             height={200}
             priority
+            loading="eager"
             style={{
               width: 'auto',
               height: '54px',

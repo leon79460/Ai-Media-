@@ -80,6 +80,10 @@ function FeatureCard({ feature, delay }) {
       <span className="service-icon" aria-hidden="true">
         <Image
           className="service-icon-image"
+          data-parallax
+          data-parallax-speed={(0.14 + delay * 0.28).toFixed(2)}
+          data-parallax-distance="95"
+          data-parallax-rotate="3"
           src={feature.icon}
           alt=""
           width={105}
@@ -114,6 +118,24 @@ export default function Features() {
 
   return (
     <section id="services" className="services-section">
+      <span
+        className="parallax-accent parallax-accent-left"
+        data-parallax
+        data-parallax-axis="xy"
+        data-parallax-speed="0.18"
+        data-parallax-distance="150"
+        data-parallax-rotate="-4"
+        aria-hidden="true"
+      />
+      <span
+        className="parallax-accent parallax-accent-right"
+        data-parallax
+        data-parallax-axis="xy"
+        data-parallax-speed="0.14"
+        data-parallax-distance="180"
+        data-parallax-rotate="5"
+        aria-hidden="true"
+      />
       <div className="services-shell">
         <header ref={headRef} className="services-header" style={{ opacity: 0 }}>
           <span className="services-badge">

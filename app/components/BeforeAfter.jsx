@@ -130,6 +130,10 @@ export default function BeforeAfter() {
           {/* Before / After slider card */}
           <div
             className="before-after-card"
+            data-parallax
+            data-parallax-speed="0.08"
+            data-parallax-distance="120"
+            data-parallax-rotate="1.2"
             style={{
               width: '100%',
               backgroundColor: '#f5f5f5',

@@ -34,6 +34,11 @@ export default function Hero() {
       }}
     >
       <video
+        className="hero-bg-video"
+        data-parallax
+        data-parallax-speed="0.1"
+        data-parallax-distance="220"
+        data-parallax-scale="1.08"
         aria-hidden="true"
         autoPlay
         loop
@@ -78,7 +83,12 @@ export default function Hero() {
           color: '#f5f5f5',
         }}
       >
-        <div style={{ position: 'relative', display: 'inline-flex' }}>
+        <div
+          data-parallax
+          data-parallax-speed="0.12"
+          data-parallax-distance="90"
+          style={{ position: 'relative', display: 'inline-flex' }}
+        >
           <div
             aria-hidden="true"
             style={{
@@ -131,6 +141,10 @@ export default function Hero() {
         </div>
 
         <h1
+          className="hero-title"
+          data-parallax
+          data-parallax-speed="0.08"
+          data-parallax-distance="120"
           style={{
             maxWidth: '900px',
             margin: 0,
@@ -148,6 +162,9 @@ export default function Hero() {
         </h1>
 
         <p
+          data-parallax
+          data-parallax-speed="0.06"
+          data-parallax-distance="90"
           style={{
             maxWidth: '880px',
             margin: 0,
@@ -163,6 +180,9 @@ export default function Hero() {
         </p>
 
         <div
+          data-parallax
+          data-parallax-speed="0.04"
+          data-parallax-distance="80"
           style={{
             display: 'flex',
             alignItems: 'center',
