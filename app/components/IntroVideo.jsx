@@ -8,6 +8,7 @@ const POSTER_IMG = ''; // optional: "/video-poster.jpg"
 export default function IntroVideo() {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
+  const frameRef = useRef(null);
   const [muted, setMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
 
@@ -32,6 +33,59 @@ export default function IntroVideo() {
     );
     obs.observe(section);
     return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    const section = sectionRef.current;
+    if (!frame || !section) return;
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    if (reduceMotion) {
+      frame.style.setProperty('--intro-video-scale', '1');
+      frame.style.setProperty('--intro-video-y', '0px');
+      frame.style.setProperty('--intro-video-opacity', '1');
+      return;
+    }
+
+    let frameId = 0;
+    const clamp = value => Math.min(Math.max(value, 0), 1);
+    const easeOut = value => 1 - Math.pow(1 - value, 3);
+
+    const updateSize = () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+      const start = viewportHeight * 0.92;
+      const end = viewportHeight * 0.2;
+      const progress = clamp((start - rect.top) / (start - end));
+      const eased = easeOut(progress);
+      const scale = 0.72 + eased * 0.28;
+      const translateY = (1 - eased) * 28;
+      const opacity = 0.78 + eased * 0.22;
+
+      frame.style.setProperty('--intro-video-scale', scale.toFixed(3));
+      frame.style.setProperty('--intro-video-y', `${translateY.toFixed(1)}px`);
+      frame.style.setProperty('--intro-video-opacity', opacity.toFixed(3));
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(updateSize);
+    };
+
+    updateSize();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+    };
   }, []);
 
   const toggleMute = () => {
@@ -66,6 +120,7 @@ export default function IntroVideo() {
       >
         {/* Video card — asymmetric rounded corners from Figma */}
         <div
+          ref={frameRef}
           className="intro-video-frame"
           style={{
             position: 'relative',
@@ -77,6 +132,11 @@ export default function IntroVideo() {
             boxShadow:
               '0 2px 8px rgba(0,0,0,0.08), 0 20px 48px rgba(0,0,0,0.12)',
             cursor: 'pointer',
+            opacity: 'var(--intro-video-opacity, 0.78)',
+            transform:
+              'translateY(var(--intro-video-y, 28px)) scale(var(--intro-video-scale, 0.72))',
+            transformOrigin: 'center top',
+            willChange: 'transform, opacity',
           }}
           onClick={togglePlay}
         >

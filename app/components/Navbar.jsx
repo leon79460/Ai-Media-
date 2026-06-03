@@ -68,6 +68,7 @@ export default function Navbar() {
 
   return (
     <nav
+      className="site-nav"
       style={{
         position: 'fixed',
         top: 0,
