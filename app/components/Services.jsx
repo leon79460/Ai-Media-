@@ -80,10 +80,6 @@ function FeatureCard({ feature, delay }) {
       <span className="service-icon" aria-hidden="true">
         <Image
           className="service-icon-image"
-          data-parallax
-          data-parallax-speed={(0.14 + delay * 0.28).toFixed(2)}
-          data-parallax-distance="95"
-          data-parallax-rotate="3"
           src={feature.icon}
           alt=""
           width={105}
