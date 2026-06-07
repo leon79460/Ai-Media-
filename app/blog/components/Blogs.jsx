@@ -57,21 +57,28 @@ function BlogCard({ post, href, delay }) {
   return (
     <article ref={ref} className="blog-card blog-home-card">
       <Link className="blog-home-image" href={href} aria-label={post.title}>
-        <div className={`blog-thumbnail is-${post.theme}`} aria-hidden="true">
-          <div className="blog-thumb-glow" />
-          <div className="blog-thumb-copy">
-            <strong>{post.title}</strong>
-            <span>{post.imageLabel || post.excerpt}</span>
+        {post.image ? (
+          <img 
+            src={post.image} 
+            alt={post.title} 
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+          />
+        ) : (
+          <div className={`blog-thumbnail is-${post.theme}`} aria-hidden="true">
+            <div className="blog-thumb-glow" />
+            <div className="blog-thumb-device">
+              <span />
+              <span />
+              <span />
+            </div>
           </div>
-          <div className="blog-thumb-device">
-            <span />
-            <span />
-            <span />
-          </div>
-        </div>
+        )}
       </Link>
       <div className="blog-home-copy">
         <h3>{post.title}</h3>
+        <p style={{ display: 'block', marginTop: '8px', color: '#666', fontSize: '14px', lineHeight: '1.5' }}>
+          {post.excerpt}
+        </p>
       </div>
       <Link className="read-more" href={href}>
         Read More
