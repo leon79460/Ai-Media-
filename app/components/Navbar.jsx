@@ -89,7 +89,7 @@ export default function Navbar() {
           }}
         >
           <video
-            src="/logos/logo.mp4"
+            src="/logos/Logo.mp4"
             autoPlay
             loop
             muted

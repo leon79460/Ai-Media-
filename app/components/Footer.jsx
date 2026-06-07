@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const BG_VIDEO = '/video/footer-bg.mp4';
-const AI_LOGO_IMAGE = '/logos/logo.mp4';
+const AI_LOGO_IMAGE = '/logos/Logo.mp4';
 
 const TAGLINE =
   'AI-First Digital Agency for AV & Smart Home Integrators. We build systems that compound over time.';
@@ -218,7 +218,7 @@ export default function Footer() {
                   }}
                 >
                   <video
-                    src="/logos/logo.mp4"
+                    src="/logos/Logo.mp4"
                     autoPlay
                     loop
                     muted
