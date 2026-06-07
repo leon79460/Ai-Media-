@@ -165,6 +165,7 @@ export default function Navbar() {
             <Link
                 href="https://app.aimedia.design"
                 className="nav-cta nav-login-cta nav-desktop-cta"
+                target='blank'
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
