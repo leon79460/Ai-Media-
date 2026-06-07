@@ -3,28 +3,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const LINKS = [
   { label: 'Home', target: 'home' },
   { label: 'Services', target: 'services' },
   { label: 'Pricing', target: 'pricing' },
   { label: 'About us', href: '/about' },
-];
-
-const MORE_LINKS = [
-  { label: 'Contact', href: '/contact' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Blogs', href: '/blog' },
 ];
-const MOBILE_LINKS = [...LINKS, ...MORE_LINKS];
+const MOBILE_LINKS = [...LINKS];
 
 export default function Navbar() {
-  const moreRef = useRef(null);
   const pathname = usePathname();
-  const isHome = pathname === '/';
   const router = useRouter();
-  const [moreOpen, setMoreOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobileNav, setIsMobileNav] = useState(false);
 
@@ -39,19 +32,8 @@ export default function Navbar() {
     };
   }, []);
 
-  useEffect(() => {
-    function closeMoreOnOutsideClick(event) {
-      if (!moreRef.current?.contains(event.target)) {
-        setMoreOpen(false);
-      }
-    }
-    document.addEventListener('pointerdown', closeMoreOnOutsideClick);
-    return () => document.removeEventListener('pointerdown', closeMoreOnOutsideClick);
-  }, []);
-
   function scrollToSection(target) {
     setMobileOpen(false);
-    setMoreOpen(false);
 
     if (pathname !== '/') {
       sessionStorage.setItem('pendingScrollTarget', target);
@@ -80,7 +62,7 @@ export default function Navbar() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '0 24px',
-        background: 'rgba(245,245,245,0.82)',
+        background: '#F0F0F0',
         backdropFilter: 'blur(18px)',
         WebkitBackdropFilter: 'blur(18px)',
         borderBottom: '1px solid rgba(0,0,0,0.06)',
@@ -106,13 +88,12 @@ export default function Navbar() {
             pointerEvents: 'auto',
           }}
         >
-          <Image
-            src="/logos/logo.png"
-            alt="AI Media"
-            width={200}
-            height={200}
-            priority
-            loading="eager"
+          <video
+            src="/logos/logo.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             style={{
               width: 'auto',
               height: '54px',
@@ -127,9 +108,9 @@ export default function Navbar() {
         <div
           className="nav-links"
           style={{
-            borderColor: 'rgba(0,0,0,0.08)',
-            background: 'rgba(255,255,255,0.72)',
-            boxShadow: '0 12px 28px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.88)',
+            border: 0,
+            background: 'transparent',
+            boxShadow: 'none',
           }}
         >
           {LINKS.map((link, i) => {
@@ -158,7 +139,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className="nav-link"
-                onClick={() => { setMobileOpen(false); setMoreOpen(false); }}
+                onClick={() => setMobileOpen(false)}
                 style={commonStyle}
               >
                 {link.label}
@@ -175,92 +156,68 @@ export default function Navbar() {
               </button>
             );
           })}
-
-          {/* More dropdown */}
-          <div
-            ref={moreRef}
-            className={`nav-more${moreOpen ? ' is-open' : ''}`}
-            style={{
-              position: 'relative',
-              opacity: 0,
-              animation: `linkDrop 0.48s cubic-bezier(0.16, 1, 0.3, 1) ${0.22 + LINKS.length * 0.07}s forwards`,
-            }}
-          >
-            <button
-              type="button"
-              className="nav-link nav-more-trigger"
-              aria-haspopup="menu"
-              aria-expanded={moreOpen}
-              onClick={() => setMoreOpen((o) => !o)}
-              onBlur={(e) => {
-                if (!e.currentTarget.parentElement?.contains(e.relatedTarget)) {
-                  setMoreOpen(false);
-                }
-              }}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '7px',
-                padding: '8px 16px',
-                border: 0,
-                background: 'transparent',
-                color: 'rgba(3,3,3,0.62)',
-                cursor: 'pointer',
-                fontFamily: 'var(--font-main)',
-                fontWeight: 400,
-                fontSize: '15px',
-                lineHeight: 1,
-                borderRadius: '6px',
-                transition: 'background 0.2s cubic-bezier(0.33, 1, 0.68, 1)',
-              }}
-            >
-              More
-              <span className="nav-more-caret" aria-hidden="true" />
-            </button>
-
-            <div className={`nav-more-menu nav-more-menu-light${moreOpen ? ' is-open' : ''}`} role="menu">
-              {MORE_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  role="menuitem"
-                  onClick={() => setMoreOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Right actions */}
         <div className="nav-actions">
           {!isMobileNav && (
+            <>
             <Link
-              href="/contact"
-              className="nav-cta nav-desktop-cta"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                backgroundColor: '#050505',
-                color: '#f5f5f5',
-                textDecoration: 'none',
-                borderRadius: '999px',
-                padding: '0 22px',
-                height: '42px',
-                fontFamily: 'var(--font-main)',
-                fontWeight: 700,
-                fontSize: '14px',
-                cursor: 'pointer',
-                transition: 'opacity 0.22s ease, transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                boxShadow: '0 3px 10px rgba(0,0,0,0.22)',
-                opacity: 0,
-                animation: 'btnPop 0.54s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
-              }}
-            >
-              Get Started
-            </Link>
+                href="https://app.aimedia.design"
+                className="nav-cta nav-login-cta nav-desktop-cta"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  color: '#060606',
+                  textDecoration: 'none',
+                  borderRadius: '7px',
+                  border: 0,
+                  padding: '0 12px',
+                  height: '40px',
+                  fontFamily: 'var(--font-main)',
+                  fontWeight: 600,
+                  fontSize: '15px',
+                  cursor: 'pointer',
+                  transition: 'opacity 0.22s ease, transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  opacity: 0,
+                  animation: 'btnPop 0.54s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s forwards',
+                }}
+              >
+                Login
+              </Link>
+              <Link
+                href="/contact"
+                className="nav-cta nav-start-cta nav-desktop-cta"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  minWidth: '140px',
+                  backgroundColor: '#050505',
+                  color: '#fff',
+                  textDecoration: 'none',
+                  borderRadius: '7px',
+                  border: '1px solid rgba(255,255,255,0.86)',
+                  padding: '0 24px',
+                  height: '40px',
+                  fontFamily: 'var(--font-main)',
+                  fontWeight: 600,
+                  fontSize: '15px',
+                  cursor: 'pointer',
+                  backdropFilter: 'blur(14px)',
+                  WebkitBackdropFilter: 'blur(14px)',
+                  transition: 'opacity 0.22s ease, transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+                  animation: 'btnPop 0.54s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
+                }}
+              >
+                Get Started
+              </Link>
+              
+            </>
           )}
 
           <button
@@ -298,10 +255,17 @@ export default function Navbar() {
           )}
           <Link
             href="/contact"
-            className="nav-mobile-cta"
+            className="nav-mobile-cta nav-mobile-start-cta"
             onClick={() => setMobileOpen(false)}
           >
             Get Started
+          </Link>
+          <Link
+            href="#"
+            className="nav-mobile-cta nav-mobile-login-cta"
+            onClick={() => setMobileOpen(false)}
+          >
+            Login
           </Link>
         </div>
       </div>

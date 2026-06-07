@@ -1,14 +1,11 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-// ⚠️ Save to /public/ before going live
 const BG_VIDEO = '/video/footer-bg.mp4';
-const AI_LOGO_IMAGE = '/logos/logo.png';
+const AI_LOGO_IMAGE = '/logos/logo.mp4';
 
-// EDIT these
 const TAGLINE =
   'AI-First Digital Agency for AV & Smart Home Integrators. We build systems that compound over time.';
 const COPYRIGHT = '© 2026 AI MEDIA · ALL RIGHTS RESERVED';
@@ -203,20 +200,38 @@ export default function Footer() {
               <div
                 style={{ display: 'flex', alignItems: 'center', gap: '14px' }}
               >
-                <Image
-                  src={AI_LOGO_IMAGE}
-                  alt="AI Media"
-                  width={200}
-                  height={200}
+                <button
+                  type="button"
+                  aria-label="AI Media home"
+                  className="nav-logo"
+                  onClick={() => scrollToSection('home')}
                   style={{
-                    width: 'auto',
-                    height: '64px',
-                    maxWidth: '200px',
-                    objectFit: 'contain',
-                    display: 'block',
-                    filter: 'drop-shadow(0 8px 18px rgba(0,0,0,0.35))',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    border: 0,
+                    background: 'transparent',
+                    cursor: 'pointer',
+                    padding: 0,
+                    opacity: 1,
+                    transform: 'translateY(0)',
+                    pointerEvents: 'auto',
                   }}
-                />
+                >
+                  <video
+                    src="/logos/logo.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                      width: 'auto',
+                      height: '54px',
+                      maxWidth: '170px',
+                      objectFit: 'contain',
+                      display: 'block',
+                    }}
+                  />
+                </button>
               </div>
 
               {/* Tagline — EDIT: TAGLINE */}
@@ -239,19 +254,24 @@ export default function Footer() {
             >
               <form
                 onSubmit={handleSubmit}
-                style={{ display: 'flex', alignItems: 'flex-end', gap: '34px' }}
+                style={{ display: 'flex', alignItems: 'center' }}
               >
                 {/* Email field */}
                 <div
                   style={{
                     flex: 1,
-                    borderBottom: '1px solid rgba(245,245,245,0.5)',
-                    paddingBottom: '14px',
+                    backgroundColor: '#2b2b2b',
+                    height: '46px',
+                    borderTopLeftRadius: '4px',
+                    borderBottomLeftRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '0 16px',
                   }}
                 >
                   <input
                     type="email"
-                    placeholder="Your Email"
+                    placeholder="Email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
@@ -261,9 +281,10 @@ export default function Footer() {
                       outline: 'none',
                       fontFamily: 'var(--font)',
                       fontWeight: 400,
-                      fontSize: '16px',
+                      fontSize: '15px',
                       color: '#f5f5f5',
                       width: '100%',
+                      height: '100%',
                     }}
                   />
                 </div>
@@ -273,24 +294,27 @@ export default function Footer() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px',
-                    backgroundColor: '#f5f5f5',
+                    justifyContent: 'center',
+                    backgroundColor: '#ffffff',
                     color: '#030303',
                     border: 'none',
-                    borderRadius: '10px',
+                    borderTopRightRadius: '4px',
+                    borderBottomRightRadius: '4px',
+                    borderTopLeftRadius: '0',
+                    borderBottomLeftRadius: '0',
                     padding: '0 20px',
                     height: '46px',
                     flexShrink: 0,
                     fontFamily: 'var(--font)',
-                    fontWeight: 700,
-                    fontSize: '14px',
+                    fontWeight: 500,
+                    fontSize: '15px',
                     cursor: 'pointer',
                     transition: 'opacity 0.2s',
                   }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
                   onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
                 >
-                  → Submit
+                  Submit
                 </button>
               </form>
               {/* Small text below form */}

@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
-const HEADING = 'Stop Chasing Leads. Start Attracting Them.';
+const HEADING = 'Stop chasing leads. start attracting them.';
 const SUBTEXT =
   'We combine AI-powered delivery, industry expertise, SEO, content, and conversion-focused web design to help integrators get found, gain trust, and win more high-value projects.';
 
@@ -90,19 +90,6 @@ export default function Hero() {
           style={{ position: 'relative', display: 'inline-flex' }}
         >
           <div
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              left: '10%',
-              right: '10%',
-              top: '70%',
-              height: '22px',
-              borderRadius: '999px',
-              background: 'rgba(0,0,0,0.7)',
-              filter: 'blur(10px)',
-            }}
-          />
-          <div
             style={{
               position: 'relative',
               height: '36px',
@@ -114,7 +101,7 @@ export default function Hero() {
               border: '1px solid rgba(255,255,255,0.62)',
               background: 'linear-gradient(180deg, #111 0%, #070707 100%)',
               boxShadow:
-                'inset 0 1px 0 rgba(255,255,255,0.25), 0 8px 16px rgba(0,0,0,0.45)',
+                'inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1.5px 0 rgba(255,255,255,0.72)',
             }}
           >
             <Image
@@ -151,8 +138,8 @@ export default function Hero() {
             fontFamily: 'var(--font-main)',
             fontWeight: 600,
             fontSize: 'clamp(48px, 8vw, 92px)',
-            lineHeight: 0.96,
-            letterSpacing: '-0.055em',
+            lineHeight: 1.25,
+            letterSpacing: '-0.01em',
             color: '#f5f5f5',
             textWrap: 'balance',
             textShadow: '0 18px 34px rgba(0,0,0,0.45)',
@@ -171,7 +158,7 @@ export default function Hero() {
             fontFamily: 'var(--font-main)',
             fontWeight: 400,
             fontSize: '18px',
-            lineHeight: 1.55,
+            lineHeight: 1.75,
             color: 'rgba(245,245,245,0.94)',
             textWrap: 'pretty',
           }}
@@ -200,19 +187,21 @@ export default function Hero() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minWidth: '166px',
-              height: '46px',
-              padding: '0 28px',
-              borderRadius: '10px',
-              border: 0,
-              background: '#000',
+              minWidth: '140px',
+              height: '40px',
+              padding: '0 24px',
+              borderRadius: '7px',
+              border: '1px solid rgba(255,255,255,0.86)',
+              background: 'rgba(255,255,255,0.08)',
               color: '#fff',
               fontFamily: 'var(--font-main)',
               fontWeight: 700,
-              fontSize: '14px',
+              fontSize: '12px',
               cursor: 'pointer',
+              backdropFilter: 'blur(14px)',
+              WebkitBackdropFilter: 'blur(14px)',
               boxShadow:
-                '0 3px 8px rgba(0,0,0,0.6), 0 12px 20px rgba(0,0,0,0.35)',
+                'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
             }}
           >
             Start a Project
@@ -225,19 +214,19 @@ export default function Hero() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minWidth: '166px',
-              height: '46px',
-              padding: '0 28px',
-              borderRadius: '10px',
+              minWidth: '140px',
+              height: '40px',
+              padding: '0 24px',
+              borderRadius: '7px',
               border: 0,
-              background: '#f5f5f5',
+              background: '#f7f7f7',
               color: '#060606',
               fontFamily: 'var(--font-main)',
               fontWeight: 700,
-              fontSize: '14px',
+              fontSize: '12px',
               cursor: 'pointer',
               boxShadow:
-                '0 1px 3px rgba(158,158,158,0.75), inset 0 3px 1px #ffffff',
+                '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
             }}
           >
             Explore Services

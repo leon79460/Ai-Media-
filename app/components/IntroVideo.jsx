@@ -59,13 +59,13 @@ export default function IntroVideo() {
       const rect = section.getBoundingClientRect();
       const viewportHeight =
         window.innerHeight || document.documentElement.clientHeight;
-      const start = viewportHeight * 0.92;
-      const end = viewportHeight * 0.2;
+      const start = viewportHeight * 0.95;
+      const end = viewportHeight * 0.05;
       const progress = clamp((start - rect.top) / (start - end));
       const eased = easeOut(progress);
-      const scale = 0.72 + eased * 0.28;
-      const translateY = (1 - eased) * 28;
-      const opacity = 0.78 + eased * 0.22;
+      const scale = 0.62 + eased * 0.38;
+      const translateY = (1 - eased) * 36;
+      const opacity = 0.82 + eased * 0.18;
 
       frame.style.setProperty('--intro-video-scale', scale.toFixed(3));
       frame.style.setProperty('--intro-video-y', `${translateY.toFixed(1)}px`);
@@ -111,12 +111,17 @@ export default function IntroVideo() {
     <section
       id="intro"
       className="intro-video-section"
-      style={{ backgroundColor: '#f5f5f5', padding: '80px 40px' }}
+      style={{ padding: '80px 0' }}
     >
       <div
         ref={sectionRef}
         className="intro-video-shell"
-        style={{ maxWidth: 'var(--max-width)', margin: '0 auto', opacity: 0 }}
+        style={{
+          width: '100%',
+          maxWidth: '100%',
+          margin: '0',
+          opacity: 0,
+        }}
       >
         {/* Video card — asymmetric rounded corners from Figma */}
         <div
@@ -126,7 +131,7 @@ export default function IntroVideo() {
             position: 'relative',
             width: '100%',
             paddingTop: '56.25%' /* 16:9 aspect ratio */,
-            borderRadius: '10px 100px 10px 100px',
+            borderRadius: '10px',
             overflow: 'hidden',
             background: '#000',
             boxShadow:
@@ -134,9 +139,11 @@ export default function IntroVideo() {
             cursor: 'pointer',
             opacity: 'var(--intro-video-opacity, 0.78)',
             transform:
-              'translateY(var(--intro-video-y, 28px)) scale(var(--intro-video-scale, 0.72))',
+              'translateY(var(--intro-video-y, 36px)) scale(var(--intro-video-scale, 0.62))',
             transformOrigin: 'center top',
             willChange: 'transform, opacity',
+            WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+            maskImage: 'radial-gradient(white, black)',
           }}
           onClick={togglePlay}
         >
@@ -156,6 +163,9 @@ export default function IntroVideo() {
               height: '100%',
               objectFit: 'cover',
               display: 'block',
+              borderRadius: '10px',
+              WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+              maskImage: 'radial-gradient(white, black)',
             }}
           />
 
@@ -169,6 +179,7 @@ export default function IntroVideo() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: 'rgba(0,0,0,0.25)',
+                borderRadius: 'inherit',
               }}
             >
               <div

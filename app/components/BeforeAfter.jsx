@@ -241,7 +241,7 @@ export default function BeforeAfter() {
             </div>
 
             {/* Before / After labels */}
-            <div style={{ position: 'absolute', bottom: '32px', left: '60px' }}>
+            <div style={{ position: 'absolute', bottom: '32px', left: '32px' }}>
               <div
                 style={{
                   backdropFilter: 'blur(5px)',
@@ -259,7 +259,7 @@ export default function BeforeAfter() {
               </div>
             </div>
             <div
-              style={{ position: 'absolute', bottom: '32px', right: '60px' }}
+              style={{ position: 'absolute', bottom: '32px', right: '32px' }}
             >
               <div
                 style={{

@@ -19,6 +19,7 @@ body {
   width: 100%;
   min-height: 100vh;
   background: #f5f5f5;
+  overflow-x: hidden;
 }
 
 :root {
@@ -246,7 +247,7 @@ body {
   max-width: 1280px;
   height: 54px;
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr) 180px;
+  grid-template-columns: 180px minmax(0, 1fr) auto;
   align-items: center;
   gap: 18px;
 }
@@ -259,7 +260,7 @@ body {
   justify-self: end;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
 }
 
 .nav-links {
@@ -270,15 +271,13 @@ body {
   gap: 4px;
   min-height: 46px;
   padding: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 0;
   border-radius: 999px;
   overflow: visible;
-  background: rgba(255, 255, 255, 0.07);
+  background: transparent;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow:
-    0 14px 28px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: none;
 }
 
 .nav-link:hover {
@@ -297,7 +296,7 @@ body {
 
 .nav-cta {
   justify-self: end;
-  border-radius: 999px !important;
+  border-radius: 7px !important;
 }
 
 .nav-mobile-toggle,
@@ -405,9 +404,27 @@ body {
 .nav-mobile-panel-light .nav-mobile-cta {
   justify-content: center;
   margin-top: 4px;
+  min-height: 40px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.nav-mobile-panel .nav-mobile-start-cta,
+.nav-mobile-panel-light .nav-mobile-start-cta {
+  border: 1px solid rgba(255, 255, 255, 0.86);
   background: #050505;
-  color: #f5f5f5;
-  border-radius: 12px;
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 16px 28px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.nav-mobile-panel .nav-mobile-login-cta,
+.nav-mobile-panel-light .nav-mobile-login-cta {
+  border: 0;
+  background: #f7f7f7;
+  color: #060606;
+  box-shadow: 0 14px 26px rgba(255, 255, 255, 0.16), 0 2px 6px rgba(0, 0, 0, 0.12), inset 0 1px 0 #ffffff;
 }
 
 .nav-more-caret {
@@ -497,17 +514,19 @@ body {
 
 .btn-p:hover {
   transform: translateY(-3px) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 18px 30px rgba(0, 0, 0, 0.32) !important;
 }
 
 .btn-s:hover {
   transform: translateY(-3px) !important;
-  background: #e6e6e6 !important;
+  background: #ffffff !important;
 }
 
 .nav-cta:hover {
-  opacity: 0.85 !important;
-  transform: scale(1.04) !important;
+  opacity: 1 !important;
+  transform: translateY(-3px) !important;
 }
 
 .card-hover:hover {
@@ -761,6 +780,11 @@ body {
 
 body {
   font-family: var(--font-main);
+  line-height: 2.0;
+}
+
+p {
+  line-height: 2.0 !important;
 }
 
 .back-to-top {
@@ -1568,7 +1592,7 @@ body {
 }
 
 .pricing-copy {
-  min-height: 74px;
+  min-height: 180px;
   margin-bottom: 28px;
 }
 
@@ -3376,7 +3400,7 @@ body {
   color: rgba(61, 61, 61, 0.78);
   font-family: var(--font);
   font-size: 13px;
-  line-height: 1.58;
+  line-height: 2.0;
 }
 
 .about-process {
@@ -3562,7 +3586,7 @@ body {
   min-height: 100px;
   font-size: 13px;
   color: rgba(61, 61, 61, 0.76);
-  line-height: 1.58;
+  line-height: 2.0;
 }
 
 .about-team-img-wrap {
@@ -5071,6 +5095,24 @@ main.careers-page .careers-process-card p {
   box-sizing: border-box;
 }
 
+.intro-video-section {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.intro-video-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.intro-video-frame {
+  border-radius: 10px 0 10px 0 !important;
+}
+
 @media (max-width: 768px) {
 
   html,
@@ -5126,10 +5168,13 @@ main.careers-page .careers-process-card p {
 
   .intro-video-shell {
     max-width: 100% !important;
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 
   .intro-video-frame {
-    border-radius: 8px 38px 8px 38px !important;
+    border-radius: 8px 0 8px 0 !important;
   }
 
   .intro-video-mute {
@@ -5282,7 +5327,7 @@ main.careers-page .careers-process-card p {
   }
 
   .intro-video-frame {
-    border-radius: 8px 28px 8px 28px !important;
+    border-radius: 8px 0 8px 0 !important;
   }
 
   .service-card,
@@ -5458,7 +5503,7 @@ main.careers-page .careers-process-card p {
   font-size: 13px;
   font-weight: 400;
   color: rgba(61, 61, 61, 0.78);
-  line-height: 1.58;
+  line-height: 2.0;
 }
 
 .contact-info-link {
