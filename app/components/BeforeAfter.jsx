@@ -81,7 +81,7 @@ export default function BeforeAfter() {
     <section
       id="case-study"
       className="before-after-section"
-      style={{ backgroundColor: '#f5f5f5', padding: '100px 40px 60px' }}
+      style={{ backgroundColor: '#f5f5f5', padding: '65px 40px' }}
     >
       <div
         className="before-after-shell"

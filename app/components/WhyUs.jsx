@@ -38,7 +38,7 @@ const OTHERS_FEATURES = [
 const styles = {
   section: {
     backgroundColor: '#f5f5f5',
-    padding: '100px 24px',
+    padding: '65px 24px',
   },
   shell: {
     width: '100%',

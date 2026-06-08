@@ -262,7 +262,7 @@ export default function Process() {
       className="process-section"
       style={{
         backgroundColor: '#f5f5f5',
-        padding: '88px 40px 0',
+        padding: '65px 40px',
         overflow: 'hidden',
       }}
     >
@@ -328,21 +328,19 @@ export default function Process() {
         </div>
       </div>
 
+      {/* Ticker strip */}
       <div
+        className="process-ticker-wrap"
         style={{
           width: '100%',
           marginTop: 28,
-          paddingBottom: 34,
-          maskImage:
-            'linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%)',
-          WebkitMaskImage:
-            'linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%)',
+          paddingBottom: 0,
         }}
       >
         <div
+          className="process-ticker-track"
           style={{
             display: 'flex',
-            gap: 24,
             width: 'max-content',
             animation: 'ticker 34s linear infinite',
           }}
@@ -351,22 +349,12 @@ export default function Process() {
             (item, index) => (
               <div
                 key={`${item.label}-${index}`}
+                className="process-ticker-pill"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: 14,
-                  minHeight: 48,
-                  backgroundColor: '#f5f5f5',
-                  border: '1px solid rgba(255,255,255,0.9)',
-                  borderRadius: 228,
-                  padding: '0 28px',
                   whiteSpace: 'nowrap',
-                  boxShadow:
-                    'inset 0 3px 1px rgba(255,255,255,0.95), 0 12px 24px rgba(0,0,0,0.13)',
                   fontFamily: 'var(--font)',
-                  fontWeight: 500,
-                  fontSize: 16,
-                  color: '#000',
                 }}
               >
                 <MiniIcon type={item.icon} />
