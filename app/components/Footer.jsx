@@ -93,7 +93,7 @@ export default function Footer() {
     fontFamily: 'var(--font)',
     fontWeight: 400,
     fontSize: '16px',
-    color: '#f5f5f5',
+    color: 'rgb(197 192 192)',
     textDecoration: 'none',
     lineHeight: 1.64,
     whiteSpace: 'nowrap',
@@ -240,7 +240,7 @@ export default function Footer() {
                   fontFamily: 'var(--font)',
                   fontWeight: 400,
                   fontSize: '16px',
-                  color: '#f5f5f5',
+                  color: 'rgb(197 192 192)',
                   lineHeight: 1.64,
                 }}
               >
