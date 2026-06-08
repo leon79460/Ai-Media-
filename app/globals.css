@@ -3181,13 +3181,6 @@ p {
     box-shadow 0.24s ease;
 }
 
-.service-card:hover .service-icon,
-.pricing-card:hover .pricing-popular,
-.section-badge:hover,
-.services-badge:hover,
-.blog-home-badge:hover {
-  transform: translateY(-2px);
-}
 
 .blog-home-image::after,
 .service-icon::after {
