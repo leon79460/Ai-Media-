@@ -694,17 +694,27 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--light);
-  border: 1px solid rgba(200, 200, 200, 0.6);
-  border-radius: 60px;
-  padding: 6px 16px;
+  min-height: 32px;
   height: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 white;
+  background: linear-gradient(180deg, #fbfbfb 0%, #ececec 100%);
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  border-radius: 999px;
+  padding: 0 16px;
+  box-shadow: 0 3px 3px #948f8f66, 0 3px 4px #2f2a2a4d, inset 0 1px #ffffffe6;
   font-family: var(--font);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 12px;
   color: #000;
+  line-height: 1;
   white-space: nowrap;
+}
+
+.section-badge img,
+.services-badge img,
+.blog-home-badge img {
+  width: 16px !important;
+  height: 16px !important;
+  object-fit: contain;
 }
 
 .section-badge.is-visible {
@@ -1054,17 +1064,18 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 40px;
-  padding: 0 20px;
+  min-height: 32px;
+  height: 32px;
+  padding: 0 16px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  background: linear-gradient(180deg, #fafafa 0%, #ececec 100%);
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  background: linear-gradient(180deg, #fbfbfb 0%, #ececec 100%);
   color: #121212;
   font-family: var(--font);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
-  box-shadow: 0 5px 5px #0006, 0 3px 4px #0000004d, inset 0 1px #ffffffe6;
+  box-shadow: 0 3px 3px #948f8f66, 0 3px 4px #2f2a2a4d, inset 0 1px #ffffffe6;
 }
 
 .services-badge-icon {
@@ -2802,19 +2813,18 @@ p {
 
 .blog-home-badge {
   gap: 8px;
-  min-height: 34px;
-  padding: 0 15px;
+  min-height: 32px;
+  height: 32px;
+  padding: 0 16px;
   border-color: rgba(255, 255, 255, 0.86);
   background: linear-gradient(180deg, #fbfbfb 0%, #ececec 100%);
-  box-shadow:
-    0 10px 18px rgba(0, 0, 0, 0.24),
-    0 3px 4px rgba(0, 0, 0, 0.14),
-    inset 0 1px #ffffffe6;
+  box-shadow: 0 3px 3px #948f8f66, 0 3px 4px #2f2a2a4d, inset 0 1px #ffffffe6;
 }
 
 .blog-home-badge span {
-  color: #8f8f8f;
-  font-size: 13px;
+  color: #121212;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
 }
 
