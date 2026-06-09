@@ -228,7 +228,7 @@ export default function CareersPage() {
                 <span aria-hidden="true">Create.<br />Ship.<br />Improve.</span>
               </div>
               <div className="about-cta-copy">
-                <span className="about-dark-badge">Join AI Media</span>
+                <Badge>Join AI Media</Badge>
                 <h2 id="careers-cta-title">Want to Work With Us?</h2>
                 <p>
                   Send your portfolio, role of interest, and a short note about

@@ -354,7 +354,7 @@ export default function AboutPage() {
                 <span aria-hidden="true">Design.<br />Build.<br />Grow.</span>
               </div>
               <div className="about-cta-copy">
-                <span className="about-dark-badge">Contact us</span>
+                <Badge>Contact us</Badge>
                 <h2 id="about-cta-title">Ready to Build a Smarter Online Presence?</h2>
                 <p>
                   Let&apos;s create a website and marketing system that helps

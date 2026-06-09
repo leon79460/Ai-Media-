@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -217,12 +218,11 @@ export default function Footer() {
                     pointerEvents: 'auto',
                   }}
                 >
-                  <video
-                    src="/logos/Logo-footer.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                  <Image
+                    src="/logos/logo-2.png"
+                    alt="AI Media"
+                    width={170}
+                    height={54}
                     style={{
                       width: 'auto',
                       height: '54px',
