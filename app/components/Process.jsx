@@ -293,7 +293,7 @@ export default function Process() {
           <h2
             className="section-title process-title"
             style={{
-              fontSize: 64,
+              fontSize: 55,
               lineHeight: 1.2,
               letterSpacing: 0,
             }}

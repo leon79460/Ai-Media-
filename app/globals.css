@@ -742,7 +742,7 @@ body {
 .section-sub {
   font-family: var(--font);
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   color: #3d3d3d;
   opacity: 0.8;
   text-align: center;
@@ -4218,7 +4218,7 @@ main.about-page .section-sub.reveal-motion:not(.is-visible) {
   }
 
   .services-sub {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .service-card {
@@ -6342,5 +6342,25 @@ main.careers-page .careers-process-card p {
 
   .contact-card {
     border-radius: 14px;
+  }
+}
+
+@media (min-width: 769px) {
+  .section-title,
+  .services-title,
+  .blog-home-title,
+  .contact-faq-title,
+  .ds-solutions-head h2,
+  .ds-faq-head h2 {
+    font-size: 55px !important;
+  }
+
+  .section-sub,
+  .services-sub,
+  .blog-home-sub,
+  .contact-faq-sub,
+  .ds-solutions-head p,
+  .ds-faq-head p {
+    font-size: 18px !important;
   }
 }
