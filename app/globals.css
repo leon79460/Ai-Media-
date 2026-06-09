@@ -5395,8 +5395,8 @@ main.careers-page .careers-process-card p {
   .why-section,
   .blog-home-section,
   .site-footer-inner {
-    padding-right: 8px !important;
-    padding-left: 8px !important;
+    padding-right: 16px !important;
+    padding-left: 16px !important;
   }
 
   .intro-video-frame {
