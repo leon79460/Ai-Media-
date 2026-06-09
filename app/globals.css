@@ -3645,12 +3645,13 @@ p {
 }
 
 .about-arrows {
-  display: inline-flex;
+  display: none;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
+
 
 .about-arrow {
   width: 38px;
