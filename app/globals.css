@@ -4493,7 +4493,7 @@ main.about-page .about-hero-grid {
   grid-template-columns: 460px 1fr;
   gap: 90px;
   align-items: center;
-  padding: 45px 16px;
+  padding: 40px 16px;
 }
 
 main.about-page .about-hero-copy {
