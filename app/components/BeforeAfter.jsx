@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 
 // EDIT section text
 const SECTION_BADGE = 'Case Study';
-const TITLE = 'We Tested the System on Our Own AV Company First.';
+const TITLE = 'We Tested The System On Our Own AV Company First.';
 const SUBTITLE =
   'Project: Automate is a $3M/year luxury AV integration company. We rebuilt its online presence using the same website, SEO, content, and reporting system we now build for other integrators.';
 

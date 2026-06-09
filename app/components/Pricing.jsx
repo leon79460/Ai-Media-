@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 const SECTION_BADGE = 'Pricing';
-const SECTION_TITLE = 'Discover the pricing plan';
+const SECTION_TITLE = 'Discover The Pricing Plan';
 const SECTION_SUB =
   'Flexible pricing plans that fit your budget & scale with needs.';
 const GUARANTEE =

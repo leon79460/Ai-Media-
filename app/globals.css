@@ -848,6 +848,42 @@ body {
     overflow-x: auto !important;
   }
 
+  /* ── Homepage section gaps: match desktop vertical spacing on mobile ── */
+  .services-section {
+    padding-top: 118px;
+    padding-bottom: 126px;
+  }
+
+  .pricing-section {
+    padding-top: 100px;
+    padding-bottom: 72px;
+  }
+
+  .blog-home-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .why-section {
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+  }
+
+  .intro-video-section {
+    padding-top: 90px !important;
+    padding-bottom: 90px !important;
+  }
+
+  .process-section {
+    padding-top: 65px !important;
+    padding-bottom: 65px !important;
+  }
+
+  .before-after-section {
+    padding-top: 65px !important;
+    padding-bottom: 65px !important;
+  }
+
 }
 
 body {
@@ -1089,11 +1125,11 @@ p {
   font-size: clamp(46px, 5.1vw, 58px);
   font-weight: 500;
   letter-spacing: -0.036em;
-  line-height: 1.13;
+  line-height: 1.40;
 }
 
 .services-title span:first-child {
-  color: #9a9a9a;
+  color: #111;
 }
 
 .services-title span:last-child {
@@ -2829,7 +2865,7 @@ p {
   margin-top: 10px;
   font-size: clamp(44px, 5vw, 56px);
   letter-spacing: -0.052em;
-  line-height: 1.08;
+  line-height: 1.65;
   background: linear-gradient(to bottom, #a8a8a8 0%, #000 74%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -3984,37 +4020,50 @@ p {
 }
 
 @media (max-width: 768px) {
+  /* ── Horizontal padding: match homepage hero's 24px side gap ── */
   .about-shell {
-    width: calc(100% - 32px);
+    width: calc(100% - 48px);
   }
 
+  /* ── Consistent vertical gap across all sections: 82px ── */
   .about-hero {
-    padding: 112px 0 62px;
+    padding: 82px 0;
   }
 
   .about-section,
   .about-split-section {
-    padding: 68px 0;
+    padding: 82px 0;
   }
 
+  .about-faq-section {
+    padding-top: 82px;
+  }
+
+  .about-testimonials {
+    padding-top: 82px;
+  }
+
+  .about-process {
+    padding-top: 82px;
+  }
+
+  .about-final-cta {
+    padding: 82px 0;
+  }
+
+  /* ── Hide uploaded image panels on mobile ── */
+  .about-hero-image,
+  .about-split-image,
+  .about-cta-image {
+    display: none;
+  }
+
+  /* ── Grid / layout adjustments ── */
   .about-hero-grid,
-  .about-split-grid {
-    gap: 32px;
-  }
-
-  .about-hero-image {
-    min-height: 310px;
-    border-radius: 8px 44px 8px 44px;
-  }
-
-  .about-split-image {
-    height: 310px;
-    border-radius: 8px 44px 8px 44px;
-  }
-
-  .about-image-copy {
-    top: 48px;
-    left: 36px;
+  .about-split-grid,
+  .about-cta-panel {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
   .about-card-grid,
@@ -4074,18 +4123,10 @@ p {
     flex-direction: column;
   }
 
-  .about-final-cta {
-    padding: 48px 0 72px;
-  }
-
   .about-cta-panel {
     gap: 28px;
-    padding: 30px 24px;
+    padding: 36px 24px;
     border-radius: 8px 42px 8px 42px;
-  }
-
-  .about-cta-image {
-    height: 210px;
   }
 }
 
@@ -4426,7 +4467,7 @@ main.about-page .about-hero-grid {
   grid-template-columns: 460px 1fr;
   gap: 90px;
   align-items: center;
-  padding: 65px 0px;
+  padding: 45px 16px;
 }
 
 main.about-page .about-hero-copy {
@@ -5063,8 +5104,13 @@ main.careers-page .careers-process-card p {
     width: calc(100% - 32px);
   }
 
+  /* ── About page: unified 82px vertical gaps, hide image panels ── */
   main.about-page .about-hero {
-    padding: 106px 0 62px;
+    padding: 65px 0;
+  }
+
+  main.about-page .about-section {
+    padding: 65px 0;
   }
 
   main.about-page .about-hero h1 {
@@ -5076,19 +5122,10 @@ main.careers-page .careers-process-card p {
     font-size: 13px;
   }
 
+  /* Image panels are hidden on mobile */
   main.about-page .about-hero-image,
   main.about-page .about-split-image {
-    height: 290px;
-    border-radius: 8px 44px 8px 44px;
-  }
-
-  main.about-page .about-image-copy {
-    top: 48px;
-    left: 36px;
-  }
-
-  main.about-page .about-section {
-    padding: 68px 0;
+    display: none;
   }
 
   main.about-page .about-section-head .section-title,
@@ -5115,7 +5152,7 @@ main.careers-page .careers-process-card p {
   }
 
   main.about-page .about-cta-panel {
-    padding: 30px 24px;
+    padding: 36px 24px;
     border-radius: 8px 42px 8px 42px;
   }
 
@@ -5231,7 +5268,7 @@ main.careers-page .careers-process-card p {
   }
 
   .intro-video-section {
-    padding: 15px 0 !important;
+    padding: 65px 0 !important;
   }
 
   .intro-video-shell {
@@ -6353,3 +6390,4 @@ main.careers-page .careers-process-card p {
     font-size: 18px !important;
   }
 }
+
