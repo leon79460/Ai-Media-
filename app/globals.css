@@ -519,22 +519,26 @@ body {
     0 18px 30px rgba(0, 0, 0, 0.32) !important;
 }
 
-/* .btn-s:hover {
+.btn-s:hover {
   transform: translateY(-3px) !important;
   background: #ffffff !important;
-} */
+  box-shadow:
+    0 18px 30px rgba(0, 0, 0, 0.18),
+    0 3px 8px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 #ffffff !important;
+}
 
 .nav-start-cta,
 .nav-login-cta {
-  transition:
-    opacity 0.22s ease,
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.24s ease,
-    box-shadow 0.3s ease !important;
   will-change: transform;
+  transition:
+    opacity 0.25s,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.24s,
+    box-shadow 0.3s !important;
 }
 
-/* .nav-start-cta:hover,
+.nav-start-cta:hover,
 .nav-start-cta:focus-visible {
   opacity: 1 !important;
   transform: translateY(-3px) !important;
@@ -542,15 +546,16 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 18px 30px rgba(0, 0, 0, 0.32) !important;
   outline: none;
-} */
+}
 
-/* .nav-login-cta:hover,
+.nav-login-cta:hover,
 .nav-login-cta:focus-visible {
   opacity: 1 !important;
   transform: translateY(-3px) !important;
-  background: #ffffff !important;
+  background: transparent !important;
+  box-shadow: none !important;
   outline: none;
-} */
+}
 
 .card-hover:hover {
   transform: translateY(-6px) !important;
