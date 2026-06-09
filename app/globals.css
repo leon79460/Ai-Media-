@@ -5227,8 +5227,8 @@ main.careers-page .careers-process-card p {
 }
 
 .intro-video-section {
-  padding-right: 0 !important;
-  padding-left: 0 !important;
+  padding-right: 65px !important;
+  padding-left: 65px !important;
   max-width: 100%;
   overflow-x: clip;
 }
@@ -5241,7 +5241,20 @@ main.careers-page .careers-process-card p {
 }
 
 .intro-video-frame {
-  border-radius: 10px !important;
+  border-radius: 8px clamp(42px, 5vw, 64px) 8px clamp(42px, 5vw, 64px) !important;
+}
+
+.intro-video-frame:hover .intro-video-mute,
+.intro-video-frame:focus-within .intro-video-mute {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+@media (hover: none) {
+  .intro-video-mute {
+    opacity: 0.74 !important;
+    transform: translateY(0) !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -5294,7 +5307,7 @@ main.careers-page .careers-process-card p {
   }
 
   .intro-video-section {
-    padding: 65px 0 !important;
+    padding: 65px clamp(24px, 8vw, 65px) !important;
   }
 
   .intro-video-shell {
@@ -5305,7 +5318,7 @@ main.careers-page .careers-process-card p {
   }
 
   .intro-video-frame {
-    border-radius: 8px !important;
+    border-radius: 6px clamp(30px, 10vw, 46px) 6px clamp(30px, 10vw, 46px) !important;
   }
 
   .intro-video-mute {
@@ -5477,7 +5490,7 @@ main.careers-page .careers-process-card p {
   }
 
   .intro-video-frame {
-    border-radius: 8px !important;
+    border-radius: 6px 34px 6px 34px !important;
   }
 
   .service-card,

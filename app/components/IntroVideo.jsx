@@ -111,7 +111,7 @@ export default function IntroVideo() {
     <section
       id="intro"
       className="intro-video-section"
-      style={{ padding: '90px 0' }}
+      style={{ backgroundColor: '#f5f5f5', padding: '90px 65px' }}
     >
       <div
         ref={sectionRef}
@@ -130,12 +130,11 @@ export default function IntroVideo() {
           style={{
             position: 'relative',
             width: '100%',
-            paddingTop: '56.25%' /* 16:9 aspect ratio */,
-            borderRadius: '10px',
+            aspectRatio: '2 / 1',
+            borderRadius: '8px 54px 8px 54px',
             overflow: 'hidden',
-            background: '#000',
-            boxShadow:
-              '0 2px 8px rgba(0,0,0,0.08), 0 20px 48px rgba(0,0,0,0.12)',
+            background: '#050505',
+            boxShadow: 'none',
             cursor: 'pointer',
             opacity: 'var(--intro-video-opacity, 0.78)',
             transform:
@@ -163,7 +162,8 @@ export default function IntroVideo() {
               height: '100%',
               objectFit: 'cover',
               display: 'block',
-              borderRadius: '10px',
+              borderRadius: 'inherit',
+              filter: 'grayscale(1) contrast(1.08)',
               WebkitMaskImage: '-webkit-radial-gradient(white, black)',
               maskImage: 'radial-gradient(white, black)',
             }}
@@ -224,7 +224,9 @@ export default function IntroVideo() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              transition: 'background 0.2s',
+              opacity: 0,
+              transform: 'translateY(4px)',
+              transition: 'opacity 0.2s ease, transform 0.2s ease, background 0.2s',
               zIndex: 10,
             }}
             onMouseEnter={e =>
@@ -239,19 +241,6 @@ export default function IntroVideo() {
           </button>
         </div>
 
-        {/* Small hint text below video */}
-        <p
-          style={{
-            textAlign: 'center',
-            marginTop: '16px',
-            fontFamily: 'var(--font)',
-            fontSize: '13px',
-            color: '#888',
-            letterSpacing: '0.5px',
-          }}
-        >
-          Click to play · Click 🔇 to unmute
-        </p>
       </div>
     </section>
   );
