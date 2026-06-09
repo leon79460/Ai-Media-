@@ -1237,7 +1237,7 @@ p {
   position: relative;
   overflow: hidden;
   background: #f5f5f5;
-  padding: 108px 24px 96px;
+  padding: 165px 24px 96px;
 }
 
 .portfolio-shell {
@@ -2168,7 +2168,7 @@ p {
 .legal-page {
   background: #f5f5f5;
   color: #000;
-  padding: 130px 24px 96px;
+  padding: 165px 24px 96px;
 }
 
 .blog-index-hero,
@@ -3994,7 +3994,7 @@ p {
 
   .about-section,
   .about-split-section {
-    padding: 58px 0;
+    padding: 68px 0;
   }
 
   .about-hero-grid,
@@ -4419,13 +4419,14 @@ main.about-page .about-shell {
 }
 
 main.about-page .about-hero {
-  padding: 128px 0 104px;
+  padding: 128px 0 0 0px;
 }
 
 main.about-page .about-hero-grid {
   grid-template-columns: 460px 1fr;
   gap: 90px;
   align-items: center;
+  padding: 65px 0px;
 }
 
 main.about-page .about-hero-copy {
@@ -4504,11 +4505,11 @@ main.about-page .about-image-copy {
 }
 
 main.about-page .about-section {
-  padding: 94px 0;
+  padding: 100px 0;
 }
 
 main.about-page .about-services {
-  padding-top: 122px;
+  padding-top: 120px;
 }
 
 main.about-page .about-section-head {
@@ -4636,7 +4637,7 @@ main.about-page .about-step-number {
 }
 
 main.about-page .about-split-section {
-  padding: 94px 0 100px;
+  padding: 100px 0;
 }
 
 main.about-page .about-split-grid {
@@ -5087,7 +5088,7 @@ main.careers-page .careers-process-card p {
   }
 
   main.about-page .about-section {
-    padding: 58px 0;
+    padding: 68px 0;
   }
 
   main.about-page .about-section-head .section-title,
@@ -5466,7 +5467,7 @@ main.careers-page .careers-process-card p {
 
 /* ── Hero ── */
 .contact-hero {
-  padding: 148px 0 72px;
+  padding: 165px 0 72px;
   text-align: center;
 }
 
