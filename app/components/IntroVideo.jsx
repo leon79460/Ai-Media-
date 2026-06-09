@@ -111,7 +111,7 @@ export default function IntroVideo() {
     <section
       id="intro"
       className="intro-video-section"
-      style={{ padding: '65px 0' }}
+      style={{ padding: '90px 0' }}
     >
       <div
         ref={sectionRef}

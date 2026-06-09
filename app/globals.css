@@ -519,10 +519,10 @@ body {
     0 18px 30px rgba(0, 0, 0, 0.32) !important;
 }
 
-.btn-s:hover {
+/* .btn-s:hover {
   transform: translateY(-3px) !important;
   background: #ffffff !important;
-}
+} */
 
 .nav-start-cta,
 .nav-login-cta {
@@ -534,7 +534,7 @@ body {
   will-change: transform;
 }
 
-.nav-start-cta:hover,
+/* .nav-start-cta:hover,
 .nav-start-cta:focus-visible {
   opacity: 1 !important;
   transform: translateY(-3px) !important;
@@ -542,15 +542,15 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 18px 30px rgba(0, 0, 0, 0.32) !important;
   outline: none;
-}
+} */
 
-.nav-login-cta:hover,
+/* .nav-login-cta:hover,
 .nav-login-cta:focus-visible {
   opacity: 1 !important;
   transform: translateY(-3px) !important;
   background: #ffffff !important;
   outline: none;
-}
+} */
 
 .card-hover:hover {
   transform: translateY(-6px) !important;
@@ -658,6 +658,7 @@ body {
 .process-ticker-track {
   display: flex;
   gap: 18px;
+  margin-bottom: 15px;
   align-items: center;
 }
 
@@ -1270,7 +1271,7 @@ p {
 
 .portfolio-header .section-sub {
   max-width: 650px;
-  font-size: 17px;
+  font-size: 18px;
 }
 
 .portfolio-masonry {

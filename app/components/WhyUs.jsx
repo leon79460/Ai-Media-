@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 
-const SECTION_BADGE = 'WHY AI MEDIA';
+const SECTION_BADGE = 'Why Ai Media';
 const SECTION_TITLE = 'Why We are Different';
 const SECTION_SUB =
   'See the difference between a modern AI powered workflow and traditional agency processes.';
@@ -38,7 +38,7 @@ const OTHERS_FEATURES = [
 const styles = {
   section: {
     backgroundColor: '#f5f5f5',
-    padding: '65px 24px',
+    padding: '65px 24px 90px 24px',
   },
   shell: {
     width: '100%',
