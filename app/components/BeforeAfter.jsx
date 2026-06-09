@@ -241,39 +241,13 @@ export default function BeforeAfter() {
             </div>
 
             {/* Before / After labels */}
-            <div style={{ position: 'absolute', bottom: '32px', left: '32px' }}>
-              <div
-                style={{
-                  backdropFilter: 'blur(5px)',
-                  backgroundColor: 'rgba(188,188,188,0.5)',
-                  borderRadius: '6px',
-                  padding: '8px 16px',
-                  fontFamily: 'var(--font)',
-                  fontWeight: 500,
-                  fontSize: '20px',
-                  color: '#f5f5f5',
-                  letterSpacing: 0,
-                }}
-              >
+            <div className="before-after-label-anchor is-before">
+              <div className="before-after-label">
                 Before
               </div>
             </div>
-            <div
-              style={{ position: 'absolute', bottom: '32px', right: '32px' }}
-            >
-              <div
-                style={{
-                  backdropFilter: 'blur(5px)',
-                  backgroundColor: 'rgba(188,188,188,0.5)',
-                  borderRadius: '6px',
-                  padding: '8px 16px',
-                  fontFamily: 'var(--font)',
-                  fontWeight: 500,
-                  fontSize: '20px',
-                  color: '#f5f5f5',
-                  letterSpacing: 0,
-                }}
-              >
+            <div className="before-after-label-anchor is-after">
+              <div className="before-after-label">
                 After
               </div>
             </div>

@@ -1536,6 +1536,32 @@ p {
   outline: 0;
 }
 
+.before-after-label-anchor {
+  position: absolute;
+  bottom: 32px;
+}
+
+.before-after-label-anchor.is-before {
+  left: 32px;
+}
+
+.before-after-label-anchor.is-after {
+  right: 32px;
+}
+
+.before-after-label {
+  backdrop-filter: blur(5px);
+  background-color: rgba(188, 188, 188, 0.5);
+  border-radius: 6px;
+  color: #f5f5f5;
+  font-family: var(--font);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.2;
+  padding: 8px 16px;
+}
+
 .pricing-section {
   background: #f5f5f5;
   padding: 100px 24px 72px;
@@ -5327,6 +5353,25 @@ main.careers-page .careers-process-card p {
     border-radius: 12px !important;
   }
 
+  .before-after-label-anchor {
+    bottom: 22px;
+  }
+
+  .before-after-label-anchor.is-before {
+    left: 22px;
+  }
+
+  .before-after-label-anchor.is-after {
+    right: 22px;
+  }
+
+  .before-after-label {
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.15;
+    padding: 6px 10px;
+  }
+
   .case-study-showcase {
     width: 100%;
   }
@@ -5447,6 +5492,23 @@ main.careers-page .careers-process-card p {
 
   .before-after-card {
     padding: 8px !important;
+  }
+
+  .before-after-label-anchor {
+    bottom: 18px;
+  }
+
+  .before-after-label-anchor.is-before {
+    left: 18px;
+  }
+
+  .before-after-label-anchor.is-after {
+    right: 18px;
+  }
+
+  .before-after-label {
+    font-size: 13px;
+    padding: 5px 9px;
   }
 }
 
