@@ -707,8 +707,6 @@ body {
 .section-badge img,
 .services-badge img,
 .blog-home-badge img {
-  width: auto !important;
-  height: auto !important;
   object-fit: contain;
 }
 
@@ -3645,7 +3643,7 @@ p {
 }
 
 .about-arrows {
-  display: none;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -5452,11 +5450,11 @@ main.careers-page .careers-process-card p {
   }
 
   .blog-home-arrow.is-prev {
-    left: 4px !important;
+    display: none !important;
   }
 
   .blog-home-arrow.is-next {
-    right: 4px !important;
+    display: none !important;
   }
 
   .site-footer-inner {

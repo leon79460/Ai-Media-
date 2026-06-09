@@ -12,9 +12,9 @@ const SECTION_SUB =
 
 const THUMB_THEMES = ['web-design', 'branding', 'seo'];
 const BADGE_ICON_STYLE = {
-  width: '28px',
-  height: '28px',
-  flex: '0 0 28px',
+  width: 18,
+  height: 18,
+  flex: '0 0 18px',
 };
 
 function useReveal(ref, delay = 0) {
