@@ -255,18 +255,19 @@ export default function Navbar() {
             )
           )}
           <Link
+            href="https://app.aimedia.design"
+            className="nav-mobile-cta nav-mobile-login-cta"
+            target="_blank"
+            onClick={() => setMobileOpen(false)}
+          >
+            Login
+          </Link>
+          <Link
             href="/contact"
             className="nav-mobile-cta nav-mobile-start-cta"
             onClick={() => setMobileOpen(false)}
           >
             Get Started
-          </Link>
-          <Link
-            href="#"
-            className="nav-mobile-cta nav-mobile-login-cta"
-            onClick={() => setMobileOpen(false)}
-          >
-            Login
           </Link>
         </div>
       </div>

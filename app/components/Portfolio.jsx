@@ -91,7 +91,7 @@ export default function Portfolio() {
             />
             Portfolio
           </span>
-          <h2 className="section-title">Selected work with measurable polish.</h2>
+          <h2 className="section-title">Selected Work With Measurable Polish.</h2>
           <p className="section-sub">
             A Pinterest-inspired wall of campaigns, websites, content systems,
             and design work built for AV and smart home businesses.

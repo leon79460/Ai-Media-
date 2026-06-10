@@ -718,7 +718,6 @@ body {
   line-height: 1.4;
   background: linear-gradient(to bottom, #e5e5e5 0%, #000 30%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
@@ -1435,18 +1434,7 @@ p {
   transform: translateY(0);
 }
 
-@media (hover: none) {
-  .portfolio-overlay {
-    opacity: 1;
-    background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0.28) 52%, rgba(0, 0, 0, 0.84) 100%);
-  }
 
-  .portfolio-copy,
-  .portfolio-visit {
-    transform: translateY(0);
-  }
-}
 
 @media (max-width: 1024px) {
   .portfolio-masonry {
@@ -1456,7 +1444,7 @@ p {
 
 @media (max-width: 768px) {
   .portfolio-section {
-    padding: 76px 16px 72px;
+    padding: 165px 16px 72px;
   }
 
   .portfolio-header {
@@ -3475,8 +3463,7 @@ p {
   font-size: clamp(38px, 4.6vw, 56px);
   letter-spacing: -0.048em;
   line-height: 1.1;
-  background: linear-gradient(to bottom, #aaaaaa 0%, #111111 60%);
-  -webkit-background-clip: text;
+  background: linear-gradient(to bottom, #111111 0%, #111111 60%);
   background-clip: text;
 }
 
@@ -3606,9 +3593,7 @@ p {
   line-height: 1.05;
 }
 
-.about-split-copy h2 span {
-  color: #b0b0b0;
-}
+
 
 .about-row-head {
   display: flex;
@@ -3643,7 +3628,7 @@ p {
 }
 
 .about-arrows {
-  display: inline-flex;
+  display: none;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -4376,7 +4361,7 @@ main.about-page .section-sub.reveal-motion:not(.is-visible) {
   .blog-index-page,
   .blog-post-page,
   .legal-page {
-    padding-top: 106px;
+    padding-top: 165px;
     padding-bottom: 76px;
   }
 
@@ -4916,7 +4901,7 @@ main.about-page .about-mail-icon::before {
 }
 
 main.about-page .about-final-cta {
-  padding: 76px 0 116px;
+  padding: 76px 0 100px;
 }
 
 main.about-page .about-final-cta .about-shell {
@@ -5129,13 +5114,30 @@ main.careers-page .careers-process-card p {
     width: calc(100% - 32px);
   }
 
-  /* ── About page: unified 82px vertical gaps, hide image panels ── */
+  /* About page: keep desktop vertical rhythm on mobile */
   main.about-page .about-hero {
-    padding: 65px 0;
+    padding: 128px 0 0;
   }
 
   main.about-page .about-section {
-    padding: 65px 0;
+    padding: 100px 0;
+  }
+
+  main.about-page .about-services {
+    padding-top: 120px;
+  }
+
+  main.about-page .about-process {
+    padding-top: 86px;
+  }
+
+  main.about-page .about-testimonials {
+    padding-top: 108px;
+  }
+
+  main.about-page .about-faq-section {
+    padding-top: 84px;
+    padding-bottom: 76px;
   }
 
   main.about-page .about-hero h1 {
@@ -5454,6 +5456,10 @@ main.careers-page .careers-process-card p {
   }
 
   .blog-home-arrow.is-next {
+    display: none !important;
+  }
+
+  .about-team .about-arrows {
     display: none !important;
   }
 

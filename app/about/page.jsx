@@ -52,22 +52,40 @@ const STEPS = [
 
 const TEAM = [
   {
-    name: 'Josh Trevack',
-    role: 'Founder & CEO',
+    name: 'Joshua Trevithick',
+    role: 'CEO, Founder & Growth Lead',
     image: '/about/team-josh.png',
     text: 'Leads the company vision, growth strategy, and client relationships with a focus on building impactful digital experiences that drive long-term business success.',
   },
   {
-    name: 'Sophia Bennett',
-    role: 'Project Manager',
+    name: 'Sayim',
+    role: 'Production / Client Delivery Lead',
     image: '/about/team-sophia.png',
     text: 'Ensures every project runs smoothly from planning to launch by coordinating timelines, communication, and team collaboration with precision.',
   },
   {
-    name: 'Mason Reed',
-    role: 'Brand & Graphic Designer',
+    name: 'Toufik',
+    role: 'Operations & Accountability Lead',
     image: '/about/team-mason.png',
     text: 'Crafts compelling visual identities and brand experiences that resonate with audiences and elevate the presence of every client.',
+  },
+  {
+    name: 'Caleb Trevithick',
+    role: 'Tech Lead',
+    image: '/about/team-elena.png',
+    text: 'Oversees the technical architecture and ensures all our digital products are built for scalability, performance, and future growth.',
+  },
+  {
+    name: 'Tanvir',
+    role: 'Software Engineer/ Next.js Developer',
+    image: '/about/team-david.png',
+    text: 'Develops data-driven strategies that increase visibility, generate qualified leads, and maximize return on investment for our clients.',
+  },
+  {
+    name: 'Leon',
+    role: 'WordPress Developer',
+    image: '/about/team-michael.png',
+    text: 'Specializes in creating seamless front-end experiences and robust back-end systems tailored for AV and smart home integrators.',
   },
 ];
 
@@ -182,7 +200,7 @@ export default function AboutPage() {
             <div className="about-section-head">
               <Badge>Strategy</Badge>
               <h2 id="presence-title" className="section-title">
-                One Team for Your Digital Presence
+                One Team For Your Digital Presence
               </h2>
             </div>
             <div className="about-card-grid">
@@ -202,7 +220,7 @@ export default function AboutPage() {
           <div className="about-shell">
             <div className="about-section-head">
               <Badge>Process</Badge>
-              <h2 id="process-title" className="section-title">How it work</h2>
+              <h2 id="process-title" className="section-title">How It Works</h2>
             </div>
             <div className="about-process-wrap">
               {/* gap must match about-timeline's gap so circles center over their cards */}
@@ -238,7 +256,7 @@ export default function AboutPage() {
               />
             </div>
             <div className="about-split-copy">
-              <Badge>Why choose us</Badge>
+              <Badge>Why Choose Us</Badge>
               <h2 id="choose-title">
                 <span>Why Brands</span>
                 Choose AI Media
@@ -257,7 +275,7 @@ export default function AboutPage() {
             <div className="about-row-head">
               <div>
                 <Badge>Team</Badge>
-                <h2 id="team-title">Meet our team.</h2>
+                <h2 id="team-title">Meet Our Team.</h2>
                 <p>Partner with an AI agency delivering smart solutions.</p>
               </div>
               <div className="about-arrows" aria-hidden="true">
@@ -292,7 +310,7 @@ export default function AboutPage() {
           <div className="about-shell">
             <div className="about-section-head">
               <Badge>Testimonial</Badge>
-              <h2 id="testimonial-title" className="section-title">What our client says</h2>
+              <h2 id="testimonial-title" className="section-title">What Our Client Says</h2>
             </div>
             <div className="about-testimonial-grid">
               {TESTIMONIALS.map((item, i) => (
@@ -340,7 +358,7 @@ export default function AboutPage() {
                 <rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               Feel free to mail us for any enquiries :{' '}
-              <a href="mailto:aimedia@support.com">aimedia@support.com</a>
+              <a href="mailto:info@aimedia.com">info@aimedia.com</a>
             </p>
           </div>
         </section>
