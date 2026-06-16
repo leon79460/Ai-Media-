@@ -58,10 +58,12 @@ function BlogCard({ post, href, delay }) {
     <article ref={ref} className="blog-card blog-home-card">
       <Link className="blog-home-image" href={href} aria-label={post.title}>
         {post.image ? (
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: 'cover' }}
           />
         ) : (
           <div className={`blog-thumbnail is-${post.theme}`} aria-hidden="true">
