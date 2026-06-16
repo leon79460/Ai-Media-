@@ -5228,8 +5228,8 @@ main.careers-page .careers-process-card p {
 }
 
 .intro-video-section {
-  padding-right: 65px !important;
-  padding-left: 65px !important;
+  padding-right: 16px !important;
+  padding-left: 16px !important;
   max-width: 100%;
   overflow-x: clip;
 }
@@ -5308,7 +5308,7 @@ main.careers-page .careers-process-card p {
   }
 
   .intro-video-section {
-    padding: 65px clamp(24px, 8vw, 65px) !important;
+    padding: 16px !important;
   }
 
   .intro-video-shell {
