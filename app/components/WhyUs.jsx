@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 
-const SECTION_BADGE = 'Why Ai Media';
+const SECTION_BADGE = 'Why AI Media';
 const SECTION_TITLE = 'Why We Are Different';
 const SECTION_SUB =
   'See the difference between a modern AI powered workflow and traditional agency processes.';
