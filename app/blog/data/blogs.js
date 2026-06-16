@@ -77,6 +77,32 @@ export const blogPosts = [
       },
     ],
   },
+  {
+    slug: 'ai-seo-for-systems-integrators',
+    title: 'AI SEO for Systems Integrators: How to Win Search in 2026',
+    eyebrow: 'AI SEO Strategy',
+    date: 'June 10, 2026',
+    readTime: '9 min read',
+    excerpt:
+      'Learn how AV, smart home, and low-voltage firms can use AI-assisted SEO, search intent mapping, and better service pages to earn more qualified local leads.',
+    description:
+      'A practical AI SEO guide for systems integrators who want stronger local visibility, better service pages, and more qualified website leads.',
+    href: '/blog/ai-seo-for-systems-integrators',
+    stats: [
+      {
+        value: 'Local intent',
+        label: 'Service pages should answer buyer questions by market, solution, and project type',
+      },
+      {
+        value: 'AI assisted',
+        label: 'Use AI for research and structure while keeping expert review and proof human-led',
+      },
+      {
+        value: 'Conversion first',
+        label: 'SEO traffic matters most when pages make consultation requests easy and credible',
+      },
+    ],
+  },
 ];
 
 export function getBlogPost(slug) {

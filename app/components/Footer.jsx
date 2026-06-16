@@ -86,6 +86,7 @@ export default function Footer() {
   const pathname = usePathname();
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [submittedOpen, setSubmittedOpen] = useState(false);
 
   const footerLinkStyle = {
     background: 'transparent',
@@ -98,9 +99,17 @@ export default function Footer() {
     textDecoration: 'none',
     lineHeight: 1.64,
     whiteSpace: 'nowrap',
-    transition: 'opacity 0.2s',
+    transition: 'color 0.2s',
     padding: 0,
     textAlign: 'left',
+  };
+
+  const handleFooterLinkEnter = e => {
+    e.currentTarget.style.color = '#ffffff';
+  };
+
+  const handleFooterLinkLeave = e => {
+    e.currentTarget.style.color = 'rgb(197 192 192)';
   };
 
   function scrollToSection(target) {
@@ -119,9 +128,10 @@ export default function Footer() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // EDIT: replace this with your real email handler
-    alert(`Subscribed: ${email}`);
+    if (!email.trim()) return;
+
     setEmail('');
+    setSubmittedOpen(true);
   };
 
   return (
@@ -371,8 +381,8 @@ export default function Footer() {
                       type="button"
                       style={footerLinkStyle}
                       onClick={() => scrollToSection(l.target)}
-                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
                     >
                       {l.label}
                     </button>
@@ -381,8 +391,8 @@ export default function Footer() {
                       key={l.label}
                       href={l.href}
                       style={footerLinkStyle}
-                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
                     >
                       {l.label}
                     </Link>
@@ -420,8 +430,8 @@ export default function Footer() {
                       type="button"
                       style={footerLinkStyle}
                       onClick={() => scrollToSection(l.target)}
-                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
                     >
                       {l.label}
                     </button>
@@ -430,8 +440,8 @@ export default function Footer() {
                       key={l.label}
                       href={l.href}
                       style={footerLinkStyle}
-                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
                     >
                       {l.label}
                     </a>
@@ -444,6 +454,7 @@ export default function Footer() {
 
         {/* ── BOTTOM ROW: copyright + social icons ── */}
         <div
+          className="site-footer-bottom"
           style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -454,6 +465,7 @@ export default function Footer() {
         >
           {/* Copyright — EDIT: COPYRIGHT */}
           <p
+            className="site-footer-copy"
             style={{
               fontFamily: 'var(--font)',
               fontWeight: 500,
@@ -467,10 +479,14 @@ export default function Footer() {
           </p>
 
           {/* Social icon buttons — EDIT: SOCIAL_LINKS */}
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div
+            className="site-footer-socials"
+            style={{ display: 'flex', gap: '16px', alignItems: 'center' }}
+          >
             {SOCIAL_LINKS.map((s, i) => (
               <a
                 key={i}
+                className="site-footer-social-link"
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -503,6 +519,32 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {submittedOpen && (
+        <div
+          className="footer-subscribe-modal-backdrop"
+          role="presentation"
+          onClick={() => setSubmittedOpen(false)}
+        >
+          <div
+            className="footer-subscribe-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-live="polite"
+            aria-label="Subscription submitted"
+            onClick={e => e.stopPropagation()}
+          >
+            <p>Submitted</p>
+            <button
+              type="button"
+              aria-label="Close subscription confirmation"
+              onClick={() => setSubmittedOpen(false)}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }

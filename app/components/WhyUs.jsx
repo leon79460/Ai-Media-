@@ -86,119 +86,101 @@ const styles = {
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'stretch',
-    gap: '24px',
+    alignItems: 'flex-start',
+    gap: '32px',
     flexWrap: 'wrap',
   },
   card: {
     width: '100%',
-    maxWidth: '386px',
-    minHeight: '648px',
+    maxWidth: '430px',
+    flex: '0 1 430px',
     display: 'flex',
     flexDirection: 'column',
-    padding: '32px 24px 22px',
-    border: '1px solid rgba(255,255,255,0.78)',
-    borderRadius: '12px',
-    backgroundColor: '#f5f5f5',
+    padding: '36px 34px 28px',
+    border: '1px solid rgba(255,255,255,0.88)',
+    borderRadius: '18px',
+    backgroundColor: '#f7f7f7',
     color: '#030303',
     opacity: 0,
     boxShadow:
-      '0 1px 2px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05), 0 12px 24px rgba(0, 0, 0, 0.06), 0 32px 56px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.92)',
+      '0 2px 3px rgba(0, 0, 0, 0.04), 0 16px 30px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.96)',
   },
   cardHeader: {
-    paddingBottom: '9px',
-    borderBottom: '1px solid #2f2f2f',
+    paddingBottom: '22px',
+    borderBottom: '2px dotted rgba(3, 3, 3, 0.14)',
+    textAlign: 'center',
   },
   cardTitle: {
     fontFamily: 'var(--font)',
-    fontSize: '25px',
-    fontWeight: 700,
-    lineHeight: 1.28,
-    letterSpacing: '-0.025em',
+    fontSize: '38px',
+    fontWeight: 500,
+    lineHeight: 1.08,
+    letterSpacing: '-0.04em',
     color: '#030303',
     margin: 0,
   },
   list: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '22px',
+    gap: '20px',
     listStyle: 'none',
-    padding: '34px 0 0',
+    padding: '26px 0 0',
     margin: 0,
   },
   item: {
     display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    color: '#1d1d1d',
+    alignItems: 'flex-start',
+    gap: '12px',
+    color: 'rgba(29, 29, 29, 0.74)',
     fontFamily: 'var(--font)',
-    fontSize: '16px',
+    fontSize: '15px',
     fontWeight: 400,
-    lineHeight: 1.5,
+    lineHeight: 1.55,
   },
   icon: {
-    width: '18px',
-    height: '18px',
-    flex: '0 0 18px',
+    width: '16px',
+    height: '16px',
+    flex: '0 0 16px',
+    marginTop: '3px',
   },
   cta: {
     width: '100%',
-    minHeight: '46px',
-    marginTop: 'auto',
+    minHeight: '52px',
+    marginTop: '28px',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '8px',
-    borderRadius: '9px',
+    gap: '10px',
+    borderRadius: '10px',
     backgroundColor: '#030303',
     color: '#f5f5f5',
     fontFamily: 'var(--font)',
-    fontSize: '14px',
+    fontSize: '15px',
     fontWeight: 700,
     lineHeight: 1,
     textDecoration: 'none',
     boxShadow:
-      '0 12px 16px rgba(0,0,0,0.22), 0 2px 4px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.16)',
+      '0 14px 20px rgba(0,0,0,0.28), 0 3px 6px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.16)',
   },
 };
 
-function StatusIcon({ variant }) {
-  const isCheck = variant === 'check';
-
+function StatusIcon() {
   return (
     <svg
       aria-hidden="true"
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
       fill="none"
       style={styles.icon}
     >
-      <circle cx="9" cy="9" r="8.25" stroke="#030303" strokeWidth="1.3" />
-      {isCheck ? (
-        <path
-          d="M5.3 9.2L7.6 11.4L12.6 6.6"
-          stroke="#030303"
-          strokeWidth="1.3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      ) : (
-        <>
-          <path
-            d="M6.4 6.4L11.6 11.6"
-            stroke="#030303"
-            strokeWidth="1.3"
-            strokeLinecap="round"
-          />
-          <path
-            d="M11.6 6.4L6.4 11.6"
-            stroke="#030303"
-            strokeWidth="1.3"
-            strokeLinecap="round"
-          />
-        </>
-      )}
+      <path
+        d="M3.1 8.25L6.1 11.2L12.9 4.8"
+        stroke="rgba(3, 3, 3, 0.42)"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

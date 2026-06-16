@@ -181,7 +181,6 @@ export default function Navbar() {
                   fontWeight: 600,
                   fontSize: '15px',
                   cursor: 'pointer',
-                  transition: 'opacity 0.30s ease, transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   opacity: 0,
                   animation: 'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s forwards',
                 }}
@@ -210,8 +209,8 @@ export default function Navbar() {
                   cursor: 'pointer',
                   backdropFilter: 'blur(14px)',
                   WebkitBackdropFilter: 'blur(14px)',
-                  transition: 'opacity 0.30s ease, transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+                  opacity: 0,
                   animation: 'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
                 }}
               >

@@ -76,7 +76,7 @@ function BlogCard({ post, href, delay }) {
       </Link>
       <div className="blog-home-copy">
         <h3>{post.title}</h3>
-        <p style={{ display: 'block', marginTop: '8px', color: '#666', fontSize: '14px', lineHeight: '1.5' }}>
+        <p style={{ display: 'block', marginTop: '8px', color: '#000000', fontSize: '16px', lineHeight: '1.5' }}>
           {post.excerpt}
         </p>
       </div>
@@ -89,12 +89,28 @@ function BlogCard({ post, href, delay }) {
 
 export default function Blogs() {
   const headRef = useRef(null);
+  const gridRef = useRef(null);
   useReveal(headRef);
   const homePosts = blogPosts.map((post, index) => ({
     ...post,
     theme: THUMB_THEMES[index % THUMB_THEMES.length],
     imageLabel: post.eyebrow,
   }));
+
+  function scrollCarousel(direction) {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const card = grid.querySelector('.blog-home-card');
+    const styles = window.getComputedStyle(grid);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+    const cardWidth = card?.getBoundingClientRect().width || grid.clientWidth;
+
+    grid.scrollBy({
+      left: direction * (cardWidth + gap),
+      behavior: 'smooth',
+    });
+  }
 
   return (
     <section id="blogs" className="blog-home-section">
@@ -113,11 +129,12 @@ export default function Blogs() {
             className="blog-home-arrow is-prev"
             type="button"
             aria-label="Previous blog posts"
+            onClick={() => scrollCarousel(-1)}
           >
             <span aria-hidden="true" />
           </button>
 
-          <div className="blog-home-grid">
+          <div ref={gridRef} className="blog-home-grid">
             {homePosts.map((post, i) => (
               <BlogCard
                 key={post.slug}
@@ -132,6 +149,7 @@ export default function Blogs() {
             className="blog-home-arrow is-next"
             type="button"
             aria-label="Next blog posts"
+            onClick={() => scrollCarousel(1)}
           >
             <span aria-hidden="true" />
           </button>
