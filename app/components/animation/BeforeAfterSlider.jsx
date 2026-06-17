@@ -26,6 +26,7 @@ export default function BeforeAfterSlider({
   }, []);
 
   const handlePointerDown = (event) => {
+    event.preventDefault();
     event.currentTarget.setPointerCapture?.(event.pointerId);
     setIsDragging(true);
     updateFromClientX(event.clientX);
@@ -69,6 +70,7 @@ export default function BeforeAfterSlider({
       <Image
         src={afterSrc}
         alt={afterAlt}
+        draggable={false}
         fill
         sizes="(max-width: 768px) 100vw, 1200px"
         priority={false}
@@ -84,6 +86,7 @@ export default function BeforeAfterSlider({
           <Image
             src={beforeSrc}
             alt={beforeAlt}
+            draggable={false}
             fill
             sizes="(max-width: 768px) 100vw, 1200px"
             style={{
@@ -104,10 +107,20 @@ export default function BeforeAfterSlider({
       </div>
 
       <div className="before-after-label-anchor is-before">
-        <div className="before-after-label">Before</div>
+        <span
+          className="before-after-label"
+          aria-hidden="true"
+        >
+          Before
+        </span>
       </div>
       <div className="before-after-label-anchor is-after">
-        <div className="before-after-label">After</div>
+        <span
+          className="before-after-label"
+          aria-hidden="true"
+        >
+          After
+        </span>
       </div>
     </div>
   );
