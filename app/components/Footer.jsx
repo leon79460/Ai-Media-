@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Reveal from './animation/Reveal';
 
 const BG_VIDEO = '/video/footer-bg.mp4';
 
@@ -171,8 +172,10 @@ export default function Footer() {
       />
 
       {/* All content sits above the background */}
-      <div
+      <Reveal
         className="site-footer-inner"
+        y={24}
+        amount={0.12}
         style={{
           position: 'relative',
           zIndex: 1,
@@ -301,6 +304,7 @@ export default function Footer() {
                 {/* Submit button */}
                 <button
                   type="submit"
+                  className="footer-submit-button"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -518,7 +522,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {submittedOpen && (
         <div

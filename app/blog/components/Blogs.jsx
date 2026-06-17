@@ -2,7 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import AnimatedCard from '../../components/animation/AnimatedCard';
+import Reveal from '../../components/animation/Reveal';
+import StaggerContainer from '../../components/animation/StaggerContainer';
 import { blogPosts } from '../data/blogs';
 
 const SECTION_BADGE = 'Insights & Resources';
@@ -17,26 +20,6 @@ const BADGE_ICON_STYLE = {
   flex: '0 0 18px',
 };
 
-function useReveal(ref, delay = 0) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          el.style.animation = `revealUp 1.2s ease ${delay}s forwards`;
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref, delay]);
-}
-
 function BadgeIcon() {
   return (
     <Image
@@ -50,12 +33,9 @@ function BadgeIcon() {
   );
 }
 
-function BlogCard({ post, href, delay }) {
-  const ref = useRef(null);
-  useReveal(ref, delay);
-
+function BlogCard({ post, href }) {
   return (
-    <article ref={ref} className="blog-card blog-home-card">
+    <AnimatedCard className="blog-card blog-home-card">
       <Link className="blog-home-image" href={href} aria-label={post.title}>
         {post.image ? (
           <Image
@@ -85,14 +65,12 @@ function BlogCard({ post, href, delay }) {
       <Link className="read-more" href={href}>
         Read More
       </Link>
-    </article>
+    </AnimatedCard>
   );
 }
 
 export default function Blogs() {
-  const headRef = useRef(null);
   const gridRef = useRef(null);
-  useReveal(headRef);
   const homePosts = blogPosts.map((post, index) => ({
     ...post,
     theme: THUMB_THEMES[index % THUMB_THEMES.length],
@@ -117,14 +95,14 @@ export default function Blogs() {
   return (
     <section id="blogs" className="blog-home-section">
       <div className="blog-home-shell">
-        <div ref={headRef} className="blog-home-header">
+        <Reveal className="blog-home-header">
           <span className="section-badge blog-home-badge">
             <BadgeIcon />
             {SECTION_BADGE}
           </span>
           <h2 className="section-title blog-home-title">{SECTION_TITLE}</h2>
           <p className="section-sub blog-home-sub">{SECTION_SUB}</p>
-        </div>
+        </Reveal>
 
         <div className="blog-home-carousel">
           <button
@@ -136,16 +114,15 @@ export default function Blogs() {
             <span aria-hidden="true" />
           </button>
 
-          <div ref={gridRef} className="blog-home-grid">
-            {homePosts.map((post, i) => (
+          <StaggerContainer ref={gridRef} className="blog-home-grid">
+            {homePosts.map((post) => (
               <BlogCard
                 key={post.slug}
                 post={post}
                 href={post.href}
-                delay={i * 0.1}
               />
             ))}
-          </div>
+          </StaggerContainer>
 
           <button
             className="blog-home-arrow is-next"

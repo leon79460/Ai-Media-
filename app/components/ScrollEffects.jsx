@@ -18,9 +18,62 @@ const REVEAL_SELECTOR = [
   '.blog-tool',
   '.blog-article',
   '.blog-toc',
+  '.blog-index-hero > *',
+  '.portfolio-header > *',
+  '.about-hero-copy',
+  '.about-hero-image',
+  '.about-section-head',
+  '.about-card',
+  '.about-split-image',
+  '.about-split-copy',
+  '.about-row-head',
+  '.about-faq-item',
+  '.about-cta-panel',
+  '.careers-role-card',
+  '.careers-process-card',
+  '.contact-hero > .contact-shell > *',
+  '.contact-card',
+  '.contact-info-card',
+  '.contact-form-col',
+  '.contact-section-head',
+  '.contact-faq-item',
+  '.contact-email-note',
+  '.legal-hero > *',
+  '.legal-summary > *',
+  '.legal-article > section',
+  '.legal-toc',
+  '.ds-hero-copy',
+  '.ds-hero-img',
+  '.ds-solutions-head',
+  '.ds-solution-card',
+  '.ds-faq-head',
+  '.ds-faq-item',
 ].join(',');
 
 const PARALLAX_SELECTOR = '[data-parallax]';
+const THREE_CARD_GROUP_SELECTOR = [
+  '.process-grid',
+  '.pricing-grid',
+  '.ds-solutions-grid',
+  '.about-card-grid',
+  '.careers-role-grid',
+  '.careers-process-list',
+  '.about-team-grid',
+  '.about-testimonial-grid',
+  '.blog-index-grid',
+  '.portfolio-masonry',
+].join(',');
+
+const THREE_CARD_ITEM_SELECTOR = [
+  '.process-card',
+  '.pricing-card',
+  '.ds-solution-card',
+  '.about-card',
+  '.careers-role-card',
+  '.careers-process-card',
+  '.blog-card',
+  '.portfolio-card',
+].join(',');
 
 export default function ScrollEffects() {
   const pathname = usePathname();
@@ -37,14 +90,62 @@ export default function ScrollEffects() {
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const lightMotion = reduceMotion || coarsePointer;
 
-    const revealTargets = Array.from(document.querySelectorAll(REVEAL_SELECTOR));
+    const revealTargets = Array.from(document.querySelectorAll(REVEAL_SELECTOR)).filter(
+      el => !el.closest('[data-motion-managed="true"]'),
+    );
 
     revealTargets.forEach((el, index) => {
       if (el.dataset.revealBound === 'true') return;
       el.dataset.revealBound = 'true';
       el.classList.add('reveal-motion');
       el.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 70}ms`);
+
+      const classList = el.classList;
+      const comesFromLeft =
+        classList.contains('about-hero-copy') ||
+        classList.contains('about-split-image') ||
+        classList.contains('ds-hero-copy') ||
+        classList.contains('contact-info-card') ||
+        (classList.contains('portfolio-card') && index % 2 === 0);
+      const comesFromRight =
+        classList.contains('about-hero-image') ||
+        classList.contains('about-split-copy') ||
+        classList.contains('ds-hero-img') ||
+        classList.contains('contact-form-col') ||
+        (classList.contains('portfolio-card') && index % 2 === 1);
+      const popsIn =
+        classList.contains('about-card') ||
+        classList.contains('ds-solution-card') ||
+        classList.contains('blog-index-card') ||
+        classList.contains('careers-role-card') ||
+        classList.contains('careers-process-card') ||
+        el.closest('.legal-summary');
+
+      if (comesFromLeft) el.classList.add('reveal-from-left');
+      if (comesFromRight) el.classList.add('reveal-from-right');
+      if (popsIn) el.classList.add('reveal-pop');
+    });
+
+    document.querySelectorAll(THREE_CARD_GROUP_SELECTOR).forEach(group => {
+      const cards = Array.from(group.children).filter(
+        el =>
+          el.matches(THREE_CARD_ITEM_SELECTOR) &&
+          !el.closest('[data-motion-managed="true"]'),
+      );
+
+      if (cards.length !== 3) return;
+
+      cards.forEach((card, cardIndex) => {
+        card.classList.remove('reveal-from-left', 'reveal-from-right', 'reveal-pop');
+        card.style.setProperty('--reveal-delay', `${cardIndex * 140}ms`);
+
+        if (cardIndex === 0) card.classList.add('reveal-from-left');
+        if (cardIndex === 1) card.classList.add('reveal-pop');
+        if (cardIndex === 2) card.classList.add('reveal-from-right');
+      });
     });
 
     let observer;
@@ -62,8 +163,8 @@ export default function ScrollEffects() {
           });
         },
         {
-          rootMargin: '0px 0px 120px 0px',
-          threshold: 0.04,
+          rootMargin: '0px 0px -10% 0px',
+          threshold: 0.12,
         },
       );
 
@@ -107,7 +208,7 @@ export default function ScrollEffects() {
       heroTitle?.style.setProperty('--title-shift', `${x * 8}px`);
     };
 
-    if (!reduceMotion) {
+    if (!lightMotion) {
       hero?.addEventListener('pointermove', moveHero);
     }
 
@@ -119,7 +220,7 @@ export default function ScrollEffects() {
 
     const updateParallax = () => {
       parallaxFrame = 0;
-      if (reduceMotion) return;
+      if (lightMotion) return;
 
       const viewportHeight =
         window.innerHeight || document.documentElement.clientHeight;
@@ -151,7 +252,7 @@ export default function ScrollEffects() {
     };
 
     const requestParallax = () => {
-      if (reduceMotion || parallaxFrame) return;
+      if (lightMotion || parallaxFrame) return;
       parallaxFrame = requestAnimationFrame(updateParallax);
     };
 
@@ -169,7 +270,7 @@ export default function ScrollEffects() {
     updateProgress();
     window.addEventListener('scroll', updateProgress, { passive: true });
     window.addEventListener('resize', updateProgress);
-    if (!reduceMotion) {
+    if (!lightMotion) {
       window.addEventListener('scroll', requestParallax, { passive: true });
       window.addEventListener('resize', requestParallax);
     }

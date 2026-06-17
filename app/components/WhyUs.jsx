@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
+import AnimatedCard from './animation/AnimatedCard';
+import Reveal from './animation/Reveal';
 
 
 const SECTION_BADGE = 'Why AI Media';
@@ -185,41 +187,86 @@ function StatusIcon() {
   );
 }
 
-function useReveal(ref, delay = 0) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.animation = `revealUp 1.2s ease ${delay}s forwards`;
-          obs.disconnect();
-        }
+function ComparisonCard({
+  title,
+  items,
+  variant,
+  withCta,
+  delay = 0,
+  direction = 1,
+}) {
+  const shouldReduceMotion = useReducedMotion();
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      x: direction * 64,
+      y: 18,
+      scale: 0.94,
+      rotate: direction * 1.2,
+    },
+    show: {
+      opacity: 1,
+      x: [direction * 64, direction * -8, direction * 4, 0],
+      y: [18, -4, 2, 0],
+      scale: [0.94, 1.025, 0.995, 1],
+      rotate:
+        variant === 'check'
+          ? [direction * 1.2, direction * -0.7, direction * 0.35, 0]
+          : [direction * 1.2, direction * -0.35, 0],
+      transition: {
+        duration: variant === 'check' ? 0.92 : 0.78,
+        ease: [0.22, 1, 0.36, 1],
+        delay,
       },
-      { threshold: 0.1 },
-    );
+    },
+  };
 
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref, delay]);
-}
-
-function ComparisonCard({ title, items, variant, withCta, cardRef }) {
   return (
-    <article ref={cardRef} className="why-card" style={styles.card}>
+    <AnimatedCard
+      className={`why-card is-${variant}`}
+      style={styles.card}
+      delay={delay}
+      standalone
+      variants={cardVariants}
+    >
       <header className="why-card-header" style={styles.cardHeader}>
         <h3 style={styles.cardTitle}>{title}</h3>
       </header>
 
-      <ul className="why-list" style={styles.list}>
+      <motion.ul
+        className="why-list"
+        style={styles.list}
+        initial={shouldReduceMotion ? false : 'hidden'}
+        whileInView={shouldReduceMotion ? undefined : 'show'}
+        viewport={{ once: true, amount: 0.25 }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              delayChildren: delay + 0.18,
+              staggerChildren: 0.045,
+            },
+          },
+        }}
+      >
         {items.map((item, index) => (
-          <li key={`${variant}-${item}-${index}`} style={styles.item}>
+          <motion.li
+            key={`${variant}-${item}-${index}`}
+            style={styles.item}
+            variants={{
+              hidden: { opacity: 0, y: 12 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
+          >
             <StatusIcon variant={variant} />
             <span>{item}</span>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
 
       {withCta && (
         <Link
@@ -231,23 +278,15 @@ function ComparisonCard({ title, items, variant, withCta, cardRef }) {
           {BTN_TEXT}
         </Link>
       )}
-    </article>
+    </AnimatedCard>
   );
 }
 
 export default function WhyUs() {
-  const headRef = useRef(null);
-  const card1Ref = useRef(null);
-  const card2Ref = useRef(null);
-
-  useReveal(headRef);
-  useReveal(card1Ref, 0.1);
-  useReveal(card2Ref, 0.2);
-
   return (
     <section id="whyus" className="why-section" style={styles.section}>
       <div className="why-shell" style={styles.shell}>
-        <div ref={headRef} className="why-header" style={styles.header}>
+        <Reveal className="why-header" style={styles.header}>
           <span className="section-badge">
             <Image
               src="/icons/why-us.png"
@@ -265,7 +304,7 @@ export default function WhyUs() {
           <p className="section-sub" style={styles.sub}>
             {SECTION_SUB}
           </p>
-        </div>
+        </Reveal>
 
         <div className="why-comparison" style={styles.comparison}>
           <ComparisonCard
@@ -273,13 +312,15 @@ export default function WhyUs() {
             items={AI_MEDIA_FEATURES}
             variant="check"
             withCta
-            cardRef={card1Ref}
+            delay={0}
+            direction={-1}
           />
           <ComparisonCard
             title="Others"
             items={OTHERS_FEATURES}
             variant="cross"
-            cardRef={card2Ref}
+            delay={0.15}
+            direction={1}
           />
         </div>
       </div>

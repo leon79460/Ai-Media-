@@ -2,7 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import AnimatedCard from './animation/AnimatedCard';
+import Marquee from './animation/Marquee';
+import Reveal from './animation/Reveal';
+import StaggerContainer from './animation/StaggerContainer';
 
 const SECTION_BADGE = 'Process';
 const SECTION_TITLE = 'One System. Built to Compound.';
@@ -47,24 +50,6 @@ const BADGE_ICON_STYLE = {
   height: 18,
   flex: '0 0 18px',
 };
-
-function useReveal(ref, delay = 0) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.animation = `revealUp 1.2s ease ${delay}s forwards`;
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.12 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref, delay]);
-}
 
 function MiniIcon({ type }) {
   const common = {
@@ -139,6 +124,46 @@ const CARD_VIDEO = {
   own: '/video/own.mp4',
 };
 
+function getThreeCardVariant(index) {
+  if (index === 0) {
+    return {
+      hidden: { opacity: 0, x: -58, y: 16, scale: 0.96, rotate: -1 },
+      show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+      },
+    };
+  }
+
+  if (index === 2) {
+    return {
+      hidden: { opacity: 0, x: 58, y: 16, scale: 0.96, rotate: 1 },
+      show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+      },
+    };
+  }
+
+  return {
+    hidden: { opacity: 0, y: 34, scale: 0.92 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: [0.92, 1.035, 1],
+      transition: { duration: 0.78, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+}
+
 function CardArt({ id }) {
   return (
     <div
@@ -168,14 +193,11 @@ function CardArt({ id }) {
   );
 }
 
-function ProcessCard({ card, delay }) {
-  const ref = useRef(null);
-  useReveal(ref, delay);
-
+function ProcessCard({ card, index }) {
   return (
-    <article
-      ref={ref}
+    <AnimatedCard
       className="process-card card-hover"
+      variants={getThreeCardVariant(index)}
       style={{
         flex: '1 1 320px',
         maxWidth: 384,
@@ -184,7 +206,6 @@ function ProcessCard({ card, delay }) {
         borderRadius: 20,
         padding: '32px',
         boxShadow: 'var(--card-shadow)',
-        opacity: 0,
         transition: 'transform 0.3s, box-shadow 0.3s',
         display: 'flex',
         flexDirection: 'column',
@@ -192,7 +213,7 @@ function ProcessCard({ card, delay }) {
     >
       <div
         data-parallax
-        data-parallax-speed={(0.1 + delay * 0.25).toFixed(2)}
+        data-parallax-speed="0.1"
         data-parallax-distance="130"
         data-parallax-scale="1.02"
         style={{
@@ -232,7 +253,7 @@ function ProcessCard({ card, delay }) {
           Contact Us
         </Link>
       </div>
-    </article>
+    </AnimatedCard>
   );
 }
 
@@ -253,9 +274,6 @@ function ProcessBadge() {
 }
 
 export default function Process() {
-  const headRef = useRef(null);
-  useReveal(headRef);
-
   return (
     <section
       id="process"
@@ -276,8 +294,7 @@ export default function Process() {
           alignItems: 'center',
         }}
       >
-        <div
-          ref={headRef}
+        <Reveal
           className="process-header"
           style={{
             display: 'flex',
@@ -285,7 +302,6 @@ export default function Process() {
             alignItems: 'center',
             gap: 20,
             textAlign: 'center',
-            opacity: 0,
             marginBottom: 78,
           }}
         >
@@ -309,10 +325,12 @@ export default function Process() {
           >
             {SECTION_SUB}
           </p>
-        </div>
+        </Reveal>
 
-        <div
+        <StaggerContainer
           className="process-grid"
+          delay={0.12}
+          stagger={0.14}
           style={{
             display: 'flex',
             gap: 24,
@@ -323,47 +341,24 @@ export default function Process() {
           }}
         >
           {CARDS.map((card, index) => (
-            <ProcessCard key={card.id} card={card} delay={index * 0.12} />
+            <ProcessCard key={card.id} card={card} index={index} />
           ))}
-        </div>
+        </StaggerContainer>
       </div>
 
       {/* Ticker strip */}
-      <div
+      <Marquee
+        items={TICKER_ITEMS}
         className="process-ticker-wrap"
-        style={{
-          width: '100%',
-          marginTop: 28,
-          paddingBottom: 0,
-        }}
-      >
-        <div
-          className="process-ticker-track"
-          style={{
-            display: 'flex',
-            width: 'max-content',
-            animation: 'ticker 34s linear infinite',
-          }}
-        >
-          {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map(
-            (item, index) => (
-              <div
-                key={`${item.label}-${index}`}
-                className="process-ticker-pill"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  whiteSpace: 'nowrap',
-                  fontFamily: 'var(--font)',
-                }}
-              >
-                <MiniIcon type={item.icon} />
-                {item.label}
-              </div>
-            ),
-          )}
-        </div>
-      </div>
+        trackClassName="process-ticker-track"
+        itemClassName="process-ticker-pill"
+        renderItem={(item) => (
+          <>
+            <MiniIcon type={item.icon} />
+            {item.label}
+          </>
+        )}
+      />
     </section>
   );
 }

@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import AnimatedCard from './animation/AnimatedCard';
+import Reveal from './animation/Reveal';
+import StaggerContainer from './animation/StaggerContainer';
 
 const SECTION_BADGE = 'Services';
 const SECTION_TITLE_TOP = 'Everything Your AV Business';
@@ -51,32 +53,9 @@ const styles = {
     flex: '0 0 18px',
   }
 }
-function useReveal(ref, delay = 0) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.animation = `revealUp 0.6s ease ${delay}s forwards`;
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref, delay]);
-}
-
-function FeatureCard({ feature, delay }) {
-  const ref = useRef(null);
-  useReveal(ref, delay);
-
+function FeatureCard({ feature }) {
   return (
-    <article ref={ref} className="service-card" style={{ opacity: 0 }}>
+    <AnimatedCard className="service-card">
       <span className="service-icon" aria-hidden="true">
         <Image
           className="service-icon-image"
@@ -104,18 +83,15 @@ function FeatureCard({ feature, delay }) {
           → Explore {feature.title}
         </Link>
       )}
-    </article>
+    </AnimatedCard>
   );
 }
 
 export default function Features() {
-  const headRef = useRef(null);
-  useReveal(headRef);
-
   return (
     <section id="services" className="services-section">
       <div className="services-shell">
-        <header ref={headRef} className="services-header" style={{ opacity: 0 }}>
+        <Reveal as="header" className="services-header">
           <span className="services-badge">
             <Image
               src="/icons/services.png"
@@ -133,17 +109,16 @@ export default function Features() {
             <span>{SECTION_TITLE_BOTTOM}</span>
           </h2>
           <p className="services-sub">{SECTION_SUB}</p>
-        </header>
+        </Reveal>
 
-        <div className="services-grid">
-          {FEATURES.map((feature, index) => (
+        <StaggerContainer className="services-grid">
+          {FEATURES.map((feature) => (
             <FeatureCard
               key={feature.title}
               feature={feature}
-              delay={index * 0.5}
             />
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

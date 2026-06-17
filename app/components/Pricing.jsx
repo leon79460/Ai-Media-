@@ -1,7 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { useState } from 'react';
+import AnimatedCard from './animation/AnimatedCard';
+import AnimatedPricingToggle from './animation/AnimatedPricingToggle';
+import Reveal from './animation/Reveal';
+import StaggerContainer from './animation/StaggerContainer';
 
 const SECTION_BADGE = 'Pricing';
 const SECTION_TITLE = 'Discover The Pricing Plan';
@@ -81,31 +86,49 @@ const styles = {
   }
 }
 
-function useReveal(ref, delay = 0) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.animation = `revealUp 1.2s ease ${delay}s forwards`;
-          obs.disconnect();
-        }
+function getThreeCardVariant(index) {
+  if (index === 0) {
+    return {
+      hidden: { opacity: 0, x: -58, y: 16, scale: 0.96, rotate: -1 },
+      show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
       },
-      { threshold: 0.1 },
-    );
+    };
+  }
 
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref, delay]);
+  if (index === 2) {
+    return {
+      hidden: { opacity: 0, x: 58, y: 16, scale: 0.96, rotate: 1 },
+      show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+      },
+    };
+  }
+
+  return {
+    hidden: { opacity: 0, y: 34, scale: 0.92 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: [0.92, 1.035, 1],
+      transition: { duration: 0.78, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 }
 
-function PricingCard({ plan, isYearly, delay }) {
-  const ref = useRef(null);
-  useReveal(ref, delay);
-
+function PricingCard({ plan, isYearly, index }) {
   const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
+  const shouldReduceMotion = useReducedMotion();
 
   function scrollToContact() {
     document.getElementById('contact')?.scrollIntoView({
@@ -116,9 +139,9 @@ function PricingCard({ plan, isYearly, delay }) {
   }
 
   return (
-    <article
-      ref={ref}
+    <AnimatedCard
       className={`pricing-card${plan.popular ? ' is-popular' : ''}`}
+      variants={getThreeCardVariant(index)}
     >
       <div className="pricing-card-head">
         <h3>{plan.name}</h3>
@@ -126,7 +149,21 @@ function PricingCard({ plan, isYearly, delay }) {
       </div>
 
       <div className="pricing-price-row">
-        <span className="pricing-price">{price}</span>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={price}
+            className="pricing-price"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.22,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {price}
+          </motion.span>
+        </AnimatePresence>
         <span className="pricing-period">{plan.period}</span>
       </div>
 
@@ -154,19 +191,17 @@ function PricingCard({ plan, isYearly, delay }) {
           </li>
         ))}
       </ul>
-    </article>
+    </AnimatedCard>
   );
 }
 
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
-  const headRef = useRef(null);
-  useReveal(headRef);
 
   return (
     <section id="pricing" className="pricing-section">
       <div className="pricing-shell">
-        <div ref={headRef} className="pricing-header">
+        <Reveal className="pricing-header">
           <span className="section-badge">
             <Image
               src="/icons/pricing.svg"
@@ -180,40 +215,24 @@ export default function Pricing() {
           <h2 className="section-title">{SECTION_TITLE}</h2>
           <p className="section-sub">{SECTION_SUB}</p>
 
-          <div className="pricing-toggle" aria-label="Billing frequency">
-            <button
-              type="button"
-              className={!isYearly ? 'is-active' : ''}
-              onClick={() => setIsYearly(false)}
-            >
-              Monthly
-            </button>
-            <button
-              type="button"
-              className={isYearly ? 'is-active' : ''}
-              onClick={() => setIsYearly(true)}
-            >
-              Yearly
-            </button>
-            <span>10% off</span>
-          </div>
-        </div>
+          <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />
+        </Reveal>
 
-        <div className="pricing-grid">
-          {PLANS.map((plan, i) => (
+        <StaggerContainer className="pricing-grid" delay={0.12} stagger={0.14}>
+          {PLANS.map((plan, index) => (
             <PricingCard
               key={plan.name}
               plan={plan}
               isYearly={isYearly}
-              delay={i * 0.1}
+              index={index}
             />
           ))}
-        </div>
+        </StaggerContainer>
 
-        <div className="pricing-guarantee">
+        <Reveal className="pricing-guarantee" y={18} delay={0.1}>
           <span>{GUARANTEE}</span>
           {/* <span>{BETA_OFFER}</span> */}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

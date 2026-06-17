@@ -20,6 +20,7 @@ export default function Navbar() {
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobileNav, setIsMobileNav] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 1024px)');
@@ -30,6 +31,13 @@ export default function Navbar() {
       cancelAnimationFrame(frameId);
       media.removeEventListener('change', update);
     };
+  }, []);
+
+  useEffect(() => {
+    const update = () => setIsScrolled(window.scrollY > 12);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
   }, []);
 
   function scrollToSection(target) {
@@ -50,7 +58,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="site-nav"
+      className={`site-nav${isScrolled ? ' is-scrolled' : ''}`}
       style={{
         position: 'fixed',
         top: 0,
@@ -62,10 +70,15 @@ export default function Navbar() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '0 24px',
-        background: '#F0F0F0',
+        background: isScrolled ? '#F0F0F0' : '#F0F0F0',
         backdropFilter: 'blur(18px)',
         WebkitBackdropFilter: 'blur(18px)',
         borderBottom: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: isScrolled
+          ? '0 14px 34px rgba(0,0,0,0.08)'
+          : '0 0 0 rgba(0,0,0,0)',
+        transition:
+          'background 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1)',
         animation: 'navDown 0.72s cubic-bezier(0.16, 1, 0.3, 1) both',
       }}
     >
