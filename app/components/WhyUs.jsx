@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
 import AnimatedCard from './animation/AnimatedCard';
-import Reveal from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
 
 
 const SECTION_BADGE = 'Why AI Media';
@@ -58,7 +59,6 @@ const styles = {
     alignItems: 'center',
     gap: '12px',
     textAlign: 'center',
-    opacity: 0,
   },
   title: {
     fontFamily: 'var(--font)',
@@ -103,7 +103,6 @@ const styles = {
     borderRadius: '18px',
     backgroundColor: '#f7f7f7',
     color: '#030303',
-    opacity: 0,
     boxShadow:
       '0 2px 3px rgba(0, 0, 0, 0.04), 0 16px 30px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.96)',
   },
@@ -196,6 +195,14 @@ function ComparisonCard({
   direction = 1,
 }) {
   const shouldReduceMotion = useReducedMotion();
+  const listRef = useRef(null);
+  const listInView = useInView(listRef, { amount: 0.5, once: true });
+  const [listEntered, setListEntered] = useState(false);
+  const listState = listInView
+    ? 'show'
+    : listEntered
+      ? 'exited'
+      : 'hidden';
   const cardVariants = {
     hidden: {
       opacity: 0,
@@ -206,20 +213,21 @@ function ComparisonCard({
     },
     show: {
       opacity: 1,
-      x: [direction * 64, direction * -8, direction * 4, 0],
-      y: [18, -4, 2, 0],
-      scale: [0.94, 1.025, 0.995, 1],
-      rotate:
-        variant === 'check'
-          ? [direction * 1.2, direction * -0.7, direction * 0.35, 0]
-          : [direction * 1.2, direction * -0.35, 0],
+      x: 0,
+      y: 0,
+      scale: 1,
+      rotate: 0,
       transition: {
-        duration: variant === 'check' ? 0.92 : 0.78,
-        ease: [0.22, 1, 0.36, 1],
+        duration: variant === 'check' ? 0.82 : 0.72,
+        ease: motionEase,
         delay,
       },
     },
   };
+
+  useEffect(() => {
+    if (listInView) setListEntered(true);
+  }, [listInView]);
 
   return (
     <AnimatedCard
@@ -234,17 +242,23 @@ function ComparisonCard({
       </header>
 
       <motion.ul
+        ref={listRef}
         className="why-list"
         style={styles.list}
         initial={shouldReduceMotion ? false : 'hidden'}
-        whileInView={shouldReduceMotion ? undefined : 'show'}
-        viewport={{ once: true, amount: 0.25 }}
+        animate={shouldReduceMotion ? undefined : listState}
         variants={{
           hidden: {},
           show: {
             transition: {
               delayChildren: delay + 0.18,
               staggerChildren: 0.045,
+            },
+          },
+          exited: {
+            transition: {
+              staggerChildren: 0.03,
+              staggerDirection: -1,
             },
           },
         }}
@@ -258,7 +272,12 @@ function ComparisonCard({
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+                transition: { duration: 0.48, ease: motionEase },
+              },
+              exited: {
+                opacity: 0.35,
+                y: 8,
+                transition: { duration: 0.32, ease: motionEase },
               },
             }}
           >
@@ -286,7 +305,7 @@ export default function WhyUs() {
   return (
     <section id="whyus" className="why-section" style={styles.section}>
       <div className="why-shell" style={styles.shell}>
-        <Reveal className="why-header" style={styles.header}>
+        <Reveal className="why-header" effect="slide-right" style={styles.header}>
           <span className="section-badge">
             <Image
               src="/icons/why-us.png"

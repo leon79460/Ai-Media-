@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import BeforeAfterSlider from './animation/BeforeAfterSlider';
-import Reveal from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
 
 const SECTION_BADGE = 'Case Study';
 const TITLE = 'We Tested The System On Our Own AV Company First.';
@@ -51,6 +51,7 @@ export default function BeforeAfter() {
         }}
       >
         <Reveal
+          effect="slide-right"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -78,7 +79,12 @@ export default function BeforeAfter() {
         </Reveal>
 
         <div className="case-study-showcase">
-          <Reveal className="before-after-card-shell" style={{ width: '100%' }}>
+          <Reveal
+            className="before-after-card-shell"
+            effect="clip-up"
+            duration={0.9}
+            style={{ width: '100%' }}
+          >
             <div
               className="before-after-card"
               data-parallax
@@ -127,7 +133,7 @@ export default function BeforeAfter() {
                 exit={shouldReduceMotion ? undefined : { opacity: 0, y: 12 }}
                 transition={{
                   duration: shouldReduceMotion ? 0 : 0.32,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: motionEase,
                 }}
                 style={{
                   width: '100%',

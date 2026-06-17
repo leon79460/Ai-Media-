@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
-import { forwardRef } from 'react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { motionEase } from './Reveal';
 
 const motionTags = {
@@ -11,14 +11,30 @@ const motionTags = {
 };
 
 export const staggerChild = {
-  hidden: { opacity: 0, y: 28, scale: 0.98 },
+  hidden: { opacity: 0, y: 24, scale: 0.985 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.65, ease: motionEase },
+    transition: { duration: 0.76, ease: motionEase },
+  },
+  exited: {
+    opacity: 0.55,
+    y: 6,
+    scale: 1,
+    transition: { duration: 0.28, ease: motionEase },
   },
 };
+
+function assignRef(ref, node) {
+  if (!ref) return;
+  if (typeof ref === 'function') {
+    ref(node);
+    return;
+  }
+
+  ref.current = node;
+}
 
 const StaggerContainer = forwardRef(function StaggerContainer(
   {
@@ -28,30 +44,49 @@ const StaggerContainer = forwardRef(function StaggerContainer(
     style,
     delay = 0,
     stagger = 0.08,
-    amount = 0.2,
+    amount = 0.5,
     once = true,
     ...props
   },
   ref,
 ) {
   const shouldReduceMotion = useReducedMotion();
+  const localRef = useRef(null);
+  const inView = useInView(localRef, { amount, once });
+  const [hasEntered, setHasEntered] = useState(false);
   const Component = motionTags[as] || motion.div;
+  const animateState = inView
+    ? 'show'
+    : hasEntered && !once
+      ? 'exited'
+      : 'hidden';
+
+  useEffect(() => {
+    if (inView) setHasEntered(true);
+  }, [inView]);
 
   return (
     <Component
-      ref={ref}
+      ref={node => {
+        localRef.current = node;
+        assignRef(ref, node);
+      }}
       className={className}
       style={style}
-      data-motion-managed="true"
       initial={shouldReduceMotion ? false : 'hidden'}
-      whileInView={shouldReduceMotion ? undefined : 'show'}
-      viewport={{ once, amount }}
+      animate={shouldReduceMotion ? undefined : animateState}
       variants={{
         hidden: {},
         show: {
           transition: {
             delayChildren: delay,
             staggerChildren: stagger,
+          },
+        },
+        exited: {
+          transition: {
+            staggerChildren: Math.min(stagger, 0.03),
+            staggerDirection: -1,
           },
         },
       }}

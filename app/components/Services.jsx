@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedCard from './animation/AnimatedCard';
-import Reveal from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
 
 const SECTION_BADGE = 'Services';
@@ -53,9 +53,30 @@ const styles = {
     flex: '0 0 18px',
   }
 }
-function FeatureCard({ feature }) {
+
+function getServiceCardVariant(index) {
+  const direction = index % 2 === 0 ? -1 : 1;
+
+  return {
+    hidden: {
+      opacity: 0,
+      x: direction * 58,
+      y: 20,
+      rotate: direction * 0.8,
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotate: 0,
+      transition: { duration: 0.76, ease: motionEase },
+    },
+  };
+}
+
+function FeatureCard({ feature, index }) {
   return (
-    <AnimatedCard className="service-card">
+    <AnimatedCard className="service-card card-hover" variants={getServiceCardVariant(index)}>
       <span className="service-icon" aria-hidden="true">
         <Image
           className="service-icon-image"
@@ -91,7 +112,7 @@ export default function Features() {
   return (
     <section id="services" className="services-section">
       <div className="services-shell">
-        <Reveal as="header" className="services-header">
+        <Reveal as="header" className="services-header" effect="clip-left">
           <span className="services-badge">
             <Image
               src="/icons/services.png"
@@ -111,11 +132,12 @@ export default function Features() {
           <p className="services-sub">{SECTION_SUB}</p>
         </Reveal>
 
-        <StaggerContainer className="services-grid">
-          {FEATURES.map((feature) => (
+        <StaggerContainer className="services-grid" stagger={0.08}>
+          {FEATURES.map((feature, index) => (
             <FeatureCard
               key={feature.title}
               feature={feature}
+              index={index}
             />
           ))}
         </StaggerContainer>

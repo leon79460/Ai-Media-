@@ -78,7 +78,7 @@ export default function Navbar() {
           ? '0 14px 34px rgba(0,0,0,0.08)'
           : '0 0 0 rgba(0,0,0,0)',
         transition:
-          'background 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1)',
+          'background 0.34s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.34s cubic-bezier(0.33, 1, 0.68, 1)',
         animation: 'navDown 0.72s cubic-bezier(0.16, 1, 0.3, 1) both',
       }}
     >
@@ -195,7 +195,7 @@ export default function Navbar() {
                   fontSize: '15px',
                   cursor: 'pointer',
                   opacity: 0,
-                  animation: 'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s forwards',
+                  animation: 'btnPop 0.64s cubic-bezier(0.16, 1, 0.3, 1) 0.76s forwards',
                 }}
               >
                 Login
@@ -224,7 +224,7 @@ export default function Navbar() {
                   WebkitBackdropFilter: 'blur(14px)',
                   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
                   opacity: 0,
-                  animation: 'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
+                  animation: 'btnPop 0.64s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards',
                 }}
               >
                 Get Started

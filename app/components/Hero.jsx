@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
+import { motionEase } from './animation/Reveal';
 
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
@@ -14,17 +15,18 @@ const heroContainer = {
   show: {
     transition: {
       delayChildren: 0.18,
-      staggerChildren: 0.1,
+      staggerChildren: 0.085,
     },
   },
 };
 
 const heroItem = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 26, filter: 'blur(10px)' },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+    filter: 'blur(0px)',
+    transition: { duration: 0.76, ease: motionEase },
   },
 };
 
@@ -69,7 +71,7 @@ export default function Hero() {
         preload="metadata"
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1, ease: motionEase }}
         style={{
           position: 'absolute',
           inset: 0,
@@ -86,7 +88,7 @@ export default function Hero() {
         className="hero-content"
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+        transition={{ duration: 0.78, ease: motionEase, delay: 0.06 }}
         style={{
           position: 'absolute',
           inset: 0,
@@ -100,7 +102,6 @@ export default function Hero() {
         variants={heroContainer}
         initial={shouldReduceMotion ? false : 'hidden'}
         animate={shouldReduceMotion ? undefined : 'show'}
-        data-motion-managed="true"
         style={{
           position: 'relative',
           zIndex: 2,

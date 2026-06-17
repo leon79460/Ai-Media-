@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 import AnimatedCard from '../../components/animation/AnimatedCard';
-import Reveal from '../../components/animation/Reveal';
+import Reveal, { motionEase } from '../../components/animation/Reveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import { blogPosts } from '../data/blogs';
 
@@ -33,9 +33,34 @@ function BadgeIcon() {
   );
 }
 
-function BlogCard({ post, href }) {
+function getBlogCardVariant(index) {
+  const direction = index % 2 === 0 ? -1 : 1;
+
+  return {
+    hidden: {
+      opacity: 0,
+      x: direction * 28,
+      y: 34,
+      rotate: direction * 1.4,
+      scale: 0.96,
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotate: 0,
+      scale: 1,
+      transition: { duration: 0.76, ease: motionEase },
+    },
+  };
+}
+
+function BlogCard({ post, href, index }) {
   return (
-    <AnimatedCard className="blog-card blog-home-card">
+    <AnimatedCard
+      className="blog-card blog-home-card"
+      variants={getBlogCardVariant(index)}
+    >
       <Link className="blog-home-image" href={href} aria-label={post.title}>
         {post.image ? (
           <Image
@@ -95,7 +120,7 @@ export default function Blogs() {
   return (
     <section id="blogs" className="blog-home-section">
       <div className="blog-home-shell">
-        <Reveal className="blog-home-header">
+        <Reveal className="blog-home-header" effect="slide-left">
           <span className="section-badge blog-home-badge">
             <BadgeIcon />
             {SECTION_BADGE}
@@ -114,12 +139,13 @@ export default function Blogs() {
             <span aria-hidden="true" />
           </button>
 
-          <StaggerContainer ref={gridRef} className="blog-home-grid">
-            {homePosts.map((post) => (
+          <StaggerContainer ref={gridRef} className="blog-home-grid" stagger={0.06}>
+            {homePosts.map((post, index) => (
               <BlogCard
                 key={post.slug}
                 post={post}
                 href={post.href}
+                index={index}
               />
             ))}
           </StaggerContainer>

@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import Reveal from './animation/Reveal';
+import StaggerContainer from './animation/StaggerContainer';
 
 const PORTFOLIO_ITEMS = [
   {
@@ -69,6 +71,9 @@ const PORTFOLIO_ITEMS = [
   },
 ];
 
+const PORTFOLIO_SUB =
+  'A Pinterest-inspired wall of campaigns, websites, content systems, and design work built for AV and smart home businesses.';
+
 const BADGE_ICON_STYLE = {
   width: 18,
   height: 18,
@@ -79,7 +84,18 @@ export default function Portfolio() {
   return (
     <section id="works" className="portfolio-section">
       <div className="portfolio-shell">
-        <header className="portfolio-header">
+        <Reveal
+          effect="slide-right"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+            maxWidth: '700px',
+            margin: '0 auto 54px',
+            textAlign: 'center',
+          }}
+        >
           <span className="section-badge">
             <Image
               src="/icons/portfolio.png"
@@ -92,17 +108,22 @@ export default function Portfolio() {
             Portfolio
           </span>
           <h2 className="section-title">Selected Work With Measurable Polish.</h2>
-          <p className="section-sub">
-            A Pinterest-inspired wall of campaigns, websites, content systems,
-            and design work built for AV and smart home businesses.
-          </p>
-        </header>
+          <p className="section-sub">{PORTFOLIO_SUB}</p>
+        </Reveal>
 
-        <div className="portfolio-masonry" aria-label="Selected portfolio projects">
+        <StaggerContainer
+          className="portfolio-masonry"
+          stagger={0.08}
+          aria-label="Selected portfolio projects"
+        >
           {PORTFOLIO_ITEMS.map((item) => (
-            <article
-              className="portfolio-card"
+            <Reveal
               key={item.title}
+              as="article"
+              className="portfolio-card"
+              effect="scale"
+              y={22}
+              scale={0.94}
               style={{ '--portfolio-ratio': item.ratio }}
             >
               <Image
@@ -120,9 +141,9 @@ export default function Portfolio() {
                 </span>
                 <span className="portfolio-visit">Visit Site</span>
               </Link>
-            </article>
+            </Reveal>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

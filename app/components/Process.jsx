@@ -4,8 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedCard from './animation/AnimatedCard';
 import Marquee from './animation/Marquee';
-import Reveal from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import TextReveal from './animation/TextReveal';
 
 const SECTION_BADGE = 'Process';
 const SECTION_TITLE = 'One System. Built to Compound.';
@@ -127,39 +128,51 @@ const CARD_VIDEO = {
 function getThreeCardVariant(index) {
   if (index === 0) {
     return {
-      hidden: { opacity: 0, x: -58, y: 16, scale: 0.96, rotate: -1 },
+      hidden: {
+        opacity: 0,
+        x: -44,
+        y: 18,
+        scale: 0.975,
+        rotate: -0.6,
+      },
       show: {
         opacity: 1,
         x: 0,
         y: 0,
         scale: 1,
         rotate: 0,
-        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.76, ease: motionEase },
       },
     };
   }
 
   if (index === 2) {
     return {
-      hidden: { opacity: 0, x: 58, y: 16, scale: 0.96, rotate: 1 },
+      hidden: {
+        opacity: 0,
+        x: 44,
+        y: 18,
+        scale: 0.975,
+        rotate: 0.6,
+      },
       show: {
         opacity: 1,
         x: 0,
         y: 0,
         scale: 1,
         rotate: 0,
-        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.76, ease: motionEase },
       },
     };
   }
 
   return {
-    hidden: { opacity: 0, y: 34, scale: 0.92 },
+    hidden: { opacity: 0, y: 30, scale: 0.96 },
     show: {
       opacity: 1,
       y: 0,
-      scale: [0.92, 1.035, 1],
-      transition: { duration: 0.78, ease: [0.22, 1, 0.36, 1] },
+      scale: 1,
+      transition: { duration: 0.76, ease: motionEase },
     },
   };
 }
@@ -296,6 +309,7 @@ export default function Process() {
       >
         <Reveal
           className="process-header"
+          effect="slide-left"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -306,16 +320,17 @@ export default function Process() {
           }}
         >
           <ProcessBadge />
-          <h2
+          <TextReveal
+            as="h2"
             className="section-title process-title"
+            text={SECTION_TITLE}
+            delay={0.1}
             style={{
               fontSize: 55,
               lineHeight: 1.2,
               letterSpacing: 0,
             }}
-          >
-            {SECTION_TITLE}
-          </h2>
+          />
           <p
             className="section-sub"
             style={{
@@ -329,8 +344,8 @@ export default function Process() {
 
         <StaggerContainer
           className="process-grid"
-          delay={0.12}
-          stagger={0.14}
+          delay={0.08}
+          stagger={0.1}
           style={{
             display: 'flex',
             gap: 24,

@@ -174,7 +174,8 @@ export default function Footer() {
       {/* All content sits above the background */}
       <Reveal
         className="site-footer-inner"
-        y={24}
+        effect="clip-up"
+        duration={0.76}
         amount={0.12}
         style={{
           position: 'relative',
@@ -231,19 +232,26 @@ export default function Footer() {
                     pointerEvents: 'auto',
                   }}
                 >
-                  <Image
-                    src="/logos/logo-2.png"
-                    alt="AI Media"
-                    width={170}
-                    height={54}
+                  <span
                     style={{
-                      width: 'auto',
+                      position: 'relative',
+                      display: 'block',
+                      width: '170px',
                       height: '54px',
                       maxWidth: '170px',
-                      objectFit: 'contain',
-                      display: 'block',
                     }}
-                  />
+                  >
+                    <Image
+                      src="/logos/logo-2.png"
+                      alt="AI Media"
+                      fill
+                      sizes="170px"
+                      style={{
+                        objectFit: 'contain',
+                        display: 'block',
+                      }}
+                    />
+                  </span>
                 </button>
               </div>
 
