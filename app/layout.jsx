@@ -2,8 +2,11 @@
 
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { usePathname } from 'next/navigation';
+import Script from 'next/script';
 import "./globals.css";
 import ScrollEffects from "./components/ScrollEffects";
+
+const GA_MEASUREMENT_ID = 'G-KWDT0F3N2Y';
 
 const pageVariants = {
   hidden: { opacity: 0, y: 12 },
@@ -29,6 +32,18 @@ export default function RootLayout({ children }) {
         className="m-0 bg-[#f5f5f5] p-0 antialiased"
         suppressHydrationWarning
       >
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <ScrollEffects />
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
