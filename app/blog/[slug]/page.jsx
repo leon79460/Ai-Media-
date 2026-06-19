@@ -8,6 +8,14 @@ import {
 import Navbar from '../../components/Navbar';
 import { blogPosts, getBlogPost } from '../data/blogs';
 
+const ESCAPED_UNICODE_PREFIX = `${String.fromCharCode(92)}u`;
+
+function stringifyJsonLd(value) {
+  return JSON.stringify(value).replace(/[<>&\u2028\u2029]/g, (char) =>
+    `${ESCAPED_UNICODE_PREFIX}${char.charCodeAt(0).toString(16).padStart(4, '0')}`
+  );
+}
+
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
@@ -47,7 +55,7 @@ export default async function BlogPostPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: stringifyJsonLd({
             '@context': 'https://schema.org',
             '@type': 'Article',
             headline: post.title,
