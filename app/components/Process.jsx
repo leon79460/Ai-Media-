@@ -6,6 +6,7 @@ import AnimatedCard from './animation/AnimatedCard';
 import Marquee from './animation/Marquee';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import OriginButton from './OriginButton';
 import TextReveal from './animation/TextReveal';
 
 const SECTION_BADGE = 'Process';
@@ -262,9 +263,14 @@ function ProcessCard({ card, index }) {
         {card.description}
       </p>
       <div className="process-card-bottom">
-        <Link href="/contact" className="process-card-cta">
+        <OriginButton
+          as="link"
+          href="/contact"
+          variant="dark"
+          className="process-card-cta"
+        >
           Contact Us
-        </Link>
+        </OriginButton>
       </div>
     </AnimatedCard>
   );
@@ -344,8 +350,8 @@ export default function Process() {
 
         <StaggerContainer
           className="process-grid"
-          delay={0.08}
-          stagger={0.1}
+          delay={0.12}
+          stagger={0.14}
           style={{
             display: 'flex',
             gap: 24,

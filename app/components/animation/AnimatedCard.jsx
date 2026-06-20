@@ -1,9 +1,10 @@
 'use client';
 
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import { motionEase } from './Reveal';
+import { cardHover, motionEase } from './Reveal';
 import { staggerChild } from './StaggerContainer';
+import { ANIMATION_VIEWPORT_AMOUNT, useDelayedInView } from './viewport';
 
 const motionTags = {
   article: motion.article,
@@ -35,7 +36,7 @@ export default function AnimatedCard({
   className,
   style,
   delay = 0,
-  amount = 0.5,
+  amount = ANIMATION_VIEWPORT_AMOUNT,
   hover = false,
   standalone = false,
   once = true,
@@ -46,7 +47,7 @@ export default function AnimatedCard({
   const ref = useRef(null);
   const Component = motionTags[as] || motion.article;
   const isStandalone = standalone || delay > 0;
-  const inView = useInView(ref, { amount, once });
+  const inView = useDelayedInView(ref, { amount, once });
   const [hasEntered, setHasEntered] = useState(false);
   const resolvedStyle = shouldReduceMotion
     ? { ...style, opacity: style?.opacity ?? 1, filter: style?.filter ?? 'none' }
@@ -71,6 +72,7 @@ export default function AnimatedCard({
             },
           }
         : staggerChild;
+
   const animateState = inView
     ? 'show'
     : hasEntered && !once
@@ -78,7 +80,10 @@ export default function AnimatedCard({
       : 'hidden';
 
   useEffect(() => {
-    if (inView) setHasEntered(true);
+    if (!inView) return undefined;
+
+    const frame = requestAnimationFrame(() => setHasEntered(true));
+    return () => cancelAnimationFrame(frame);
   }, [inView]);
 
   return (
@@ -89,9 +94,7 @@ export default function AnimatedCard({
       variants={localVariants}
       initial={shouldReduceMotion ? false : isStandalone ? 'hidden' : undefined}
       animate={shouldReduceMotion || !isStandalone ? undefined : animateState}
-      whileHover={
-        shouldReduceMotion || !hover ? undefined : { y: -8, scale: 1.012 }
-      }
+      whileHover={shouldReduceMotion || !hover ? undefined : cardHover}
       transition={{ duration: 0.34, ease: motionEase }}
       {...props}
     >

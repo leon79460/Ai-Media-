@@ -5,6 +5,7 @@ import Link from 'next/link';
 import AnimatedCard from './animation/AnimatedCard';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Services';
 const SECTION_TITLE_TOP = 'Everything Your AV Business';
@@ -100,9 +101,9 @@ function FeatureCard({ feature, index }) {
       </ul>
 
       {feature.href && (
-        <Link href={feature.href} className="service-card-link">
+        <OriginButton as="link" href={feature.href} variant="dark" className="service-card-link">
           → Explore {feature.title}
-        </Link>
+        </OriginButton>
       )}
     </AnimatedCard>
   );
@@ -132,7 +133,7 @@ export default function Features() {
           <p className="services-sub">{SECTION_SUB}</p>
         </Reveal>
 
-        <StaggerContainer className="services-grid" stagger={0.08}>
+        <StaggerContainer className="services-grid" delay={0.1} stagger={0.12}>
           {FEATURES.map((feature, index) => (
             <FeatureCard
               key={feature.title}

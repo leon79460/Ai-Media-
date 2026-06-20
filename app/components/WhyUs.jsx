@@ -3,9 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import AnimatedCard from './animation/AnimatedCard';
 import Reveal, { motionEase } from './animation/Reveal';
+import { useDelayedInView } from './animation/viewport';
+import OriginButton from './OriginButton';
 
 
 const SECTION_BADGE = 'Why AI Media';
@@ -196,7 +198,7 @@ function ComparisonCard({
 }) {
   const shouldReduceMotion = useReducedMotion();
   const listRef = useRef(null);
-  const listInView = useInView(listRef, { amount: 0.5, once: true });
+  const listInView = useDelayedInView(listRef);
   const [listEntered, setListEntered] = useState(false);
   const listState = listInView
     ? 'show'
@@ -226,7 +228,10 @@ function ComparisonCard({
   };
 
   useEffect(() => {
-    if (listInView) setListEntered(true);
+    if (!listInView) return undefined;
+
+    const frame = requestAnimationFrame(() => setListEntered(true));
+    return () => cancelAnimationFrame(frame);
   }, [listInView]);
 
   return (
@@ -288,14 +293,16 @@ function ComparisonCard({
       </motion.ul>
 
       {withCta && (
-        <Link
+        <OriginButton
+          as="link"
           href="/contact"
+          variant="dark"
           className="why-cta"
           style={styles.cta}
         >
           <span aria-hidden="true">→</span>
           {BTN_TEXT}
-        </Link>
+        </OriginButton>
       )}
     </AnimatedCard>
   );

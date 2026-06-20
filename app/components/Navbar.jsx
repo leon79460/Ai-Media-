@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import OriginButton from './OriginButton';
 
 const LINKS = [
   { label: 'Home', target: 'home' },
@@ -175,10 +176,12 @@ export default function Navbar() {
         <div className="nav-actions">
           {!isMobileNav && (
             <>
-            <Link
+            <OriginButton
+                as="a"
                 href="https://app.aimedia.design"
+                target="_blank"
+                variant="ghost"
                 className="nav-cta nav-login-cta nav-desktop-cta"
-                target='blank'
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -188,20 +191,23 @@ export default function Navbar() {
                   textDecoration: 'none',
                   borderRadius: '7px',
                   border: 0,
+                  background: 'transparent',
                   padding: '0 12px',
                   height: '40px',
                   fontFamily: 'var(--font-main)',
                   fontWeight: 600,
                   fontSize: '15px',
-                  cursor: 'pointer',
-                  opacity: 0,
-                  animation: 'btnPop 0.64s cubic-bezier(0.16, 1, 0.3, 1) 0.76s forwards',
                 }}
+                initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.76 }}
               >
                 Login
-              </Link>
-              <Link
+              </OriginButton>
+              <OriginButton
+                as="link"
                 href="/contact"
+                variant="dark"
                 className="nav-cta nav-start-cta nav-desktop-cta"
                 style={{
                   display: 'inline-flex',
@@ -219,16 +225,16 @@ export default function Navbar() {
                   fontFamily: 'var(--font-main)',
                   fontWeight: 600,
                   fontSize: '15px',
-                  cursor: 'pointer',
                   backdropFilter: 'blur(14px)',
                   WebkitBackdropFilter: 'blur(14px)',
                   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
-                  opacity: 0,
-                  animation: 'btnPop 0.64s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards',
                 }}
+                initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.68 }}
               >
                 Get Started
-              </Link>
+              </OriginButton>
               
             </>
           )}
@@ -266,21 +272,57 @@ export default function Navbar() {
               </Link>
             )
           )}
-          <Link
+          <OriginButton
+            as="a"
             href="https://app.aimedia.design"
-            className="nav-mobile-cta nav-mobile-login-cta"
             target="_blank"
+            variant="light"
+            className="nav-mobile-cta nav-mobile-login-cta"
             onClick={() => setMobileOpen(false)}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '4px',
+              minHeight: '40px',
+              borderRadius: '7px',
+              fontSize: '12px',
+              border: 0,
+              background: '#f7f7f7',
+              color: '#060606',
+              fontFamily: 'var(--font-main)',
+              fontWeight: 600,
+              textDecoration: 'none',
+              boxShadow: '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
+            }}
           >
             Login
-          </Link>
-          <Link
+          </OriginButton>
+          <OriginButton
+            as="link"
             href="/contact"
+            variant="dark"
             className="nav-mobile-cta nav-mobile-start-cta"
             onClick={() => setMobileOpen(false)}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '4px',
+              minHeight: '40px',
+              borderRadius: '7px',
+              fontSize: '12px',
+              border: '1px solid rgba(255,255,255,0.86)',
+              background: '#050505',
+              color: '#fff',
+              fontFamily: 'var(--font-main)',
+              fontWeight: 600,
+              textDecoration: 'none',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+              backdropFilter: 'blur(14px)',
+              WebkitBackdropFilter: 'blur(14px)',
+            }}
           >
             Get Started
-          </Link>
+          </OriginButton>
         </div>
       </div>
     </nav>

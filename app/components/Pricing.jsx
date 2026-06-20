@@ -7,6 +7,7 @@ import AnimatedCard from './animation/AnimatedCard';
 import AnimatedPricingToggle from './animation/AnimatedPricingToggle';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Pricing';
 const SECTION_TITLE = 'Discover The Pricing Plan';
@@ -150,14 +151,16 @@ function PricingCard({ plan, isYearly, index }) {
         <p>{plan.description}</p>
       </div>
 
-      <button
-        type="button"
+      <OriginButton
+        variant="custom"
+        fillColor={plan.popular ? '#f5f5f5' : '#050505'}
+        hoverTextColor={plan.popular ? '#050505' : '#f5f5f5'}
         className={`pricing-cta${plan.popular ? ' is-primary' : ''}`}
         onClick={scrollToContact}
       >
         {plan.popular && <span className="pricing-arrow" aria-hidden="true" />}
         {plan.btnText}
-      </button>
+      </OriginButton>
 
       <div className="pricing-divider" />
 
@@ -196,7 +199,7 @@ export default function Pricing() {
           <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />
         </Reveal>
 
-        <StaggerContainer className="pricing-grid" delay={0.08} stagger={0.1}>
+        <StaggerContainer className="pricing-grid" delay={0.12} stagger={0.14}>
           {PLANS.map((plan, index) => (
             <PricingCard
               key={plan.name}

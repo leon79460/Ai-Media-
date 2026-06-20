@@ -1,8 +1,9 @@
 'use client';
 
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { motionEase } from './Reveal';
+import { ANIMATION_VIEWPORT_AMOUNT, useDelayedInView } from './viewport';
 
 const motionTags = {
   div: motion.div,
@@ -20,16 +21,17 @@ export default function TextReveal({
   style,
   delay = 0,
   stagger = 0.045,
-  amount = 0.5,
+  amount = ANIMATION_VIEWPORT_AMOUNT,
   once = true,
   ...props
 }) {
   const shouldReduceMotion = useReducedMotion();
   const ref = useRef(null);
-  const inView = useInView(ref, { amount, once });
+  const inView = useDelayedInView(ref, { amount, once });
   const [hasEntered, setHasEntered] = useState(false);
   const Component = motionTags[as] || motion.span;
   const words = text.split(' ');
+
   const animateState = inView
     ? 'show'
     : hasEntered && !once
@@ -37,7 +39,10 @@ export default function TextReveal({
       : 'hidden';
 
   useEffect(() => {
-    if (inView) setHasEntered(true);
+    if (!inView) return undefined;
+
+    const frame = requestAnimationFrame(() => setHasEntered(true));
+    return () => cancelAnimationFrame(frame);
   }, [inView]);
 
   return (

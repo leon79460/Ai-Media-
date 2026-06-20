@@ -1,8 +1,9 @@
 'use client';
 
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { motionEase } from './Reveal';
+import { ANIMATION_VIEWPORT_AMOUNT, useDelayedInView } from './viewport';
 
 const motionTags = {
   div: motion.div,
@@ -42,9 +43,9 @@ const StaggerContainer = forwardRef(function StaggerContainer(
     children,
     className,
     style,
-    delay = 0,
-    stagger = 0.08,
-    amount = 0.5,
+    delay = 0.08,
+    stagger = 0.12,
+    amount = ANIMATION_VIEWPORT_AMOUNT,
     once = true,
     ...props
   },
@@ -52,9 +53,10 @@ const StaggerContainer = forwardRef(function StaggerContainer(
 ) {
   const shouldReduceMotion = useReducedMotion();
   const localRef = useRef(null);
-  const inView = useInView(localRef, { amount, once });
+  const inView = useDelayedInView(localRef, { amount, once });
   const [hasEntered, setHasEntered] = useState(false);
   const Component = motionTags[as] || motion.div;
+
   const animateState = inView
     ? 'show'
     : hasEntered && !once
@@ -62,7 +64,10 @@ const StaggerContainer = forwardRef(function StaggerContainer(
       : 'hidden';
 
   useEffect(() => {
-    if (inView) setHasEntered(true);
+    if (!inView) return undefined;
+
+    const frame = requestAnimationFrame(() => setHasEntered(true));
+    return () => cancelAnimationFrame(frame);
   }, [inView]);
 
   return (

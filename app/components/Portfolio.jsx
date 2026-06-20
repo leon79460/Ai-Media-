@@ -116,12 +116,13 @@ export default function Portfolio() {
           stagger={0.08}
           aria-label="Selected portfolio projects"
         >
-          {PORTFOLIO_ITEMS.map((item) => (
+          {PORTFOLIO_ITEMS.map((item, index) => (
             <Reveal
               key={item.title}
               as="article"
               className="portfolio-card"
               effect="scale"
+              delay={index * 0.1}
               y={22}
               scale={0.94}
               style={{ '--portfolio-ratio': item.ratio }}

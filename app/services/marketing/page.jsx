@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
+import OriginButton from '../../components/OriginButton';
 
 const SOLUTIONS = [
   {
@@ -87,9 +88,9 @@ export default function MarketingPage() {
                   qualified leads, and stay connected with their audience through SEO,
                   social media, and email marketing.
                 </p>
-                <Link href="/contact" className="ds-primary-btn">
+                <OriginButton as="link" href="/contact" variant="dark" className="ds-primary-btn">
                   → Book a Strategy Call
-                </Link>
+                </OriginButton>
               </div>
               <div className="ds-hero-img">
                 <Image
@@ -132,9 +133,9 @@ export default function MarketingPage() {
                   <div className="ds-solution-copy">
                     <h3>{sol.title}</h3>
                     <p>{sol.description}</p>
-                    <Link href="/contact" className="ds-solution-btn">
+                    <OriginButton as="link" href="/contact" variant="light" fillColor="#f5f5f5" hoverTextColor="#050505" className="ds-solution-btn">
                       → Explore Services
-                    </Link>
+                    </OriginButton>
                   </div>
                 </article>
               ))}

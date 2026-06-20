@@ -2,33 +2,14 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
-import { motionEase } from './animation/Reveal';
+import { blurReveal, fadeIn, fadeUp, motionEase, staggerContainer } from './animation/Reveal';
+import OriginButton from './OriginButton';
 
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
 const HEADING = 'Stop chasing leads. start attracting them.';
 const SUBTEXT =
   'We combine AI-powered delivery, industry expertise, SEO, content, and conversion-focused web design to help integrators get found, gain trust, and win more high-value projects.';
-
-const heroContainer = {
-  hidden: {},
-  show: {
-    transition: {
-      delayChildren: 0.18,
-      staggerChildren: 0.085,
-    },
-  },
-};
-
-const heroItem = {
-  hidden: { opacity: 0, y: 26, filter: 'blur(10px)' },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.76, ease: motionEase },
-  },
-};
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -69,9 +50,9 @@ export default function Hero() {
         muted
         playsInline
         preload="metadata"
-        initial={shouldReduceMotion ? false : { opacity: 0 }}
-        animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-        transition={{ duration: 1, ease: motionEase }}
+        initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
+        animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: 'absolute',
           inset: 0,
@@ -99,9 +80,9 @@ export default function Hero() {
       />
 
       <motion.div
-        variants={heroContainer}
+        variants={staggerContainer}
         initial={shouldReduceMotion ? false : 'hidden'}
-        animate={shouldReduceMotion ? undefined : 'show'}
+        animate={shouldReduceMotion ? undefined : 'visible'}
         style={{
           position: 'relative',
           zIndex: 2,
@@ -116,7 +97,7 @@ export default function Hero() {
           color: '#f5f5f5',
         }}
       >
-        <motion.div variants={heroItem}>
+        <motion.div variants={fadeUp}>
           <div
             data-parallax
             data-parallax-speed="0.12"
@@ -162,7 +143,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <motion.div variants={heroItem}>
+        <motion.div variants={blurReveal}>
           <h1
             className="hero-title"
             data-parallax
@@ -185,7 +166,7 @@ export default function Hero() {
           </h1>
         </motion.div>
 
-        <motion.div variants={heroItem}>
+        <motion.div variants={fadeIn}>
           <p
             data-parallax
             data-parallax-speed="0.06"
@@ -205,7 +186,7 @@ export default function Hero() {
           </p>
         </motion.div>
 
-        <motion.div variants={heroItem}>
+        <motion.div variants={fadeUp}>
           <div
             data-parallax
             data-parallax-speed="0.04"
@@ -219,10 +200,9 @@ export default function Hero() {
               marginTop: '4px',
             }}
           >
-          <button
-            type="button"
+          <OriginButton
+            variant="outline-light"
             onClick={() => scrollToSection('pricing')}
-            className="btn-p"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -237,7 +217,6 @@ export default function Hero() {
               fontFamily: 'var(--font-main)',
               fontWeight: 700,
               fontSize: '12px',
-              cursor: 'pointer',
               backdropFilter: 'blur(14px)',
               WebkitBackdropFilter: 'blur(14px)',
               boxShadow:
@@ -245,11 +224,12 @@ export default function Hero() {
             }}
           >
             Start a Project
-          </button>
-          <button
-            type="button"
+          </OriginButton>
+          <OriginButton
+            variant="light"
             onClick={() => scrollToSection('services')}
-            className="btn-s"
+            fillColor="#050505"
+            hoverTextColor="#f5f5f5"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -264,13 +244,12 @@ export default function Hero() {
               fontFamily: 'var(--font-main)',
               fontWeight: 700,
               fontSize: '12px',
-              cursor: 'pointer',
               boxShadow:
                 '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
             }}
           >
             Explore Services
-          </button>
+          </OriginButton>
           </div>
         </motion.div>
       </motion.div>

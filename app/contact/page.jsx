@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import OriginButton from '../components/OriginButton';
 
 const FAQS = [
   {
@@ -204,9 +205,15 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  <button type="submit" className="contact-submit">
+                  <OriginButton
+                    type="submit"
+                    variant="custom"
+                    fillColor="#f5f5f5"
+                    hoverTextColor="#050505"
+                    className="contact-submit"
+                  >
                     {sent ? '✓ Message Sent!' : '→ Send Your Message'}
-                  </button>
+                  </OriginButton>
                 </form>
               </div>
             </div>

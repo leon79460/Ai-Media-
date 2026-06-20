@@ -3,7 +3,9 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
+import 'lenis/dist/lenis.css';
 import "./globals.css";
+import LenisProvider from "./components/LenisProvider";
 import ScrollEffects from "./components/ScrollEffects";
 
 const GA_MEASUREMENT_ID = 'G-KWDT0F3N2Y';
@@ -44,6 +46,7 @@ export default function RootLayout({ children }) {
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+        <LenisProvider />
         <ScrollEffects />
         <AnimatePresence mode="wait" initial={false}>
           <motion.div

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Reveal from './animation/Reveal';
+import OriginButton from './OriginButton';
 
 const BG_VIDEO = '/video/footer-bg.mp4';
 
@@ -310,8 +311,11 @@ export default function Footer() {
                   />
                 </div>
                 {/* Submit button */}
-                <button
+                <OriginButton
                   type="submit"
+                  variant="custom"
+                  fillColor="#050505"
+                  hoverTextColor="#ffffff"
                   className="footer-submit-button"
                   style={{
                     display: 'flex',
@@ -324,20 +328,17 @@ export default function Footer() {
                     borderBottomRightRadius: '4px',
                     borderTopLeftRadius: '0',
                     borderBottomLeftRadius: '0',
+                    borderRadius: '0 4px 4px 0',
                     padding: '0 20px',
                     height: '46px',
                     flexShrink: 0,
                     fontFamily: 'var(--font)',
                     fontWeight: 500,
                     fontSize: '15px',
-                    cursor: 'pointer',
-                    transition: 'opacity 0.2s',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
                 >
                   Submit
-                </button>
+                </OriginButton>
               </form>
               {/* Small text below form */}
               <p
@@ -547,13 +548,26 @@ export default function Footer() {
             onClick={e => e.stopPropagation()}
           >
             <p>Submitted</p>
-            <button
-              type="button"
+            <OriginButton
+              variant="custom"
+              fillColor="#050505"
+              hoverTextColor="#ffffff"
               aria-label="Close subscription confirmation"
               onClick={() => setSubmittedOpen(false)}
+              style={{
+                minWidth: '86px',
+                height: '36px',
+                border: 0,
+                borderRadius: '8px',
+                background: '#ffffff',
+                color: '#030303',
+                fontFamily: 'var(--font)',
+                fontSize: '13px',
+                fontWeight: 700,
+              }}
             >
               OK
-            </button>
+            </OriginButton>
           </div>
         </div>
       )}

@@ -4,6 +4,47 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 const PARALLAX_SELECTOR = '[data-parallax]';
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+const BUTTON_ORIGIN_SELECTOR = [
+  'button:not(.nav-logo)',
+  '.btn-p',
+  '.btn-s',
+  '.nav-link',
+  '.nav-cta',
+  '.nav-mobile-cta',
+  '.pricing-cta',
+  '.why-cta',
+  '.process-card-cta',
+  '.service-card-link',
+  '.case-study-action',
+  '.blog-button',
+  '.blog-cta a',
+  '.blog-home-arrow',
+  '.about-primary-btn',
+  '.about-dark-btn',
+  '.about-arrow',
+  '.careers-role-link',
+  '.contact-submit',
+  '.footer-submit-button',
+  '.ds-primary-btn',
+  '.ds-solution-btn',
+].join(',');
+
+function getNativeScrollBehavior() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches ? 'auto' : 'smooth';
+}
+
+function getCoverDiameter(width, height, x, y) {
+  return Math.ceil(
+    2 *
+      Math.max(
+        Math.hypot(x, y),
+        Math.hypot(width - x, y),
+        Math.hypot(x, height - y),
+        Math.hypot(width - x, height - y),
+      ),
+  );
+}
 
 export default function ScrollEffects() {
   const pathname = usePathname();
@@ -12,14 +53,12 @@ export default function ScrollEffects() {
   function scrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: getNativeScrollBehavior(),
     });
   }
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
+    const reduceMotion = window.matchMedia(REDUCED_MOTION_QUERY).matches;
     const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
     const lightMotion = reduceMotion || coarsePointer;
 
@@ -55,6 +94,30 @@ export default function ScrollEffects() {
 
     glowTargets.forEach(el => {
       el.addEventListener('pointermove', updateGlow);
+    });
+
+    const updateButtonOrigin = event => {
+      const target = event.target.closest?.(BUTTON_ORIGIN_SELECTOR);
+      if (!target) return;
+
+      const rect = target.getBoundingClientRect();
+      const x = Math.round(event.clientX - rect.left);
+      const y = Math.round(event.clientY - rect.top);
+      const cover = getCoverDiameter(rect.width, rect.height, x, y);
+
+      target.style.setProperty('--mx', `${x}px`);
+      target.style.setProperty('--my', `${y}px`);
+      target.style.setProperty('--button-fill-max', `${cover}px`);
+    };
+
+    document.addEventListener('pointerover', updateButtonOrigin, {
+      passive: true,
+    });
+    document.addEventListener('pointermove', updateButtonOrigin, {
+      passive: true,
+    });
+    document.addEventListener('pointerdown', updateButtonOrigin, {
+      passive: true,
     });
 
     const hero = document.querySelector('#home');
@@ -164,7 +227,7 @@ export default function ScrollEffects() {
       sessionStorage.removeItem('pendingScrollTarget');
       window.setTimeout(() => {
         document.getElementById(pendingTarget)?.scrollIntoView({
-          behavior: 'smooth',
+          behavior: getNativeScrollBehavior(),
           block: 'start',
         });
         window.history.replaceState(null, '', '/');
@@ -179,6 +242,9 @@ export default function ScrollEffects() {
       glowTargets.forEach(el => {
         el.removeEventListener('pointermove', updateGlow);
       });
+      document.removeEventListener('pointerover', updateButtonOrigin);
+      document.removeEventListener('pointermove', updateButtonOrigin);
+      document.removeEventListener('pointerdown', updateButtonOrigin);
       hero?.removeEventListener('pointermove', moveHero);
       window.removeEventListener('scroll', requestProgress);
       window.removeEventListener('resize', requestProgress);

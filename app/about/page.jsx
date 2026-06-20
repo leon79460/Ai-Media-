@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import TestimonialAvatar from '../components/TestimonialAvatar';
+import OriginButton from '../components/OriginButton';
 
 const SERVICES = [
   {
@@ -172,9 +173,14 @@ export default function AboutPage() {
                 presence through website design, SEO, content, branding, and AI
                 powered marketing systems.
               </p>
-              <Link className="about-primary-btn" href="/contact">
+              <OriginButton
+                as="link"
+                href="/contact"
+                variant="dark"
+                className="about-primary-btn"
+              >
                 → Book a Strategy Call
-              </Link>
+              </OriginButton>
             </div>
 
             <div className="about-hero-image">
@@ -378,9 +384,16 @@ export default function AboutPage() {
                   Let&apos;s create a website and marketing system that helps
                   your business stand out, rank better, and generate qualified leads.
                 </p>
-                <Link href="/contact" className="about-primary-btn about-dark-btn">
+                <OriginButton
+                  as="link"
+                  href="/contact"
+                  variant="light"
+                  fillColor="#f5f5f5"
+                  hoverTextColor="#050505"
+                  className="about-primary-btn about-dark-btn"
+                >
                   → Get Started
-                </Link>
+                </OriginButton>
               </div>
             </div>
           </div>

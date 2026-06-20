@@ -1,13 +1,84 @@
 'use client';
 
-import { motion, useInView, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
+import { ANIMATION_VIEWPORT_AMOUNT, useDelayedInView } from './viewport';
 
-export const motionEase = [0.16, 1, 0.3, 1];
+export const motionEase = [0.22, 1, 0.36, 1];
 export const motionDurations = {
-  fast: 0.32,
-  base: 0.7,
-  slow: 0.9,
+  fast: 0.45,
+  base: 0.95,
+  slow: 1.2,
+};
+
+// Reusable Hover/Stagger Variants
+export const cardHover = {
+  y: -8,
+  scale: 1.02,
+  transition: { type: 'spring', stiffness: 220, damping: 24 },
+};
+
+export const buttonHover = {
+  scale: 1.025,
+  transition: { type: 'spring', stiffness: 260, damping: 20 },
+};
+
+export const buttonTap = {
+  scale: 0.98,
+};
+
+export const iconHover = {
+  y: -4,
+  scale: 1.05,
+  transition: { type: 'spring', stiffness: 250, damping: 20 },
+};
+
+export const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.26,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+export const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.85, ease: motionEase },
+  },
+};
+
+export const fadeUp = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.9, ease: motionEase },
+  },
+};
+
+export const scaleIn = {
+  hidden: { opacity: 0, scale: 0.96, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 1.1, ease: motionEase },
+  },
+};
+
+export const blurReveal = {
+  hidden: { opacity: 0, y: 24, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.85, ease: motionEase },
+  },
 };
 
 const motionTags = {
@@ -23,12 +94,26 @@ const revealEffects = {
     hidden: {
       opacity: 0,
       y,
+      filter: 'blur(8px)',
       ...(scale ? { scale } : null),
     },
     visible: {
       opacity: 1,
       y: 0,
+      filter: 'blur(0px)',
       ...(scale ? { scale: 1 } : null),
+    },
+  }),
+  'blur-reveal': ({ y }) => ({
+    hidden: {
+      opacity: 0,
+      y: y || 24,
+      filter: 'blur(10px)',
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
     },
   }),
   'slide-left': () => ({
@@ -120,13 +205,13 @@ export default function Reveal({
   duration = motionDurations.base,
   y = 26,
   scale,
-  amount = 0.5,
+  amount = ANIMATION_VIEWPORT_AMOUNT,
   once = true,
   ...props
 }) {
   const shouldReduceMotion = useReducedMotion();
   const ref = useRef(null);
-  const inView = useInView(ref, { amount, once });
+  const inView = useDelayedInView(ref, { amount, once });
   const [hasEntered, setHasEntered] = useState(false);
   const Component = motionTags[as] || motion.div;
   const preset = (revealEffects[effect] || revealEffects['fade-up'])({
@@ -135,9 +220,12 @@ export default function Reveal({
   });
   const exited = getExitedState(preset.visible);
   const baseStyle = { ...preset.style, ...style };
+  
+  // Clean up initial filter string for SSR/reduced motion to avoid jumps
   const resolvedStyle = shouldReduceMotion
     ? { ...baseStyle, opacity: style?.opacity ?? 1, filter: style?.filter ?? 'none' }
-    : baseStyle;
+    : { ...baseStyle, filter: preset.hidden.filter || baseStyle.filter };
+
   const animateState = inView
     ? 'visible'
     : hasEntered && !once
@@ -145,7 +233,10 @@ export default function Reveal({
       : 'hidden';
 
   useEffect(() => {
-    if (inView) setHasEntered(true);
+    if (!inView) return undefined;
+
+    const frame = requestAnimationFrame(() => setHasEntered(true));
+    return () => cancelAnimationFrame(frame);
   }, [inView]);
 
   return (
