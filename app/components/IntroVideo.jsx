@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
-import { motionEase } from './animation/Reveal';
+import { ContainerScroll } from './ContainerScroll';
 
 // ✅ Your video is already in /public/ folder
 const VIDEO_SRC = '/intro-video.mp4';
@@ -10,12 +9,8 @@ const POSTER_IMG = ''; // optional: "/video-poster.jpg"
 export default function IntroVideo() {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
-  const frameRef = useRef(null);
-  const shouldReduceMotion = useReducedMotion();
   const [muted, setMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
-  const [shellVisible, setShellVisible] = useState(false);
-  const [shellEntered, setShellEntered] = useState(false);
 
   // Auto-play muted when section scrolls into view
   useEffect(() => {
@@ -28,71 +23,15 @@ export default function IntroVideo() {
         if (entry.isIntersecting) {
           video.play().catch(() => { });
           setPlaying(true);
-          setShellVisible(true);
-          setShellEntered(true);
         } else {
           video.pause();
           setPlaying(false);
-          setShellVisible(false);
         }
       },
       { threshold: 0.3 },
     );
     obs.observe(section);
     return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const frame = frameRef.current;
-    const section = sectionRef.current;
-    if (!frame || !section) return;
-
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
-
-    if (reduceMotion) {
-      frame.style.setProperty('--intro-video-scale', '1');
-      frame.style.setProperty('--intro-video-y', '0px');
-      frame.style.setProperty('--intro-video-opacity', '1');
-      return;
-    }
-
-    let frameId = 0;
-    const clamp = value => Math.min(Math.max(value, 0), 1);
-    const easeOut = value => 1 - Math.pow(1 - value, 4);
-
-    const updateSize = () => {
-      const rect = section.getBoundingClientRect();
-      const viewportHeight =
-        window.innerHeight || document.documentElement.clientHeight;
-      const start = viewportHeight * 0.95;
-      const end = viewportHeight * 0.05;
-      const progress = clamp((start - rect.top) / (start - end));
-      const eased = easeOut(progress);
-      const scale = 0.82 + eased * 0.18;
-      const translateY = (1 - eased) * 28;
-      const opacity = 0.88 + eased * 0.12;
-
-      frame.style.setProperty('--intro-video-scale', scale.toFixed(3));
-      frame.style.setProperty('--intro-video-y', `${translateY.toFixed(1)}px`);
-      frame.style.setProperty('--intro-video-opacity', opacity.toFixed(3));
-    };
-
-    const requestUpdate = () => {
-      cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(updateSize);
-    };
-
-    updateSize();
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-    };
   }, []);
 
   const toggleMute = () => {
@@ -114,71 +53,22 @@ export default function IntroVideo() {
     }
   };
 
-  const shellAnimate = shellVisible
-    ? {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.76, ease: motionEase },
-      }
-    : shellEntered
-      ? {
-          opacity: 0.35,
-          y: 10,
-          transition: { duration: 0.28, ease: motionEase },
-        }
-      : undefined;
-
   return (
     <section
       id="intro"
       className="intro-video-section"
-      style={{ backgroundColor: '#f5f5f5', padding: '90px 65px' }}
+      ref={sectionRef}
+      style={{ backgroundColor: '#f5f5f5' }}
     >
-      <motion.div
-        ref={sectionRef}
-        className="intro-video-shell"
-        initial={
-          shouldReduceMotion
-            ? false
-            : { opacity: 0, y: 34 }
-        }
-        animate={
-          shouldReduceMotion
-            ? { opacity: 1, y: 0 }
-            : shellAnimate
-        }
-        transition={{
-          duration: shouldReduceMotion ? 0 : 0.76,
-          ease: motionEase,
-        }}
-        style={{
-          width: '100%',
-          maxWidth: '100%',
-          margin: '0',
-        }}
-      >
-        {/* Video card — asymmetric rounded corners from Figma */}
+      <ContainerScroll titleComponent={<></>}>
         <div
-          ref={frameRef}
-          className="intro-video-frame"
+          className="intro-video-frame relative w-full h-full overflow-hidden bg-[#050505] cursor-pointer"
+          onClick={togglePlay}
           style={{
-            position: 'relative',
-            width: '100%',
-            aspectRatio: '2 / 1',
-            borderRadius: '8px 54px 8px 54px',
-            overflow: 'hidden',
-            background: '#050505',
-            boxShadow: 'none',
-            cursor: 'pointer',
-            opacity: 'var(--intro-video-opacity, 0.88)',
-            transform:
-              'translateY(var(--intro-video-y, 28px)) scale(var(--intro-video-scale, 0.82))',
-            transformOrigin: 'center top',
-            willChange: 'transform, opacity',
             WebkitMaskImage: '-webkit-radial-gradient(white, black)',
             maskImage: 'radial-gradient(white, black)',
+            borderRadius: 'inherit'
           }}
-          onClick={togglePlay}
         >
           {/* The actual video — NO controls attribute = no browser bar */}
           <video
@@ -265,10 +155,8 @@ export default function IntroVideo() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              opacity: 0,
-              transform: 'translateY(4px)',
-              transition: 'opacity 0.22s ease, transform 0.22s ease, background 0.2s',
               zIndex: 10,
+              transition: 'background 0.2s',
             }}
             onMouseEnter={e =>
               (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.8)')
@@ -324,8 +212,7 @@ export default function IntroVideo() {
             )}
           </button>
         </div>
-
-      </motion.div>
+      </ContainerScroll>
     </section>
   );
 }
