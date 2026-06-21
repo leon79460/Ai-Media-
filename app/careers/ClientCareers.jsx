@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import OriginButton from '../components/OriginButton';
 import Reveal from '../components/animation/Reveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
 import AnimatedCard from '../components/animation/AnimatedCard';
@@ -186,13 +187,18 @@ export default function ClientCareers() {
               {OPEN_ROLES.map((role) => (
                 <AnimatedCard className="careers-role-card about-card card-hover" key={role.title}>
                   <div>
-                    <span>{role.type}</span>
+                    <span className="careers-role-badge">{role.type}</span>
                     <h3>{role.title}</h3>
                     <p>{role.text}</p>
                   </div>
-                  <Link href="mailto:careers@aimedia.design" className="careers-role-link">
+                  <OriginButton
+                    as="a"
+                    href="mailto:careers@aimedia.design"
+                    variant="dark"
+                    className="careers-role-link"
+                  >
                     Apply for this role
-                  </Link>
+                  </OriginButton>
                 </AnimatedCard>
               ))}
             </StaggerContainer>
@@ -233,9 +239,16 @@ export default function ClientCareers() {
                   Send your portfolio, role of interest, and a short note about
                   the kind of work you do best.
                 </p>
-                <Link href="mailto:careers@aimedia.design" className="about-primary-btn about-dark-btn">
+                <OriginButton
+                  as="a"
+                  href="mailto:careers@aimedia.design"
+                  variant="light"
+                  fillColor="#050505"
+                  hoverTextColor="#f5f5f5"
+                  className="about-primary-btn about-dark-btn"
+                >
                   Apply Now
-                </Link>
+                </OriginButton>
               </div>
             </Reveal>
           </div>
