@@ -120,14 +120,12 @@ function FaqPro({
     getDefaultOpenId(items, defaultOpenFirst)
   );
 
-  React.useEffect(() => {
-    setOpenId((current) => {
-      if (!current) {
-        return current;
-      }
-      return items.some((item) => item.id === current) ? current : null;
-    });
-  }, [items]);
+  const activeOpenId = React.useMemo(() => {
+    if (!openId) {
+      return null;
+    }
+    return items.some((item) => item.id === openId) ? openId : null;
+  }, [items, openId]);
 
   const toggleItem = React.useCallback((id) => {
     setOpenId((current) => (current === id ? null : id));
@@ -227,7 +225,7 @@ function FaqPro({
               transition={{ duration: 0.2, ease: PANEL_EASE }}
             >
               <FaqProRow
-                isOpen={openId === item.id}
+                isOpen={activeOpenId === item.id}
                 item={item}
                 onToggle={() => toggleItem(item.id)}
                 panelId={`${listId}-${item.id}-panel`}
