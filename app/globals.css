@@ -7085,7 +7085,7 @@ main.careers-page .careers-process-card p {
 }
 
 .contact-faq-item[open] summary::after {
-  content: "âˆ’";
+  content: "-";
 }
 
 .contact-faq-item p {
@@ -14437,7 +14437,7 @@ main.careers-page .careers-process-card p {
 }
 
 .contact-faq-item[open] summary::after {
-  content: "âˆ’";
+  content: "-";
 }
 
 .contact-faq-item p {

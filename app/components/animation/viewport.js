@@ -17,19 +17,17 @@ function getSafeViewportAmount(node, preferredAmount) {
   const elementHeight = node.getBoundingClientRect().height;
 
   if (!viewportHeight || !elementHeight) return preferredAmount;
-  if (elementHeight <= viewportHeight * 0.95) return preferredAmount;
 
-  const maxVisibleRatio = viewportHeight / elementHeight;
-  if (maxVisibleRatio >= preferredAmount) return preferredAmount;
+  // If the required pixels to meet preferredAmount is safely less than half the viewport, use it
+  if (preferredAmount * elementHeight <= viewportHeight * 0.5) {
+    return preferredAmount;
+  }
 
-  return Math.max(
-    MIN_TALL_ELEMENT_AMOUNT,
-    Math.min(
-      preferredAmount,
-      ANIMATION_TALL_VIEWPORT_AMOUNT,
-      maxVisibleRatio - TALL_ELEMENT_GUTTER,
-    ),
-  );
+  // Otherwise, for tall elements, trigger when a safe chunk of pixels enters the viewport
+  const targetPixels = Math.min(viewportHeight * 0.15, 150);
+  const safeRatio = targetPixels / elementHeight;
+
+  return Math.max(0, Math.min(preferredAmount, safeRatio));
 }
 
 export function useDelayedInView(

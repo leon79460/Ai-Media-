@@ -10,6 +10,7 @@ import Reveal from '../components/animation/Reveal';
 import TextReveal from '../components/animation/TextReveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
 import AnimatedCard from '../components/animation/AnimatedCard';
+import FaqPro from '../components/FaqPro';
 
 const SERVICES = [
   {
@@ -115,22 +116,27 @@ const TESTIMONIALS = [
 
 const FAQS = [
   {
+    id: 'faq-1',
     question: 'How long does it take to develop an AI solution?',
     answer: 'We specialize in AI solutions, including machine learning models, automation, chatbots, predictive analytics, and consulting tailored to your business needs.',
   },
   {
+    id: 'faq-2',
     question: 'How long does it take to develop an AI solution?',
     answer: 'Most first launches take a few weeks, while larger systems depend on the depth of content, automation, and integrations required.',
   },
   {
+    id: 'faq-3',
     question: 'Do I need technical expertise to work with you?',
     answer: 'No. We manage the technical strategy, implementation, and support so you can focus on your business.',
   },
   {
+    id: 'faq-4',
     question: 'Is my data safe when working with your agency?',
     answer: 'Yes. We design workflows with privacy, access control, and practical data handling standards in mind.',
   },
   {
+    id: 'faq-5',
     question: 'Can AI really help my business grow?',
     answer: 'Yes. Used correctly, AI can speed up production, improve follow-up, clarify reporting, and create more consistent marketing operations.',
   },
@@ -350,14 +356,9 @@ export default function ClientAbout() {
               <TextReveal id="faq-title" as="h2" text="Questions? Answers!" className="section-title" delay={0.2} />
               <p className="section-sub">Find some quick answers to the most common questions.</p>
             </Reveal>
-            <StaggerContainer className="about-faq-list" delay={0.2} stagger={0.15}>
-              {FAQS.map((faq, i) => (
-                <AnimatedCard as="details" className="about-faq-item" key={i} open={i === 0}>
-                  <summary>{faq.question}</summary>
-                  <p>{faq.answer}</p>
-                </AnimatedCard>
-              ))}
-            </StaggerContainer>
+            <Reveal delay={0.2} className="about-faq-list">
+              <FaqPro items={FAQS} defaultOpenFirst={true} />
+            </Reveal>
             <Reveal className="about-email-note" delay={0.3}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0, marginTop: '1px' }}>
                 <rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />

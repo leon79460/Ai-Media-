@@ -7,6 +7,7 @@ import OriginButton from '../../components/OriginButton';
 import Reveal from '../../components/animation/Reveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
+import FaqPro from '../../components/FaqPro';
 
 const SOLUTIONS = [
   {
@@ -25,29 +26,29 @@ const SOLUTIONS = [
 
 const FAQS = [
   {
+    id: 'faq-1',
     question: 'How long does it take to build a website?',
-    answer:
-      'Most websites are completed within 4 to 8 weeks depending on the scope, number of pages, and integrations required. We share a clear timeline before we start so you know what to expect.',
+    answer: 'Most websites are completed within 4 to 8 weeks depending on the scope, number of pages, and integrations required. We share a clear timeline before we start so you know what to expect.',
   },
   {
+    id: 'faq-2',
     question: 'Will my website be mobile-friendly and SEO ready?',
-    answer:
-      'Yes. Every website we build is fully responsive across all devices and structured with clean code, fast load times, and on-page SEO foundations to support your search visibility from day one.',
+    answer: 'Yes. Every website we build is fully responsive across all devices and structured with clean code, fast load times, and on-page SEO foundations to support your search visibility from day one.',
   },
   {
+    id: 'faq-3',
     question: 'Do I need to provide content and images?',
-    answer:
-      'Not necessarily. We can work with content and images you provide, or assist with content creation and sourcing visuals as part of the project. We will advise what works best for your goals.',
+    answer: 'Not necessarily. We can work with content and images you provide, or assist with content creation and sourcing visuals as part of the project. We will advise what works best for your goals.',
   },
   {
+    id: 'faq-4',
     question: 'What does website maintenance include?',
-    answer:
-      'Our maintenance service covers software and plugin updates, security monitoring, performance checks, and minor content updates so your site stays secure, fast, and up to date.',
+    answer: 'Our maintenance service covers software and plugin updates, security monitoring, performance checks, and minor content updates so your site stays secure, fast, and up to date.',
   },
   {
+    id: 'faq-5',
     question: 'Can you update my existing website instead of building a new one?',
-    answer:
-      'Yes. If your current site just needs improvements, we can audit it and make targeted updates to design, speed, structure, or content rather than rebuilding from scratch.',
+    answer: 'Yes. If your current site just needs improvements, we can audit it and make targeted updates to design, speed, structure, or content rather than rebuilding from scratch.',
   },
 ];
 
@@ -153,17 +154,9 @@ export default function ClientDevelopment() {
               <h2>Questions? Answers!</h2>
               <p>Find some quick answers to the most common questions.</p>
             </Reveal>
-            <StaggerContainer className="ds-faq-list" delay={0.2} stagger={0.15}>
-              {FAQS.map((faq, i) => (
-                <AnimatedCard as="details" className="ds-faq-item" key={i} open={i === 0}>
-                  <summary>
-                    {faq.question}
-                    <span className="ds-faq-icon" aria-hidden="true" />
-                  </summary>
-                  <p>{faq.answer}</p>
-                </AnimatedCard>
-              ))}
-            </StaggerContainer>
+            <Reveal delay={0.2} className="ds-faq-list">
+              <FaqPro items={FAQS} defaultOpenFirst={true} />
+            </Reveal>
             <Reveal className="ds-email-note" delay={0.24}>
               <svg
                 width="14" height="14" viewBox="0 0 24 24" fill="none"
