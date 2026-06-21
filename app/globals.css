@@ -14636,7 +14636,7 @@ main.careers-page .careers-process-card p {
   .ds-primary-btn,
   .ds-solution-btn
 ):is(:hover, :focus-visible) {
-  color: #2b2929 !important;
+  /* color: #2b2929 !important; */
 }
 
 :where(
