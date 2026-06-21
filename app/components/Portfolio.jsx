@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import AnimatedCard from './animation/AnimatedCard';
 
 const PORTFOLIO_ITEMS = [
   {
@@ -113,18 +114,15 @@ export default function Portfolio() {
 
         <StaggerContainer
           className="portfolio-masonry"
-          stagger={0.08}
+          delay={0.2}
+          stagger={0.22}
           aria-label="Selected portfolio projects"
         >
           {PORTFOLIO_ITEMS.map((item, index) => (
-            <Reveal
+            <AnimatedCard
               key={item.title}
               as="article"
               className="portfolio-card"
-              effect="scale"
-              delay={index * 0.1}
-              y={22}
-              scale={0.94}
               style={{ '--portfolio-ratio': item.ratio }}
             >
               <Image
@@ -142,7 +140,7 @@ export default function Portfolio() {
                 </span>
                 <span className="portfolio-visit">Visit Site</span>
               </Link>
-            </Reveal>
+            </AnimatedCard>
           ))}
         </StaggerContainer>
       </div>

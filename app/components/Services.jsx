@@ -61,8 +61,8 @@ function getServiceCardVariant(index) {
   return {
     hidden: {
       opacity: 0,
-      x: direction * 58,
-      y: 20,
+      x: direction * 120,
+      y: 50,
       rotate: direction * 0.8,
     },
     show: {
@@ -133,7 +133,7 @@ export default function Features() {
           <p className="services-sub">{SECTION_SUB}</p>
         </Reveal>
 
-        <StaggerContainer className="services-grid" delay={0.1} stagger={0.12}>
+        <StaggerContainer className="services-grid" delay={0.2} stagger={0.22}>
           {FEATURES.map((feature, index) => (
             <FeatureCard
               key={feature.title}

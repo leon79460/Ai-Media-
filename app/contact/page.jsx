@@ -5,6 +5,9 @@ import { useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import OriginButton from '../components/OriginButton';
+import Reveal from '../components/animation/Reveal';
+import StaggerContainer from '../components/animation/StaggerContainer';
+import AnimatedCard from '../components/animation/AnimatedCard';
 
 const FAQS = [
   {
@@ -102,7 +105,7 @@ export default function ContactPage() {
 
         {/* ── Hero ── */}
         <section className="contact-hero">
-          <div className="contact-shell">
+          <Reveal className="contact-shell" delay={0.16}>
             <span className="section-badge contact-badge">
               <ConnectIcon />
               Let&apos;s Connect
@@ -115,13 +118,13 @@ export default function ContactPage() {
               search visibility, or completely refresh your brand identity, we&apos;re here to
               help. Reach out today and let&apos;s discuss how we can partner to achieve your goals.
             </p>
-          </div>
+          </Reveal>
         </section>
 
         {/* ── Contact Card ── */}
         <section className="contact-card-section">
           <div className="contact-shell">
-            <div className="contact-card">
+            <Reveal className="contact-card" delay={0.2} effect="slide-up">
               {/* Left — info column */}
               <div className="contact-info-col">
                 <article className="contact-info-card">
@@ -216,14 +219,14 @@ export default function ContactPage() {
                   </OriginButton>
                 </form>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── FAQ ── */}
         <section className="contact-faq-section">
           <div className="contact-shell contact-faq-shell">
-            <div className="contact-section-head">
+            <Reveal className="contact-section-head" delay={0.16}>
               <span className="section-badge contact-badge">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" />
@@ -234,25 +237,25 @@ export default function ContactPage() {
               <p className="contact-faq-sub">
                 Find Some quick answers to the most common questions.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="contact-faq-list">
+            <StaggerContainer className="contact-faq-list" delay={0.2} stagger={0.15}>
               {FAQS.map((faq, i) => (
-                <details className="contact-faq-item" key={i} open={i === 0}>
+                <AnimatedCard as="details" className="contact-faq-item" key={i} open={i === 0}>
                   <summary>{faq.question}</summary>
                   <p>{faq.answer}</p>
-                </details>
+                </AnimatedCard>
               ))}
-            </div>
+            </StaggerContainer>
 
-            <p className="contact-email-note">
+            <Reveal className="contact-email-note" delay={0.24}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0, marginTop: '1px' }}>
                 <rect x="2" y="4" width="20" height="16" rx="2" />
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               Feel free to mail us for any enquiries :{' '}
               <a href="mailto:info@aimedia.design">info@aimedia.design</a>
-            </p>
+            </Reveal>
           </div>
         </section>
 

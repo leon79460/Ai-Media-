@@ -69,7 +69,7 @@ export default function Hero() {
         className="hero-content"
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-        transition={{ duration: 0.78, ease: motionEase, delay: 0.06 }}
+        transition={{ duration: 0.78, ease: motionEase, delay: 0.16 }}
         style={{
           position: 'absolute',
           inset: 0,

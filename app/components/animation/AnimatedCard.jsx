@@ -57,7 +57,7 @@ export default function AnimatedCard({
       ? withExitedVariant(variants)
       : isStandalone
         ? {
-            hidden: { opacity: 0, y: 24, scale: 0.985 },
+            hidden: { opacity: 0, y: 60, scale: 0.985 },
             show: {
               opacity: 1,
               y: 0,

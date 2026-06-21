@@ -199,7 +199,7 @@ export default function Pricing() {
           <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />
         </Reveal>
 
-        <StaggerContainer className="pricing-grid" delay={0.12} stagger={0.14}>
+        <StaggerContainer className="pricing-grid" delay={0.20} stagger={0.24}>
           {PLANS.map((plan, index) => (
             <PricingCard
               key={plan.name}

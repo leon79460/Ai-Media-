@@ -139,7 +139,7 @@ export default function Blogs() {
             <span aria-hidden="true" />
           </button>
 
-          <StaggerContainer ref={gridRef} className="blog-home-grid" delay={0.08} stagger={0.1}>
+          <StaggerContainer ref={gridRef} className="blog-home-grid" delay={0.15} stagger={0.2}>
             {homePosts.map((post, index) => (
               <BlogCard
                 key={post.slug}

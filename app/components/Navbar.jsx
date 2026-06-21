@@ -200,7 +200,7 @@ export default function Navbar() {
                 }}
                 initial={{ opacity: 0, y: 10, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.76 }}
+                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.88 }}
               >
                 Login
               </OriginButton>
@@ -231,7 +231,7 @@ export default function Navbar() {
                 }}
                 initial={{ opacity: 0, y: 10, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.68 }}
+                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.76 }}
               >
                 Get Started
               </OriginButton>

@@ -1,5 +1,8 @@
+'use client';
+
 import Footer from './Footer';
 import Navbar from './Navbar';
+import Reveal from './animation/Reveal';
 
 function LegalBadgeIcon() {
   return (
@@ -40,7 +43,7 @@ export default function LegalDocument({
     <>
       <Navbar />
       <main className="legal-page">
-        <section className="legal-hero" aria-labelledby="legal-title">
+        <Reveal as="section" className="legal-hero" aria-labelledby="legal-title" delay={0.16}>
           <span className="section-badge">
             <LegalBadgeIcon />
             {badge}
@@ -48,10 +51,10 @@ export default function LegalDocument({
           <h1 id="legal-title">{title}</h1>
           <p>{intro}</p>
           <small>Last updated: {lastUpdated}</small>
-        </section>
+        </Reveal>
 
         <section className="legal-layout" aria-label={title}>
-          <article className="legal-article blog-article">
+          <Reveal as="article" className="legal-article blog-article" delay={0.2}>
             {highlights?.length ? (
               <div className="legal-summary" aria-label="Policy summary">
                 {highlights.map((item) => (
@@ -92,9 +95,9 @@ export default function LegalDocument({
                 ) : null}
               </section>
             ))}
-          </article>
+          </Reveal>
 
-          <aside className="legal-toc blog-toc" aria-label="Document navigation">
+          <Reveal as="aside" className="legal-toc blog-toc" aria-label="Document navigation" delay={0.24}>
             <h2>On This Page</h2>
             {sections.map((section) => (
               <a href={`#${section.id}`} key={section.id}>
@@ -105,7 +108,7 @@ export default function LegalDocument({
               Questions about these terms can be sent through the contact form
               on this website.
             </div>
-          </aside>
+          </Reveal>
         </section>
       </main>
       <Footer />

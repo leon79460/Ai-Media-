@@ -131,8 +131,8 @@ function getThreeCardVariant(index) {
     return {
       hidden: {
         opacity: 0,
-        x: -44,
-        y: 18,
+        x: -100,
+        y: 40,
         scale: 0.975,
         rotate: -0.6,
       },
@@ -151,8 +151,8 @@ function getThreeCardVariant(index) {
     return {
       hidden: {
         opacity: 0,
-        x: 44,
-        y: 18,
+        x: 100,
+        y: 40,
         scale: 0.975,
         rotate: 0.6,
       },
@@ -168,7 +168,7 @@ function getThreeCardVariant(index) {
   }
 
   return {
-    hidden: { opacity: 0, y: 30, scale: 0.96 },
+    hidden: { opacity: 0, y: 60, scale: 0.96 },
     show: {
       opacity: 1,
       y: 0,
@@ -330,7 +330,7 @@ export default function Process() {
             as="h2"
             className="section-title process-title"
             text={SECTION_TITLE}
-            delay={0.1}
+            delay={0.2}
             style={{
               fontSize: 55,
               lineHeight: 1.2,
