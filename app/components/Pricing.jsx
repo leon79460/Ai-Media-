@@ -5,8 +5,10 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import AnimatedCard from './animation/AnimatedCard';
 import AnimatedPricingToggle from './animation/AnimatedPricingToggle';
-import Reveal from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import TextReveal from './animation/TextReveal';
+import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Pricing';
 const SECTION_TITLE = 'Discover The Pricing Plan';
@@ -87,41 +89,19 @@ const styles = {
 }
 
 function getThreeCardVariant(index) {
-  if (index === 0) {
-    return {
-      hidden: { opacity: 0, x: -58, y: 16, scale: 0.96, rotate: -1 },
-      show: {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        scale: 1,
-        rotate: 0,
-        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
-      },
-    };
-  }
-
-  if (index === 2) {
-    return {
-      hidden: { opacity: 0, x: 58, y: 16, scale: 0.96, rotate: 1 },
-      show: {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        scale: 1,
-        rotate: 0,
-        transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
-      },
-    };
-  }
+  const lift = index === 1 ? 18 : 34;
 
   return {
-    hidden: { opacity: 0, y: 34, scale: 0.92 },
+    hidden: {
+      opacity: 0,
+      y: lift,
+      scale: 0.9,
+    },
     show: {
       opacity: 1,
       y: 0,
-      scale: [0.92, 1.035, 1],
-      transition: { duration: 0.78, ease: [0.22, 1, 0.36, 1] },
+      scale: 1,
+      transition: { duration: 0.82, ease: motionEase },
     },
   };
 }
@@ -140,7 +120,7 @@ function PricingCard({ plan, isYearly, index }) {
 
   return (
     <AnimatedCard
-      className={`pricing-card${plan.popular ? ' is-popular' : ''}`}
+      className={`pricing-card card-hover${plan.popular ? ' is-popular' : ''}`}
       variants={getThreeCardVariant(index)}
     >
       <div className="pricing-card-head">
@@ -158,7 +138,7 @@ function PricingCard({ plan, isYearly, index }) {
             exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
             transition={{
               duration: shouldReduceMotion ? 0 : 0.22,
-              ease: [0.22, 1, 0.36, 1],
+              ease: motionEase,
             }}
           >
             {price}
@@ -172,14 +152,16 @@ function PricingCard({ plan, isYearly, index }) {
         <p>{plan.description}</p>
       </div>
 
-      <button
-        type="button"
+      <OriginButton
+        variant="custom"
+        fillColor={plan.popular ? '#f5f5f5' : '#050505'}
+        hoverTextColor={plan.popular ? '#050505' : '#f5f5f5'}
         className={`pricing-cta${plan.popular ? ' is-primary' : ''}`}
         onClick={scrollToContact}
       >
         {plan.popular && <span className="pricing-arrow" aria-hidden="true" />}
         {plan.btnText}
-      </button>
+      </OriginButton>
 
       <div className="pricing-divider" />
 
@@ -201,7 +183,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="pricing-section">
       <div className="pricing-shell">
-        <Reveal className="pricing-header">
+        <Reveal className="pricing-header" effect="scale" scale={0.94}>
           <span className="section-badge">
             <Image
               src="/icons/pricing.svg"
@@ -212,13 +194,13 @@ export default function Pricing() {
               style={styles.badgeIcon}
             />
             {SECTION_BADGE}</span>
-          <h2 className="section-title">{SECTION_TITLE}</h2>
+          <TextReveal id="pricing-title" as="h2" text={SECTION_TITLE} className="section-title" delay={0.2} />
           <p className="section-sub">{SECTION_SUB}</p>
 
           <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />
         </Reveal>
 
-        <StaggerContainer className="pricing-grid" delay={0.12} stagger={0.14}>
+        <StaggerContainer className="pricing-grid" delay={0.20} stagger={0.24}>
           {PLANS.map((plan, index) => (
             <PricingCard
               key={plan.name}

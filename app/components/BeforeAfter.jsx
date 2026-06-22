@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import BeforeAfterSlider from './animation/BeforeAfterSlider';
-import Reveal from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
+import TextReveal from './animation/TextReveal';
 
 const SECTION_BADGE = 'Case Study';
 const TITLE = 'We Tested The System On Our Own AV Company First.';
@@ -50,6 +51,35 @@ export default function BeforeAfter() {
           alignItems: 'center',
         }}
       >
+ tanvir
+        <Reveal
+          effect="slide-right"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+            maxWidth: '700px',
+            textAlign: 'center',
+          }}
+        >
+          <span className="section-badge">
+            <Image
+              src="/icons/case-studies.png"
+              alt=""
+              aria-hidden="true"
+              width={18}
+              height={18}
+              style={BADGE_ICON_STYLE}
+            />
+            {SECTION_BADGE}
+          </span>
+          <TextReveal id="case-study-title" as="h2" text={TITLE} className="section-title" delay={0.2} />
+          <p className="section-sub" style={{ fontSize: '18px' }}>
+            {SUBTITLE}
+          </p>
+        </Reveal>
+
 <div
   style={{
     display: 'flex',
@@ -94,9 +124,15 @@ export default function BeforeAfter() {
     </p>
   </Reveal>
 </div>
+ main
 
         <div className="case-study-showcase">
-          <Reveal className="before-after-card-shell" style={{ width: '100%' }}>
+          <Reveal
+            className="before-after-card-shell"
+            effect="clip-up"
+            duration={0.9}
+            style={{ width: '100%' }}
+          >
             <div
               className="before-after-card"
               data-parallax
@@ -145,7 +181,7 @@ export default function BeforeAfter() {
                 exit={shouldReduceMotion ? undefined : { opacity: 0, y: 12 }}
                 transition={{
                   duration: shouldReduceMotion ? 0 : 0.32,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: motionEase,
                 }}
                 style={{
                   width: '100%',

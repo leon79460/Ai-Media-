@@ -359,6 +359,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import OriginButton from './OriginButton';
 
 const LINKS = [
   { label: 'Home', target: 'home' },
@@ -441,7 +442,7 @@ export default function Navbar() {
           ? '0 14px 34px rgba(0,0,0,0.08)'
           : '0 0 0 rgba(0,0,0,0)',
         transition:
-          'background 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1)',
+          'background 0.34s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.34s cubic-bezier(0.33, 1, 0.68, 1)',
         animation: 'navDown 0.72s cubic-bezier(0.16, 1, 0.3, 1) both',
       }}
     >
@@ -538,10 +539,20 @@ export default function Navbar() {
         <div className="nav-actions">
           {!isMobileNav && (
             <>
+ tanvir
+            <OriginButton
+                as="a"
+
               <Link
+ main
                 href="https://app.aimedia.design"
-                className="nav-cta nav-login-cta nav-desktop-cta"
                 target="_blank"
+                variant="ghost"
+                className="nav-cta nav-login-cta nav-desktop-cta"
+ tanvir
+
+                target="_blank"
+ main
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -551,22 +562,36 @@ export default function Navbar() {
                   textDecoration: 'none',
                   borderRadius: '7px',
                   border: 0,
+                  background: 'transparent',
                   padding: '0 12px',
                   height: '40px',
                   fontFamily: 'var(--font-main)',
                   fontWeight: 600,
                   fontSize: '15px',
+ tanvir
+
                   cursor: 'pointer',
                   opacity: 0,
                   animation:
                     'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s forwards',
+ main
                 }}
+                initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.88 }}
               >
                 Login
+ tanvir
+              </OriginButton>
+              <OriginButton
+                as="link"
+
               </Link>
 
               <Link
+ main
                 href="/contact"
+                variant="dark"
                 className="nav-cta nav-start-cta nav-desktop-cta"
                 style={{
                   display: 'inline-flex',
@@ -584,18 +609,29 @@ export default function Navbar() {
                   fontFamily: 'var(--font-main)',
                   fontWeight: 600,
                   fontSize: '15px',
-                  cursor: 'pointer',
                   backdropFilter: 'blur(14px)',
                   WebkitBackdropFilter: 'blur(14px)',
+ tanvir
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+
                   boxShadow:
                     'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
                   opacity: 0,
                   animation:
                     'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
+ main
                 }}
+                initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.76 }}
               >
                 Get Started
+ tanvir
+              </OriginButton>
+              
+
               </Link>
+ main
             </>
           )}
 
@@ -637,23 +673,68 @@ export default function Navbar() {
               </Link>
             )
           )}
+ tanvir
+          <OriginButton
+            as="a"
+=======
 
           <Link
+ main
             href="https://app.aimedia.design"
-            className="nav-mobile-cta nav-mobile-login-cta"
             target="_blank"
+            variant="light"
+            className="nav-mobile-cta nav-mobile-login-cta"
             onClick={() => setMobileOpen(false)}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '4px',
+              minHeight: '40px',
+              borderRadius: '7px',
+              fontSize: '12px',
+              border: 0,
+              background: '#f7f7f7',
+              color: '#060606',
+              fontFamily: 'var(--font-main)',
+              fontWeight: 600,
+              textDecoration: 'none',
+              boxShadow: '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
+            }}
           >
             Login
+ tanvir
+          </OriginButton>
+          <OriginButton
+            as="link"
+
           </Link>
 
           <Link
+ main
             href="/contact"
+            variant="dark"
             className="nav-mobile-cta nav-mobile-start-cta"
             onClick={() => setMobileOpen(false)}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '4px',
+              minHeight: '40px',
+              borderRadius: '7px',
+              fontSize: '12px',
+              border: '1px solid rgba(255,255,255,0.86)',
+              background: '#050505',
+              color: '#fff',
+              fontFamily: 'var(--font-main)',
+              fontWeight: 600,
+              textDecoration: 'none',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+              backdropFilter: 'blur(14px)',
+              WebkitBackdropFilter: 'blur(14px)',
+            }}
           >
             Get Started
-          </Link>
+          </OriginButton>
         </div>
       </div>
     </nav>

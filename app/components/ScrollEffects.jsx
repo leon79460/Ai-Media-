@@ -3,77 +3,48 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
-const REVEAL_SELECTOR = [
-  '.section-badge',
-  '.section-title',
-  '.section-sub',
-  '.process-card',
-  '.service-card',
-  '.portfolio-card',
-  '.pricing-card',
-  '.why-card',
-  '.blog-card',
-  '.blog-index-card',
-  '.blog-stat',
-  '.blog-tool',
-  '.blog-article',
-  '.blog-toc',
-  '.blog-index-hero > *',
-  '.portfolio-header > *',
-  '.about-hero-copy',
-  '.about-hero-image',
-  '.about-section-head',
-  '.about-card',
-  '.about-split-image',
-  '.about-split-copy',
-  '.about-row-head',
-  '.about-faq-item',
-  '.about-cta-panel',
-  '.careers-role-card',
-  '.careers-process-card',
-  '.contact-hero > .contact-shell > *',
-  '.contact-card',
-  '.contact-info-card',
-  '.contact-form-col',
-  '.contact-section-head',
-  '.contact-faq-item',
-  '.contact-email-note',
-  '.legal-hero > *',
-  '.legal-summary > *',
-  '.legal-article > section',
-  '.legal-toc',
-  '.ds-hero-copy',
-  '.ds-hero-img',
-  '.ds-solutions-head',
-  '.ds-solution-card',
-  '.ds-faq-head',
-  '.ds-faq-item',
-].join(',');
-
 const PARALLAX_SELECTOR = '[data-parallax]';
-const THREE_CARD_GROUP_SELECTOR = [
-  '.process-grid',
-  '.pricing-grid',
-  '.ds-solutions-grid',
-  '.about-card-grid',
-  '.careers-role-grid',
-  '.careers-process-list',
-  '.about-team-grid',
-  '.about-testimonial-grid',
-  '.blog-index-grid',
-  '.portfolio-masonry',
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+const BUTTON_ORIGIN_SELECTOR = [
+  'button:not(.nav-logo)',
+  '.btn-p',
+  '.btn-s',
+  '.nav-link',
+  '.nav-cta',
+  '.nav-mobile-cta',
+  '.pricing-cta',
+  '.why-cta',
+  '.process-card-cta',
+  '.service-card-link',
+  '.case-study-action',
+  '.blog-button',
+  '.blog-cta a',
+  '.blog-home-arrow',
+  '.about-primary-btn',
+  '.about-dark-btn',
+  '.about-arrow',
+  '.careers-role-link',
+  '.contact-submit',
+  '.footer-submit-button',
+  '.ds-primary-btn',
+  '.ds-solution-btn',
 ].join(',');
 
-const THREE_CARD_ITEM_SELECTOR = [
-  '.process-card',
-  '.pricing-card',
-  '.ds-solution-card',
-  '.about-card',
-  '.careers-role-card',
-  '.careers-process-card',
-  '.blog-card',
-  '.portfolio-card',
-].join(',');
+function getNativeScrollBehavior() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches ? 'auto' : 'smooth';
+}
+
+function getCoverDiameter(width, height, x, y) {
+  return Math.ceil(
+    2 *
+      Math.max(
+        Math.hypot(x, y),
+        Math.hypot(width - x, y),
+        Math.hypot(x, height - y),
+        Math.hypot(width - x, height - y),
+      ),
+  );
+}
 
 export default function ScrollEffects() {
   const pathname = usePathname();
@@ -82,94 +53,14 @@ export default function ScrollEffects() {
   function scrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: getNativeScrollBehavior(),
     });
   }
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
+    const reduceMotion = window.matchMedia(REDUCED_MOTION_QUERY).matches;
     const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
     const lightMotion = reduceMotion || coarsePointer;
-
-    const revealTargets = Array.from(document.querySelectorAll(REVEAL_SELECTOR)).filter(
-      el => !el.closest('[data-motion-managed="true"]'),
-    );
-
-    revealTargets.forEach((el, index) => {
-      if (el.dataset.revealBound === 'true') return;
-      el.dataset.revealBound = 'true';
-      el.classList.add('reveal-motion');
-      el.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 70}ms`);
-
-      const classList = el.classList;
-      const comesFromLeft =
-        classList.contains('about-hero-copy') ||
-        classList.contains('about-split-image') ||
-        classList.contains('ds-hero-copy') ||
-        classList.contains('contact-info-card') ||
-        (classList.contains('portfolio-card') && index % 2 === 0);
-      const comesFromRight =
-        classList.contains('about-hero-image') ||
-        classList.contains('about-split-copy') ||
-        classList.contains('ds-hero-img') ||
-        classList.contains('contact-form-col') ||
-        (classList.contains('portfolio-card') && index % 2 === 1);
-      const popsIn =
-        classList.contains('about-card') ||
-        classList.contains('ds-solution-card') ||
-        classList.contains('blog-index-card') ||
-        classList.contains('careers-role-card') ||
-        classList.contains('careers-process-card') ||
-        el.closest('.legal-summary');
-
-      if (comesFromLeft) el.classList.add('reveal-from-left');
-      if (comesFromRight) el.classList.add('reveal-from-right');
-      if (popsIn) el.classList.add('reveal-pop');
-    });
-
-    document.querySelectorAll(THREE_CARD_GROUP_SELECTOR).forEach(group => {
-      const cards = Array.from(group.children).filter(
-        el =>
-          el.matches(THREE_CARD_ITEM_SELECTOR) &&
-          !el.closest('[data-motion-managed="true"]'),
-      );
-
-      if (cards.length !== 3) return;
-
-      cards.forEach((card, cardIndex) => {
-        card.classList.remove('reveal-from-left', 'reveal-from-right', 'reveal-pop');
-        card.style.setProperty('--reveal-delay', `${cardIndex * 140}ms`);
-
-        if (cardIndex === 0) card.classList.add('reveal-from-left');
-        if (cardIndex === 1) card.classList.add('reveal-pop');
-        if (cardIndex === 2) card.classList.add('reveal-from-right');
-      });
-    });
-
-    let observer;
-
-    if (reduceMotion) {
-      revealTargets.forEach(el => el.classList.add('is-visible'));
-    } else {
-      observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          rootMargin: '0px 0px -10% 0px',
-          threshold: 0.12,
-        },
-      );
-
-      revealTargets.forEach(el => observer.observe(el));
-    }
 
     const glowTargets = Array.from(
       document.querySelectorAll(
@@ -177,35 +68,82 @@ export default function ScrollEffects() {
       ),
     );
 
+    const glowState = new Map();
+    let glowFrame = 0;
+
+    const flushGlow = () => {
+      glowFrame = 0;
+      glowState.forEach(({ x, y }, el) => {
+        el.style.setProperty('--mx', `${x}px`);
+        el.style.setProperty('--my', `${y}px`);
+      });
+      glowState.clear();
+    };
+
     const updateGlow = event => {
       const rect = event.currentTarget.getBoundingClientRect();
-      event.currentTarget.style.setProperty(
-        '--mx',
-        `${event.clientX - rect.left}px`,
-      );
-      event.currentTarget.style.setProperty(
-        '--my',
-        `${event.clientY - rect.top}px`,
-      );
+      glowState.set(event.currentTarget, {
+        x: Math.round(event.clientX - rect.left),
+        y: Math.round(event.clientY - rect.top),
+      });
+
+      if (!glowFrame) {
+        glowFrame = requestAnimationFrame(flushGlow);
+      }
     };
 
     glowTargets.forEach(el => {
       el.addEventListener('pointermove', updateGlow);
     });
 
+    const updateButtonOrigin = event => {
+      const target = event.target.closest?.(BUTTON_ORIGIN_SELECTOR);
+      if (!target) return;
+
+      const rect = target.getBoundingClientRect();
+      const x = Math.round(event.clientX - rect.left);
+      const y = Math.round(event.clientY - rect.top);
+      const cover = getCoverDiameter(rect.width, rect.height, x, y);
+
+      target.style.setProperty('--mx', `${x}px`);
+      target.style.setProperty('--my', `${y}px`);
+      target.style.setProperty('--button-fill-max', `${cover}px`);
+    };
+
+    document.addEventListener('pointerover', updateButtonOrigin, {
+      passive: true,
+    });
+    document.addEventListener('pointermove', updateButtonOrigin, {
+      passive: true,
+    });
+    document.addEventListener('pointerdown', updateButtonOrigin, {
+      passive: true,
+    });
+
     const hero = document.querySelector('#home');
     const sphere = document.querySelector('.sphere');
     const heroTitle = document.querySelector('.hero-title');
     const progress = progressRef.current;
+    let heroFrame = 0;
+    let heroPointer = null;
 
-    const moveHero = event => {
-      if (!hero) return;
+    const applyHeroMotion = () => {
+      heroFrame = 0;
+      if (!hero || !heroPointer) return;
       const rect = hero.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      const x = (heroPointer.clientX - rect.left) / rect.width - 0.5;
+      const y = (heroPointer.clientY - rect.top) / rect.height - 0.5;
       sphere?.style.setProperty('--tilt-x', `${y * -8}deg`);
       sphere?.style.setProperty('--tilt-y', `${x * 10}deg`);
       heroTitle?.style.setProperty('--title-shift', `${x * 8}px`);
+    };
+
+    const moveHero = event => {
+      heroPointer = { clientX: event.clientX, clientY: event.clientY };
+
+      if (!heroFrame) {
+        heroFrame = requestAnimationFrame(applyHeroMotion);
+      }
     };
 
     if (!lightMotion) {
@@ -258,7 +196,10 @@ export default function ScrollEffects() {
 
     updateParallax();
 
+    let progressFrame = 0;
+
     const updateProgress = () => {
+      progressFrame = 0;
       if (!progress) return;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = max > 0 ? window.scrollY / max : 0;
@@ -267,9 +208,15 @@ export default function ScrollEffects() {
       progress.classList.toggle('is-visible', window.scrollY > 260);
     };
 
+    const requestProgress = () => {
+      if (!progressFrame) {
+        progressFrame = requestAnimationFrame(updateProgress);
+      }
+    };
+
     updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
+    window.addEventListener('scroll', requestProgress, { passive: true });
+    window.addEventListener('resize', requestProgress);
     if (!lightMotion) {
       window.addEventListener('scroll', requestParallax, { passive: true });
       window.addEventListener('resize', requestParallax);
@@ -280,7 +227,7 @@ export default function ScrollEffects() {
       sessionStorage.removeItem('pendingScrollTarget');
       window.setTimeout(() => {
         document.getElementById(pendingTarget)?.scrollIntoView({
-          behavior: 'smooth',
+          behavior: getNativeScrollBehavior(),
           block: 'start',
         });
         window.history.replaceState(null, '', '/');
@@ -288,14 +235,19 @@ export default function ScrollEffects() {
     }
 
     return () => {
-      observer?.disconnect();
       cancelAnimationFrame(parallaxFrame);
+      cancelAnimationFrame(glowFrame);
+      cancelAnimationFrame(heroFrame);
+      cancelAnimationFrame(progressFrame);
       glowTargets.forEach(el => {
         el.removeEventListener('pointermove', updateGlow);
       });
+      document.removeEventListener('pointerover', updateButtonOrigin);
+      document.removeEventListener('pointermove', updateButtonOrigin);
+      document.removeEventListener('pointerdown', updateButtonOrigin);
       hero?.removeEventListener('pointermove', moveHero);
-      window.removeEventListener('scroll', updateProgress);
-      window.removeEventListener('resize', updateProgress);
+      window.removeEventListener('scroll', requestProgress);
+      window.removeEventListener('resize', requestProgress);
       window.removeEventListener('scroll', requestParallax);
       window.removeEventListener('resize', requestParallax);
     };

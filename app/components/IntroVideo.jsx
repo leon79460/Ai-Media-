@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import { ContainerScroll } from './ContainerScroll';
 
 // ✅ Your video is already in /public/ folder
 const VIDEO_SRC = '/intro-video.mp4';
@@ -8,7 +9,6 @@ const POSTER_IMG = ''; // optional: "/video-poster.jpg"
 export default function IntroVideo() {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
-  const frameRef = useRef(null);
   const [muted, setMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
 
@@ -23,7 +23,6 @@ export default function IntroVideo() {
         if (entry.isIntersecting) {
           video.play().catch(() => { });
           setPlaying(true);
-          section.style.animation = 'revealUp 0.8s ease forwards';
         } else {
           video.pause();
           setPlaying(false);
@@ -33,59 +32,6 @@ export default function IntroVideo() {
     );
     obs.observe(section);
     return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const frame = frameRef.current;
-    const section = sectionRef.current;
-    if (!frame || !section) return;
-
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
-
-    if (reduceMotion) {
-      frame.style.setProperty('--intro-video-scale', '1');
-      frame.style.setProperty('--intro-video-y', '0px');
-      frame.style.setProperty('--intro-video-opacity', '1');
-      return;
-    }
-
-    let frameId = 0;
-    const clamp = value => Math.min(Math.max(value, 0), 1);
-    const easeOut = value => 1 - Math.pow(1 - value, 3);
-
-    const updateSize = () => {
-      const rect = section.getBoundingClientRect();
-      const viewportHeight =
-        window.innerHeight || document.documentElement.clientHeight;
-      const start = viewportHeight * 0.95;
-      const end = viewportHeight * 0.05;
-      const progress = clamp((start - rect.top) / (start - end));
-      const eased = easeOut(progress);
-      const scale = 0.62 + eased * 0.38;
-      const translateY = (1 - eased) * 36;
-      const opacity = 0.82 + eased * 0.18;
-
-      frame.style.setProperty('--intro-video-scale', scale.toFixed(3));
-      frame.style.setProperty('--intro-video-y', `${translateY.toFixed(1)}px`);
-      frame.style.setProperty('--intro-video-opacity', opacity.toFixed(3));
-    };
-
-    const requestUpdate = () => {
-      cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(updateSize);
-    };
-
-    updateSize();
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-    };
   }, []);
 
   const toggleMute = () => {
@@ -111,40 +57,18 @@ export default function IntroVideo() {
     <section
       id="intro"
       className="intro-video-section"
-      style={{ backgroundColor: '#f5f5f5', padding: '90px 65px' }}
+      ref={sectionRef}
+      style={{ backgroundColor: '#f5f5f5' }}
     >
-      <div
-        ref={sectionRef}
-        className="intro-video-shell"
-        style={{
-          width: '100%',
-          maxWidth: '100%',
-          margin: '0',
-          opacity: 0,
-        }}
-      >
-        {/* Video card — asymmetric rounded corners from Figma */}
+      <ContainerScroll titleComponent={<></>}>
         <div
-          ref={frameRef}
-          className="intro-video-frame"
+          className="intro-video-frame relative w-full h-full overflow-hidden bg-[#050505] cursor-pointer"
+          onClick={togglePlay}
           style={{
-            position: 'relative',
-            width: '100%',
-            aspectRatio: '2 / 1',
-            borderRadius: '8px 54px 8px 54px',
-            overflow: 'hidden',
-            background: '#050505',
-            boxShadow: 'none',
-            cursor: 'pointer',
-            opacity: 'var(--intro-video-opacity, 0.78)',
-            transform:
-              'translateY(var(--intro-video-y, 36px)) scale(var(--intro-video-scale, 0.62))',
-            transformOrigin: 'center top',
-            willChange: 'transform, opacity',
             WebkitMaskImage: '-webkit-radial-gradient(white, black)',
             maskImage: 'radial-gradient(white, black)',
+            borderRadius: 'inherit'
           }}
-          onClick={togglePlay}
         >
           {/* The actual video — NO controls attribute = no browser bar */}
           <video
@@ -192,10 +116,17 @@ export default function IntroVideo() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '28px',
                 }}
               >
-                ▶
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path d="M8 5v14l11-7-11-7Z" fill="#fff" />
+                </svg>
               </div>
             </div>
           )}
@@ -224,10 +155,8 @@ export default function IntroVideo() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              opacity: 0,
-              transform: 'translateY(4px)',
-              transition: 'opacity 0.2s ease, transform 0.2s ease, background 0.2s',
               zIndex: 10,
+              transition: 'background 0.2s',
             }}
             onMouseEnter={e =>
               (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.8)')
@@ -236,12 +165,54 @@ export default function IntroVideo() {
               (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.55)')
             }
             title={muted ? 'Unmute' : 'Mute'}
+            aria-label={muted ? 'Unmute video' : 'Mute video'}
           >
-            {muted ? '🔇' : '🔊'}
+            {muted ? (
+              <svg
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 9v6h4l5 4V5L8 9H4Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="m18 9 4 4m0-4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ) : (
+              <svg
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 9v6h4l5 4V5L8 9H4Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M17 9.5a4 4 0 0 1 0 5M19.5 7a7 7 0 0 1 0 10"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            )}
           </button>
         </div>
-
-      </div>
+      </ContainerScroll>
     </section>
   );
 }
