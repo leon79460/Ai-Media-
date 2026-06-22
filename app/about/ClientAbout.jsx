@@ -387,8 +387,6 @@ export default function ClientAbout() {
                   as="link"
                   href="/contact"
                   variant="light"
-                  fillColor="#f5f5f5"
-                  hoverTextColor="#050505"
                   className="about-primary-btn about-dark-btn"
                 >
                   → Get Started
