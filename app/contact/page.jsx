@@ -235,7 +235,7 @@ export default function ContactPage() {
                 </svg>
                 FAQS
               </span>
-              <TextReveal id="contact-faq-title" as="h2" text="Questions? Answers!" className="contact-faq-title" delay={0.2} />
+              <h2 id="contact-faq-title" className="contact-faq-title">Questions? Answers!</h2>
               <p className="contact-faq-sub">
                 Find Some quick answers to the most common questions.
               </p>

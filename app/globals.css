@@ -14765,3 +14765,12 @@ main.careers-page .careers-role-link:focus-visible {
     padding: 45px 16px 45px !important;
   }
 }
+
+main.about-page .about-faq-section #faq-title.section-title {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #050505 !important;
+  color: #050505 !important;
+  filter: none !important;
+}

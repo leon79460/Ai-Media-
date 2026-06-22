@@ -350,9 +350,9 @@ export default function ClientAbout() {
         {/* ── FAQ ── */}
         <section className="about-section about-faq-section" aria-labelledby="faq-title">
           <div className="about-shell about-faq-shell">
-            <Reveal className="about-section-head" delay={0.16}>
+            <Reveal className="about-section-head" delay={0.16} effect="clip-up">
               <Badge>FAQS</Badge>
-              <TextReveal id="faq-title" as="h2" text="Questions? Answers!" className="section-title" delay={0.2} />
+              <h2 id="faq-title" className="section-title">Questions? Answers!</h2>
               <p className="section-sub">Find some quick answers to the most common questions.</p>
             </Reveal>
             <Reveal delay={0.2} className="about-faq-list">
