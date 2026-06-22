@@ -16,23 +16,33 @@ export default function ClientBlog() {
     <>
       <Navbar />
       <main className="blog-index-page">
-        <Reveal as="section" className="blog-index-hero" delay={0.16}>
-          <span className="section-badge">
-            <Image
-              src="/blog/blog.svg"
-              alt=""
-              aria-hidden="true"
-              width={18}
-              height={18}
-            />
-            Insights & Resources
-          </span>
-          <h1>Latest Insights From AI Media</h1>
-          <p>
-            Practical strategy, budgeting, SEO, content, and website guidance
-            for systems integrators that want more predictable growth.
-          </p>
-        </Reveal>
+        <section className="blog-index-hero">
+          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+            <span className="section-badge">
+              <Image
+                src="/blog/blog.svg"
+                alt=""
+                aria-hidden="true"
+                width={18}
+                height={18}
+              />
+              Insights & Resources
+            </span>
+          </Reveal>
+
+          <h1>
+            <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+              <span style={{ display: 'block' }}>Latest Insights From AI Media</span>
+            </Reveal>
+          </h1>
+
+          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+            <p>
+              Practical strategy, budgeting, SEO, content, and website guidance
+              for systems integrators that want more predictable growth.
+            </p>
+          </Reveal>
+        </section>
 
         <StaggerContainer as="section" className="blog-index-grid" aria-label="Blog posts" delay={0.15} stagger={0.2}>
           {blogPosts.map((post, index) => (

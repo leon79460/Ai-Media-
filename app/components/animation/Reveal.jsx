@@ -94,7 +94,7 @@ const motionTags = {
 };
 
 const revealEffects = {
-  'fade-up': ({ y, scale, blur }) => ({
+  'fade-up': ({ y, scale, blur, visibleY = 0 }) => ({
     hidden: {
       opacity: 0,
       y,
@@ -103,12 +103,12 @@ const revealEffects = {
     },
     visible: {
       opacity: 1,
-      y: 0,
+      y: visibleY,
       filter: 'blur(0px)',
       ...(scale ? { scale: 1 } : null),
     },
   }),
-  'slide-up': ({ y, scale, blur }) => ({
+  'slide-up': ({ y, scale, blur, visibleY = 0 }) => ({
     hidden: {
       opacity: 0,
       y,
@@ -117,12 +117,12 @@ const revealEffects = {
     },
     visible: {
       opacity: 1,
-      y: 0,
+      y: visibleY,
       filter: 'blur(0px)',
       ...(scale ? { scale: 1 } : null),
     },
   }),
-  'blur-reveal': ({ y, blur }) => ({
+  'blur-reveal': ({ y, blur, visibleY = 0 }) => ({
     hidden: {
       opacity: 0,
       y: y || 24,
@@ -130,7 +130,7 @@ const revealEffects = {
     },
     visible: {
       opacity: 1,
-      y: 0,
+      y: visibleY,
       filter: 'blur(0px)',
     },
   }),
@@ -235,19 +235,26 @@ export default function Reveal({
   amount = ANIMATION_VIEWPORT_AMOUNT,
   once = true,
   inView = true,
+  inViewMargin,
   blur,
   ...props
 }) {
   const ref = useRef(null);
   const shouldReduceMotion = useReducedMotion();
-  const observedInView = useDelayedInView(ref, { amount, once });
+  const observedInView = useDelayedInView(ref, {
+    amount,
+    once,
+    margin: inViewMargin,
+  });
   const [hasEntered, setHasEntered] = useState(false);
   const Component = motionTags[as] || motion.div;
   const resolvedY = yOffset ?? y;
+  const visibleY = yOffset === undefined ? 0 : -yOffset;
   const preset = (revealEffects[effect] || revealEffects['fade-up'])({
     y: resolvedY,
     scale,
     blur,
+    visibleY,
   });
   const exited = getExitedState(preset.visible);
   const baseStyle = { ...preset.style, ...style };

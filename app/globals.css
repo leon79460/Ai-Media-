@@ -14810,6 +14810,95 @@ main.about-page .about-faq-section #faq-title.section-title {
       circle at 80% 30%,
       rgba(255,255,255,.35),
       transparent 45%
-    );
+  );
   opacity: .8;
 } */
+
+/* Leon responsive merge overrides */
+.nav-mobile-panel a:hover,
+.nav-mobile-panel a:focus-visible,
+.nav-mobile-panel button:hover,
+.nav-mobile-panel button:focus-visible,
+.nav-mobile-panel-light a:hover,
+.nav-mobile-panel-light a:focus-visible,
+.nav-mobile-panel-light button:hover,
+.nav-mobile-panel-light button:focus-visible {
+  border: none !important;
+  background: rgba(255, 255, 255, 0.06);
+  color: #000;
+  outline: none;
+}
+
+.blog-home-arrow.is-prev:hover {
+  border: 1px solid #030303;
+  background: #000;
+  color: #fff;
+}
+
+.blog-home-arrow.is-next {
+  border: 1px solid #030303;
+  background: #f5f5f5;
+  color: #030303;
+}
+
+.blog-home-arrow.is-next:hover {
+  border: 0;
+  background: #000;
+  color: #fff;
+}
+
+.blog-home-card .read-more {
+  border-top: 0;
+}
+
+@media (max-width: 768px) {
+  .portfolio-section {
+    padding: 130px 16px 60px;
+  }
+
+  .blog-index-page,
+  .blog-post-page,
+  .legal-page {
+    padding-top: 130px;
+    padding-bottom: 60px !important;
+  }
+
+  .blog-index-grid {
+    margin: 30px auto 0 !important;
+  }
+
+  main.about-page .about-hero {
+    padding: 80px 0 0;
+  }
+
+  main.about-page .about-section {
+    padding: 30px 0;
+  }
+
+  main.about-page .about-services {
+    padding-top: 40px;
+  }
+
+  main.about-page .about-process,
+  main.about-page .about-split-section,
+  main.about-page .about-testimonials,
+  main.about-page .about-faq-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  main.about-page .about-final-cta {
+    padding: 40px 0 60px !important;
+  }
+
+  main.about-page .about-hero-image,
+  main.about-page .about-split-image,
+  main.about-page .about-cta-image {
+    display: block !important;
+  }
+
+  .service-card {
+    min-height: 412px;
+    padding: 34px;
+  }
+}

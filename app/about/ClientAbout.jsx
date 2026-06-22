@@ -171,14 +171,24 @@ export default function ClientAbout() {
         {/* ── Hero ── */}
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-shell about-hero-grid">
-            <Reveal className="about-hero-copy" delay={0.16}>
-              <Badge>About</Badge>
-              <h1 id="about-title">About AI Media</h1>
-              <p>
-                We help AV and smart home integrators build a stronger online
-                presence through website design, SEO, content, branding, and AI
-                powered marketing systems.
-              </p>
+            <div className="about-hero-copy">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>About</Badge>
+              </Reveal>
+
+              <h1 id="about-title">
+                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>About AI Media</span>
+                </Reveal>
+              </h1>
+
+              <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                <p>
+                  We help AV and smart home integrators build a stronger online
+                  presence through website design, SEO, content, branding, and AI
+                  powered marketing systems.
+                </p>
+              </Reveal>
               <OriginButton
                 as="link"
                 href="/contact"
@@ -187,7 +197,7 @@ export default function ClientAbout() {
               >
                 → Book a Strategy Call
               </OriginButton>
-            </Reveal>
+            </div>
 
             <Reveal className="about-hero-image" delay={0.24}>
               <Image

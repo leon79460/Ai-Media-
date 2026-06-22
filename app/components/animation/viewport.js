@@ -32,7 +32,7 @@ function getSafeViewportAmount(node, preferredAmount) {
 
 export function useDelayedInView(
   ref,
-  { amount = ANIMATION_VIEWPORT_AMOUNT, once = true } = {},
+  { amount = ANIMATION_VIEWPORT_AMOUNT, once = true, margin } = {},
 ) {
   const [resolvedAmount, setResolvedAmount] = useState(amount);
 
@@ -63,5 +63,5 @@ export function useDelayedInView(
     };
   }, [amount, ref]);
 
-  return useInView(ref, { amount: resolvedAmount, once });
+  return useInView(ref, { amount: resolvedAmount, once, margin });
 }

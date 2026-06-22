@@ -14,7 +14,7 @@ import {
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
 const HEADING_LINES = [
-  'Stop Chasing leads.',
+  'Stop chasing leads.',
   'Start attracting them.',
 ];
 
@@ -165,7 +165,7 @@ export default function Hero() {
               margin: 0,
               fontFamily: 'var(--font-main)',
               fontWeight: 600,
-              fontSize: 'clamp(48px, 8vw, 92px)',
+              fontSize: 'clamp(42px, 8vw, 80px)',
               lineHeight: 1.25,
               letterSpacing: '0',
               color: '#f5f5f5',
