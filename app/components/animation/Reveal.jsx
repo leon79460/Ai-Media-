@@ -89,6 +89,11 @@ const motionTags = {
   article: motion.article,
   footer: motion.footer,
   main: motion.main,
+  h1: motion.h1,
+  h2: motion.h2,
+  h3: motion.h3,
+  p: motion.p,
+  small: motion.small,
   ul: motion.ul,
   li: motion.li,
 };

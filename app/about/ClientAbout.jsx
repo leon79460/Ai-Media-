@@ -4,7 +4,6 @@ import Image from 'next/image';
 import AnimatedCard from '../components/animation/AnimatedCard';
 import Reveal from '../components/animation/Reveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
-import TextReveal from '../components/animation/TextReveal';
 import FaqPro from '../components/FaqPro';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
@@ -219,10 +218,14 @@ export default function ClientAbout() {
         {/* ── One Team for Your Digital Presence ── */}
         <section className="about-section about-services" aria-labelledby="presence-title">
           <div className="about-shell">
-            <Reveal className="about-section-head" delay={0.16}>
-              <Badge>Strategy</Badge>
-              <TextReveal id="presence-title" as="h2" text="One Team For Your Digital Presence" className="section-title" delay={0.2} />
-            </Reveal>
+            <div className="about-section-head">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Strategy</Badge>
+              </Reveal>
+              <Reveal as="h2" id="presence-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                One Team For Your Digital Presence
+              </Reveal>
+            </div>
             <StaggerContainer className="about-card-grid" delay={0.2} stagger={0.22}>
               {SERVICES.map((s) => (
                 <AnimatedCard className="about-card card-hover" key={s.title}>
@@ -238,10 +241,14 @@ export default function ClientAbout() {
         {/* ── How it work ── */}
         <section className="about-section about-process" aria-labelledby="process-title">
           <div className="about-shell">
-            <Reveal className="about-section-head" delay={0.16}>
-              <Badge>Process</Badge>
-              <TextReveal id="process-title" as="h2" text="How It Works" className="section-title" delay={0.2} />
-            </Reveal>
+            <div className="about-section-head">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Process</Badge>
+              </Reveal>
+              <Reveal as="h2" id="process-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                How It Works
+              </Reveal>
+            </div>
             <div className="about-process-wrap">
               {/* gap must match about-timeline's gap so circles center over their cards */}
               <div className="about-step-rail" aria-hidden="true" style={{ gap: '20px' }}>
@@ -275,34 +282,48 @@ export default function ClientAbout() {
                 height={520}
               />
             </Reveal>
-            <Reveal className="about-split-copy" delay={0.2} effect="slide-left">
-              <Badge>Why Choose Us</Badge>
+            <div className="about-split-copy">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Why Choose Us</Badge>
+              </Reveal>
               <h2 id="choose-title">
-                <span>Why Brands</span>
-                Choose AI Media
+                <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  Why Brands
+                </Reveal>
+                <Reveal as="span" delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                  Choose AI Media
+                </Reveal>
               </h2>
-              <p>
-                Built for AV and smart home companies that want premium
-                positioning, qualified leads, and long-term growth.
-              </p>
-            </Reveal>
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p>
+                  Built for AV and smart home companies that want premium
+                  positioning, qualified leads, and long-term growth.
+                </p>
+              </Reveal>
+            </div>
           </div>
         </section>
 
         {/* ── Meet our team ── */}
         <section className="about-section about-team" aria-labelledby="team-title">
           <div className="about-shell">
-            <Reveal className="about-row-head" delay={0.16}>
+            <div className="about-row-head">
               <div>
-                <Badge>Team</Badge>
-                <TextReveal id="team-title" as="h2" text="Meet Our Team." delay={0.2} />
-                <p>Partner with an AI agency delivering smart solutions.</p>
+                <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                  <Badge>Team</Badge>
+                </Reveal>
+                <Reveal as="h2" id="team-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  Meet Our Team.
+                </Reveal>
+                <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                  <p>Partner with an AI agency delivering smart solutions.</p>
+                </Reveal>
               </div>
-              <div className="about-arrows" aria-hidden="true">
+              <Reveal className="about-arrows" aria-hidden="true" delay={0.85} duration={0.4} yOffset={6} blur="6px">
                 <button type="button" className="about-arrow is-prev" tabIndex={-1}><span /></button>
                 <button type="button" className="about-arrow is-next" tabIndex={-1}><span /></button>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
             <StaggerContainer className="about-team-grid" delay={0.2} stagger={0.22}>
               {TEAM.map((member) => (
                 <AnimatedCard className="about-team-card about-card" key={member.name}>
@@ -328,10 +349,14 @@ export default function ClientAbout() {
         {/* ── What our client says ── */}
         <section className="about-section about-testimonials" aria-labelledby="testimonial-title">
           <div className="about-shell">
-            <Reveal className="about-section-head" delay={0.16}>
-              <Badge>Testimonial</Badge>
-              <TextReveal id="testimonial-title" as="h2" text="What Our Client Says" className="section-title" delay={0.2} />
-            </Reveal>
+            <div className="about-section-head">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Testimonial</Badge>
+              </Reveal>
+              <Reveal as="h2" id="testimonial-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                What Our Client Says
+              </Reveal>
+            </div>
             <StaggerContainer className="about-testimonial-grid" delay={0.2} stagger={0.22}>
               {TESTIMONIALS.map((item, i) => (
                 <AnimatedCard className="about-testimonial-card about-card" key={`${item.name}-${i}`}>
@@ -360,11 +385,17 @@ export default function ClientAbout() {
         {/* ── FAQ ── */}
         <section className="about-section about-faq-section" aria-labelledby="faq-title">
           <div className="about-shell about-faq-shell">
-            <Reveal className="about-section-head" delay={0.16} effect="clip-up">
-              <Badge>FAQS</Badge>
-              <h2 id="faq-title" className="section-title">Questions? Answers!</h2>
-              <p className="section-sub">Find some quick answers to the most common questions.</p>
-            </Reveal>
+            <div className="about-section-head">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>FAQS</Badge>
+              </Reveal>
+              <Reveal as="h2" id="faq-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Questions? Answers!
+              </Reveal>
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p className="section-sub">Find some quick answers to the most common questions.</p>
+              </Reveal>
+            </div>
             <Reveal delay={0.2} className="about-faq-list">
               <FaqPro items={FAQS} defaultOpenFirst={true} />
             </Reveal>
@@ -387,12 +418,18 @@ export default function ClientAbout() {
                 <span aria-hidden="true">Design.<br />Build.<br />Grow.</span>
               </div>
               <div className="about-cta-copy">
-                <Badge>Contact us</Badge>
-                <h2 id="about-cta-title">Ready to Build a Smarter Online Presence?</h2>
-                <p>
-                  Let&apos;s create a website and marketing system that helps
-                  your business stand out, rank better, and generate qualified leads.
-                </p>
+                <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                  <Badge>Contact us</Badge>
+                </Reveal>
+                <Reveal as="h2" id="about-cta-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  Ready to Build a Smarter Online Presence?
+                </Reveal>
+                <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                  <p>
+                    Let&apos;s create a website and marketing system that helps
+                    your business stand out, rank better, and generate qualified leads.
+                  </p>
+                </Reveal>
                 <OriginButton
                   as="link"
                   href="/contact"

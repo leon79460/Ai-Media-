@@ -7,7 +7,6 @@ import OriginButton from '../../components/OriginButton';
 import Reveal from '../../components/animation/Reveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
-import TextReveal from '../../components/animation/TextReveal';
 import FaqPro from '../../components/FaqPro';
 
 const SOLUTIONS = [
@@ -68,9 +67,9 @@ export default function ClientMarketing() {
         {/* ── Hero ── */}
         <section className="ds-hero">
           <div className="ds-hero-card">
-            <Reveal className="ds-hero-grid" delay={0.16}>
+            <div className="ds-hero-grid">
               <div className="ds-hero-copy">
-                <span className="ds-badge">
+                <Reveal as="span" className="ds-badge" delay={0} duration={0.4} yOffset={6} blur="6px">
                   <svg
                     width="14" height="14" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="1.8"
@@ -81,18 +80,20 @@ export default function ClientMarketing() {
                     <line x1="6" y1="20" x2="6" y2="14" />
                   </svg>
                   Marketing
-                </span>
-                <h1>Digital Marketing for AV &amp; Smart Home Integrators</h1>
-                <p>
+                </Reveal>
+                <Reveal as="h1" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  Digital Marketing for AV &amp; Smart Home Integrators
+                </Reveal>
+                <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
                   We help AV and smart home businesses improve visibility, attract
                   qualified leads, and stay connected with their audience through SEO,
                   social media, and email marketing.
-                </p>
+                </Reveal>
                 <OriginButton as="link" href="/contact" variant="dark" className="ds-primary-btn">
                   → Book a Strategy Call
                 </OriginButton>
               </div>
-              <div className="ds-hero-img">
+              <Reveal className="ds-hero-img" delay={0.3}>
                 <Image
                   src="/services/marketing-hero.png"
                   alt="Digital marketing for AV and smart home businesses"
@@ -101,8 +102,8 @@ export default function ClientMarketing() {
                   priority
                   style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px', display: 'block' }}
                 />
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
           </div>
         </section>
 
@@ -111,13 +112,15 @@ export default function ClientMarketing() {
           <span className="ds-deco ds-deco-1" aria-hidden="true" />
           <span className="ds-deco ds-deco-2" aria-hidden="true" />
           <div className="ds-solutions-shell">
-            <Reveal className="ds-solutions-head" delay={0.16}>
-              <TextReveal id="marketing-sol-title" as="h2" text="Marketing Solutions Built for Consistent Growth" delay={0.2} />
-              <p>
+            <div className="ds-solutions-head">
+              <Reveal as="h2" id="marketing-sol-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Marketing Solutions Built for Consistent Growth
+              </Reveal>
+              <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
                 From search visibility to audience engagement, we focus on the
                 channels that help your business get found, trusted, and contacted.
-              </p>
-            </Reveal>
+              </Reveal>
+            </div>
             <StaggerContainer className="ds-solutions-grid" delay={0.2} stagger={0.22}>
               {SOLUTIONS.map((sol) => (
                 <AnimatedCard className="ds-solution-card" key={sol.title}>
@@ -146,8 +149,8 @@ export default function ClientMarketing() {
         {/* ── FAQ ── */}
         <section className="ds-faq-section">
           <div className="ds-faq-shell">
-            <Reveal className="ds-faq-head" delay={0.16}>
-              <span className="ds-badge ds-badge-sm">
+            <div className="ds-faq-head">
+              <Reveal as="span" className="ds-badge ds-badge-sm" delay={0} duration={0.4} yOffset={6} blur="6px">
                 <svg
                   width="13" height="13" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" strokeWidth="2"
@@ -157,10 +160,14 @@ export default function ClientMarketing() {
                   <path d="M12 16v-4M12 8h.01" />
                 </svg>
                 FAQS
-              </span>
-              <TextReveal id="faq-title" as="h2" text="Questions? Answers!" delay={0.2} />
-              <p>Find some quick answers to the most common questions.</p>
-            </Reveal>
+              </Reveal>
+              <Reveal as="h2" id="faq-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Questions? Answers!
+              </Reveal>
+              <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                Find some quick answers to the most common questions.
+              </Reveal>
+            </div>
             <Reveal delay={0.2} className="ds-faq-list">
               <FaqPro items={FAQS} defaultOpenFirst={true} />
             </Reveal>

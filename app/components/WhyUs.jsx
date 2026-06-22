@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import AnimatedCard from './animation/AnimatedCard';
 import Reveal, { motionEase } from './animation/Reveal';
-import TextReveal from './animation/TextReveal';
 import { useDelayedInView } from './animation/viewport';
 import OriginButton from './OriginButton';
 
@@ -313,23 +312,33 @@ export default function WhyUs() {
   return (
     <section id="whyus" className="why-section" style={styles.section}>
       <div className="why-shell" style={styles.shell}>
-        <Reveal className="why-header" effect="slide-right" style={styles.header}>
-          <span className="section-badge">
-            <Image
-              src="/icons/why-us.png"
-              alt=""
-              aria-hidden="true"
-              width={18}
-              height={18}
-              style={styles.badgeIcon}
-            />
-            {SECTION_BADGE}
-          </span>
-          <TextReveal id="whyus-title" as="h2" text={SECTION_TITLE} className="section-title" style={styles.title} delay={0.2} />
-          <p className="section-sub" style={styles.sub}>
-            {SECTION_SUB}
-          </p>
-        </Reveal>
+        <header className="why-header" style={styles.header}>
+          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+            <span className="section-badge">
+              <Image
+                src="/icons/why-us.png"
+                alt=""
+                aria-hidden="true"
+                width={18}
+                height={18}
+                style={styles.badgeIcon}
+              />
+              {SECTION_BADGE}
+            </span>
+          </Reveal>
+
+          <h2 id="whyus-title" className="section-title" style={styles.title}>
+            <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px" style={{ display: 'block' }}>
+              {SECTION_TITLE}
+            </Reveal>
+          </h2>
+
+          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+            <p className="section-sub" style={styles.sub}>
+              {SECTION_SUB}
+            </p>
+          </Reveal>
+        </header>
 
         <div className="why-comparison" style={styles.comparison}>
           <ComparisonCard

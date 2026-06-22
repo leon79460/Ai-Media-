@@ -1,15 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
+import { useRef } from 'react';
 import OriginButton from './OriginButton';
-import {
-  blurReveal,
-  fadeIn,
-  fadeUp,
-  motionEase,
-  staggerContainer,
-} from './animation/Reveal';
+import { motionEase } from './animation/Reveal';
 
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
@@ -20,6 +15,54 @@ const HEADING_LINES = [
 
 const SUBTEXT =
   'We combine AI-powered delivery, industry expertise, SEO, content, and conversion-focused web design to help integrators get found, gain trust, and win more high-value projects.';
+
+function BlurFade({
+  children,
+  delay = 0,
+  duration = 1.35,
+  yOffset = 8,
+  blur = '16px',
+  className,
+}) {
+  const ref = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(ref, {
+    once: true,
+    margin: '-50px',
+  });
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={{
+        hidden: {
+          y: yOffset,
+          opacity: 0,
+          filter: `blur(${blur})`,
+        },
+        visible: {
+          y: -yOffset,
+          opacity: 1,
+          filter: 'blur(0px)',
+        },
+      }}
+      transition={{
+        delay: 0.04 + delay,
+        duration,
+        ease: motionEase,
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -89,10 +132,7 @@ export default function Hero() {
         }}
       />
 
-      <motion.div
-        variants={staggerContainer}
-        initial={shouldReduceMotion ? false : 'hidden'}
-        animate={shouldReduceMotion ? undefined : 'visible'}
+      <div
         data-motion-managed="true"
         style={{
           position: 'relative',
@@ -108,7 +148,7 @@ export default function Hero() {
           color: '#f5f5f5',
         }}
       >
-        <motion.div variants={fadeUp}>
+        <BlurFade delay={0.12} duration={1.15} yOffset={8} blur="10px">
           <div
             data-parallax
             data-parallax-speed="0.12"
@@ -152,36 +192,42 @@ export default function Hero() {
               </span>
             </div>
           </div>
-        </motion.div>
+        </BlurFade>
 
-        <motion.div variants={blurReveal}>
-          <h1
-            className="hero-title"
-            data-parallax
-            data-parallax-speed="0.08"
-            data-parallax-distance="120"
-            style={{
-              maxWidth: '900px',
-              margin: 0,
-              fontFamily: 'var(--font-main)',
-              fontWeight: 600,
-              fontSize: 'clamp(42px, 8vw, 80px)',
-              lineHeight: 1.25,
-              letterSpacing: '0',
-              color: '#f5f5f5',
-              textWrap: 'balance',
-              textShadow: '0 18px 34px rgba(0,0,0,0.45)',
-            }}
-          >
-            {HEADING_LINES.map((line) => (
-              <span key={line} style={{ display: 'block' }}>
+        <h1
+          className="hero-title"
+          data-parallax
+          data-parallax-speed="0.08"
+          data-parallax-distance="120"
+          style={{
+            maxWidth: '900px',
+            margin: 0,
+            fontFamily: 'var(--font-main)',
+            fontWeight: 600,
+            fontSize: 'clamp(42px, 8vw, 80px)',
+            lineHeight: 1.25,
+            letterSpacing: '0',
+            color: '#f5f5f5',
+            textWrap: 'balance',
+            textShadow: '0 18px 34px rgba(0,0,0,0.45)',
+          }}
+        >
+          {HEADING_LINES.map((line, index) => (
+            <BlurFade
+              key={line}
+              delay={0.28 + index * 0.22}
+              duration={1.35}
+              yOffset={10}
+              blur="16px"
+            >
+              <span style={{ display: 'block' }}>
                 {line}
               </span>
-            ))}
-          </h1>
-        </motion.div>
+            </BlurFade>
+          ))}
+        </h1>
 
-        <motion.div variants={fadeIn}>
+        <BlurFade delay={0.78} duration={1.2} yOffset={8} blur="12px">
           <p
             data-parallax
             data-parallax-speed="0.06"
@@ -199,9 +245,9 @@ export default function Hero() {
           >
             {SUBTEXT}
           </p>
-        </motion.div>
+        </BlurFade>
 
-        <motion.div variants={fadeUp}>
+        <BlurFade delay={0.94} duration={1.1} yOffset={8} blur="8px">
           <div
             data-parallax
             data-parallax-speed="0.04"
@@ -267,8 +313,8 @@ export default function Hero() {
               Explore Services
             </OriginButton>
           </div>
-        </motion.div>
-      </motion.div>
+        </BlurFade>
+      </div>
     </section>
   );
 }

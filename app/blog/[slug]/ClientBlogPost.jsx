@@ -10,23 +10,31 @@ import Reveal from '../../components/animation/Reveal';
 export default function ClientBlogPost({ post }) {
   return (
     <main className="blog-post-page">
-      <Reveal as="header" className="blog-post-hero" delay={0.16}>
-        <Link className="blog-back-link" href="/blog">
-          Back to insights
-        </Link>
-        <span className="section-badge">{post.eyebrow}</span>
-        <h1>{post.title}</h1>
-        <p>{post.excerpt}</p>
+      <header className="blog-post-hero">
+        <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+          <Link className="blog-back-link" href="/blog">
+            Back to insights
+          </Link>
+        </Reveal>
+        <Reveal as="span" className="section-badge" delay={0.1} duration={0.4} yOffset={6} blur="6px">
+          {post.eyebrow}
+        </Reveal>
+        <Reveal as="h1" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+          {post.title}
+        </Reveal>
+        <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+          {post.excerpt}
+        </Reveal>
 
-        <div className="blog-stat-grid" aria-label="Key budget recommendations">
+        <Reveal className="blog-stat-grid" aria-label="Key budget recommendations" delay={0.9} duration={0.4} yOffset={6} blur="6px">
           {post.stats.map((stat) => (
             <div className="blog-stat" key={stat.value}>
               <strong>{stat.value}</strong>
               <span>{stat.label}</span>
             </div>
           ))}
-        </div>
-      </Reveal>
+        </Reveal>
+      </header>
 
       <div className="blog-layout">
         <Reveal as="article" className="blog-article" delay={0.2}>

@@ -7,7 +7,6 @@ import OriginButton from '../../components/OriginButton';
 import Reveal from '../../components/animation/Reveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
-import TextReveal from '../../components/animation/TextReveal';
 import FaqPro from '../../components/FaqPro';
 
 const SOLUTIONS = [
@@ -62,9 +61,9 @@ export default function ClientDevelopment() {
         {/* ── Hero ── */}
         <section className="ds-hero">
           <div className="ds-hero-card">
-            <Reveal className="ds-hero-grid" delay={0.16}>
+            <div className="ds-hero-grid">
               <div className="ds-hero-copy">
-                <span className="ds-badge">
+                <Reveal as="span" className="ds-badge" delay={0} duration={0.4} yOffset={6} blur="6px">
                   <svg
                     width="14" height="14" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="1.8"
@@ -74,18 +73,20 @@ export default function ClientDevelopment() {
                     <polyline points="8 6 2 12 8 18" />
                   </svg>
                   Development
-                </span>
-                <h1>Website Development for AV &amp; Smart Home Integrators</h1>
-                <p>
+                </Reveal>
+                <Reveal as="h1" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  Website Development for AV &amp; Smart Home Integrators
+                </Reveal>
+                <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
                   We build fast, responsive, and conversion focused websites that help
                   AV and smart home businesses look credible, rank better, and turn
                   visitors into qualified leads.
-                </p>
+                </Reveal>
                 <OriginButton as="link" href="/contact" variant="dark" className="ds-primary-btn">
                   → Book a Strategy Call
                 </OriginButton>
               </div>
-              <div className="ds-hero-img">
+              <Reveal className="ds-hero-img" delay={0.3}>
                 <Image
                   src="/services/development-hero.png"
                   alt="Website development for AV and smart home businesses"
@@ -94,8 +95,8 @@ export default function ClientDevelopment() {
                   priority
                   style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px', display: 'block' }}
                 />
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
           </div>
         </section>
 
@@ -104,14 +105,16 @@ export default function ClientDevelopment() {
           <span className="ds-deco ds-deco-1" aria-hidden="true" />
           <span className="ds-deco ds-deco-2" aria-hidden="true" />
           <div className="ds-solutions-shell">
-            <Reveal className="ds-solutions-head" delay={0.16}>
-              <TextReveal id="dev-sol-title" as="h2" text="Development Solutions Built Around Your Website" delay={0.2} />
-              <p>
+            <div className="ds-solutions-head">
+              <Reveal as="h2" id="dev-sol-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Development Solutions Built Around Your Website
+              </Reveal>
+              <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
                 From building a new website to keeping it secure, updated, and
                 performing well, we cover the two essentials every AV and smart home
                 business needs.
-              </p>
-            </Reveal>
+              </Reveal>
+            </div>
             <StaggerContainer className="ds-solutions-grid ds-grid-2" delay={0.2} stagger={0.22}>
               {SOLUTIONS.map((sol) => (
                 <AnimatedCard className="ds-solution-card" key={sol.title}>
@@ -140,8 +143,8 @@ export default function ClientDevelopment() {
         {/* ── FAQ ── */}
         <section className="ds-faq-section">
           <div className="ds-faq-shell">
-            <Reveal className="ds-faq-head" delay={0.16}>
-              <span className="ds-badge ds-badge-sm">
+            <div className="ds-faq-head">
+              <Reveal as="span" className="ds-badge ds-badge-sm" delay={0} duration={0.4} yOffset={6} blur="6px">
                 <svg
                   width="13" height="13" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" strokeWidth="2"
@@ -151,10 +154,14 @@ export default function ClientDevelopment() {
                   <path d="M12 16v-4M12 8h.01" />
                 </svg>
                 FAQS
-              </span>
-              <TextReveal id="faq-title" as="h2" text="Questions? Answers!" delay={0.2} />
-              <p>Find some quick answers to the most common questions.</p>
-            </Reveal>
+              </Reveal>
+              <Reveal as="h2" id="faq-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Questions? Answers!
+              </Reveal>
+              <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                Find some quick answers to the most common questions.
+              </Reveal>
+            </div>
             <Reveal delay={0.2} className="ds-faq-list">
               <FaqPro items={FAQS} defaultOpenFirst={true} />
             </Reveal>

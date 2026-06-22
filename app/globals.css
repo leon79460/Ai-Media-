@@ -14901,4 +14901,17 @@ main.about-page .about-faq-section #faq-title.section-title {
     min-height: 412px;
     padding: 34px;
   }
+
+  main.about-page .about-card-grid,
+  main.about-page .about-timeline,
+  main.about-page .about-team-grid,
+  main.about-page .about-testimonial-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.pricing-header,
+.why-header,
+.blog-home-header {
+  opacity: 1 !important;
 }

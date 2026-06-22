@@ -7,7 +7,6 @@ import AnimatedCard from './animation/AnimatedCard';
 import AnimatedPricingToggle from './animation/AnimatedPricingToggle';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
-import TextReveal from './animation/TextReveal';
 import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Pricing';
@@ -183,22 +182,33 @@ export default function Pricing() {
   return (
     <section id="pricing" className="pricing-section">
       <div className="pricing-shell">
-        <Reveal className="pricing-header" effect="scale" scale={0.94}>
-          <span className="section-badge">
-            <Image
-              src="/icons/pricing.svg"
-              alt=""
-              aria-hidden="true"
-              width={18}
-              height={18}
-              style={styles.badgeIcon}
-            />
-            {SECTION_BADGE}</span>
-          <TextReveal id="pricing-title" as="h2" text={SECTION_TITLE} className="section-title" delay={0.2} />
-          <p className="section-sub">{SECTION_SUB}</p>
+        <div className="pricing-header">
+          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+            <span className="section-badge">
+              <Image
+                src="/icons/pricing.svg"
+                alt=""
+                aria-hidden="true"
+                width={18}
+                height={18}
+                style={styles.badgeIcon}
+              />
+              {SECTION_BADGE}
+            </span>
+          </Reveal>
+
+          <h2 id="pricing-title" className="section-title">
+            <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px" style={{ display: 'block' }}>
+              {SECTION_TITLE}
+            </Reveal>
+          </h2>
+
+          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+            <p className="section-sub">{SECTION_SUB}</p>
+          </Reveal>
 
           <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />
-        </Reveal>
+        </div>
 
         <StaggerContainer className="pricing-grid" delay={0.20} stagger={0.24}>
           {PLANS.map((plan, index) => (

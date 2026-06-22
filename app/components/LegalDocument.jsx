@@ -43,15 +43,21 @@ export default function LegalDocument({
     <>
       <Navbar />
       <main className="legal-page">
-        <Reveal as="section" className="legal-hero" aria-labelledby="legal-title" delay={0.16}>
-          <span className="section-badge">
+        <section className="legal-hero" aria-labelledby="legal-title">
+          <Reveal as="span" className="section-badge" delay={0} duration={0.4} yOffset={6} blur="6px">
             <LegalBadgeIcon />
             {badge}
-          </span>
-          <h1 id="legal-title">{title}</h1>
-          <p>{intro}</p>
-          <small>Last updated: {lastUpdated}</small>
-        </Reveal>
+          </Reveal>
+          <Reveal as="h1" id="legal-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+            {title}
+          </Reveal>
+          <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+            {intro}
+          </Reveal>
+          <Reveal as="small" delay={0.9} duration={0.4} yOffset={6} blur="6px">
+            Last updated: {lastUpdated}
+          </Reveal>
+        </section>
 
         <section className="legal-layout" aria-label={title}>
           <Reveal as="article" className="legal-article blog-article" delay={0.2}>

@@ -7,7 +7,6 @@ import Marquee from './animation/Marquee';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
 import OriginButton from './OriginButton';
-import TextReveal from './animation/TextReveal';
 
 const SECTION_BADGE = 'Process';
 const SECTION_TITLE = 'One System. Built to Compound.';
@@ -313,9 +312,8 @@ export default function Process() {
           alignItems: 'center',
         }}
       >
-        <Reveal
+        <div
           className="process-header"
-          effect="slide-left"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -325,28 +323,36 @@ export default function Process() {
             marginBottom: 78,
           }}
         >
-          <ProcessBadge />
-          <TextReveal
-            as="h2"
+          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+            <ProcessBadge />
+          </Reveal>
+
+          <h2
+            id="process-title"
             className="section-title process-title"
-            text={SECTION_TITLE}
-            delay={0.2}
             style={{
               fontSize: 55,
               lineHeight: 1.2,
               letterSpacing: 0,
             }}
-          />
-          <p
-            className="section-sub"
-            style={{
-              fontSize: 18,
-              lineHeight: 1.4,
-            }}
           >
-            {SECTION_SUB}
-          </p>
-        </Reveal>
+            <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px" style={{ display: 'block' }}>
+              {SECTION_TITLE}
+            </Reveal>
+          </h2>
+
+          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+            <p
+              className="section-sub"
+              style={{
+                fontSize: 18,
+                lineHeight: 1.4,
+              }}
+            >
+              {SECTION_SUB}
+            </p>
+          </Reveal>
+        </div>
 
         <StaggerContainer
           className="process-grid"

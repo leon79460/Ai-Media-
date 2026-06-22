@@ -8,7 +8,6 @@ import OriginButton from '../components/OriginButton';
 import Reveal from '../components/animation/Reveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
 import AnimatedCard from '../components/animation/AnimatedCard';
-import TextReveal from '../components/animation/TextReveal';
 
 const VALUES = [
   {
@@ -114,18 +113,24 @@ export default function ClientCareers() {
       <main className="about-page careers-page">
         <section className="about-hero" aria-labelledby="careers-title">
           <div className="about-shell about-hero-grid">
-            <Reveal className="about-hero-copy" delay={0.16}>
-              <Badge>Careers</Badge>
-              <h1 id="careers-title">Build Growth Systems for Modern Integrators</h1>
-              <p>
-                Join AI Media and help AV and smart home companies get found,
-                trusted, and chosen through better websites, SEO, content,
-                automation, and reporting.
-              </p>
+            <div className="about-hero-copy">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Careers</Badge>
+              </Reveal>
+              <Reveal as="h1" id="careers-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Build Growth Systems for Modern Integrators
+              </Reveal>
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p>
+                  Join AI Media and help AV and smart home companies get found,
+                  trusted, and chosen through better websites, SEO, content,
+                  automation, and reporting.
+                </p>
+              </Reveal>
               <Link className="about-primary-btn" href="mailto:careers@aimedia.design">
                 Apply Now
               </Link>
-            </Reveal>
+            </div>
 
             <Reveal className="about-hero-image" delay={0.24}>
               <Image
@@ -146,14 +151,20 @@ export default function ClientCareers() {
 
         <section className="about-section careers-values" aria-labelledby="careers-values-title">
           <div className="about-shell">
-            <Reveal className="about-section-head" delay={0.16}>
-              <Badge>How We Work</Badge>
-              <TextReveal id="careers-values-title" as="h2" text="A Team Built Around Ownership" className="section-title" delay={0.2} />
-              <p className="section-sub">
-                We look for clear thinkers, strong makers, and people who care
-                about measurable client outcomes.
-              </p>
-            </Reveal>
+            <div className="about-section-head">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>How We Work</Badge>
+              </Reveal>
+              <Reveal as="h2" id="careers-values-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                A Team Built Around Ownership
+              </Reveal>
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p className="section-sub">
+                  We look for clear thinkers, strong makers, and people who care
+                  about measurable client outcomes.
+                </p>
+              </Reveal>
+            </div>
 
             <StaggerContainer className="about-card-grid" delay={0.2} stagger={0.24}>
               {VALUES.map((item, index) => (
@@ -171,14 +182,20 @@ export default function ClientCareers() {
 
         <section className="about-section careers-roles" aria-labelledby="careers-roles-title">
           <div className="about-shell">
-            <Reveal className="about-section-head" delay={0.16}>
-              <Badge>Open Roles</Badge>
-              <TextReveal id="careers-roles-title" as="h2" text="Current Opportunities" className="section-title" delay={0.2} />
-              <p className="section-sub">
-                We are always interested in specialists who can help premium
-                integrators grow online.
-              </p>
-            </Reveal>
+            <div className="about-section-head">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Open Roles</Badge>
+              </Reveal>
+              <Reveal as="h2" id="careers-roles-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Current Opportunities
+              </Reveal>
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p className="section-sub">
+                  We are always interested in specialists who can help premium
+                  integrators grow online.
+                </p>
+              </Reveal>
+            </div>
 
             <StaggerContainer className="careers-role-grid" delay={0.2} stagger={0.24}>
               {OPEN_ROLES.map((role) => (
@@ -204,10 +221,14 @@ export default function ClientCareers() {
 
         <section className="about-section careers-process" aria-labelledby="careers-process-title">
           <div className="about-shell">
-            <Reveal className="about-section-head" delay={0.16}>
-              <Badge>Hiring Process</Badge>
-              <TextReveal id="careers-process-title" as="h2" text="Simple, Practical, and Paid-Test Friendly" className="section-title" delay={0.2} />
-            </Reveal>
+            <div className="about-section-head">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Hiring Process</Badge>
+              </Reveal>
+              <Reveal as="h2" id="careers-process-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                Simple, Practical, and Paid-Test Friendly
+              </Reveal>
+            </div>
 
             <StaggerContainer className="careers-process-list" delay={0.2} stagger={0.24}>
               {PROCESS.map((step, index) => (
@@ -228,12 +249,18 @@ export default function ClientCareers() {
                 <span aria-hidden="true">Create.<br />Ship.<br />Improve.</span>
               </div>
               <div className="about-cta-copy">
-                <Badge>Join AI Media</Badge>
-                <TextReveal id="careers-cta-title" as="h2" text="Want to Work With Us?" delay={0.2} />
-                <p>
-                  Send your portfolio, role of interest, and a short note about
-                  the kind of work you do best.
-                </p>
+                <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                  <Badge>Join AI Media</Badge>
+                </Reveal>
+                <Reveal as="h2" id="careers-cta-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  Want to Work With Us?
+                </Reveal>
+                <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                  <p>
+                    Send your portfolio, role of interest, and a short note about
+                    the kind of work you do best.
+                  </p>
+                </Reveal>
                 <OriginButton
                   as="a"
                   href="mailto:careers@aimedia.design"
