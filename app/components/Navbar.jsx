@@ -1,111 +1,661 @@
-// ============================================================
-// components/Navbar.jsx — AI Media Website
-// ─────────────────────────────────────────────────────────────
-// HOW TO EDIT:
-// - To change nav links: edit the LINKS array below
-// - To change logo text: find "AI Media" and change it
-// - To change button text: find "Get Started" and change it
-// - To change button link: change href="#contact"
-// ============================================================
+// 'use client';
+
+// import Image from 'next/image';
+// import Link from 'next/link';
+// import { usePathname, useRouter } from 'next/navigation';
+// import { useEffect, useState } from 'react';
+
+// const LINKS = [
+//   { label: 'Home', target: 'home' },
+//   { label: 'Services', target: 'services' },
+//   { label: 'Pricing', target: 'pricing' },
+//   { label: 'About us', href: '/about' },
+//   { label: 'Portfolio', href: '/portfolio' },
+//   { label: 'Blogs', href: '/blog' },
+// ];
+// const MOBILE_LINKS = [...LINKS];
+
+// export default function Navbar() {
+//   const pathname = usePathname();
+//   const router = useRouter();
+//   const [mobileOpen, setMobileOpen] = useState(false);
+//   const [isMobileNav, setIsMobileNav] = useState(false);
+//   const [isScrolled, setIsScrolled] = useState(false);
+
+//   useEffect(() => {
+//     const media = window.matchMedia('(max-width: 1024px)');
+//     const update = () => setIsMobileNav(media.matches);
+//     const frameId = requestAnimationFrame(update);
+//     media.addEventListener('change', update);
+//     return () => {
+//       cancelAnimationFrame(frameId);
+//       media.removeEventListener('change', update);
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     const update = () => setIsScrolled(window.scrollY > 12);
+//     update();
+//     window.addEventListener('scroll', update, { passive: true });
+//     return () => window.removeEventListener('scroll', update);
+//   }, []);
+
+//   function scrollToSection(target) {
+//     setMobileOpen(false);
+
+//     if (pathname !== '/') {
+//       sessionStorage.setItem('pendingScrollTarget', target);
+//       router.push('/');
+//       return;
+//     }
+
+//     document.getElementById(target)?.scrollIntoView({
+//       behavior: 'smooth',
+//       block: 'start',
+//     });
+//     window.history.replaceState(null, '', '/');
+//   }
+
+//   return (
+//     <nav 
+    
+//       className={`site-nav${isScrolled ? ' is-scrolled' : ''}`}
+//       style={{
+//         position: 'fixed',
+//         top: 0,
+//         left: 0,
+//         right: 0,
+//         zIndex: 100,
+//         height: '78px',
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         padding: '0 24px',
+//         background: 'rgba(245,245,245,0.42)',
+//         backdropFilter: 'blur(24px) saturate(1.45)',
+//         WebkitBackdropFilter: 'blur(24px) saturate(1.45)',
+//         borderBottom: '1px solid rgba(255,255,255,0.62)',
+//         boxShadow: isScrolled
+//           ? '0 14px 34px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.85)'
+//           : 'inset 0 1px 0 rgba(255,255,255,0.85)',
+//         overflow: 'hidden',
+//         transition:
+//           'background 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1)',
+//         animation: 'navDown 0.72s cubic-bezier(0.16, 1, 0.3, 1) both',
+//       }}
+//     >
+//       <svg
+//   width="0"
+//   height="0"
+//   style={{
+//     position: 'absolute',
+//     pointerEvents: 'none',
+//   }}
+//   aria-hidden="true"
+// >
+//   <filter id="nav-liquid-glass">
+//     <feTurbulence
+//       type="fractalNoise"
+//       baseFrequency="0.008 0.012"
+//       numOctaves="1"
+//       seed="17"
+//       result="noise"
+//     />
+
+//     <feGaussianBlur
+//       in="noise"
+//       stdDeviation="2"
+//       result="blurred"
+//     />
+
+//     <feDisplacementMap
+//       in="SourceGraphic"
+//       in2="blurred"
+//       scale="18"
+//       xChannelSelector="R"
+//       yChannelSelector="G"
+//     />
+//   </filter>
+// </svg>
+
+// <div
+//   aria-hidden="true"
+//   style={{
+//     position: 'absolute',
+//     inset: 0,
+//     zIndex: 0,
+//     pointerEvents: 'none',
+//     background:
+//       'linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.18) 45%, rgba(255,255,255,0.45))',
+//     filter: 'url(#nav-liquid-glass)',
+//     opacity: 0.7,
+//   }}
+// />
+
+// <div
+//   aria-hidden="true"
+//   style={{
+//     position: 'absolute',
+//     inset: 0,
+//     zIndex: 0,
+//     pointerEvents: 'none',
+//     boxShadow:
+//       'inset 0 1px 0 rgba(255,255,255,0.92), inset 0 -1px 0 rgba(255,255,255,0.32)',
+//   }}
+// />
+//       <div
+//   className="nav-shell"
+//   style={{
+//     position: 'relative',
+//     zIndex: 2,
+//   }}
+// >
+//         {/* Logo — hidden until user scrolls past the hero logo on the home page */}
+//         <button
+//           type="button"
+//           aria-label="AI Media home"
+//           className="nav-logo"
+//           onClick={() => scrollToSection('home')}
+//           style={{
+//             display: 'inline-flex',
+//             alignItems: 'center',
+//             border: 0,
+//             background: 'transparent',
+//             cursor: 'pointer',
+//             padding: 0,
+//             opacity: 1,
+//             transform: 'translateY(0)',
+//             pointerEvents: 'auto',
+//           }}
+//         >
+//           <video
+//             src="/logos/Logo.mp4"
+//             autoPlay
+//             loop
+//             muted
+//             playsInline
+//             style={{
+//               width: 'auto',
+//               height: '54px',
+//               maxWidth: '170px',
+//               objectFit: 'contain',
+//               display: 'block',
+//             }}
+//           />
+//         </button>
+
+//         {/* Desktop pill nav */}
+//         <div
+//           className="nav-links"
+//           style={{
+//             border: 0,
+//             background: 'transparent',
+//             boxShadow: 'none',
+//           }}
+//         >
+//           {LINKS.map((link, i) => {
+//             const isActive =
+//               (pathname === '/' && i === 0) ||
+//               (link.href && pathname === link.href);
+
+//             const commonStyle = {
+//               padding: '8px 16px',
+//               border: 0,
+//               background: 'transparent',
+//               cursor: 'pointer',
+//               fontFamily: 'var(--font-main)',
+//               fontWeight: isActive ? 600 : 400,
+//               fontSize: '15px',
+//               color: isActive ? '#030303' : 'rgba(3,3,3,0.62)',
+//               textDecoration: 'none',
+//               borderRadius: '6px',
+//               transition: 'background 0.2s cubic-bezier(0.33, 1, 0.68, 1), color 0.2s cubic-bezier(0.33, 1, 0.68, 1)',
+//               opacity: 0,
+//               animation: `linkDrop 0.48s cubic-bezier(0.16, 1, 0.3, 1) ${0.22 + i * 0.07}s forwards`,
+//             };
+
+//             return link.href ? (
+//               <Link
+//                 key={link.label}
+//                 href={link.href}
+//                 className="nav-link"
+//                 onClick={() => setMobileOpen(false)}
+//                 style={commonStyle}
+//               >
+//                 {link.label}
+//               </Link>
+//             ) : (
+//               <button
+//                 key={link.label}
+//                 type="button"
+//                 className="nav-link"
+//                 onClick={() => scrollToSection(link.target)}
+//                 style={commonStyle}
+//               >
+//                 {link.label}
+//               </button>
+//             );
+//           })}
+//         </div>
+
+//         {/* Right actions */}
+//         <div className="nav-actions">
+//           {!isMobileNav && (
+//             <>
+//             <Link
+//                 href="https://app.aimedia.design"
+//                 className="nav-cta nav-login-cta nav-desktop-cta"
+//                 target='blank'
+//                 style={{
+//                   display: 'inline-flex',
+//                   alignItems: 'center',
+//                   justifyContent: 'center',
+//                   gap: '8px',
+//                   color: '#060606',
+//                   textDecoration: 'none',
+//                   borderRadius: '7px',
+//                   border: 0,
+//                   padding: '0 12px',
+//                   height: '40px',
+//                   fontFamily: 'var(--font-main)',
+//                   fontWeight: 600,
+//                   fontSize: '15px',
+//                   cursor: 'pointer',
+//                   opacity: 0,
+//                   animation: 'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s forwards',
+//                 }}
+//               >
+//                 Login
+//               </Link>
+//               <Link
+//                 href="/contact"
+//                 className="nav-cta nav-start-cta nav-desktop-cta"
+//                 style={{
+//                   display: 'inline-flex',
+//                   alignItems: 'center',
+//                   justifyContent: 'center',
+//                   gap: '8px',
+//                   minWidth: '140px',
+//                   backgroundColor: '#050505',
+//                   color: '#fff',
+//                   textDecoration: 'none',
+//                   borderRadius: '7px',
+//                   border: '1px solid rgba(255,255,255,0.86)',
+//                   padding: '0 24px',
+//                   height: '40px',
+//                   fontFamily: 'var(--font-main)',
+//                   fontWeight: 600,
+//                   fontSize: '15px',
+//                   cursor: 'pointer',
+//                   backdropFilter: 'blur(14px)',
+//                   WebkitBackdropFilter: 'blur(14px)',
+//                   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+//                   opacity: 0,
+//                   animation: 'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
+//                 }}
+//               >
+//                 Get Started
+//               </Link>
+              
+//             </>
+//           )}
+
+//           <button
+//             className={`nav-mobile-toggle nav-mobile-toggle-light${mobileOpen ? ' is-open' : ''}`}
+//             type="button"
+//             aria-label="Toggle navigation menu"
+//             aria-expanded={mobileOpen}
+//             onClick={() => setMobileOpen((o) => !o)}
+//           >
+//             <span />
+//             <span />
+//           </button>
+//         </div>
+
+//         {/* Mobile panel */}
+//         <div className={`nav-mobile-panel nav-mobile-panel-light${mobileOpen ? ' is-open' : ''}`}>
+//           {MOBILE_LINKS.map((link) =>
+//             link.target ? (
+//               <button
+//                 key={link.label}
+//                 type="button"
+//                 onClick={() => scrollToSection(link.target)}
+//               >
+//                 {link.label}
+//               </button>
+//             ) : (
+//               <Link
+//                 key={link.label}
+//                 href={link.href}
+//                 onClick={() => setMobileOpen(false)}
+//               >
+//                 {link.label}
+//               </Link>
+//             )
+//           )}
+//           <Link
+//             href="https://app.aimedia.design"
+//             className="nav-mobile-cta nav-mobile-login-cta"
+//             target="_blank"
+//             onClick={() => setMobileOpen(false)}
+//           >
+//             Login
+//           </Link>
+//           <Link
+//             href="/contact"
+//             className="nav-mobile-cta nav-mobile-start-cta"
+//             onClick={() => setMobileOpen(false)}
+//           >
+//             Get Started
+//           </Link>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// }
 
 'use client';
 
-// ── Nav link labels — EDIT THESE to change menu items ────────
-const LINKS = ['Home', 'Services', 'About us', 'Works', 'Blogs'];
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+const LINKS = [
+  { label: 'Home', target: 'home' },
+  { label: 'Services', target: 'services' },
+  { label: 'Pricing', target: 'pricing' },
+  { label: 'About us', href: '/about' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Blogs', href: '/blog' },
+];
+
+const MOBILE_LINKS = [...LINKS];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileNav, setIsMobileNav] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 1024px)');
+
+    const update = () => setIsMobileNav(media.matches);
+    const frameId = requestAnimationFrame(update);
+
+    media.addEventListener('change', update);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      media.removeEventListener('change', update);
+    };
+  }, []);
+
+  useEffect(() => {
+    const update = () => setIsScrolled(window.scrollY > 12);
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
+  function scrollToSection(target) {
+    setMobileOpen(false);
+
+    if (pathname !== '/') {
+      sessionStorage.setItem('pendingScrollTarget', target);
+      router.push('/');
+      return;
+    }
+
+    document.getElementById(target)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+
+    window.history.replaceState(null, '', '/');
+  }
+
   return (
     <nav
+      className={`site-nav${isScrolled ? ' is-scrolled' : ''}`}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 100,
-        height: '74px',
+        height: '78px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 40px',
-        /* Frosted glass effect */
-        backdropFilter: 'blur(6px)',
-        WebkitBackdropFilter: 'blur(6px)',
-        backgroundColor: 'rgba(245,245,245,0.18)',
-        borderBottom: '1px solid #e3e3e3',
-        /* Slide down animation on page load */
-        animation: 'navDown 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both',
+        justifyContent: 'center',
+        padding: '0 24px',
+        background: '#F0F0F0',
+        backdropFilter: 'blur(18px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        borderBottom: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: isScrolled
+          ? '0 14px 34px rgba(0,0,0,0.08)'
+          : '0 0 0 rgba(0,0,0,0)',
+        transition:
+          'background 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1)',
+        animation: 'navDown 0.72s cubic-bezier(0.16, 1, 0.3, 1) both',
       }}
     >
-      {/* ── Logo / Brand Name ────────────────────────────────
-          EDIT: Change "AI Media" to your brand name         */}
-      <span
-        style={{
-          fontFamily: 'var(--font-main)',
-          fontWeight: 700,
-          fontSize: '22px',
-          color: '#030303',
-          letterSpacing: '-0.5px',
-          userSelect: 'none',
-        }}
-      >
-        AI Media
-      </span>
-
-      {/* ── Nav Links ────────────────────────────────────────
-          Each link drops in one-by-one with staggered delay  */}
-      <div className="nav-links" style={{ display: 'flex', gap: '2px' }}>
-        {LINKS.map((link, i) => (
-          <a
-            key={link}
-            href={`#${link.toLowerCase().replace(' ', '')}`}
-            className="nav-link"
+      <div className="nav-shell">
+        <button
+          type="button"
+          aria-label="AI Media home"
+          className="nav-logo"
+          onClick={() => scrollToSection('home')}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            border: 0,
+            background: 'transparent',
+            cursor: 'pointer',
+            padding: 0,
+            opacity: 1,
+            transform: 'translateY(0)',
+            pointerEvents: 'auto',
+          }}
+        >
+          <video
+            src="/logos/Logo.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             style={{
+              width: 'auto',
+              height: '54px',
+              maxWidth: '170px',
+              objectFit: 'contain',
+              display: 'block',
+            }}
+          />
+        </button>
+
+        <div
+          className="nav-links"
+          style={{
+            border: 0,
+            background: 'transparent',
+            boxShadow: 'none',
+          }}
+        >
+          {LINKS.map((link, i) => {
+            const isActive =
+              (pathname === '/' && i === 0) ||
+              (link.href && pathname === link.href);
+
+            const commonStyle = {
               padding: '8px 16px',
+              border: 0,
+              background: 'transparent',
+              cursor: 'pointer',
               fontFamily: 'var(--font-main)',
-              fontWeight: i === 0 ? 600 : 400,
+              fontWeight: isActive ? 600 : 400,
               fontSize: '15px',
-              color: i === 0 ? '#000' : '#3d3d3d',
+              color: isActive ? '#030303' : 'rgba(3,3,3,0.62)',
               textDecoration: 'none',
               borderRadius: '6px',
-              transition: 'background 0.2s',
-              /* Staggered drop-in: each link 0.1s later than prev */
+              transition:
+                'background 0.2s cubic-bezier(0.33, 1, 0.68, 1), color 0.2s cubic-bezier(0.33, 1, 0.68, 1)',
               opacity: 0,
-              animation: `linkDrop 0.4s ease ${0.4 + i * 0.1}s forwards`,
-            }}
-          >
-            {link}
-          </a>
-        ))}
-      </div>
+              animation: `linkDrop 0.48s cubic-bezier(0.16, 1, 0.3, 1) ${
+                0.22 + i * 0.07
+              }s forwards`,
+            };
 
-      {/* ── Get Started Button ───────────────────────────────
-          EDIT: Change text or href below                     */}
-      <a
-        href="#contact"
-        className="nav-cta"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          backgroundColor: '#000',
-          color: '#fff',
-          textDecoration: 'none',
-          borderRadius: '10px',
-          padding: '0 20px',
-          height: '46px',
-          fontFamily: 'var(--font-main)',
-          fontWeight: 700,
-          fontSize: '14px',
-          cursor: 'pointer',
-          transition: 'opacity 0.2s, transform 0.2s',
-          boxShadow: '0 3px 10px rgba(0,0,0,0.3)',
-          /* Pops in last, after all links */
-          opacity: 0,
-          animation: 'btnPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 1s forwards',
-        }}
-      >
-        ✦ Get Started
-      </a>
+            return link.href ? (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="nav-link"
+                onClick={() => setMobileOpen(false)}
+                style={commonStyle}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <button
+                key={link.label}
+                type="button"
+                className="nav-link"
+                onClick={() => scrollToSection(link.target)}
+                style={commonStyle}
+              >
+                {link.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="nav-actions">
+          {!isMobileNav && (
+            <>
+              <Link
+                href="https://app.aimedia.design"
+                className="nav-cta nav-login-cta nav-desktop-cta"
+                target="_blank"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  color: '#060606',
+                  textDecoration: 'none',
+                  borderRadius: '7px',
+                  border: 0,
+                  padding: '0 12px',
+                  height: '40px',
+                  fontFamily: 'var(--font-main)',
+                  fontWeight: 600,
+                  fontSize: '15px',
+                  cursor: 'pointer',
+                  opacity: 0,
+                  animation:
+                    'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s forwards',
+                }}
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/contact"
+                className="nav-cta nav-start-cta nav-desktop-cta"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  minWidth: '140px',
+                  backgroundColor: '#050505',
+                  color: '#fff',
+                  textDecoration: 'none',
+                  borderRadius: '7px',
+                  border: '1px solid rgba(255,255,255,0.86)',
+                  padding: '0 24px',
+                  height: '40px',
+                  fontFamily: 'var(--font-main)',
+                  fontWeight: 600,
+                  fontSize: '15px',
+                  cursor: 'pointer',
+                  backdropFilter: 'blur(14px)',
+                  WebkitBackdropFilter: 'blur(14px)',
+                  boxShadow:
+                    'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+                  opacity: 0,
+                  animation:
+                    'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
+                }}
+              >
+                Get Started
+              </Link>
+            </>
+          )}
+
+          <button
+            className={`nav-mobile-toggle nav-mobile-toggle-light${
+              mobileOpen ? ' is-open' : ''
+            }`}
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((open) => !open)}
+          >
+            <span />
+            <span />
+          </button>
+        </div>
+
+        <div
+          className={`nav-mobile-panel nav-mobile-panel-light${
+            mobileOpen ? ' is-open' : ''
+          }`}
+        >
+          {MOBILE_LINKS.map((link) =>
+            link.target ? (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => scrollToSection(link.target)}
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+
+          <Link
+            href="https://app.aimedia.design"
+            className="nav-mobile-cta nav-mobile-login-cta"
+            target="_blank"
+            onClick={() => setMobileOpen(false)}
+          >
+            Login
+          </Link>
+
+          <Link
+            href="/contact"
+            className="nav-mobile-cta nav-mobile-start-cta"
+            onClick={() => setMobileOpen(false)}
+          >
+            Get Started
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }

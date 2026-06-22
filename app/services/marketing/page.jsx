@@ -1,0 +1,194 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
+
+const SOLUTIONS = [
+  {
+    image: '/services/marketing-seo.png',
+    title: 'SEO',
+    description:
+      'We improve your website structure, keywords, and search visibility so more qualified customers can find your business on Google.',
+  },
+  {
+    image: '/services/marketing-social.png',
+    title: 'Social Media',
+    description:
+      'We create and manage social content that keeps your brand active, professional, and visible across the platforms your audience uses.',
+  },
+  {
+    image: '/services/marketing-email.png',
+    title: 'Email Marketing',
+    description:
+      'We build email campaigns that nurture leads, maintain customer relationships, and keep your business top of mind.',
+  },
+];
+
+const FAQS = [
+  {
+    question: 'How long does it take to develop an AI solution?',
+    answer:
+      'We specialize in AI solutions, including machine learning models, automation, chatbots, predictive analytics, and consulting tailored to your business needs.',
+  },
+  {
+    question: 'How long does it take to develop an AI solution?',
+    answer:
+      'Most first launches take a few weeks, while larger systems depend on the depth of content, automation, and integrations required.',
+  },
+  {
+    question: 'Do I need technical expertise to work with you?',
+    answer:
+      'No. We manage the technical strategy, implementation, and support so you can focus on your business.',
+  },
+  {
+    question: 'Is my data safe when working with your agency?',
+    answer:
+      'Yes. We design workflows with privacy, access control, and practical data handling standards in mind.',
+  },
+  {
+    question: 'Can AI really help my business grow?',
+    answer:
+      'Yes. Used correctly, AI can speed up production, improve follow-up, clarify reporting, and create more consistent marketing operations.',
+  },
+];
+
+export const metadata = {
+  title: 'Digital Marketing Services — AI Media',
+  description:
+    'SEO, social media, and email marketing for AV and smart home integrators. Increase visibility, attract qualified leads, and grow consistently.',
+};
+
+export default function MarketingPage() {
+  return (
+    <>
+      <Navbar />
+      <main className="ds-page">
+
+        {/* ── Hero ── */}
+        <section className="ds-hero">
+          <div className="ds-hero-card">
+            <div className="ds-hero-grid">
+              <div className="ds-hero-copy">
+                <span className="ds-badge">
+                  <svg
+                    width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="1.8"
+                    strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+                  >
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                  Marketing
+                </span>
+                <h1>Digital Marketing for AV &amp; Smart Home Integrators</h1>
+                <p>
+                  We help AV and smart home businesses improve visibility, attract
+                  qualified leads, and stay connected with their audience through SEO,
+                  social media, and email marketing.
+                </p>
+                <Link href="/contact" className="ds-primary-btn">
+                  → Book a Strategy Call
+                </Link>
+              </div>
+              <div className="ds-hero-img">
+                <Image
+                  src="/services/marketing-hero.png"
+                  alt="Digital marketing for AV and smart home businesses"
+                  width={640}
+                  height={440}
+                  priority
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px', display: 'block' }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Dark Solutions Section ── */}
+        <section className="ds-solutions">
+          <span className="ds-deco ds-deco-1" aria-hidden="true" />
+          <span className="ds-deco ds-deco-2" aria-hidden="true" />
+          <div className="ds-solutions-shell">
+            <div className="ds-solutions-head">
+              <h2>Marketing Solutions Built for Consistent Growth</h2>
+              <p>
+                From search visibility to audience engagement, we focus on the
+                channels that help your business get found, trusted, and contacted.
+              </p>
+            </div>
+            <div className="ds-solutions-grid">
+              {SOLUTIONS.map((sol) => (
+                <article className="ds-solution-card" key={sol.title}>
+                  <div className="ds-solution-img">
+                    <Image
+                      src={sol.image}
+                      alt={sol.title}
+                      width={540}
+                      height={260}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                  <div className="ds-solution-copy">
+                    <h3>{sol.title}</h3>
+                    <p>{sol.description}</p>
+                    <Link href="/contact" className="ds-solution-btn">
+                      → Explore Services
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── FAQ ── */}
+        <section className="ds-faq-section">
+          <div className="ds-faq-shell">
+            <div className="ds-faq-head">
+              <span className="ds-badge ds-badge-sm">
+                <svg
+                  width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2"
+                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+                FAQS
+              </span>
+              <h2>Questions? Answers!</h2>
+              <p>Find some quick answers to the most common questions.</p>
+            </div>
+            <div className="ds-faq-list">
+              {FAQS.map((faq, i) => (
+                <details className="ds-faq-item" key={i} open={i === 0}>
+                  <summary>
+                    {faq.question}
+                    <span className="ds-faq-icon" aria-hidden="true" />
+                  </summary>
+                  <p>{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+            <p className="ds-email-note">
+              <svg
+                width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round"
+                aria-hidden="true" style={{ flexShrink: 0, marginTop: '1px' }}
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              Feel free to mail us for any enquiries :{' '}
+              <a href="mailto:aimedia@support.com">aimedia@support.com</a>
+            </p>
+          </div>
+        </section>
+
+      </main>
+      <Footer />
+    </>
+  );
+}

@@ -1,64 +1,154 @@
-// ============================================================
-// Footer.jsx — Exact Figma match
-// EDIT: TAGLINE, COPYRIGHT, MENU_LINKS, SERVICE_LINKS
-// EDIT: SOCIAL_LINKS — replace # with your real social URLs
-// ============================================================
 'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Reveal from './animation/Reveal';
 
-// ⚠️ Save to /public/ before going live
-const BG_IMAGE = 'footer-bg.png';
-const LOGO_IMAGE = 'logo.png';
-const ICON_X =
-  'https://www.figma.com/api/mcp/asset/692032a9-1b13-44d9-9fc0-700b191bc32c';
-const ICON_INSTA =
-  'https://www.figma.com/api/mcp/asset/620475f7-c1ee-4e71-89fc-7e93cb9d6831';
-const ICON_LINKEDIN =
-  'https://www.figma.com/api/mcp/asset/2cec57d9-b83e-4f9e-88a7-c7a2ff3cb4b3';
+const BG_VIDEO = '/video/footer-bg.mp4';
 
-// EDIT these
+
 const TAGLINE =
   'AI-First Digital Agency for AV & Smart Home Integrators. We build systems that compound over time.';
 const COPYRIGHT = '© 2026 AI MEDIA · ALL RIGHTS RESERVED';
 
 const MENU_LINKS = [
-  { label: 'Blog', href: '#blogs' },
-  { label: 'Work', href: '#works' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Terms', href: '/terms-and-conditions' },
+  { label: 'Privacy', href: '/privacy-policy' },
+  { label: 'Careers', href: '/careers' },
 ];
 
 const SERVICE_LINKS = [
-  { label: 'Design', href: '#services' },
-  { label: 'Development', href: '#services' },
-  { label: 'Marketing', href: '#services' },
-  { label: 'Content', href: '#services' },
-  { label: 'Privacy', href: '#' },
+  { label: 'Design', target: 'services' },
+  { label: 'Development', target: 'services' },
+  { label: 'Marketing', target: 'services' },
+  { label: 'Content', target: 'services' },
 ];
 
 const SOCIAL_LINKS = [
-  { icon: ICON_X, href: 'https://x.com', label: 'X' },
-  { icon: ICON_INSTA, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: ICON_LINKEDIN, href: 'https://linkedin.com', label: 'LinkedIn' },
+  { href: 'https://www.facebook.com/people/AI-Media/61588554962980/', label: 'Facebook' },
+  { href: 'https://www.instagram.com/ai.media.design/', label: 'Instagram' },
+  { href: 'https://www.youtube.com/@AIMedia.Design', label: 'YouTube' },
+  { href: 'https://www.linkedin.com/company/ai-media-design/', label: 'LinkedIn' },
+  { href: 'https://www.tiktok.com/@aimedia_co', label: 'TikTok' },
 ];
 
+function SocialIcon({ label }) {
+  if (label === 'Facebook') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5f5f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+      </svg>
+    );
+  }
+
+  if (label === 'Instagram') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="4" width="16" height="16" rx="4" stroke="#f5f5f5" strokeWidth="2" fill="none" />
+        <circle cx="12" cy="12" r="3.5" stroke="#f5f5f5" strokeWidth="2" fill="none" />
+        <circle cx="17.2" cy="6.8" r="1.1" fill="#f5f5f5" />
+      </svg>
+    );
+  }
+
+  if (label === 'YouTube') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5f5f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#f5f5f5" />
+      </svg>
+    );
+  }
+
+  if (label === 'LinkedIn') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5f5f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    );
+  }
+
+  if (label === 'TikTok') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5f5f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+      </svg>
+    );
+  }
+
+  return null;
+}
+
 export default function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [email, setEmail] = useState('');
+  const [submittedOpen, setSubmittedOpen] = useState(false);
+
+  const footerLinkStyle = {
+    background: 'transparent',
+    border: 0,
+    cursor: 'pointer',
+    fontFamily: 'var(--font)',
+    fontWeight: 400,
+    fontSize: '16px',
+    color: 'rgb(197 192 192)',
+    textDecoration: 'none',
+    lineHeight: 1.64,
+    whiteSpace: 'nowrap',
+    transition: 'color 0.2s',
+    padding: 0,
+    textAlign: 'left',
+  };
+
+  const handleFooterLinkEnter = e => {
+    e.currentTarget.style.color = '#ffffff';
+  };
+
+  const handleFooterLinkLeave = e => {
+    e.currentTarget.style.color = 'rgb(197 192 192)';
+  };
+
+  function scrollToSection(target) {
+    if (pathname !== '/') {
+      sessionStorage.setItem('pendingScrollTarget', target);
+      router.push('/');
+      return;
+    }
+
+    document.getElementById(target)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    window.history.replaceState(null, '', '/');
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
-    // EDIT: replace this with your real email handler
-    alert(`Subscribed: ${email}`);
+    if (!email.trim()) return;
+
     setEmail('');
+    setSubmittedOpen(true);
   };
 
   return (
     <footer
       id="contact"
-      style={{ position: 'relative', overflow: 'hidden', minHeight: '699px' }}
+      className="site-footer"
+      style={{ position: 'relative', overflow: 'hidden' }}
     >
-      {/* Dark background image */}
-      <img
-        src={BG_IMAGE}
-        alt=""
+      {/* Dark background video */}
+      <video
+        aria-hidden="true"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
         style={{
           position: 'absolute',
           inset: 0,
@@ -67,7 +157,9 @@ export default function Footer() {
           objectFit: 'cover',
           pointerEvents: 'none',
         }}
-      />
+      >
+        <source src={BG_VIDEO} type="video/mp4" />
+      </video>
       {/* Semi-transparent blur overlay */}
       <div
         style={{
@@ -80,16 +172,19 @@ export default function Footer() {
       />
 
       {/* All content sits above the background */}
-      <div
+      <Reveal
+        className="site-footer-inner"
+        y={24}
+        amount={0.12}
         style={{
           position: 'relative',
           zIndex: 1,
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '118px 40px',
+          padding: '72px 40px 48px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '124px',
+          gap: '72px',
         }}
       >
         {/* ── TOP ROW: left content + right nav columns ── */}
@@ -112,68 +207,44 @@ export default function Footer() {
               minWidth: '280px',
             }}
           >
-            {/* Logo + brand name */}
+            {/* Logo */}
             <div
               style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}
             >
               <div
-                style={{ display: 'flex', alignItems: 'center', gap: '24px' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '14px' }}
               >
-                {/* Mini sphere */}
-                <div
+                <button
+                  type="button"
+                  aria-label="AI Media home"
+                  className="nav-logo"
+                  onClick={() => scrollToSection('home')}
                   style={{
-                    width: '64px',
-                    height: '64px',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(to bottom, #000, #fff)',
-                    position: 'relative',
-                    flexShrink: 0,
-                    boxShadow: '0 2px 8px rgba(122,122,122,0.4)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    border: 0,
+                    background: 'transparent',
+                    cursor: 'pointer',
+                    padding: 0,
+                    opacity: 1,
+                    transform: 'translateY(0)',
+                    pointerEvents: 'auto',
                   }}
                 >
-                  <div
+                  <Image
+                    src="/logos/logo-2.png"
+                    alt="AI Media"
+                    width={170}
+                    height={54}
                     style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%,-50%)',
-                      width: '53px',
-                      height: '53px',
-                      borderRadius: '50%',
-                      background:
-                        'linear-gradient(to right, #000, rgba(0,0,0,0.4))',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      overflow: 'hidden',
+                      width: 'auto',
+                      height: '54px',
+                      maxWidth: '170px',
+                      objectFit: 'contain',
+                      display: 'block',
                     }}
-                  >
-                    <img
-                      src={LOGO_IMAGE}
-                      alt="AI Media"
-                      style={{
-                        width: '49px',
-                        height: '49px',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </div>
-                </div>
-                {/* Brand name — EDIT to change */}
-                <span
-                  style={{
-                    fontFamily: 'var(--font)',
-                    fontWeight: 500,
-                    fontSize: 'clamp(28px,4vw,64px)',
-                    color: '#f5f5f5',
-                    letterSpacing: '-2px',
-                    textTransform: 'uppercase',
-                    lineHeight: 1.64,
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  AI Media
-                </span>
+                  />
+                </button>
               </div>
 
               {/* Tagline — EDIT: TAGLINE */}
@@ -182,7 +253,7 @@ export default function Footer() {
                   fontFamily: 'var(--font)',
                   fontWeight: 400,
                   fontSize: '16px',
-                  color: '#f5f5f5',
+                  color: 'rgb(197 192 192)',
                   lineHeight: 1.64,
                 }}
               >
@@ -196,19 +267,24 @@ export default function Footer() {
             >
               <form
                 onSubmit={handleSubmit}
-                style={{ display: 'flex', alignItems: 'flex-end', gap: '34px' }}
+                style={{ display: 'flex', alignItems: 'center' }}
               >
                 {/* Email field */}
                 <div
                   style={{
                     flex: 1,
-                    borderBottom: '1px solid rgba(245,245,245,0.5)',
-                    paddingBottom: '14px',
+                    backgroundColor: '#2b2b2b',
+                    height: '46px',
+                    borderTopLeftRadius: '4px',
+                    borderBottomLeftRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '0 16px',
                   }}
                 >
                   <input
                     type="email"
-                    placeholder="Your Email"
+                    placeholder="Email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
@@ -218,36 +294,41 @@ export default function Footer() {
                       outline: 'none',
                       fontFamily: 'var(--font)',
                       fontWeight: 400,
-                      fontSize: '16px',
+                      fontSize: '15px',
                       color: '#f5f5f5',
                       width: '100%',
+                      height: '100%',
                     }}
                   />
                 </div>
                 {/* Submit button */}
                 <button
                   type="submit"
+                  className="footer-submit-button"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px',
-                    backgroundColor: '#f5f5f5',
+                    justifyContent: 'center',
+                    backgroundColor: '#ffffff',
                     color: '#030303',
                     border: 'none',
-                    borderRadius: '10px',
+                    borderTopRightRadius: '4px',
+                    borderBottomRightRadius: '4px',
+                    borderTopLeftRadius: '0',
+                    borderBottomLeftRadius: '0',
                     padding: '0 20px',
                     height: '46px',
                     flexShrink: 0,
                     fontFamily: 'var(--font)',
-                    fontWeight: 700,
-                    fontSize: '14px',
+                    fontWeight: 500,
+                    fontSize: '15px',
                     cursor: 'pointer',
                     transition: 'opacity 0.2s',
                   }}
                   onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
                   onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
                 >
-                  → Submit
+                  Submit
                 </button>
               </form>
               {/* Small text below form */}
@@ -297,26 +378,30 @@ export default function Footer() {
                   gap: '10px',
                 }}
               >
-                {MENU_LINKS.map(l => (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    style={{
-                      fontFamily: 'var(--font)',
-                      fontWeight: 400,
-                      fontSize: '16px',
-                      color: '#f5f5f5',
-                      textDecoration: 'none',
-                      lineHeight: 1.64,
-                      whiteSpace: 'nowrap',
-                      transition: 'opacity 0.2s',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                    onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-                  >
-                    {l.label}
-                  </a>
-                ))}
+                {MENU_LINKS.map(l =>
+                  l.target ? (
+                    <button
+                      key={l.label}
+                      type="button"
+                      style={footerLinkStyle}
+                      onClick={() => scrollToSection(l.target)}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
+                    >
+                      {l.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={l.label}
+                      href={l.href}
+                      style={footerLinkStyle}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
+                    >
+                      {l.label}
+                    </Link>
+                  ),
+                )}
               </div>
             </div>
 
@@ -342,26 +427,30 @@ export default function Footer() {
                   gap: '10px',
                 }}
               >
-                {SERVICE_LINKS.map(l => (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    style={{
-                      fontFamily: 'var(--font)',
-                      fontWeight: 400,
-                      fontSize: '16px',
-                      color: '#f5f5f5',
-                      textDecoration: 'none',
-                      lineHeight: 1.64,
-                      whiteSpace: 'nowrap',
-                      transition: 'opacity 0.2s',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.opacity = '0.6')}
-                    onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-                  >
-                    {l.label}
-                  </a>
-                ))}
+                {SERVICE_LINKS.map(l =>
+                  l.target ? (
+                    <button
+                      key={l.label}
+                      type="button"
+                      style={footerLinkStyle}
+                      onClick={() => scrollToSection(l.target)}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
+                    >
+                      {l.label}
+                    </button>
+                  ) : (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      style={footerLinkStyle}
+                      onMouseEnter={handleFooterLinkEnter}
+                      onMouseLeave={handleFooterLinkLeave}
+                    >
+                      {l.label}
+                    </a>
+                  ),
+                )}
               </div>
             </div>
           </div>
@@ -369,6 +458,7 @@ export default function Footer() {
 
         {/* ── BOTTOM ROW: copyright + social icons ── */}
         <div
+          className="site-footer-bottom"
           style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -379,6 +469,7 @@ export default function Footer() {
         >
           {/* Copyright — EDIT: COPYRIGHT */}
           <p
+            className="site-footer-copy"
             style={{
               fontFamily: 'var(--font)',
               fontWeight: 500,
@@ -392,10 +483,14 @@ export default function Footer() {
           </p>
 
           {/* Social icon buttons — EDIT: SOCIAL_LINKS */}
-          <div style={{ display: 'flex', gap: '16px' }}>
+          <div
+            className="site-footer-socials"
+            style={{ display: 'flex', gap: '16px', alignItems: 'center' }}
+          >
             {SOCIAL_LINKS.map((s, i) => (
               <a
                 key={i}
+                className="site-footer-social-link"
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -414,28 +509,46 @@ export default function Footer() {
                   textDecoration: 'none',
                 }}
                 onMouseEnter={e =>
-                  (e.currentTarget.style.backgroundColor =
-                    'rgba(255,255,255,0.22)')
+                (e.currentTarget.style.backgroundColor =
+                  'rgba(255,255,255,0.22)')
                 }
                 onMouseLeave={e =>
-                  (e.currentTarget.style.backgroundColor =
-                    'rgba(255,255,255,0.1)')
+                (e.currentTarget.style.backgroundColor =
+                  'rgba(255,255,255,0.1)')
                 }
               >
-                <img
-                  src={s.icon}
-                  alt={s.label}
-                  style={{
-                    width: '16px',
-                    height: '16px',
-                    objectFit: 'contain',
-                  }}
-                />
+                <SocialIcon label={s.label} />
               </a>
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
+
+      {submittedOpen && (
+        <div
+          className="footer-subscribe-modal-backdrop"
+          role="presentation"
+          onClick={() => setSubmittedOpen(false)}
+        >
+          <div
+            className="footer-subscribe-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-live="polite"
+            aria-label="Subscription submitted"
+            onClick={e => e.stopPropagation()}
+          >
+            <p>Submitted</p>
+            <button
+              type="button"
+              aria-label="Close subscription confirmation"
+              onClick={() => setSubmittedOpen(false)}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }

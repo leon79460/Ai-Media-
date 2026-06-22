@@ -1,9 +1,3 @@
-// ============================================================
-// IntroVideo.jsx — Clean video player, no browser control bar
-// Only shows a mute/unmute button overlay
-// EDIT: VIDEO_SRC — your video file in /public/ folder
-// EDIT: POSTER_IMG — thumbnail shown before play (optional)
-// ============================================================
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
@@ -14,6 +8,7 @@ const POSTER_IMG = ''; // optional: "/video-poster.jpg"
 export default function IntroVideo() {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
+  const frameRef = useRef(null);
   const [muted, setMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
 
@@ -26,7 +21,7 @@ export default function IntroVideo() {
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          video.play().catch(() => { });
           setPlaying(true);
           section.style.animation = 'revealUp 0.8s ease forwards';
         } else {
@@ -38,6 +33,59 @@ export default function IntroVideo() {
     );
     obs.observe(section);
     return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    const section = sectionRef.current;
+    if (!frame || !section) return;
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    if (reduceMotion) {
+      frame.style.setProperty('--intro-video-scale', '1');
+      frame.style.setProperty('--intro-video-y', '0px');
+      frame.style.setProperty('--intro-video-opacity', '1');
+      return;
+    }
+
+    let frameId = 0;
+    const clamp = value => Math.min(Math.max(value, 0), 1);
+    const easeOut = value => 1 - Math.pow(1 - value, 3);
+
+    const updateSize = () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+      const start = viewportHeight * 0.95;
+      const end = viewportHeight * 0.05;
+      const progress = clamp((start - rect.top) / (start - end));
+      const eased = easeOut(progress);
+      const scale = 0.62 + eased * 0.38;
+      const translateY = (1 - eased) * 36;
+      const opacity = 0.82 + eased * 0.18;
+
+      frame.style.setProperty('--intro-video-scale', scale.toFixed(3));
+      frame.style.setProperty('--intro-video-y', `${translateY.toFixed(1)}px`);
+      frame.style.setProperty('--intro-video-opacity', opacity.toFixed(3));
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(updateSize);
+    };
+
+    updateSize();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+    };
   }, []);
 
   const toggleMute = () => {
@@ -62,24 +110,39 @@ export default function IntroVideo() {
   return (
     <section
       id="intro"
-      style={{ backgroundColor: '#f5f5f5', padding: '80px 40px' }}
+      className="intro-video-section"
+      style={{ backgroundColor: '#f5f5f5', padding: '90px 65px' }}
     >
       <div
         ref={sectionRef}
-        style={{ maxWidth: 'var(--max-width)', margin: '0 auto', opacity: 0 }}
+        className="intro-video-shell"
+        style={{
+          width: '100%',
+          maxWidth: '100%',
+          margin: '0',
+          opacity: 0,
+        }}
       >
         {/* Video card — asymmetric rounded corners from Figma */}
         <div
+          ref={frameRef}
+          className="intro-video-frame"
           style={{
             position: 'relative',
             width: '100%',
-            paddingTop: '56.25%' /* 16:9 aspect ratio */,
-            borderRadius: '10px 100px 10px 100px',
+            aspectRatio: '2 / 1',
+            borderRadius: '8px 54px 8px 54px',
             overflow: 'hidden',
-            background: '#000',
-            boxShadow:
-              '0 2px 8px rgba(0,0,0,0.08), 0 20px 48px rgba(0,0,0,0.12)',
+            background: '#050505',
+            boxShadow: 'none',
             cursor: 'pointer',
+            opacity: 'var(--intro-video-opacity, 0.78)',
+            transform:
+              'translateY(var(--intro-video-y, 36px)) scale(var(--intro-video-scale, 0.62))',
+            transformOrigin: 'center top',
+            willChange: 'transform, opacity',
+            WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+            maskImage: 'radial-gradient(white, black)',
           }}
           onClick={togglePlay}
         >
@@ -91,6 +154,7 @@ export default function IntroVideo() {
             muted
             loop
             playsInline
+            preload="metadata"
             style={{
               position: 'absolute',
               inset: 0,
@@ -98,6 +162,10 @@ export default function IntroVideo() {
               height: '100%',
               objectFit: 'cover',
               display: 'block',
+              borderRadius: 'inherit',
+              filter: 'grayscale(1) contrast(1.08)',
+              WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+              maskImage: 'radial-gradient(white, black)',
             }}
           />
 
@@ -111,6 +179,7 @@ export default function IntroVideo() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: 'rgba(0,0,0,0.25)',
+                borderRadius: 'inherit',
               }}
             >
               <div
@@ -133,6 +202,7 @@ export default function IntroVideo() {
 
           {/* Mute / Unmute button — bottom right corner */}
           <button
+            className="intro-video-mute"
             onClick={e => {
               e.stopPropagation();
               toggleMute();
@@ -154,7 +224,9 @@ export default function IntroVideo() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              transition: 'background 0.2s',
+              opacity: 0,
+              transform: 'translateY(4px)',
+              transition: 'opacity 0.2s ease, transform 0.2s ease, background 0.2s',
               zIndex: 10,
             }}
             onMouseEnter={e =>
@@ -169,19 +241,6 @@ export default function IntroVideo() {
           </button>
         </div>
 
-        {/* Small hint text below video */}
-        <p
-          style={{
-            textAlign: 'center',
-            marginTop: '16px',
-            fontFamily: 'var(--font)',
-            fontSize: '13px',
-            color: '#888',
-            letterSpacing: '0.5px',
-          }}
-        >
-          Click to play · Click 🔇 to unmute
-        </p>
       </div>
     </section>
   );
