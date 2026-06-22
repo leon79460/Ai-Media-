@@ -3,6 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from './animation/Reveal';
+ tanvir
+import StaggerContainer from './animation/StaggerContainer';
+import AnimatedCard from './animation/AnimatedCard';
+import TextReveal from './animation/TextReveal';
+
+ main
 
 const PORTFOLIO_ITEMS = [
   {
@@ -70,6 +76,9 @@ const PORTFOLIO_ITEMS = [
   },
 ];
 
+const PORTFOLIO_SUB =
+  'A Pinterest-inspired wall of campaigns, websites, content systems, and design work built for AV and smart home businesses.';
+
 const BADGE_ICON_STYLE = {
   width: 18,
   height: 18,
@@ -80,6 +89,34 @@ export default function Portfolio() {
   return (
     <section id="works" className="portfolio-section">
       <div className="portfolio-shell">
+ tanvir
+        <Reveal
+          effect="slide-right"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+            maxWidth: '700px',
+            margin: '0 auto 54px',
+            textAlign: 'center',
+          }}
+        >
+          <span className="section-badge">
+            <Image
+              src="/icons/portfolio.png"
+              alt=""
+              aria-hidden="true"
+              width={18}
+              height={18}
+              style={BADGE_ICON_STYLE}
+            />
+            Portfolio
+          </span>
+          <TextReveal id="portfolio-title" as="h2" text="Selected Work With Measurable Polish." className="section-title" delay={0.2} />
+          <p className="section-sub">{PORTFOLIO_SUB}</p>
+        </Reveal>
+
         <header className="portfolio-header">
           <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
             <span className="section-badge">
@@ -112,12 +149,19 @@ export default function Portfolio() {
             </p>
           </Reveal>
         </header>
+ main
 
-        <div className="portfolio-masonry" aria-label="Selected portfolio projects">
-          {PORTFOLIO_ITEMS.map((item) => (
-            <article
-              className="portfolio-card"
+        <StaggerContainer
+          className="portfolio-masonry"
+          delay={0.2}
+          stagger={0.22}
+          aria-label="Selected portfolio projects"
+        >
+          {PORTFOLIO_ITEMS.map((item, index) => (
+            <AnimatedCard
               key={item.title}
+              as="article"
+              className="portfolio-card"
               style={{ '--portfolio-ratio': item.ratio }}
             >
               <Image
@@ -135,9 +179,9 @@ export default function Portfolio() {
                 </span>
                 <span className="portfolio-visit">Visit Site</span>
               </Link>
-            </article>
+            </AnimatedCard>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

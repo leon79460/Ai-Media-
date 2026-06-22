@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedCard from './animation/AnimatedCard';
-import Reveal from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Services';
 const SECTION_TITLE_TOP = 'Everything Your AV Business';
@@ -53,9 +54,30 @@ const styles = {
     flex: '0 0 18px',
   }
 }
-function FeatureCard({ feature }) {
+
+function getServiceCardVariant(index) {
+  const direction = index % 2 === 0 ? -1 : 1;
+
+  return {
+    hidden: {
+      opacity: 0,
+      x: direction * 120,
+      y: 50,
+      rotate: direction * 0.8,
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotate: 0,
+      transition: { duration: 0.76, ease: motionEase },
+    },
+  };
+}
+
+function FeatureCard({ feature, index }) {
   return (
-    <AnimatedCard className="service-card">
+    <AnimatedCard className="service-card card-hover" variants={getServiceCardVariant(index)}>
       <span className="service-icon" aria-hidden="true">
         <Image
           className="service-icon-image"
@@ -79,9 +101,9 @@ function FeatureCard({ feature }) {
       </ul>
 
       {feature.href && (
-        <Link href={feature.href} className="service-card-link">
+        <OriginButton as="link" href={feature.href} variant="dark" className="service-card-link">
           → Explore {feature.title}
-        </Link>
+        </OriginButton>
       )}
     </AnimatedCard>
   );
@@ -91,6 +113,20 @@ export default function Features() {
   return (
     <section id="services" className="services-section">
       <div className="services-shell">
+ tanvir
+        <Reveal as="header" className="services-header" effect="clip-left">
+          <span className="services-badge">
+            <Image
+              src="/icons/services.png"
+              alt=""
+              aria-hidden="true"
+              width={18}
+              height={18}
+              style={styles.badgeIcon}
+            />
+            {SECTION_BADGE}
+          </span>
+
         <header className="services-header">
           <Reveal
             delay={0}
@@ -110,6 +146,7 @@ export default function Features() {
               {SECTION_BADGE}
             </span>
           </Reveal>
+ main
 
           <h2 className="services-title">
             <Reveal
@@ -143,11 +180,12 @@ export default function Features() {
           </Reveal>
         </header>
 
-        <StaggerContainer className="services-grid">
-          {FEATURES.map((feature) => (
+        <StaggerContainer className="services-grid" delay={0.2} stagger={0.22}>
+          {FEATURES.map((feature, index) => (
             <FeatureCard
               key={feature.title}
               feature={feature}
+              index={index}
             />
           ))}
         </StaggerContainer>

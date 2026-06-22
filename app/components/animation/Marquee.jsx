@@ -22,7 +22,7 @@ export default function Marquee({
   );
 
   return (
-    <div className={`motion-marquee ${className}`} data-motion-managed="true">
+    <div className={`motion-marquee ${className}`}>
       <div className={`motion-marquee-track ${trackClassName}`}>
         {renderGroup('a')}
         {renderGroup('b', true)}

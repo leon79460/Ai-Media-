@@ -1,4 +1,4 @@
- tanvir
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,55 +6,37 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { blogPosts } from './data/blogs';
 import Reveal from '../components/animation/Reveal';
+import StaggerContainer from '../components/animation/StaggerContainer';
+import AnimatedCard from '../components/animation/AnimatedCard';
 
- main
-export const metadata = {
-  title: 'Blog - AI Media',
-  description:
-    'Insights for AV, smart home, security, commercial AV, and low-voltage systems integrators.',
-};
+const THUMB_THEMES = ['web-design', 'branding', 'seo'];
 
-import ClientBlog from './ClientBlog';
-
-export default function BlogIndexPage() {
- tanvir
-  return <ClientBlog />;
-
+export default function ClientBlog() {
   return (
     <>
       <Navbar />
       <main className="blog-index-page">
-        <section className="blog-index-hero">
-          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
-            <span className="section-badge">
-              <Image
-                src="/blog/blog.svg"
-                alt=""
-                aria-hidden="true"
-                width={18}
-                height={18}
-              />
-              Insights & Resources
-            </span>
-          </Reveal>
+        <Reveal as="section" className="blog-index-hero" delay={0.16}>
+          <span className="section-badge">
+            <Image
+              src="/blog/blog.svg"
+              alt=""
+              aria-hidden="true"
+              width={18}
+              height={18}
+            />
+            Insights & Resources
+          </span>
+          <h1>Latest Insights From AI Media</h1>
+          <p>
+            Practical strategy, budgeting, SEO, content, and website guidance
+            for systems integrators that want more predictable growth.
+          </p>
+        </Reveal>
 
-          <h1>
-            <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
-              <span style={{ display: 'block' }}>Latest Insights From AI Media</span>
-            </Reveal>
-          </h1>
-
-          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
-            <p>
-              Practical strategy, budgeting, SEO, content, and website guidance
-              for systems integrators that want more predictable growth.
-            </p>
-          </Reveal>
-        </section>
-
-        <section className="blog-index-grid" aria-label="Blog posts">
+        <StaggerContainer as="section" className="blog-index-grid" aria-label="Blog posts" delay={0.15} stagger={0.2}>
           {blogPosts.map((post, index) => (
-            <article
+            <AnimatedCard
               className="blog-card blog-home-card blog-index-card"
               key={post.slug}
             >
@@ -94,12 +76,11 @@ export default function BlogIndexPage() {
               <Link className="read-more" href={post.href}>
                 Read More
               </Link>
-            </article>
+            </AnimatedCard>
           ))}
-        </section>
+        </StaggerContainer>
       </main>
       <Footer />
     </>
   );
- main
 }
