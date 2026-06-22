@@ -1,10 +1,10 @@
 @import url("https://fonts.cdnfonts.com/css/satoshi");
 @import "tailwindcss";
 
-/* ============================================================
+/* 
    globals.css â€” AI Media Website
    HOW TO EDIT: Change colors/speeds here to update whole site
-   ============================================================ */
+    */
 *,
 *::before,
 *::after {
@@ -7631,8 +7631,16 @@ body {
 .nav-mobile-panel-light button:focus-visible {
   color: #000000;
   background: #ffffff0f;
+
   outline: none;
   border: none !important;
+}
+
+.nav-mobile-panel a:hover, .nav-mobile-panel a:focus-visible, .nav-mobile-panel button:hover, .nav-mobile-panel button:focus-visible, .nav-mobile-panel-light a:hover, .nav-mobile-panel-light a:focus-visible, .nav-mobile-panel-light button:hover, .nav-mobile-panel-light button:focus-visible {
+    color: #000000;
+    background: #ffffff0f;
+    outline: none;
+    border: none !important;
 }
 
 .nav-mobile-panel .nav-mobile-cta,
@@ -8598,6 +8606,9 @@ p {
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
 }
 
+
+
+
 .service-icon {
   display: block;
   position: relative;
@@ -8889,6 +8900,7 @@ p {
 
 @media (max-width: 768px) {
   .portfolio-section {
+    padding: 130px 16px 60px;
     padding: 130px 16px 60px;
   }
 
@@ -11407,6 +11419,7 @@ p {
   padding: 82px 0 76px;
 }
 
+
 .about-split-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -12209,6 +12222,7 @@ main.about-page .section-sub.reveal-motion:not(.is-visible) {
   .blog-post-page,
   .legal-page {
     padding-top: 130px;
+    padding-top: 130px;
     padding-bottom: 60px !important;
   }
 
@@ -12997,6 +13011,7 @@ main.careers-page .careers-process-card p {
   main.about-page .about-split-grid,
   main.about-page .about-cta-panel {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   main.about-page .about-card-grid,
@@ -13041,8 +13056,11 @@ main.careers-page .careers-process-card p {
   }
 }
 
+
 /* About page 768 responsive code here */
 @media (max-width: 768px) {
+
+
   main.careers-page .about-shell {
     width: calc(100% - 32px);
   }
@@ -13113,12 +13131,14 @@ main.careers-page .careers-process-card p {
   main.about-page .about-timeline,
   main.about-page .about-team-grid,
   main.about-page .about-testimonial-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   main.about-page .about-timeline {
     padding-top: 0;
   }
+
+  
 
   main.about-page .about-split-copy h2,
   main.about-page .about-row-head h2 {
@@ -14774,3 +14794,22 @@ main.about-page .about-faq-section #faq-title.section-title {
   color: #050505 !important;
   filter: none !important;
 }
+
+/* .site-nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.7),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(255,255,255,.35),
+      transparent 45%
+    );
+  opacity: .8;
+} */

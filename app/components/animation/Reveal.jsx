@@ -1,10 +1,16 @@
 'use client';
 
+ tanvir
 import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { ANIMATION_VIEWPORT_AMOUNT, useDelayedInView } from './viewport';
 
-export const motionEase = [0.22, 1, 0.36, 1];
+import { motion, useInView, useReducedMotion } from 'motion/react';
+import { useRef } from 'react';
+
+export const motionEase = 'easeOut';
+ main
+
 export const motionDurations = {
   fast: 0.45,
   base: 0.95,
@@ -81,6 +87,7 @@ export const blurReveal = {
   },
 };
 
+ tanvir
 const motionTags = {
   div: motion.div,
   header: motion.header,
@@ -195,10 +202,12 @@ function getExitedState(visible) {
   };
 }
 
+
+ main
 export default function Reveal({
-  as = 'div',
   children,
   className,
+ tanvir
   style,
   effect = 'fade-up',
   delay = 0,
@@ -207,9 +216,19 @@ export default function Reveal({
   scale,
   amount = ANIMATION_VIEWPORT_AMOUNT,
   once = true,
+
+ delay = 0 ,
+duration = 0.5,
+yOffset = 7,
+inView = true,
+inViewMargin = '-50px',
+blur = '6px',
+ main
   ...props
 }) {
+  const ref = useRef(null);
   const shouldReduceMotion = useReducedMotion();
+ tanvir
   const ref = useRef(null);
   const inView = useDelayedInView(ref, { amount, once });
   const [hasEntered, setHasEntered] = useState(false);
@@ -252,9 +271,51 @@ export default function Reveal({
         exited,
       }}
       transition={{ duration, ease: motionEase, delay }}
+
+
+  const inViewResult = useInView(ref, {
+    once: true,
+    margin: inViewMargin,
+  });
+
+  const isInView = !inView || inViewResult;
+
+  if (shouldReduceMotion) {
+    return (
+      <div className={className} {...props}>
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      data-motion-managed="true"
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={{
+        hidden: {
+          y: yOffset,
+          opacity: 0,
+          filter: `blur(${blur})`,
+        },
+        visible: {
+          y: -yOffset,
+          opacity: 1,
+          filter: 'blur(0px)',
+        },
+      }}
+      transition={{
+        delay: 0.04 + delay,
+        duration,
+        ease: 'easeOut',
+      }}
+ main
       {...props}
     >
       {children}
-    </Component>
+    </motion.div>
   );
 }

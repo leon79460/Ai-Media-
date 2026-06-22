@@ -113,6 +113,7 @@ export default function Features() {
   return (
     <section id="services" className="services-section">
       <div className="services-shell">
+ tanvir
         <Reveal as="header" className="services-header" effect="clip-left">
           <span className="services-badge">
             <Image
@@ -126,12 +127,58 @@ export default function Features() {
             {SECTION_BADGE}
           </span>
 
+        <header className="services-header">
+          <Reveal
+            delay={0}
+            duration={0.4}
+            yOffset={6}
+            blur="6px"
+          >
+            <span className="services-badge">
+              <Image
+                src="/icons/services.png"
+                alt=""
+                aria-hidden="true"
+                width={18}
+                height={18}
+                style={styles.badgeIcon}
+              />
+              {SECTION_BADGE}
+            </span>
+          </Reveal>
+ main
+
           <h2 className="services-title">
-            <span>{SECTION_TITLE_TOP}</span>
-            <span>{SECTION_TITLE_BOTTOM}</span>
+            <Reveal
+              delay={0.25}
+              duration={0.4}
+              yOffset={6}
+              blur="6px"
+            >
+              <span>{SECTION_TITLE_TOP}</span>
+            </Reveal>
+
+            <Reveal
+              delay={0.5}
+              duration={0.4}
+              yOffset={6}
+              blur="6px"
+            >
+              <span>{SECTION_TITLE_BOTTOM}</span>
+            </Reveal>
           </h2>
-          <p className="services-sub">{SECTION_SUB}</p>
-        </Reveal>
+
+          <Reveal
+            delay={0.75}
+            duration={0.4}
+            yOffset={6}
+            blur="6px"
+          >
+            <p className="services-sub">
+              {SECTION_SUB}
+            </p>
+          </Reveal>
+        </header>
 
         <StaggerContainer className="services-grid" delay={0.2} stagger={0.22}>
           {FEATURES.map((feature, index) => (

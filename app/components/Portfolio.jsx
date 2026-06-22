@@ -3,9 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from './animation/Reveal';
+ tanvir
 import StaggerContainer from './animation/StaggerContainer';
 import AnimatedCard from './animation/AnimatedCard';
 import TextReveal from './animation/TextReveal';
+
+ main
 
 const PORTFOLIO_ITEMS = [
   {
@@ -86,6 +89,7 @@ export default function Portfolio() {
   return (
     <section id="works" className="portfolio-section">
       <div className="portfolio-shell">
+ tanvir
         <Reveal
           effect="slide-right"
           style={{
@@ -112,6 +116,40 @@ export default function Portfolio() {
           <TextReveal id="portfolio-title" as="h2" text="Selected Work With Measurable Polish." className="section-title" delay={0.2} />
           <p className="section-sub">{PORTFOLIO_SUB}</p>
         </Reveal>
+
+        <header className="portfolio-header">
+          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+            <span className="section-badge">
+              <Image
+                src="/icons/portfolio.png"
+                alt=""
+                aria-hidden="true"
+                width={18}
+                height={18}
+                style={BADGE_ICON_STYLE}
+              />
+              Portfolio
+            </span>
+          </Reveal>
+
+          <h2 className="section-title">
+            <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+              <span style={{ display: 'block' }}>Selected Work With</span>
+            </Reveal>
+
+            <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+              <span style={{ display: 'block' }}>Measurable Polish.</span>
+            </Reveal>
+          </h2>
+
+          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+            <p className="section-sub">
+              A Pinterest-inspired wall of campaigns, websites, content systems,
+              and design work built for AV and smart home businesses.
+            </p>
+          </Reveal>
+        </header>
+ main
 
         <StaggerContainer
           className="portfolio-masonry"
