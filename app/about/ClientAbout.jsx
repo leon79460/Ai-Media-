@@ -1,16 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import AnimatedCard from '../components/animation/AnimatedCard';
+import Reveal from '../components/animation/Reveal';
+import StaggerContainer from '../components/animation/StaggerContainer';
+import TextReveal from '../components/animation/TextReveal';
+import FaqPro from '../components/FaqPro';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import TestimonialAvatar from '../components/TestimonialAvatar';
 import OriginButton from '../components/OriginButton';
-import Reveal from '../components/animation/Reveal';
-import TextReveal from '../components/animation/TextReveal';
-import StaggerContainer from '../components/animation/StaggerContainer';
-import AnimatedCard from '../components/animation/AnimatedCard';
-import FaqPro from '../components/FaqPro';
+import TestimonialAvatar from '../components/TestimonialAvatar';
 
 const SERVICES = [
   {
@@ -173,7 +172,7 @@ export default function ClientAbout() {
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-shell about-hero-grid">
             <Reveal className="about-hero-copy" delay={0.16}>
-              <Badge>Process</Badge>
+              <Badge>About</Badge>
               <h1 id="about-title">About AI Media</h1>
               <p>
                 We help AV and smart home integrators build a stronger online

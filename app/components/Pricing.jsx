@@ -7,6 +7,7 @@ import AnimatedCard from './animation/AnimatedCard';
 import AnimatedPricingToggle from './animation/AnimatedPricingToggle';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import TextReveal from './animation/TextReveal';
 import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Pricing';
@@ -193,7 +194,7 @@ export default function Pricing() {
               style={styles.badgeIcon}
             />
             {SECTION_BADGE}</span>
-          <h2 className="section-title">{SECTION_TITLE}</h2>
+          <TextReveal id="pricing-title" as="h2" text={SECTION_TITLE} className="section-title" delay={0.2} />
           <p className="section-sub">{SECTION_SUB}</p>
 
           <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />

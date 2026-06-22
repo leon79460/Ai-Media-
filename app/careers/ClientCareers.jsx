@@ -8,6 +8,7 @@ import OriginButton from '../components/OriginButton';
 import Reveal from '../components/animation/Reveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
 import AnimatedCard from '../components/animation/AnimatedCard';
+import TextReveal from '../components/animation/TextReveal';
 
 const VALUES = [
   {
@@ -147,9 +148,7 @@ export default function ClientCareers() {
           <div className="about-shell">
             <Reveal className="about-section-head" delay={0.16}>
               <Badge>How We Work</Badge>
-              <h2 id="careers-values-title" className="section-title">
-                A Team Built Around Ownership
-              </h2>
+              <TextReveal id="careers-values-title" as="h2" text="A Team Built Around Ownership" className="section-title" delay={0.2} />
               <p className="section-sub">
                 We look for clear thinkers, strong makers, and people who care
                 about measurable client outcomes.
@@ -174,9 +173,7 @@ export default function ClientCareers() {
           <div className="about-shell">
             <Reveal className="about-section-head" delay={0.16}>
               <Badge>Open Roles</Badge>
-              <h2 id="careers-roles-title" className="section-title">
-                Current Opportunities
-              </h2>
+              <TextReveal id="careers-roles-title" as="h2" text="Current Opportunities" className="section-title" delay={0.2} />
               <p className="section-sub">
                 We are always interested in specialists who can help premium
                 integrators grow online.
@@ -209,9 +206,7 @@ export default function ClientCareers() {
           <div className="about-shell">
             <Reveal className="about-section-head" delay={0.16}>
               <Badge>Hiring Process</Badge>
-              <h2 id="careers-process-title" className="section-title">
-                Simple, Practical, and Paid-Test Friendly
-              </h2>
+              <TextReveal id="careers-process-title" as="h2" text="Simple, Practical, and Paid-Test Friendly" className="section-title" delay={0.2} />
             </Reveal>
 
             <StaggerContainer className="careers-process-list" delay={0.2} stagger={0.24}>
@@ -234,7 +229,7 @@ export default function ClientCareers() {
               </div>
               <div className="about-cta-copy">
                 <Badge>Join AI Media</Badge>
-                <h2 id="careers-cta-title">Want to Work With Us?</h2>
+                <TextReveal id="careers-cta-title" as="h2" text="Want to Work With Us?" delay={0.2} />
                 <p>
                   Send your portfolio, role of interest, and a short note about
                   the kind of work you do best.

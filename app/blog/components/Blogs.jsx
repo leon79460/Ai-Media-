@@ -1,4 +1,4 @@
-'use client';
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import AnimatedCard from '../../components/animation/AnimatedCard';
 import Reveal, { motionEase } from '../../components/animation/Reveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
+import TextReveal from '../../components/animation/TextReveal';
 import { blogPosts } from '../data/blogs';
 
 const SECTION_BADGE = 'Insights & Resources';
@@ -125,7 +126,7 @@ export default function Blogs() {
             <BadgeIcon />
             {SECTION_BADGE}
           </span>
-          <h2 className="section-title blog-home-title">{SECTION_TITLE}</h2>
+          <TextReveal id="blogs-title" as="h2" text={SECTION_TITLE} className="section-title blog-home-title" delay={0.2} />
           <p className="section-sub blog-home-sub">{SECTION_SUB}</p>
         </Reveal>
 

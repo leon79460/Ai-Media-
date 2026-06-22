@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import AnimatedCard from './animation/AnimatedCard';
 import Reveal, { motionEase } from './animation/Reveal';
+import TextReveal from './animation/TextReveal';
 import { useDelayedInView } from './animation/viewport';
 import OriginButton from './OriginButton';
 
@@ -324,9 +325,7 @@ export default function WhyUs() {
             />
             {SECTION_BADGE}
           </span>
-          <h2 className="section-title" style={styles.title}>
-            {SECTION_TITLE}
-          </h2>
+          <TextReveal id="whyus-title" as="h2" text={SECTION_TITLE} className="section-title" style={styles.title} delay={0.2} />
           <p className="section-sub" style={styles.sub}>
             {SECTION_SUB}
           </p>

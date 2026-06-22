@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Reveal from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
 import AnimatedCard from './animation/AnimatedCard';
+import TextReveal from './animation/TextReveal';
 
 const PORTFOLIO_ITEMS = [
   {
@@ -108,7 +109,7 @@ export default function Portfolio() {
             />
             Portfolio
           </span>
-          <h2 className="section-title">Selected Work With Measurable Polish.</h2>
+          <TextReveal id="portfolio-title" as="h2" text="Selected Work With Measurable Polish." className="section-title" delay={0.2} />
           <p className="section-sub">{PORTFOLIO_SUB}</p>
         </Reveal>
 

@@ -8,6 +8,7 @@ import OriginButton from '../components/OriginButton';
 import Reveal from '../components/animation/Reveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
 import AnimatedCard from '../components/animation/AnimatedCard';
+import TextReveal from '../components/animation/TextReveal';
 import FaqPro from '../components/FaqPro';
 
 const FAQS = [
@@ -234,7 +235,7 @@ export default function ContactPage() {
                 </svg>
                 FAQS
               </span>
-              <h2 className="contact-faq-title">Questions? Answers!</h2>
+              <TextReveal id="contact-faq-title" as="h2" text="Questions? Answers!" className="contact-faq-title" delay={0.2} />
               <p className="contact-faq-sub">
                 Find Some quick answers to the most common questions.
               </p>

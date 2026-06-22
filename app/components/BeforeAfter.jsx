@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import BeforeAfterSlider from './animation/BeforeAfterSlider';
 import Reveal, { motionEase } from './animation/Reveal';
+import TextReveal from './animation/TextReveal';
 
 const SECTION_BADGE = 'Case Study';
 const TITLE = 'We Tested The System On Our Own AV Company First.';
@@ -72,7 +73,7 @@ export default function BeforeAfter() {
             />
             {SECTION_BADGE}
           </span>
-          <h2 className="section-title">{TITLE}</h2>
+          <TextReveal id="case-study-title" as="h2" text={TITLE} className="section-title" delay={0.2} />
           <p className="section-sub" style={{ fontSize: '18px' }}>
             {SUBTITLE}
           </p>

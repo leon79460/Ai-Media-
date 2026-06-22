@@ -7,6 +7,7 @@ import OriginButton from '../../components/OriginButton';
 import Reveal from '../../components/animation/Reveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
+import TextReveal from '../../components/animation/TextReveal';
 import FaqPro from '../../components/FaqPro';
 
 const SOLUTIONS = [
@@ -111,7 +112,7 @@ export default function ClientMarketing() {
           <span className="ds-deco ds-deco-2" aria-hidden="true" />
           <div className="ds-solutions-shell">
             <Reveal className="ds-solutions-head" delay={0.16}>
-              <h2>Marketing Solutions Built for Consistent Growth</h2>
+              <TextReveal id="marketing-sol-title" as="h2" text="Marketing Solutions Built for Consistent Growth" delay={0.2} />
               <p>
                 From search visibility to audience engagement, we focus on the
                 channels that help your business get found, trusted, and contacted.
@@ -132,7 +133,7 @@ export default function ClientMarketing() {
                   <div className="ds-solution-copy">
                     <h3>{sol.title}</h3>
                     <p>{sol.description}</p>
-                    <OriginButton as="link" href="/contact" variant="light" fillColor="#f5f5f5" hoverTextColor="#050505" className="ds-solution-btn">
+                    <OriginButton as="link" href="/contact" variant="dark" className="ds-solution-btn">
                       → Explore Services
                     </OriginButton>
                   </div>
@@ -157,7 +158,7 @@ export default function ClientMarketing() {
                 </svg>
                 FAQS
               </span>
-              <h2>Questions? Answers!</h2>
+              <TextReveal id="faq-title" as="h2" text="Questions? Answers!" delay={0.2} />
               <p>Find some quick answers to the most common questions.</p>
             </Reveal>
             <Reveal delay={0.2} className="ds-faq-list">
