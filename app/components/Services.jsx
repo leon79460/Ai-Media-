@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import AnimatedCard from './animation/AnimatedCard';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
@@ -113,20 +112,6 @@ export default function Features() {
   return (
     <section id="services" className="services-section">
       <div className="services-shell">
- tanvir
-        <Reveal as="header" className="services-header" effect="clip-left">
-          <span className="services-badge">
-            <Image
-              src="/icons/services.png"
-              alt=""
-              aria-hidden="true"
-              width={18}
-              height={18}
-              style={styles.badgeIcon}
-            />
-            {SECTION_BADGE}
-          </span>
-
         <header className="services-header">
           <Reveal
             delay={0}
@@ -146,7 +131,6 @@ export default function Features() {
               {SECTION_BADGE}
             </span>
           </Reveal>
- main
 
           <h2 className="services-title">
             <Reveal

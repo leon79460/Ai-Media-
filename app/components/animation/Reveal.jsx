@@ -1,23 +1,17 @@
 'use client';
 
- tanvir
 import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { ANIMATION_VIEWPORT_AMOUNT, useDelayedInView } from './viewport';
 
-import { motion, useInView, useReducedMotion } from 'motion/react';
-import { useRef } from 'react';
-
-export const motionEase = 'easeOut';
- main
+export const motionEase = [0.22, 1, 0.36, 1];
 
 export const motionDurations = {
   fast: 0.45,
-  base: 0.95,
-  slow: 1.2,
+  base: 0.72,
+  slow: 1.05,
 };
 
-// Reusable Hover/Stagger Variants
 export const cardHover = {
   y: -8,
   scale: 1.02,
@@ -43,8 +37,8 @@ export const staggerContainer = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.26,
-      delayChildren: 0.3,
+      staggerChildren: 0.18,
+      delayChildren: 0.18,
     },
   },
 };
@@ -58,7 +52,7 @@ export const fadeIn = {
 };
 
 export const fadeUp = {
-  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 36, filter: 'blur(8px)' },
   visible: {
     opacity: 1,
     y: 0,
@@ -87,21 +81,24 @@ export const blurReveal = {
   },
 };
 
- tanvir
 const motionTags = {
   div: motion.div,
+  span: motion.span,
   header: motion.header,
   section: motion.section,
   article: motion.article,
   footer: motion.footer,
+  main: motion.main,
+  ul: motion.ul,
+  li: motion.li,
 };
 
 const revealEffects = {
-  'fade-up': ({ y, scale }) => ({
+  'fade-up': ({ y, scale, blur }) => ({
     hidden: {
       opacity: 0,
       y,
-      filter: 'blur(8px)',
+      filter: blur ? `blur(${blur})` : 'blur(8px)',
       ...(scale ? { scale } : null),
     },
     visible: {
@@ -111,11 +108,25 @@ const revealEffects = {
       ...(scale ? { scale: 1 } : null),
     },
   }),
-  'blur-reveal': ({ y }) => ({
+  'slide-up': ({ y, scale, blur }) => ({
+    hidden: {
+      opacity: 0,
+      y,
+      filter: blur ? `blur(${blur})` : 'blur(8px)',
+      ...(scale ? { scale } : null),
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      ...(scale ? { scale: 1 } : null),
+    },
+  }),
+  'blur-reveal': ({ y, blur }) => ({
     hidden: {
       opacity: 0,
       y: y || 24,
-      filter: 'blur(10px)',
+      filter: blur ? `blur(${blur})` : 'blur(10px)',
     },
     visible: {
       opacity: 1,
@@ -123,32 +134,36 @@ const revealEffects = {
       filter: 'blur(0px)',
     },
   }),
-  'slide-left': () => ({
+  'slide-left': ({ blur }) => ({
     hidden: {
       opacity: 0,
       x: -48,
       y: 12,
       rotate: -0.6,
+      filter: blur ? `blur(${blur})` : undefined,
     },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
       rotate: 0,
+      filter: 'blur(0px)',
     },
   }),
-  'slide-right': () => ({
+  'slide-right': ({ blur }) => ({
     hidden: {
       opacity: 0,
       x: 48,
       y: 12,
       rotate: 0.6,
+      filter: blur ? `blur(${blur})` : undefined,
     },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
       rotate: 0,
+      filter: 'blur(0px)',
     },
   }),
   scale: ({ scale }) => ({
@@ -164,28 +179,32 @@ const revealEffects = {
       scale: 1,
     },
   }),
-  'clip-up': () => ({
+  'clip-up': ({ blur }) => ({
     hidden: {
       opacity: 0,
       y: 32,
       scale: 0.98,
+      filter: blur ? `blur(${blur})` : undefined,
     },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
+      filter: 'blur(0px)',
     },
   }),
-  'clip-left': () => ({
+  'clip-left': ({ blur }) => ({
     hidden: {
       opacity: 0,
       x: -24,
       y: 6,
+      filter: blur ? `blur(${blur})` : undefined,
     },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
+      filter: 'blur(0px)',
     },
   }),
 };
@@ -202,68 +221,62 @@ function getExitedState(visible) {
   };
 }
 
-
- main
 export default function Reveal({
+  as = 'div',
   children,
   className,
- tanvir
   style,
   effect = 'fade-up',
   delay = 0,
   duration = motionDurations.base,
   y = 26,
+  yOffset,
   scale,
   amount = ANIMATION_VIEWPORT_AMOUNT,
   once = true,
-
- delay = 0 ,
-duration = 0.5,
-yOffset = 7,
-inView = true,
-inViewMargin = '-50px',
-blur = '6px',
- main
+  inView = true,
+  blur,
   ...props
 }) {
   const ref = useRef(null);
   const shouldReduceMotion = useReducedMotion();
- tanvir
-  const ref = useRef(null);
-  const inView = useDelayedInView(ref, { amount, once });
+  const observedInView = useDelayedInView(ref, { amount, once });
   const [hasEntered, setHasEntered] = useState(false);
   const Component = motionTags[as] || motion.div;
+  const resolvedY = yOffset ?? y;
   const preset = (revealEffects[effect] || revealEffects['fade-up'])({
-    y,
+    y: resolvedY,
     scale,
+    blur,
   });
   const exited = getExitedState(preset.visible);
   const baseStyle = { ...preset.style, ...style };
-  
-  // Clean up initial filter string for SSR/reduced motion to avoid jumps
+  const isInView = inView === false || observedInView;
+
   const resolvedStyle = shouldReduceMotion
     ? { ...baseStyle, opacity: style?.opacity ?? 1, filter: style?.filter ?? 'none' }
-    : { ...baseStyle, filter: preset.hidden.filter || baseStyle.filter };
+    : baseStyle;
 
-  const animateState = inView
+  const animateState = isInView
     ? 'visible'
     : hasEntered && !once
       ? 'exited'
       : 'hidden';
 
   useEffect(() => {
-    if (!inView) return undefined;
+    if (!isInView) return undefined;
 
     const frame = requestAnimationFrame(() => setHasEntered(true));
     return () => cancelAnimationFrame(frame);
-  }, [inView]);
+  }, [isInView]);
 
   return (
     <Component
       ref={ref}
       className={className}
       style={resolvedStyle}
-      initial={shouldReduceMotion ? false : preset.hidden}
+      data-motion-managed="true"
+      initial={shouldReduceMotion ? false : 'hidden'}
       animate={shouldReduceMotion ? undefined : animateState}
       variants={{
         hidden: preset.hidden,
@@ -271,51 +284,9 @@ blur = '6px',
         exited,
       }}
       transition={{ duration, ease: motionEase, delay }}
-
-
-  const inViewResult = useInView(ref, {
-    once: true,
-    margin: inViewMargin,
-  });
-
-  const isInView = !inView || inViewResult;
-
-  if (shouldReduceMotion) {
-    return (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    );
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      data-motion-managed="true"
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      variants={{
-        hidden: {
-          y: yOffset,
-          opacity: 0,
-          filter: `blur(${blur})`,
-        },
-        visible: {
-          y: -yOffset,
-          opacity: 1,
-          filter: 'blur(0px)',
-        },
-      }}
-      transition={{
-        delay: 0.04 + delay,
-        duration,
-        ease: 'easeOut',
-      }}
- main
       {...props}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 }

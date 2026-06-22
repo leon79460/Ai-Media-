@@ -1,77 +1,26 @@
 'use client';
 
 import Image from 'next/image';
- tanvir
 import { motion, useReducedMotion } from 'motion/react';
-import { blurReveal, fadeIn, fadeUp, motionEase, staggerContainer } from './animation/Reveal';
 import OriginButton from './OriginButton';
-=======
-import { motion, useInView, useReducedMotion } from 'motion/react';
-import { useRef } from 'react';
- main
+import {
+  blurReveal,
+  fadeIn,
+  fadeUp,
+  motionEase,
+  staggerContainer,
+} from './animation/Reveal';
 
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
 const HEADING_LINES = [
-  'Stop chasing leads.',
+  'Stop Chasing leads.',
   'Start attracting them.',
 ];
 
 const SUBTEXT =
   'We combine AI-powered delivery, industry expertise, SEO, content, and conversion-focused web design to help integrators get found, gain trust, and win more high-value projects.';
 
- tanvir
-
-function BlurFade({
-  children,
-  delay = 0,
-  duration = 1.35,
-  yOffset = 8,
-  blur = '16px',
-  className,
-}) {
-  const ref = useRef(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  const isInView = useInView(ref, {
-    once: true,
-    margin: '-50px',
-  });
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      variants={{
-        hidden: {
-          y: yOffset,
-          opacity: 0,
-          filter: `blur(${blur})`,
-        },
-        visible: {
-          y: -yOffset,
-          opacity: 1,
-          filter: 'blur(0px)',
-        },
-      }}
-      transition={{
-        delay: 0.04 + delay,
-        duration,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
- main
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -111,15 +60,9 @@ export default function Hero() {
         muted
         playsInline
         preload="metadata"
- tanvir
         initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
         animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-=======
-        initial={shouldReduceMotion ? false : { opacity: 0 }}
-        animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
- main
+        transition={{ duration: 1.5, ease: motionEase }}
         style={{
           position: 'absolute',
           inset: 0,
@@ -136,11 +79,7 @@ export default function Hero() {
         className="hero-content"
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={shouldReduceMotion ? undefined : { opacity: 1 }}
- tanvir
         transition={{ duration: 0.78, ease: motionEase, delay: 0.16 }}
-=======
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
- main
         style={{
           position: 'absolute',
           inset: 0,
@@ -150,15 +89,11 @@ export default function Hero() {
         }}
       />
 
- tanvir
       <motion.div
         variants={staggerContainer}
         initial={shouldReduceMotion ? false : 'hidden'}
         animate={shouldReduceMotion ? undefined : 'visible'}
-=======
-      <div
         data-motion-managed="true"
- main
         style={{
           position: 'relative',
           zIndex: 2,
@@ -173,11 +108,7 @@ export default function Hero() {
           color: '#f5f5f5',
         }}
       >
- tanvir
         <motion.div variants={fadeUp}>
-=======
-        <BlurFade delay={0.12} duration={1.15} yOffset={8} blur="10px">
- main
           <div
             data-parallax
             data-parallax-speed="0.12"
@@ -221,9 +152,8 @@ export default function Hero() {
               </span>
             </div>
           </div>
-        </BlurFade>
+        </motion.div>
 
- tanvir
         <motion.div variants={blurReveal}>
           <h1
             className="hero-title"
@@ -237,57 +167,21 @@ export default function Hero() {
               fontWeight: 600,
               fontSize: 'clamp(48px, 8vw, 92px)',
               lineHeight: 1.25,
-              letterSpacing: '-0.01em',
+              letterSpacing: '0',
               color: '#f5f5f5',
               textWrap: 'balance',
               textShadow: '0 18px 34px rgba(0,0,0,0.45)',
             }}
           >
-            {HEADING}
+            {HEADING_LINES.map((line) => (
+              <span key={line} style={{ display: 'block' }}>
+                {line}
+              </span>
+            ))}
           </h1>
         </motion.div>
 
         <motion.div variants={fadeIn}>
-
-        <h1
-          className="hero-title"
-          data-parallax
-          data-parallax-speed="0.08"
-          data-parallax-distance="120"
-          style={{
-            maxWidth: '900px',
-            margin: 0,
-            fontFamily: 'var(--font-main)',
-            fontWeight: 600,
-            fontSize: 'clamp(48px, 8vw, 92px)',
-            lineHeight: 1.25,
-            letterSpacing: '-0.01em',
-            color: '#f5f5f5',
-            textWrap: 'balance',
-            textShadow: '0 18px 34px rgba(0,0,0,0.45)',
-          }}
-        >
-          {HEADING_LINES.map((line, index) => (
-            <BlurFade
-              key={line}
-              delay={0.28 + index * 0.22}
-              duration={1.35}
-              yOffset={10}
-              blur="16px"
-            >
-              <span
-                style={{
-                  display: 'block',
-                }}
-              >
-                {line}
-              </span>
-            </BlurFade>
-          ))}
-        </h1>
-
-        <BlurFade delay={0.78} duration={1.2} yOffset={8} blur="12px">
- main
           <p
             data-parallax
             data-parallax-speed="0.06"
@@ -305,13 +199,9 @@ export default function Hero() {
           >
             {SUBTEXT}
           </p>
-        </BlurFade>
+        </motion.div>
 
- tanvir
         <motion.div variants={fadeUp}>
-
-        <BlurFade delay={0.94} duration={1.1} yOffset={8} blur="8px">
- main
           <div
             data-parallax
             data-parallax-speed="0.04"
@@ -325,62 +215,9 @@ export default function Hero() {
               marginTop: '4px',
             }}
           >
- tanvir
-          <OriginButton
-            variant="outline-light"
-            onClick={() => scrollToSection('pricing')}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              minWidth: '140px',
-              height: '40px',
-              padding: '0 24px',
-              borderRadius: '7px',
-              border: '1px solid rgba(255,255,255,0.86)',
-              background: 'rgba(255,255,255,0.08)',
-              color: '#fff',
-              fontFamily: 'var(--font-main)',
-              fontWeight: 700,
-              fontSize: '12px',
-              backdropFilter: 'blur(14px)',
-              WebkitBackdropFilter: 'blur(14px)',
-              boxShadow:
-                'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
-            }}
-          >
-            Start a Project
-          </OriginButton>
-          <OriginButton
-            variant="light"
-            onClick={() => scrollToSection('services')}
-            fillColor="#050505"
-            hoverTextColor="#f5f5f5"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              minWidth: '140px',
-              height: '40px',
-              padding: '0 24px',
-              borderRadius: '7px',
-              border: 0,
-              background: '#f7f7f7',
-              color: '#060606',
-              fontFamily: 'var(--font-main)',
-              fontWeight: 700,
-              fontSize: '12px',
-              boxShadow:
-                '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
-            }}
-          >
-            Explore Services
-          </OriginButton>
-
-            <button
-              type="button"
+            <OriginButton
+              variant="outline-light"
               onClick={() => scrollToSection('pricing')}
-              className="btn-p"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -395,7 +232,6 @@ export default function Hero() {
                 fontFamily: 'var(--font-main)',
                 fontWeight: 700,
                 fontSize: '12px',
-                cursor: 'pointer',
                 backdropFilter: 'blur(14px)',
                 WebkitBackdropFilter: 'blur(14px)',
                 boxShadow:
@@ -403,12 +239,13 @@ export default function Hero() {
               }}
             >
               Start a Project
-            </button>
+            </OriginButton>
 
-            <button
-              type="button"
+            <OriginButton
+              variant="light"
               onClick={() => scrollToSection('services')}
-              className="btn-s"
+              fillColor="#050505"
+              hoverTextColor="#f5f5f5"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -423,17 +260,15 @@ export default function Hero() {
                 fontFamily: 'var(--font-main)',
                 fontWeight: 700,
                 fontSize: '12px',
-                cursor: 'pointer',
                 boxShadow:
                   '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
               }}
             >
               Explore Services
-            </button>
- main
+            </OriginButton>
           </div>
-        </BlurFade>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

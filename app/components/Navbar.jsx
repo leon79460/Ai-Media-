@@ -539,20 +539,13 @@ export default function Navbar() {
         <div className="nav-actions">
           {!isMobileNav && (
             <>
- tanvir
-            <OriginButton
+              <OriginButton
                 as="a"
-
-              <Link
- main
                 href="https://app.aimedia.design"
                 target="_blank"
+                rel="noreferrer"
                 variant="ghost"
                 className="nav-cta nav-login-cta nav-desktop-cta"
- tanvir
-
-                target="_blank"
- main
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -568,28 +561,17 @@ export default function Navbar() {
                   fontFamily: 'var(--font-main)',
                   fontWeight: 600,
                   fontSize: '15px',
- tanvir
-
                   cursor: 'pointer',
                   opacity: 0,
                   animation:
                     'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.76s forwards',
- main
                 }}
-                initial={{ opacity: 0, y: 10, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.88 }}
               >
                 Login
- tanvir
               </OriginButton>
+
               <OriginButton
                 as="link"
-
-              </Link>
-
-              <Link
- main
                 href="/contact"
                 variant="dark"
                 className="nav-cta nav-start-cta nav-desktop-cta"
@@ -611,27 +593,15 @@ export default function Navbar() {
                   fontSize: '15px',
                   backdropFilter: 'blur(14px)',
                   WebkitBackdropFilter: 'blur(14px)',
- tanvir
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
-
                   boxShadow:
                     'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
                   opacity: 0,
                   animation:
                     'btnPop 0.59s cubic-bezier(0.34, 1.56, 0.64, 1) 0.68s forwards',
- main
                 }}
-                initial={{ opacity: 0, y: 10, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.64, ease: [0.16, 1, 0.3, 1], delay: 0.76 }}
               >
                 Get Started
- tanvir
               </OriginButton>
-              
-
-              </Link>
- main
             </>
           )}
 
@@ -673,15 +643,12 @@ export default function Navbar() {
               </Link>
             )
           )}
- tanvir
+
           <OriginButton
             as="a"
-=======
-
-          <Link
- main
             href="https://app.aimedia.design"
             target="_blank"
+            rel="noreferrer"
             variant="light"
             className="nav-mobile-cta nav-mobile-login-cta"
             onClick={() => setMobileOpen(false)}
@@ -702,15 +669,10 @@ export default function Navbar() {
             }}
           >
             Login
- tanvir
           </OriginButton>
+
           <OriginButton
             as="link"
-
-          </Link>
-
-          <Link
- main
             href="/contact"
             variant="dark"
             className="nav-mobile-cta nav-mobile-start-cta"

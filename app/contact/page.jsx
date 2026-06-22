@@ -4,16 +4,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
- tanvir
 import OriginButton from '../components/OriginButton';
 import Reveal from '../components/animation/Reveal';
-import StaggerContainer from '../components/animation/StaggerContainer';
-import AnimatedCard from '../components/animation/AnimatedCard';
-import TextReveal from '../components/animation/TextReveal';
 import FaqPro from '../components/FaqPro';
-
-import Reveal from '../components/animation/Reveal';
- main
 
 const FAQS = [
   {
@@ -111,13 +104,6 @@ export default function ContactPage() {
 
         {/* ── Hero ── */}
         <section className="contact-hero">
- tanvir
-          <Reveal className="contact-shell" delay={0.16}>
-            <span className="section-badge contact-badge">
-              <ConnectIcon />
-              Let&apos;s Connect
-            </span>
-
           <div className="contact-shell">
             <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
               <span className="section-badge contact-badge">
@@ -126,7 +112,6 @@ export default function ContactPage() {
               </span>
             </Reveal>
 
- main
             <h1 className="contact-hero-title">
               <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
                 <span style={{ display: 'block' }}>Ready to Build a</span>
@@ -136,14 +121,6 @@ export default function ContactPage() {
                 <span style={{ display: 'block' }}>Smarter Online Presence?</span>
               </Reveal>
             </h1>
- tanvir
-            <p className="contact-hero-sub">
-              Whether you&apos;re looking to elevate your digital product, scale your organic
-              search visibility, or completely refresh your brand identity, we&apos;re here to
-              help. Reach out today and let&apos;s discuss how we can partner to achieve your goals.
-            </p>
-          </Reveal>
-
 
             <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
               <p className="contact-hero-sub">
@@ -153,7 +130,6 @@ export default function ContactPage() {
               </p>
             </Reveal>
           </div>
- main
         </section>
 
         {/* ── Contact Card ── */}
@@ -261,20 +237,6 @@ export default function ContactPage() {
         {/* ── FAQ ── */}
         <section className="contact-faq-section">
           <div className="contact-shell contact-faq-shell">
- tanvir
-            <Reveal className="contact-section-head" delay={0.16}>
-              <span className="section-badge contact-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" />
-                </svg>
-                FAQS
-              </span>
-              <h2 id="contact-faq-title" className="contact-faq-title">Questions? Answers!</h2>
-              <p className="contact-faq-sub">
-                Find Some quick answers to the most common questions.
-              </p>
-            </Reveal>
-
             <div className="contact-section-head">
               <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
                 <span className="section-badge contact-badge">
@@ -286,10 +248,10 @@ export default function ContactPage() {
               </Reveal>
 
               <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
-              <h2 className="contact-faq-title">
-                Questions? Answers!
-              </h2>
-            </Reveal>
+                <h2 className="contact-faq-title">
+                  Questions? Answers!
+                </h2>
+              </Reveal>
 
               <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
                 <p className="contact-faq-sub">
@@ -297,7 +259,6 @@ export default function ContactPage() {
                 </p>
               </Reveal>
             </div>
- main
 
             <Reveal delay={0.2} className="contact-faq-list">
               <FaqPro items={FAQS} defaultOpenFirst={true} />
