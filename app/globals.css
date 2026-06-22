@@ -9370,7 +9370,7 @@ p {
 
 .pricing-copy {
   min-height: 180px;
-  margin-bottom: 28px;
+  margin-bottom: -28px;
 }
 
 .pricing-copy p {
