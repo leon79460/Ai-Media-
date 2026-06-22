@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import TestimonialAvatar from '../components/TestimonialAvatar';
+import Reveal from '../components/animation/Reveal';
 
 const SERVICES = [
   {
@@ -165,16 +166,29 @@ export default function AboutPage() {
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-shell about-hero-grid">
             <div className="about-hero-copy">
-              <Badge>Process</Badge>
-              <h1 id="about-title">About AI Media</h1>
+             <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Badge>About</Badge>
+            </Reveal>
+
+            <h1 id="about-title">
+              <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                <span style={{ display: 'block' }}>About AI Media</span>
+              </Reveal>
+            </h1>
+
+            <Reveal delay={0.50} duration={0.4} yOffset={6} blur="6px">
               <p>
                 We help AV and smart home integrators build a stronger online
                 presence through website design, SEO, content, branding, and AI
                 powered marketing systems.
               </p>
+            </Reveal>
+            <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
               <Link className="about-primary-btn" href="/contact">
                 → Book a Strategy Call
               </Link>
+            </Reveal>
+              
             </div>
 
             <div className="about-hero-image">
@@ -198,9 +212,18 @@ export default function AboutPage() {
         <section className="about-section about-services" aria-labelledby="presence-title">
           <div className="about-shell">
             <div className="about-section-head">
-              <Badge>Strategy</Badge>
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Strategy</Badge>
+              </Reveal>
+
               <h2 id="presence-title" className="section-title">
-                One Team For Your Digital Presence
+                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>One Team For Your Digital Presence</span>
+                </Reveal>
+
+                {/* <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>Your Digital Presence</span>
+                </Reveal> */}
               </h2>
             </div>
             <div className="about-card-grid">
@@ -219,8 +242,15 @@ export default function AboutPage() {
         <section className="about-section about-process" aria-labelledby="process-title">
           <div className="about-shell">
             <div className="about-section-head">
-              <Badge>Process</Badge>
-              <h2 id="process-title" className="section-title">How It Works</h2>
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Process</Badge>
+              </Reveal>
+
+              <h2 id="process-title" className="section-title">
+                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  <span>How It Works</span>
+                </Reveal>
+              </h2>
             </div>
             <div className="about-process-wrap">
               {/* gap must match about-timeline's gap so circles center over their cards */}
@@ -256,15 +286,26 @@ export default function AboutPage() {
               />
             </div>
             <div className="about-split-copy">
-              <Badge>Why Choose Us</Badge>
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Why Choose Us</Badge>
+              </Reveal>
+
               <h2 id="choose-title">
-                <span>Why Brands</span>
-                Choose AI Media
+                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>Why Brands</span>
+                </Reveal>
+
+                <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>Choose AI Media</span>
+                </Reveal>
               </h2>
-              <p>
-                Built for AV and smart home companies that want premium
-                positioning, qualified leads, and long-term growth.
-              </p>
+
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p>
+                  Built for AV and smart home companies that want premium
+                  positioning, qualified leads, and long-term growth.
+                </p>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -274,9 +315,19 @@ export default function AboutPage() {
           <div className="about-shell">
             <div className="about-row-head">
               <div>
-                <Badge>Team</Badge>
-                <h2 id="team-title">Meet Our Team.</h2>
-                <p>Partner with an AI agency delivering smart solutions.</p>
+                <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                  <Badge>Team</Badge>
+                </Reveal>
+
+                <h2 id="team-title">
+                  <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                    <span>Meet Our Team.</span>
+                  </Reveal>
+                </h2>
+
+                <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                  <p>Partner with an AI agency delivering smart solutions.</p>
+                </Reveal>
               </div>
               <div className="about-arrows" aria-hidden="true">
                 <button type="button" className="about-arrow is-prev" tabIndex={-1}><span /></button>
@@ -309,8 +360,19 @@ export default function AboutPage() {
         <section className="about-section about-testimonials" aria-labelledby="testimonial-title">
           <div className="about-shell">
             <div className="about-section-head">
-              <Badge>Testimonial</Badge>
-              <h2 id="testimonial-title" className="section-title">What Our Client Says</h2>
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>Testimonial</Badge>
+              </Reveal>
+
+              <h2 id="testimonial-title" className="section-title">
+                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>What Our Client Says</span>
+                </Reveal>
+
+                {/* <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>Client Says</span>
+                </Reveal> */}
+              </h2>
             </div>
             <div className="about-testimonial-grid">
               {TESTIMONIALS.map((item, i) => (
@@ -341,9 +403,25 @@ export default function AboutPage() {
         <section className="about-section about-faq-section" aria-labelledby="faq-title">
           <div className="about-shell about-faq-shell">
             <div className="about-section-head">
-              <Badge>FAQS</Badge>
-              <h2 id="faq-title" className="section-title">Questions? Answers!</h2>
-              <p className="section-sub">Find some quick answers to the most common questions.</p>
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Badge>FAQS</Badge>
+              </Reveal>
+
+              <h2 id="faq-title" className="section-title">
+                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>Questions? Answers!</span>
+                </Reveal>
+
+                {/* <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>Answers!</span>
+                </Reveal> */}
+              </h2>
+
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p className="section-sub">
+                  Find some quick answers to the most common questions.
+                </p>
+              </Reveal>
             </div>
             <div className="about-faq-list">
               {FAQS.map((faq, i) => (
@@ -372,12 +450,30 @@ export default function AboutPage() {
                 <span aria-hidden="true">Design.<br />Build.<br />Grow.</span>
               </div>
               <div className="about-cta-copy">
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
                 <Badge>Contact us</Badge>
-                <h2 id="about-cta-title">Ready to Build a Smarter Online Presence?</h2>
+              </Reveal>
+
+              <h2 id="about-cta-title">
+                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>
+                    Ready to Build a
+                  </span>
+                </Reveal>
+
+                <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                  <span style={{ display: 'block' }}>
+                    Smarter Online Presence?
+                  </span>
+                </Reveal>
+              </h2>
+
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
                 <p>
                   Let&apos;s create a website and marketing system that helps
                   your business stand out, rank better, and generate qualified leads.
                 </p>
+            </Reveal>
                 <Link href="/contact" className="about-primary-btn about-dark-btn">
                   → Get Started
                 </Link>

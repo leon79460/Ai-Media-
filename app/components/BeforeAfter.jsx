@@ -50,32 +50,50 @@ export default function BeforeAfter() {
           alignItems: 'center',
         }}
       >
-        <Reveal
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '16px',
-            maxWidth: '700px',
-            textAlign: 'center',
-          }}
-        >
-          <span className="section-badge">
-            <Image
-              src="/icons/case-studies.png"
-              alt=""
-              aria-hidden="true"
-              width={18}
-              height={18}
-              style={BADGE_ICON_STYLE}
-            />
-            {SECTION_BADGE}
-          </span>
-          <h2 className="section-title">{TITLE}</h2>
-          <p className="section-sub" style={{ fontSize: '18px' }}>
-            {SUBTITLE}
-          </p>
-        </Reveal>
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '16px',
+    maxWidth: '700px',
+    textAlign: 'center',
+  }}
+>
+  <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+    <span className="section-badge">
+      <Image
+        src="/icons/case-studies.png"
+        alt=""
+        aria-hidden="true"
+        width={18}
+        height={18}
+        style={BADGE_ICON_STYLE}
+      />
+      {SECTION_BADGE}
+    </span>
+  </Reveal>
+
+  <h2 className="section-title">
+    <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+      <span style={{ display: 'block' }}>
+        We Tested The System On 
+      </span>
+    </Reveal>
+
+    <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+      <span style={{ display: 'block' }}>
+        Our Own AV Company First.
+      </span>
+    </Reveal>
+  </h2>
+
+  <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+    <p className="section-sub" style={{ fontSize: '18px' }}>
+      {SUBTITLE}
+    </p>
+  </Reveal>
+</div>
 
         <div className="case-study-showcase">
           <Reveal className="before-after-card-shell" style={{ width: '100%' }}>

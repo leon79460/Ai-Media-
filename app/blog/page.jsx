@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { blogPosts } from './data/blogs';
+import Reveal from '../components/animation/Reveal';
 
 export const metadata = {
   title: 'Blog - AI Media',
@@ -18,21 +19,31 @@ export default function BlogIndexPage() {
       <Navbar />
       <main className="blog-index-page">
         <section className="blog-index-hero">
-          <span className="section-badge">
-            <Image
-              src="/blog/blog.svg"
-              alt=""
-              aria-hidden="true"
-              width={18}
-              height={18}
-            />
-            Insights & Resources
-          </span>
-          <h1>Latest Insights From AI Media</h1>
-          <p>
-            Practical strategy, budgeting, SEO, content, and website guidance
-            for systems integrators that want more predictable growth.
-          </p>
+          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+            <span className="section-badge">
+              <Image
+                src="/blog/blog.svg"
+                alt=""
+                aria-hidden="true"
+                width={18}
+                height={18}
+              />
+              Insights & Resources
+            </span>
+          </Reveal>
+
+          <h1>
+            <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+              <span style={{ display: 'block' }}>Latest Insights From AI Media</span>
+            </Reveal>
+          </h1>
+
+          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+            <p>
+              Practical strategy, budgeting, SEO, content, and website guidance
+              for systems integrators that want more predictable growth.
+            </p>
+          </Reveal>
         </section>
 
         <section className="blog-index-grid" aria-label="Blog posts">

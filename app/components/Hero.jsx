@@ -1,32 +1,67 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
+import { useRef } from 'react';
 
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
-const HEADING = 'Stop chasing leads. start attracting them.';
+const HEADING_LINES = [
+  'Stop chasing leads.',
+  'Start attracting them.',
+];
+
 const SUBTEXT =
   'We combine AI-powered delivery, industry expertise, SEO, content, and conversion-focused web design to help integrators get found, gain trust, and win more high-value projects.';
 
-const heroContainer = {
-  hidden: {},
-  show: {
-    transition: {
-      delayChildren: 0.18,
-      staggerChildren: 0.1,
-    },
-  },
-};
+function BlurFade({
+  children,
+  delay = 0,
+  duration = 1.35,
+  yOffset = 8,
+  blur = '16px',
+  className,
+}) {
+  const ref = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
-const heroItem = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+  const isInView = useInView(ref, {
+    once: true,
+    margin: '-50px',
+  });
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={{
+        hidden: {
+          y: yOffset,
+          opacity: 0,
+          filter: `blur(${blur})`,
+        },
+        visible: {
+          y: -yOffset,
+          opacity: 1,
+          filter: 'blur(0px)',
+        },
+      }}
+      transition={{
+        delay: 0.04 + delay,
+        duration,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -69,7 +104,7 @@ export default function Hero() {
         preload="metadata"
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: 'absolute',
           inset: 0,
@@ -86,7 +121,7 @@ export default function Hero() {
         className="hero-content"
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
         style={{
           position: 'absolute',
           inset: 0,
@@ -96,10 +131,7 @@ export default function Hero() {
         }}
       />
 
-      <motion.div
-        variants={heroContainer}
-        initial={shouldReduceMotion ? false : 'hidden'}
-        animate={shouldReduceMotion ? undefined : 'show'}
+      <div
         data-motion-managed="true"
         style={{
           position: 'relative',
@@ -115,76 +147,90 @@ export default function Hero() {
           color: '#f5f5f5',
         }}
       >
-        <motion.div variants={heroItem}>
+        <BlurFade delay={0.12} duration={1.15} yOffset={8} blur="10px">
           <div
             data-parallax
             data-parallax-speed="0.12"
             data-parallax-distance="90"
             style={{ position: 'relative', display: 'inline-flex' }}
           >
-          <div
-            style={{
-              position: 'relative',
-              height: '36px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '7px',
-              padding: '0 14px 0 12px',
-              borderRadius: '999px',
-              border: '1px solid rgba(255,255,255,0.62)',
-              background: 'linear-gradient(180deg, #111 0%, #070707 100%)',
-              boxShadow:
-                'inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1.5px 0 rgba(255,255,255,0.72)',
-            }}
-          >
-            <Image
-              src="/AI-SVG.png"
-              alt=""
-              width={17}
-              height={17}
-              aria-hidden="true"
-              style={{ width: '21px', height: '21px', objectFit: 'contain' }}
-            />
-
-            <span
+            <div
               style={{
-                fontFamily: 'var(--font-main)',
-                fontSize: '12px',
-                color: '#f3f3f3',
-                lineHeight: 1,
-                fontWeight: 500,
+                position: 'relative',
+                height: '36px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                padding: '0 14px 0 12px',
+                borderRadius: '999px',
+                border: '1px solid rgba(255,255,255,0.62)',
+                background: 'linear-gradient(180deg, #111 0%, #070707 100%)',
+                boxShadow:
+                  'inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1.5px 0 rgba(255,255,255,0.72)',
               }}
             >
-              AI Powered Creative Agency
-            </span>
-          </div>
-          </div>
-        </motion.div>
+              <Image
+                src="/AI-SVG.png"
+                alt=""
+                width={17}
+                height={17}
+                aria-hidden="true"
+                style={{ width: '21px', height: '21px', objectFit: 'contain' }}
+              />
 
-        <motion.div variants={heroItem}>
-          <h1
-            className="hero-title"
-            data-parallax
-            data-parallax-speed="0.08"
-            data-parallax-distance="120"
-            style={{
-              maxWidth: '900px',
-              margin: 0,
-              fontFamily: 'var(--font-main)',
-              fontWeight: 600,
-              fontSize: 'clamp(48px, 8vw, 92px)',
-              lineHeight: 1.25,
-              letterSpacing: '-0.01em',
-              color: '#f5f5f5',
-              textWrap: 'balance',
-              textShadow: '0 18px 34px rgba(0,0,0,0.45)',
-            }}
-          >
-            {HEADING}
-          </h1>
-        </motion.div>
+              <span
+                style={{
+                  fontFamily: 'var(--font-main)',
+                  fontSize: '12px',
+                  color: '#f3f3f3',
+                  lineHeight: 1,
+                  fontWeight: 500,
+                }}
+              >
+                AI Powered Creative Agency
+              </span>
+            </div>
+          </div>
+        </BlurFade>
 
-        <motion.div variants={heroItem}>
+        <h1
+          className="hero-title"
+          data-parallax
+          data-parallax-speed="0.08"
+          data-parallax-distance="120"
+          style={{
+            maxWidth: '900px',
+            margin: 0,
+            fontFamily: 'var(--font-main)',
+            fontWeight: 600,
+            fontSize: 'clamp(48px, 8vw, 92px)',
+            lineHeight: 1.25,
+            letterSpacing: '-0.01em',
+            color: '#f5f5f5',
+            textWrap: 'balance',
+            textShadow: '0 18px 34px rgba(0,0,0,0.45)',
+          }}
+        >
+          {HEADING_LINES.map((line, index) => (
+            <BlurFade
+              key={line}
+              delay={0.28 + index * 0.22}
+              duration={1.35}
+              yOffset={10}
+              blur="16px"
+            >
+              <span
+                style={{
+                  display: 'block',
+                }}
+              >
+                {line}
+              </span>
+            </BlurFade>
+          ))}
+        </h1>
+
+        <BlurFade delay={0.78} duration={1.2} yOffset={8} blur="12px">
           <p
             data-parallax
             data-parallax-speed="0.06"
@@ -202,9 +248,9 @@ export default function Hero() {
           >
             {SUBTEXT}
           </p>
-        </motion.div>
+        </BlurFade>
 
-        <motion.div variants={heroItem}>
+        <BlurFade delay={0.94} duration={1.1} yOffset={8} blur="8px">
           <div
             data-parallax
             data-parallax-speed="0.04"
@@ -218,61 +264,62 @@ export default function Hero() {
               marginTop: '4px',
             }}
           >
-          <button
-            type="button"
-            onClick={() => scrollToSection('pricing')}
-            className="btn-p"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              minWidth: '140px',
-              height: '40px',
-              padding: '0 24px',
-              borderRadius: '7px',
-              border: '1px solid rgba(255,255,255,0.86)',
-              background: 'rgba(255,255,255,0.08)',
-              color: '#fff',
-              fontFamily: 'var(--font-main)',
-              fontWeight: 700,
-              fontSize: '12px',
-              cursor: 'pointer',
-              backdropFilter: 'blur(14px)',
-              WebkitBackdropFilter: 'blur(14px)',
-              boxShadow:
-                'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
-            }}
-          >
-            Start a Project
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollToSection('services')}
-            className="btn-s"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              minWidth: '140px',
-              height: '40px',
-              padding: '0 24px',
-              borderRadius: '7px',
-              border: 0,
-              background: '#f7f7f7',
-              color: '#060606',
-              fontFamily: 'var(--font-main)',
-              fontWeight: 700,
-              fontSize: '12px',
-              cursor: 'pointer',
-              boxShadow:
-                '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
-            }}
-          >
-            Explore Services
-          </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection('pricing')}
+              className="btn-p"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minWidth: '140px',
+                height: '40px',
+                padding: '0 24px',
+                borderRadius: '7px',
+                border: '1px solid rgba(255,255,255,0.86)',
+                background: 'rgba(255,255,255,0.08)',
+                color: '#fff',
+                fontFamily: 'var(--font-main)',
+                fontWeight: 700,
+                fontSize: '12px',
+                cursor: 'pointer',
+                backdropFilter: 'blur(14px)',
+                WebkitBackdropFilter: 'blur(14px)',
+                boxShadow:
+                  'inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 28px rgba(0,0,0,0.26)',
+              }}
+            >
+              Start a Project
+            </button>
+
+            <button
+              type="button"
+              onClick={() => scrollToSection('services')}
+              className="btn-s"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minWidth: '140px',
+                height: '40px',
+                padding: '0 24px',
+                borderRadius: '7px',
+                border: 0,
+                background: '#f7f7f7',
+                color: '#060606',
+                fontFamily: 'var(--font-main)',
+                fontWeight: 700,
+                fontSize: '12px',
+                cursor: 'pointer',
+                boxShadow:
+                  '0 14px 26px rgba(255,255,255,0.16), 0 2px 6px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff',
+              }}
+            >
+              Explore Services
+            </button>
           </div>
-        </motion.div>
-      </motion.div>
+        </BlurFade>
+      </div>
     </section>
   );
 }

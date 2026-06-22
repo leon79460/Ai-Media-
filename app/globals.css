@@ -423,8 +423,15 @@ body {
 .nav-mobile-panel-light button:hover,
 .nav-mobile-panel-light button:focus-visible {
   background: rgba(0, 0, 0, 0.06);
-  color: #030303;
+  color: #000000;
   outline: none;
+}
+
+.nav-mobile-panel a:hover, .nav-mobile-panel a:focus-visible, .nav-mobile-panel button:hover, .nav-mobile-panel button:focus-visible, .nav-mobile-panel-light a:hover, .nav-mobile-panel-light a:focus-visible, .nav-mobile-panel-light button:hover, .nav-mobile-panel-light button:focus-visible {
+    color: #000000;
+    background: #ffffff0f;
+    outline: none;
+    border: none !important;
 }
 
 .nav-mobile-panel .nav-mobile-cta,
@@ -1351,6 +1358,9 @@ p {
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
 }
 
+
+
+
 .service-icon {
   display: block;
   position: relative;
@@ -1632,7 +1642,7 @@ p {
 
 @media (max-width: 768px) {
   .portfolio-section {
-    padding: 165px 16px 72px;
+    padding: 130px 16px 60px ;
   }
 
   .portfolio-header {
@@ -2544,7 +2554,7 @@ p {
   margin: 0;
   color: #000;
   font-family: var(--font);
-  font-size: clamp(32px, 3.8vw, 48px);
+  font-size: clamp(24px, 3.3vw, 38px);
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 1.15;
@@ -2674,7 +2684,7 @@ p {
 .blog-index-grid {
   width: 100%;
   max-width: var(--max-width);
-  margin: 58px auto 0;
+  margin: 58px auto 0 !important;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 24px;
@@ -3400,7 +3410,7 @@ p {
 
 .blog-home-card h3 {
   max-width: none;
-  font-size: clamp(18px, calc(16px + 0.6vw), 20px);
+  font-size: clamp(22px, calc(18px + 0.6vw), 16px);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.28;
@@ -3419,7 +3429,7 @@ p {
   display: inline-flex;
   margin-top: auto;
   padding-top: 16px;
-  border-top: 1px solid rgba(3, 3, 3, 0.08);
+  /* border-top: 1px solid rgba(255, 255, 255, 0.08); */
   font-size: 14px;
   font-weight: 700;
   text-decoration-thickness: 1.5px;
@@ -3468,11 +3478,24 @@ p {
   background: #f5f5f5;
   color: #030303;
 }
+.blog-home-arrow.is-prev:hover {
+  left: -50px;
+  border: 1px solid #030303;
+  background: #000000;
+  color: #ffffff;
+}
 
 .blog-home-arrow.is-next {
   right: -50px;
   border: 0;
-  background: #030303;
+   background: #f5f5f5;
+  color: #030303;
+  border: 1px solid #030303;
+}
+.blog-home-arrow.is-next:hover {
+  right: -50px;
+  border: 0;
+  background: #000000;
   color: #fff;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
@@ -4059,6 +4082,7 @@ p {
   padding: 82px 0 76px;
 }
 
+
 .about-split-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -4552,14 +4576,14 @@ p {
   }
 
   .about-final-cta {
-    padding: 82px 0;
+    padding: 40px 0;
   }
 
   /* ── Hide uploaded image panels on mobile ── */
   .about-hero-image,
   .about-split-image,
   .about-cta-image {
-    display: none;
+    display: block !important;
   }
 
   /* ── Grid / layout adjustments ── */
@@ -4860,8 +4884,8 @@ main.about-page .section-sub.reveal-motion:not(.is-visible) {
   .blog-index-page,
   .blog-post-page,
   .legal-page {
-    padding-top: 165px;
-    padding-bottom: 76px;
+    padding-top: 130px ;
+    padding-bottom: 60px !important;
   }
 
   .legal-summary {
@@ -4875,6 +4899,15 @@ main.about-page .section-sub.reveal-motion:not(.is-visible) {
     overflow: visible;
     scroll-snap-type: none;
   }
+
+  .blog-index-grid {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 30px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 24px;
+}
 
   .blog-home-card,
   .blog-index-card {
@@ -5408,10 +5441,10 @@ main.about-page .about-testimonials .about-arrows {
   margin-top: 36px;
 }
 
-main.about-page .about-faq-section {
+/* main.about-page .about-faq-section {
   padding-top: 84px;
   padding-bottom: 76px;
-}
+} */
 
 main.about-page .about-faq-shell {
   max-width: 700px;
@@ -5477,7 +5510,8 @@ main.about-page .about-mail-icon::before {
 }
 
 main.about-page .about-final-cta {
-  padding: 76px 0 100px;
+  padding-top: 76px;
+  padding-bottom: 100px;
 }
 
 main.about-page .about-final-cta .about-shell {
@@ -5640,6 +5674,7 @@ main.careers-page .careers-process-card p {
   main.about-page .about-split-grid,
   main.about-page .about-cta-panel {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   main.about-page .about-card-grid,
@@ -5685,35 +5720,44 @@ main.careers-page .careers-process-card p {
   }
 }
 
+
+/* About page 768 responsive code here */
 @media (max-width: 768px) {
+
+
   main.careers-page .about-shell {
     width: calc(100% - 32px);
   }
 
   /* About page: keep desktop vertical rhythm on mobile */
   main.about-page .about-hero {
-    padding: 128px 0 0;
+    padding: 80px 0 0;
   }
 
   main.about-page .about-section {
-    padding: 100px 0;
+    padding: 30px 0px 30px 0px;
   }
 
   main.about-page .about-services {
-    padding-top: 120px;
+    padding-top: 40px;
   }
 
   main.about-page .about-process {
-    padding-top: 86px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
+  main.about-page .about-split-section {
+  padding: 40px 0 ;
+}
+
   main.about-page .about-testimonials {
-    padding-top: 108px;
+    padding-top: 40px;
   }
 
   main.about-page .about-faq-section {
-    padding-top: 84px;
-    padding-bottom: 76px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   main.about-page .about-hero h1 {
@@ -5724,6 +5768,17 @@ main.careers-page .careers-process-card p {
     max-width: 100%;
     font-size: 13px;
   }
+
+ .about-split-section {
+  padding: 40px 0;
+  }
+
+    .about-final-cta {
+    padding: 40px 0 0 0 !important;
+    padding-bottom: 60px !important;
+
+  }
+
 
   /* Image panels are hidden on mobile */
   main.about-page .about-hero-image,
@@ -5742,12 +5797,14 @@ main.careers-page .careers-process-card p {
   main.about-page .about-timeline,
   main.about-page .about-team-grid,
   main.about-page .about-testimonial-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   main.about-page .about-timeline {
     padding-top: 0;
   }
+
+  
 
   main.about-page .about-split-copy h2,
   main.about-page .about-row-head h2 {
@@ -6087,6 +6144,23 @@ main.careers-page .careers-process-card p {
     right: max(12px, env(safe-area-inset-right));
     bottom: max(12px, env(safe-area-inset-bottom));
   }
+
+  .service-card {
+  position: relative;
+  display: flex;
+  min-height: 412px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  background: #f5f5f5;
+  color: #000;
+  box-shadow:
+  0 2px 6px rgba(0, 0, 0, 0.05),
+  0 8px 18px rgba(0, 0, 0, 0.08),
+  inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
 }
 
 @media (max-width: 420px) {
@@ -7131,3 +7205,21 @@ main.careers-page .careers-process-card p {
   }
 }
 
+/* .site-nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.7),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(255,255,255,.35),
+      transparent 45%
+    );
+  opacity: .8;
+} */

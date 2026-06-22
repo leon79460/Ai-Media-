@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import Reveal from '../components/animation/Reveal';
 
 const FAQS = [
   {
@@ -102,18 +103,30 @@ export default function ContactPage() {
         {/* ── Hero ── */}
         <section className="contact-hero">
           <div className="contact-shell">
-            <span className="section-badge contact-badge">
-              <ConnectIcon />
-              Let&apos;s Connect
-            </span>
+            <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <span className="section-badge contact-badge">
+                <ConnectIcon />
+                Let&apos;s Connect
+              </span>
+            </Reveal>
+
             <h1 className="contact-hero-title">
-              Ready to Build a Smarter Online Presence?
+              <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+                <span style={{ display: 'block' }}>Ready to Build a</span>
+              </Reveal>
+
+              <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+                <span style={{ display: 'block' }}>Smarter Online Presence?</span>
+              </Reveal>
             </h1>
-            <p className="contact-hero-sub">
-              Whether you&apos;re looking to elevate your digital product, scale your organic
-              search visibility, or completely refresh your brand identity, we&apos;re here to
-              help. Reach out today and let&apos;s discuss how we can partner to achieve your goals.
-            </p>
+
+            <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+              <p className="contact-hero-sub">
+                Whether you&apos;re looking to elevate your digital product, scale your organic
+                search visibility, or completely refresh your brand identity, we&apos;re here to
+                help. Reach out today and let&apos;s discuss how we can partner to achieve your goals.
+              </p>
+            </Reveal>
           </div>
         </section>
 
@@ -217,16 +230,26 @@ export default function ContactPage() {
         <section className="contact-faq-section">
           <div className="contact-shell contact-faq-shell">
             <div className="contact-section-head">
-              <span className="section-badge contact-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" />
-                </svg>
-                FAQS
-              </span>
-              <h2 className="contact-faq-title">Questions? Answers!</h2>
-              <p className="contact-faq-sub">
-                Find Some quick answers to the most common questions.
-              </p>
+              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <span className="section-badge contact-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" />
+                  </svg>
+                  FAQS
+                </span>
+              </Reveal>
+
+              <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
+              <h2 className="contact-faq-title">
+                Questions? Answers!
+              </h2>
+            </Reveal>
+
+              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <p className="contact-faq-sub">
+                  Find Some quick answers to the most common questions.
+                </p>
+              </Reveal>
             </div>
 
             <div className="contact-faq-list">

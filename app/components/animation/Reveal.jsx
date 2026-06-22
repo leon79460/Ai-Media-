@@ -1,60 +1,72 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
+import { useRef } from 'react';
 
-export const motionEase = [0.22, 1, 0.36, 1];
+export const motionEase = 'easeOut';
+
 export const motionDurations = {
   fast: 0.25,
   base: 0.6,
   slow: 0.9,
 };
 
-const motionTags = {
-  div: motion.div,
-  header: motion.header,
-  section: motion.section,
-  article: motion.article,
-  footer: motion.footer,
-};
-
 export default function Reveal({
-  as = 'div',
   children,
   className,
-  style,
-  delay = 0,
-  duration = 0.65,
-  y = 32,
-  scale,
-  amount = 0.25,
-  once = true,
+ delay = 0 ,
+duration = 0.5,
+yOffset = 7,
+inView = true,
+inViewMargin = '-50px',
+blur = '6px',
   ...props
 }) {
+  const ref = useRef(null);
   const shouldReduceMotion = useReducedMotion();
-  const Component = motionTags[as] || motion.div;
-  const hidden = {
-    opacity: 0,
-    y,
-    ...(scale ? { scale } : null),
-  };
-  const visible = {
-    opacity: 1,
-    y: 0,
-    ...(scale ? { scale: 1 } : null),
-  };
+
+  const inViewResult = useInView(ref, {
+    once: true,
+    margin: inViewMargin,
+  });
+
+  const isInView = !inView || inViewResult;
+
+  if (shouldReduceMotion) {
+    return (
+      <div className={className} {...props}>
+        {children}
+      </div>
+    );
+  }
 
   return (
-    <Component
+    <motion.div
+      ref={ref}
       className={className}
-      style={style}
       data-motion-managed="true"
-      initial={shouldReduceMotion ? false : hidden}
-      whileInView={shouldReduceMotion ? undefined : visible}
-      viewport={{ once, amount }}
-      transition={{ duration, ease: motionEase, delay }}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={{
+        hidden: {
+          y: yOffset,
+          opacity: 0,
+          filter: `blur(${blur})`,
+        },
+        visible: {
+          y: -yOffset,
+          opacity: 1,
+          filter: 'blur(0px)',
+        },
+      }}
+      transition={{
+        delay: 0.04 + delay,
+        duration,
+        ease: 'easeOut',
+      }}
       {...props}
     >
       {children}
-    </Component>
+    </motion.div>
   );
 }

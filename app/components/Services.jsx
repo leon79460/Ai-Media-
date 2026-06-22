@@ -91,25 +91,57 @@ export default function Features() {
   return (
     <section id="services" className="services-section">
       <div className="services-shell">
-        <Reveal as="header" className="services-header">
-          <span className="services-badge">
-            <Image
-              src="/icons/services.png"
-              alt=""
-              aria-hidden="true"
-              width={18}
-              height={18}
-              style={styles.badgeIcon}
-            />
-            {SECTION_BADGE}
-          </span>
+        <header className="services-header">
+          <Reveal
+            delay={0}
+            duration={0.4}
+            yOffset={6}
+            blur="6px"
+          >
+            <span className="services-badge">
+              <Image
+                src="/icons/services.png"
+                alt=""
+                aria-hidden="true"
+                width={18}
+                height={18}
+                style={styles.badgeIcon}
+              />
+              {SECTION_BADGE}
+            </span>
+          </Reveal>
 
           <h2 className="services-title">
-            <span>{SECTION_TITLE_TOP}</span>
-            <span>{SECTION_TITLE_BOTTOM}</span>
+            <Reveal
+              delay={0.25}
+              duration={0.4}
+              yOffset={6}
+              blur="6px"
+            >
+              <span>{SECTION_TITLE_TOP}</span>
+            </Reveal>
+
+            <Reveal
+              delay={0.5}
+              duration={0.4}
+              yOffset={6}
+              blur="6px"
+            >
+              <span>{SECTION_TITLE_BOTTOM}</span>
+            </Reveal>
           </h2>
-          <p className="services-sub">{SECTION_SUB}</p>
-        </Reveal>
+
+          <Reveal
+            delay={0.75}
+            duration={0.4}
+            yOffset={6}
+            blur="6px"
+          >
+            <p className="services-sub">
+              {SECTION_SUB}
+            </p>
+          </Reveal>
+        </header>
 
         <StaggerContainer className="services-grid">
           {FEATURES.map((feature) => (
