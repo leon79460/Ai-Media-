@@ -7,7 +7,7 @@ import { useRef } from 'react';
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
 const HEADING_LINES = [
-  'Stop chasing leads.',
+  'Stop Chasing leads.',
   'Start attracting them.',
 ];
 
