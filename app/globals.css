@@ -995,11 +995,6 @@ html {
     padding-bottom: 45px !important;
   }
 
-  .intro-video-section {
-    padding-top: 90px !important;
-    padding-bottom: 45px !important;
-  }
-
   .process-section {
     padding-top: 65px !important;
     padding-bottom: 65px !important;
@@ -5013,8 +5008,8 @@ p {
 @media (max-width: 480px) {
   .blog-post-page,
   .legal-page {
-    padding-right: 8px;
-    padding-left: 8px;
+    padding-right: 16px  !important;
+    padding-left: 16px !important; 
   }
 
   .blog-article {
@@ -5863,8 +5858,6 @@ main.careers-page .careers-process-card p {
 }
 
 .intro-video-section {
-  padding-right: 65px !important;
-  padding-left: 65px !important;
   max-width: 100%;
   overflow-x: clip;
 }
@@ -5939,10 +5932,6 @@ main.careers-page .careers-process-card p {
     max-width: 100% !important;
     font-size: 15px !important;
     line-height: 1.55 !important;
-  }
-
-  .intro-video-section {
-    padding: 65px 16px 65px 16px;
   }
 
   .intro-video-shell {
@@ -6200,7 +6189,6 @@ main.careers-page .careers-process-card p {
 }
 
 @media (max-width: 768px) {
-  .intro-video-section,
   .process-section,
   .services-section,
   .before-after-section,
@@ -8118,7 +8106,7 @@ body {
   }
 
   .hero-title {
-    font-size: 48px !important;
+    font-size: 44px !important;
     letter-spacing: 0 !important;
   }
 
@@ -8196,11 +8184,6 @@ body {
 
   .why-section {
     padding-top: 45px !important;
-    padding-bottom: 45px !important;
-  }
-
-  .intro-video-section {
-    padding-top: 90px !important;
     padding-bottom: 45px !important;
   }
 
@@ -13195,8 +13178,6 @@ main.careers-page .careers-process-card p {
 }
 
 .intro-video-section {
-  padding-right: 65px !important;
-  padding-left: 65px !important;
   max-width: 100%;
   overflow-x: clip;
 }
@@ -13271,10 +13252,6 @@ main.careers-page .careers-process-card p {
     max-width: 100% !important;
     font-size: 15px !important;
     line-height: 1.55 !important;
-  }
-
-  .intro-video-section {
-    padding: 65px 16px 65px 16px;
   }
 
   .intro-video-shell {
@@ -13568,7 +13545,6 @@ main.careers-page .careers-process-card p {
     --reveal-scale: 0.972;
   }
 
-  .intro-video-section,
   .process-section,
   .services-section,
   .before-after-section,
@@ -14774,15 +14750,25 @@ main.careers-page .careers-role-link:focus-visible {
   margin: 0 auto !important;
 }
 
-@media (min-width: 769px) {
+.intro-video-section {
+  padding: 130px  65px !important;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
   .intro-video-section {
-    padding: 45px 65px 45px !important;
+    padding: 100px 40px 65px !important; 
   }
 }
 
 @media (max-width: 768px) {
   .intro-video-section {
-    padding: 45px 16px 45px !important;
+    padding: 60px 16px 45px !important;
+  }
+
+  .intro-scroll-perspective,
+  .intro-scroll-card {
+    width: 100% !important;
+    max-width: none !important;
   }
 }
 
@@ -14914,4 +14900,112 @@ main.about-page .about-faq-section #faq-title.section-title {
 .why-header,
 .blog-home-header {
   opacity: 1 !important;
+}
+
+#process-title,
+.services-title,
+.before-after-section .section-title,
+  #pricing-title,
+  #blogs-title,
+  #whyus-title {
+  font-size: 54px !important;
+  line-height: 1.6em !important;
+}
+
+#process-title span,
+.services-title span,
+.before-after-section .section-title span,
+#pricing-title span,
+#blogs-title span,
+#whyus-title span {
+  line-height: inherit !important;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  #process-title,
+  .services-title,
+  .before-after-section .section-title,
+  #pricing-title,
+  #blogs-title,
+  #whyus-title {
+    font-size: 44px !important;
+    line-height: 1.6em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #process-title,
+  .services-title,
+  .before-after-section .section-title,
+  #pricing-title,
+  #blogs-title,
+  #whyus-title {
+    font-size: 32px !important;
+    line-height: 1.5em !important;
+  }
+}
+
+main.about-page:not(.careers-page) #about-title,
+main.about-page:not(.careers-page) #presence-title,
+main.about-page:not(.careers-page) #process-title,
+main.about-page:not(.careers-page) #choose-title,
+main.about-page:not(.careers-page) #team-title,
+main.about-page:not(.careers-page) #testimonial-title,
+main.about-page:not(.careers-page) #faq-title,
+main.about-page:not(.careers-page) #about-cta-title {
+  font-size: 54px !important;
+  line-height: 1.6em !important;
+}
+
+main.about-page:not(.careers-page) #about-title span,
+main.about-page:not(.careers-page) #presence-title span,
+main.about-page:not(.careers-page) #process-title span,
+main.about-page:not(.careers-page) #choose-title span,
+main.about-page:not(.careers-page) #team-title span,
+main.about-page:not(.careers-page) #testimonial-title span,
+main.about-page:not(.careers-page) #faq-title span,
+main.about-page:not(.careers-page) #about-cta-title span {
+  line-height: inherit !important;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  main.about-page:not(.careers-page) #about-title,
+  main.about-page:not(.careers-page) #presence-title,
+  main.about-page:not(.careers-page) #process-title,
+  main.about-page:not(.careers-page) #choose-title,
+  main.about-page:not(.careers-page) #team-title,
+  main.about-page:not(.careers-page) #testimonial-title,
+  main.about-page:not(.careers-page) #faq-title,
+  main.about-page:not(.careers-page) #about-cta-title {
+    font-size: 44px !important;
+    line-height: 1.6em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  main.about-page:not(.careers-page) #about-title,
+  main.about-page:not(.careers-page) #presence-title,
+  main.about-page:not(.careers-page) #process-title,
+  main.about-page:not(.careers-page) #choose-title,
+  main.about-page:not(.careers-page) #team-title,
+  main.about-page:not(.careers-page) #testimonial-title,
+  main.about-page:not(.careers-page) #faq-title,
+  main.about-page:not(.careers-page) #about-cta-title {
+    font-size: 32px !important;
+    line-height: 1.5em !important;
+  }
+}
+
+.nav-cta:hover,
+.nav-cta:focus-visible,
+.nav-mobile-cta:hover,
+.nav-mobile-cta:focus-visible {
+  transition:
+    color 0.3s var(--motion-soft),
+    transform 0.56s var(--motion-ease),
+    box-shadow 0.24s ease,
+    opacity 0.24s ease,
+    background-color 0.24s ease,
+    --button-fill-radius 0.5s var(--motion-ease) !important;
+  transform: scale(1.018) !important;
 }
