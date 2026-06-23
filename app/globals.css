@@ -1660,6 +1660,18 @@ p {
   .portfolio-overlay {
     padding: 18px;
   }
+  .blog-index-hero h1,
+.blog-post-hero h1,
+  .legal-hero h1 {
+    max-width: 980px;
+    margin: 0;
+    color: #000;
+    font-family: var(--font);
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.065em;
+    line-height: 1.4em;
+  }
 }
 
 .case-study-showcase {
@@ -2699,19 +2711,6 @@ p {
 .blog-back-link:hover {
   color: #000;
   text-decoration: underline;
-}
-
-.blog-index-hero h1,
-.blog-post-hero h1,
-.legal-hero h1 {
-  max-width: 980px;
-  margin: 0;
-  color: #000;
-  font-family: var(--font);
-  font-size: 55px;
-  font-weight: 500;
-  letter-spacing: -0.065em;
-  line-height: 0.98;
 }
 
 .blog-index-hero p,
@@ -14930,6 +14929,88 @@ main.about-page .about-faq-section #faq-title.section-title {
   }
 }
 
+.blog-home-card .blog-card-excerpt,
+.blog-index-card .blog-card-excerpt,
+.blog-index-card .blog-index-excerpt {
+  display: block !important;
+  margin: 8px 0 0 !important;
+  color: #000 !important;
+  font-family: var(--font);
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.5 !important;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .blog-home-card .blog-card-excerpt,
+  .blog-index-card .blog-card-excerpt,
+  .blog-index-card .blog-index-excerpt {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-home-card .blog-card-excerpt,
+  .blog-index-card .blog-card-excerpt,
+  .blog-index-card .blog-index-excerpt {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+.blog-post-page .blog-post-hero h1,
+.blog-post-page .blog-article > h2,
+.blog-post-page .blog-article > h3,
+.blog-post-page .blog-tool h2,
+.blog-post-page .blog-cta h2 {
+  font-size: 48px !important;
+  letter-spacing: 0 !important;
+  line-height: 1.4em !important;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .blog-post-page .blog-post-hero h1,
+  .blog-post-page .blog-article > h2,
+  .blog-post-page .blog-article > h3,
+  .blog-post-page .blog-tool h2,
+  .blog-post-page .blog-cta h2 {
+    font-size: 38px !important;
+    line-height: 1.3em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-post-page .blog-post-hero h1,
+  .blog-post-page .blog-article > h2,
+  .blog-post-page .blog-article > h3,
+  .blog-post-page .blog-tool h2,
+  .blog-post-page .blog-cta h2 {
+    font-size: 30px !important;
+    line-height: 1.3em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section p[data-parallax],
+  #process .section-sub,
+  #services .services-sub,
+  .before-after-section .section-sub,
+  #pricing .pricing-header .section-sub,
+  #blogs .blog-home-sub,
+  #whyus .why-header .section-sub {
+    font-size: 16px !important;
+    line-height: 1.5em !important;
+  }
+
+  .blog-post-page .blog-article p,
+  .blog-post-page .blog-article li {
+    font-size: 16px !important;
+    line-height: 1.5em !important;
+  }
+}
+
 main.about-page:not(.careers-page) #about-title,
 main.about-page:not(.careers-page) #presence-title,
 main.about-page:not(.careers-page) #process-title,
@@ -14977,7 +15058,7 @@ main.about-page:not(.careers-page) #about-cta-title span {
   main.about-page:not(.careers-page) #faq-title,
   main.about-page:not(.careers-page) #about-cta-title {
     font-size: 32px !important;
-    line-height: 1.5em !important;
+    line-height: 1.5em !important ;
   }
 }
 

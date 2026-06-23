@@ -83,9 +83,7 @@ function BlogCard({ post, href, index }) {
       </Link>
       <div className="blog-home-copy">
         <h3>{post.title}</h3>
-        <p style={{ display: 'block', marginTop: '8px', color: '#000000', fontSize: '16px', lineHeight: '1.5' }}>
-          {post.excerpt}
-        </p>
+        <p className="blog-card-excerpt">{post.excerpt}</p>
       </div>
       <Link className="read-more" href={href}>
         Read More

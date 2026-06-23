@@ -80,7 +80,7 @@ export default function ClientBlog() {
 
               <div className="blog-home-copy">
                 <h3>{post.title}</h3>
-                <p className="blog-index-excerpt">{post.excerpt}</p>
+                <p className="blog-card-excerpt blog-index-excerpt">{post.excerpt}</p>
               </div>
 
               <Link className="read-more" href={post.href}>
