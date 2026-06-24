@@ -84,20 +84,14 @@ export default function TextReveal({
               style={{ display: 'inline-block' }}
               variants={{
                 hidden: {
-                  opacity: 0,
-                  y: '0.16em',
-                  filter: 'blur(3px)',
+                  y: '112%',
                 },
                 show: {
-                  opacity: 1,
                   y: '0em',
-                  filter: 'blur(0px)',
-                  transition: { duration: 1, ease: motionEase },
+                  transition: { duration: 0.92, ease: motionEase },
                 },
                 exited: {
-                  opacity: 0.62,
                   y: '0.08em',
-                  filter: 'blur(0px)',
                   transition: { duration: 0.26, ease: motionEase },
                 },
               }}

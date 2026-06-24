@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import AnimatedCard from './animation/AnimatedCard';
 import Marquee from './animation/Marquee';
-import { motionEase } from './animation/Reveal';
+import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
 import TextReveal from './animation/TextReveal';
 import OriginButton from './OriginButton';
@@ -286,12 +286,7 @@ function ProcessBadge() {
         height={18}
         style={BADGE_ICON_STYLE}
       />
-      <TextReveal
-        text={SECTION_BADGE}
-        delay={0.04}
-        stagger={0.03}
-        style={{ display: 'inline-flex' }}
-      />
+      {SECTION_BADGE}
     </span>
   );
 }
@@ -328,15 +323,17 @@ export default function Process() {
             marginBottom: 78,
           }}
         >
-          <ProcessBadge />
+          <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
+            <ProcessBadge />
+          </Reveal>
 
           <TextReveal
             as="h2"
             id="process-title"
             className="section-title process-title"
             text={SECTION_TITLE}
-            delay={0.12}
-            stagger={0.08}
+            delay={0.36}
+            stagger={0.11}
             style={{
               fontSize: 55,
               lineHeight: 1.2,
@@ -344,17 +341,17 @@ export default function Process() {
             }}
           />
 
-          <TextReveal
-            as="p"
-            className="section-sub"
-            text={SECTION_SUB}
-            delay={0.34}
-            stagger={0.045}
-            style={{
-              fontSize: 18,
-              lineHeight: 1.4,
-            }}
-          />
+          <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
+            <p
+              className="section-sub"
+              style={{
+                fontSize: 18,
+                lineHeight: 1.4,
+              }}
+            >
+              {SECTION_SUB}
+            </p>
+          </Reveal>
         </div>
 
         <StaggerContainer
