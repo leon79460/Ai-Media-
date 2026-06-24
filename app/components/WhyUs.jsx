@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import AnimatedCard from './animation/AnimatedCard';
 import Reveal, { motionEase } from './animation/Reveal';
 import { useDelayedInView } from './animation/viewport';
+import TextReveal from './animation/TextReveal';
 import OriginButton from './OriginButton';
 
 
@@ -313,7 +314,7 @@ export default function WhyUs() {
     <section id="whyus" className="why-section" style={styles.section}>
       <div className="why-shell" style={styles.shell}>
         <header className="why-header" style={styles.header}>
-          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
             <span className="section-badge">
               <Image
                 src="/icons/why-us.png"
@@ -327,13 +328,17 @@ export default function WhyUs() {
             </span>
           </Reveal>
 
-          <h2 id="whyus-title" className="section-title" style={styles.title}>
-            <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px" style={{ display: 'block' }}>
-              {SECTION_TITLE}
-            </Reveal>
-          </h2>
+          <TextReveal
+            as="h2"
+            id="whyus-title"
+            className="section-title"
+            text={SECTION_TITLE}
+            delay={0.36}
+            stagger={0.11}
+            style={styles.title}
+          />
 
-          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
             <p className="section-sub" style={styles.sub}>
               {SECTION_SUB}
             </p>

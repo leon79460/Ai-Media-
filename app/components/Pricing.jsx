@@ -7,6 +7,7 @@ import AnimatedCard from './animation/AnimatedCard';
 import AnimatedPricingToggle from './animation/AnimatedPricingToggle';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import TextReveal from './animation/TextReveal';
 import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Pricing';
@@ -183,7 +184,7 @@ export default function Pricing() {
     <section id="pricing" className="pricing-section">
       <div className="pricing-shell">
         <div className="pricing-header">
-          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
             <span className="section-badge">
               <Image
                 src="/icons/pricing.svg"
@@ -197,13 +198,16 @@ export default function Pricing() {
             </span>
           </Reveal>
 
-          <h2 id="pricing-title" className="section-title">
-            <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px" style={{ display: 'block' }}>
-              {SECTION_TITLE}
-            </Reveal>
-          </h2>
+          <TextReveal
+            as="h2"
+            id="pricing-title"
+            className="section-title"
+            text={SECTION_TITLE}
+            delay={0.36}
+            stagger={0.11}
+          />
 
-          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
             <p className="section-sub">{SECTION_SUB}</p>
           </Reveal>
 

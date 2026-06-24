@@ -4,6 +4,7 @@ import Image from 'next/image';
 import AnimatedCard from './animation/AnimatedCard';
 import Reveal, { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import TextReveal from './animation/TextReveal';
 import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Services';
@@ -113,12 +114,7 @@ export default function Features() {
     <section id="services" className="services-section">
       <div className="services-shell">
         <header className="services-header">
-          <Reveal
-            delay={0}
-            duration={0.4}
-            yOffset={6}
-            blur="6px"
-          >
+          <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
             <span className="services-badge">
               <Image
                 src="/icons/services.png"
@@ -133,31 +129,22 @@ export default function Features() {
           </Reveal>
 
           <h2 className="services-title">
-            <Reveal
-              delay={0.25}
-              duration={0.4}
-              yOffset={6}
-              blur="6px"
-            >
-              <span>{SECTION_TITLE_TOP}</span>
-            </Reveal>
+            <TextReveal
+              text={SECTION_TITLE_TOP}
+              delay={0.36}
+              stagger={0.11}
+              style={{ display: 'block' }}
+            />
 
-            <Reveal
-              delay={0.5}
-              duration={0.4}
-              yOffset={6}
-              blur="6px"
-            >
-              <span>{SECTION_TITLE_BOTTOM}</span>
-            </Reveal>
+            <TextReveal
+              text={SECTION_TITLE_BOTTOM}
+              delay={0.7}
+              stagger={0.11}
+              style={{ display: 'block' }}
+            />
           </h2>
 
-          <Reveal
-            delay={0.75}
-            duration={0.4}
-            yOffset={6}
-            blur="6px"
-          >
+          <Reveal delay={1.16} duration={1.2} yOffset={8} blur="12px">
             <p className="services-sub">
               {SECTION_SUB}
             </p>

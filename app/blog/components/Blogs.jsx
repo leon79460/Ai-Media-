@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import AnimatedCard from '../../components/animation/AnimatedCard';
 import Reveal, { motionEase } from '../../components/animation/Reveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
+import TextReveal from '../../components/animation/TextReveal';
 import { blogPosts } from '../data/blogs';
 
 const SECTION_BADGE = 'Insights & Resources';
@@ -119,20 +120,23 @@ export default function Blogs() {
     <section id="blogs" className="blog-home-section">
       <div className="blog-home-shell">
         <header className="blog-home-header">
-          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
             <span className="section-badge blog-home-badge">
               <BadgeIcon />
               {SECTION_BADGE}
             </span>
           </Reveal>
 
-          <h2 id="blogs-title" className="section-title blog-home-title">
-            <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px" style={{ display: 'block' }}>
-              {SECTION_TITLE}
-            </Reveal>
-          </h2>
+          <TextReveal
+            as="h2"
+            id="blogs-title"
+            className="section-title blog-home-title"
+            text={SECTION_TITLE}
+            delay={0.36}
+            stagger={0.11}
+          />
 
-          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
             <p className="section-sub blog-home-sub">{SECTION_SUB}</p>
           </Reveal>
         </header>
