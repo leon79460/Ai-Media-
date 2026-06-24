@@ -2925,7 +2925,7 @@ p {
 }
 
 .blog-article p + p {
-  margin-top: 18px;
+  margin-top: 18px; 
 }
 
 .blog-article h2 {

@@ -20,7 +20,7 @@ export default function TextReveal({
   className,
   style,
   delay = 0,
-  stagger = 0.045,
+  stagger = 0.03,
   amount = ANIMATION_VIEWPORT_AMOUNT,
   once = true,
   ...props
@@ -85,21 +85,18 @@ export default function TextReveal({
               variants={{
                 hidden: {
                   opacity: 0,
-                  y: '0.72em',
-                  rotate: 1.2,
+                  y: '0.16em',
                   filter: 'blur(3px)',
                 },
                 show: {
                   opacity: 1,
                   y: '0em',
-                  rotate: 0,
                   filter: 'blur(0px)',
-                  transition: { duration: 0.62, ease: motionEase },
+                  transition: { duration: 1, ease: motionEase },
                 },
                 exited: {
-                  opacity: 0.55,
-                  y: '0.12em',
-                  rotate: 0,
+                  opacity: 0.62,
+                  y: '0.08em',
                   filter: 'blur(0px)',
                   transition: { duration: 0.26, ease: motionEase },
                 },

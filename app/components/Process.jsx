@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import AnimatedCard from './animation/AnimatedCard';
 import Marquee from './animation/Marquee';
-import Reveal, { motionEase } from './animation/Reveal';
+import { motionEase } from './animation/Reveal';
 import StaggerContainer from './animation/StaggerContainer';
+import TextReveal from './animation/TextReveal';
 import OriginButton from './OriginButton';
 
 const SECTION_BADGE = 'Process';
@@ -286,7 +286,12 @@ function ProcessBadge() {
         height={18}
         style={BADGE_ICON_STYLE}
       />
-      {SECTION_BADGE}
+      <TextReveal
+        text={SECTION_BADGE}
+        delay={0.04}
+        stagger={0.03}
+        style={{ display: 'inline-flex' }}
+      />
     </span>
   );
 }
@@ -323,35 +328,33 @@ export default function Process() {
             marginBottom: 78,
           }}
         >
-          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
-            <ProcessBadge />
-          </Reveal>
+          <ProcessBadge />
 
-          <h2
+          <TextReveal
+            as="h2"
             id="process-title"
             className="section-title process-title"
+            text={SECTION_TITLE}
+            delay={0.12}
+            stagger={0.08}
             style={{
               fontSize: 55,
               lineHeight: 1.2,
               letterSpacing: 0,
             }}
-          >
-            <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px" style={{ display: 'block' }}>
-              {SECTION_TITLE}
-            </Reveal>
-          </h2>
+          />
 
-          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
-            <p
-              className="section-sub"
-              style={{
-                fontSize: 18,
-                lineHeight: 1.4,
-              }}
-            >
-              {SECTION_SUB}
-            </p>
-          </Reveal>
+          <TextReveal
+            as="p"
+            className="section-sub"
+            text={SECTION_SUB}
+            delay={0.34}
+            stagger={0.045}
+            style={{
+              fontSize: 18,
+              lineHeight: 1.4,
+            }}
+          />
         </div>
 
         <StaggerContainer
