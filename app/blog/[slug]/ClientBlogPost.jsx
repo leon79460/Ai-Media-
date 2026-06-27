@@ -6,6 +6,7 @@ import {
   MarketingBudgetCalculator,
 } from '../components/MarketingBudgetTools';
 import Reveal from '../../components/animation/Reveal';
+import TextReveal from '../../components/animation/TextReveal';
 
 export default function ClientBlogPost({ post }) {
   return (
@@ -16,13 +17,16 @@ export default function ClientBlogPost({ post }) {
             Back to insights
           </Link>
         </Reveal>
-        <Reveal as="span" className="section-badge" delay={0.1} duration={0.4} yOffset={6} blur="6px">
+        <Reveal as="span" className="section-badge" delay={0.04} duration={0.9} yOffset={10} blur="12px">
           {post.eyebrow}
         </Reveal>
-        <Reveal as="h1" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-          {post.title}
-        </Reveal>
-        <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+        <TextReveal
+          as="h1"
+          text={post.title}
+          delay={0.36}
+          stagger={0.11}
+        />
+        <Reveal as="p" delay={0.86} duration={1.2} yOffset={8} blur="12px">
           {post.excerpt}
         </Reveal>
 

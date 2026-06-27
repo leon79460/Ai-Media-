@@ -4,11 +4,13 @@ import Image from 'next/image';
 import AnimatedCard from '../components/animation/AnimatedCard';
 import Reveal from '../components/animation/Reveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
+import TextReveal from '../components/animation/TextReveal';
 import FaqPro from '../components/FaqPro';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import OriginButton from '../components/OriginButton';
 import TestimonialAvatar from '../components/TestimonialAvatar';
+import { CircularTestimonials } from '../components/ui/circular-testimonials';
 
 const SERVICES = [
   {
@@ -95,6 +97,13 @@ const TEAM = [
   },
 ];
 
+const TEAM_TESTIMONIALS = TEAM.map((member) => ({
+  quote: member.text,
+  name: member.name,
+  designation: member.role,
+  src: member.image,
+}));
+
 const TESTIMONIALS = [
   {
     name: 'Maria González',
@@ -171,17 +180,19 @@ export default function ClientAbout() {
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-shell about-hero-grid">
             <div className="about-hero-copy">
-              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                 <Badge>About</Badge>
               </Reveal>
 
-              <h1 id="about-title">
-                <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                  <span style={{ display: 'block' }}>About AI Media</span>
-                </Reveal>
-              </h1>
+              <TextReveal
+                as="h1"
+                id="about-title"
+                text="About AI Media"
+                delay={0.36}
+                stagger={0.11}
+              />
 
-              <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
                 <p>
                   We help AV and smart home integrators build a stronger online
                   presence through website design, SEO, content, branding, and AI
@@ -219,12 +230,17 @@ export default function ClientAbout() {
         <section className="about-section about-services" aria-labelledby="presence-title">
           <div className="about-shell">
             <div className="about-section-head">
-              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                 <Badge>Strategy</Badge>
               </Reveal>
-              <Reveal as="h2" id="presence-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                One Team For Your Digital Presence
-              </Reveal>
+              <TextReveal
+                as="h2"
+                id="presence-title"
+                className="section-title"
+                text="One Team For Your Digital Presence"
+                delay={0.36}
+                stagger={0.11}
+              />
             </div>
             <StaggerContainer className="about-card-grid" delay={0.2} stagger={0.22}>
               {SERVICES.map((s) => (
@@ -242,12 +258,17 @@ export default function ClientAbout() {
         <section className="about-section about-process" aria-labelledby="process-title">
           <div className="about-shell">
             <div className="about-section-head">
-              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                 <Badge>Process</Badge>
               </Reveal>
-              <Reveal as="h2" id="process-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                How It Works
-              </Reveal>
+              <TextReveal
+                as="h2"
+                id="process-title"
+                className="section-title"
+                text="How It Works"
+                delay={0.36}
+                stagger={0.11}
+              />
             </div>
             <div className="about-process-wrap">
               {/* gap must match about-timeline's gap so circles center over their cards */}
@@ -283,18 +304,24 @@ export default function ClientAbout() {
               />
             </Reveal>
             <div className="about-split-copy">
-              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                 <Badge>Why Choose Us</Badge>
               </Reveal>
               <h2 id="choose-title">
-                <Reveal as="span" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                  Why Brands
-                </Reveal>
-                <Reveal as="span" delay={0.5} duration={0.4} yOffset={6} blur="6px">
-                  Choose AI Media
-                </Reveal>
+                <TextReveal
+                  text="Why Brands"
+                  delay={0.36}
+                  stagger={0.11}
+                  style={{ display: 'block' }}
+                />
+                <TextReveal
+                  text="Choose AI Media"
+                  delay={0.7}
+                  stagger={0.11}
+                  style={{ display: 'block' }}
+                />
               </h2>
-              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={1.16} duration={1.2} yOffset={8} blur="12px">
                 <p>
                   Built for AV and smart home companies that want premium
                   positioning, qualified leads, and long-term growth.
@@ -309,40 +336,42 @@ export default function ClientAbout() {
           <div className="about-shell">
             <div className="about-row-head">
               <div>
-                <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                   <Badge>Team</Badge>
                 </Reveal>
-                <Reveal as="h2" id="team-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                  Meet Our Team.
-                </Reveal>
-                <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <TextReveal
+                  as="h2"
+                  id="team-title"
+                  text="Meet Our Team."
+                  delay={0.36}
+                  stagger={0.11}
+                />
+                <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
                   <p>Partner with an AI agency delivering smart solutions.</p>
                 </Reveal>
               </div>
-              <Reveal className="about-arrows" aria-hidden="true" delay={0.85} duration={0.4} yOffset={6} blur="6px">
-                <button type="button" className="about-arrow is-prev" tabIndex={-1}><span /></button>
-                <button type="button" className="about-arrow is-next" tabIndex={-1}><span /></button>
-              </Reveal>
             </div>
-            <StaggerContainer className="about-team-grid" delay={0.2} stagger={0.22}>
-              {TEAM.map((member) => (
-                <AnimatedCard className="about-team-card about-card" key={member.name}>
-                  <span className="about-team-role">{member.role}</span>
-                  <h3 className="about-team-name">{member.name}</h3>
-                  <p>{member.text}</p>
-                  {/* margin matches the card's 26px padding so image flush-fills both edges */}
-                  <div className="about-team-img-wrap" style={{ margin: 'auto -26px 0', height: '290px' }}>
-                    <Image
-                      src={member.image}
-                      alt={`${member.name} portrait`}
-                      width={420}
-                      height={420}
-                      style={{ width: 'calc(100% + 52px)', marginLeft: '0px', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
-                    />
-                  </div>
-                </AnimatedCard>
-              ))}
-            </StaggerContainer>
+            <Reveal delay={0.18} duration={0.8} yOffset={14} blur="10px">
+              <div className="about-team-carousel">
+                <CircularTestimonials
+                  testimonials={TEAM_TESTIMONIALS}
+                  autoplay
+                  colors={{
+                    name: '#030303',
+                    designation: 'rgba(61, 61, 61, 0.78)',
+                    testimony: 'rgba(29, 29, 29, 0.84)',
+                    arrowBackground: '#141414',
+                    arrowForeground: '#f5f5f5',
+                    arrowHoverBackground: '#030303',
+                  }}
+                  fontSizes={{
+                    name: '30px',
+                    designation: '18px',
+                    quote: '19px',
+                  }}
+                />
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -350,12 +379,17 @@ export default function ClientAbout() {
         <section className="about-section about-testimonials" aria-labelledby="testimonial-title">
           <div className="about-shell">
             <div className="about-section-head">
-              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                 <Badge>Testimonial</Badge>
               </Reveal>
-              <Reveal as="h2" id="testimonial-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                What Our Client Says
-              </Reveal>
+              <TextReveal
+                as="h2"
+                id="testimonial-title"
+                className="section-title"
+                text="What Our Client Says"
+                delay={0.36}
+                stagger={0.11}
+              />
             </div>
             <StaggerContainer className="about-testimonial-grid" delay={0.2} stagger={0.22}>
               {TESTIMONIALS.map((item, i) => (
@@ -386,13 +420,18 @@ export default function ClientAbout() {
         <section className="about-section about-faq-section" aria-labelledby="faq-title">
           <div className="about-shell about-faq-shell">
             <div className="about-section-head">
-              <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                 <Badge>FAQS</Badge>
               </Reveal>
-              <Reveal as="h2" id="faq-title" className="section-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                Questions? Answers!
-              </Reveal>
-              <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+              <TextReveal
+                as="h2"
+                id="faq-title"
+                className="section-title"
+                text="Questions? Answers!"
+                delay={0.36}
+                stagger={0.11}
+              />
+              <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
                 <p className="section-sub">Find some quick answers to the most common questions.</p>
               </Reveal>
             </div>
@@ -418,13 +457,17 @@ export default function ClientAbout() {
                 <span aria-hidden="true">Design.<br />Build.<br />Grow.</span>
               </div>
               <div className="about-cta-copy">
-                <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
                   <Badge>Contact us</Badge>
                 </Reveal>
-                <Reveal as="h2" id="about-cta-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                  Ready to Build a Smarter Online Presence?
-                </Reveal>
-                <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <TextReveal
+                  as="h2"
+                  id="about-cta-title"
+                  text="Ready to Build a Smarter Online Presence?"
+                  delay={0.36}
+                  stagger={0.11}
+                />
+                <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
                   <p>
                     Let&apos;s create a website and marketing system that helps
                     your business stand out, rank better, and generate qualified leads.

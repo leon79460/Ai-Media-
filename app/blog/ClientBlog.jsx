@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { blogPosts } from './data/blogs';
 import Reveal from '../components/animation/Reveal';
+import TextReveal from '../components/animation/TextReveal';
 import StaggerContainer from '../components/animation/StaggerContainer';
 import AnimatedCard from '../components/animation/AnimatedCard';
 
@@ -17,7 +18,7 @@ export default function ClientBlog() {
       <Navbar />
       <main className="blog-index-page">
         <section className="blog-index-hero">
-          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
             <span className="section-badge">
               <Image
                 src="/blog/blog.svg"
@@ -30,13 +31,14 @@ export default function ClientBlog() {
             </span>
           </Reveal>
 
-          <h1>
-            <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
-              <span style={{ display: 'block' }}>Latest Insights From AI Media</span>
-            </Reveal>
-          </h1>
+          <TextReveal
+            as="h1"
+            text="Latest Insights From AI Media"
+            delay={0.36}
+            stagger={0.11}
+          />
 
-          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.86} duration={1.2} yOffset={8} blur="12px">
             <p>
               Practical strategy, budgeting, SEO, content, and website guidance
               for systems integrators that want more predictable growth.

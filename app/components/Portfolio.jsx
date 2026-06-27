@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Reveal from './animation/Reveal';
+import TextReveal from './animation/TextReveal';
 import StaggerContainer from './animation/StaggerContainer';
 import AnimatedCard from './animation/AnimatedCard';
 
@@ -86,7 +87,7 @@ export default function Portfolio() {
     <section id="works" className="portfolio-section">
       <div className="portfolio-shell">
         <header className="portfolio-header">
-          <Reveal delay={0} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={0.04} duration={0.9} yOffset={10} blur="12px">
             <span className="section-badge">
               <Image
                 src="/icons/portfolio.png"
@@ -101,16 +102,23 @@ export default function Portfolio() {
           </Reveal>
 
           <h2 className="section-title">
-            <Reveal delay={0.25} duration={0.4} yOffset={6} blur="6px">
-              <span style={{ display: 'block' }}>Selected Work With</span>
-            </Reveal>
-
-            <Reveal delay={0.5} duration={0.4} yOffset={6} blur="6px">
-              <span style={{ display: 'block' }}>Measurable Polish.</span>
-            </Reveal>
+            <TextReveal
+              as="span"
+              text="Selected Work With"
+              delay={0.36}
+              stagger={0.11}
+              style={{ display: 'block' }}
+            />
+            <TextReveal
+              as="span"
+              text="Measurable Polish."
+              delay={0.7}
+              stagger={0.11}
+              style={{ display: 'block' }}
+            />
           </h2>
 
-          <Reveal delay={0.75} duration={0.4} yOffset={6} blur="6px">
+          <Reveal delay={1.16} duration={1.2} yOffset={8} blur="12px">
             <p className="section-sub">{PORTFOLIO_SUB}</p>
           </Reveal>
         </header>

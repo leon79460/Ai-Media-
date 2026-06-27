@@ -346,9 +346,8 @@ export default function Footer() {
                   fontFamily: 'var(--font)',
                   fontWeight: 400,
                   fontSize: '14px',
-                  color: '#f5f5f5',
+                  color: 'rgb(197 192 192)',
                   lineHeight: 1.64,
-                  opacity: 0.8,
                 }}
               >
                 {TAGLINE}

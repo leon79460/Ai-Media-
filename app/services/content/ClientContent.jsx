@@ -5,6 +5,7 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import OriginButton from '../../components/OriginButton';
 import Reveal from '../../components/animation/Reveal';
+import TextReveal from '../../components/animation/TextReveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
 import FaqPro from '../../components/FaqPro';
@@ -63,7 +64,7 @@ export default function ClientContent() {
           <div className="ds-hero-card">
             <div className="ds-hero-grid">
               <div className="ds-hero-copy">
-                <Reveal as="span" className="ds-badge" delay={0} duration={0.4} yOffset={6} blur="6px">
+                <Reveal as="span" className="ds-badge" delay={0.04} duration={0.9} yOffset={10} blur="12px">
                   <svg
                     width="14" height="14" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="1.8"
@@ -77,10 +78,13 @@ export default function ClientContent() {
                   </svg>
                   Content
                 </Reveal>
-                <Reveal as="h1" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                  Content Creation for AV &amp; Smart Home Integrators
-                </Reveal>
-                <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+                <TextReveal
+                  as="h1"
+                  text="Content Creation for AV & Smart Home Integrators"
+                  delay={0.36}
+                  stagger={0.11}
+                />
+                <Reveal as="p" delay={0.86} duration={1.2} yOffset={8} blur="12px">
                   We create clear, engaging, and professional content that helps your
                   business educate customers, build trust, and support your marketing
                   goals.
@@ -109,10 +113,14 @@ export default function ClientContent() {
           <span className="ds-deco ds-deco-2" aria-hidden="true" />
           <div className="ds-solutions-shell">
             <div className="ds-solutions-head">
-              <Reveal as="h2" id="content-sol-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                Content Solutions Built to Educate and Convert
-              </Reveal>
-              <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+              <TextReveal
+                as="h2"
+                id="content-sol-title"
+                text="Content Solutions Built to Educate and Convert"
+                delay={0.36}
+                stagger={0.11}
+              />
+              <Reveal as="p" delay={0.86} duration={1.2} yOffset={8} blur="12px">
                 From AI-assisted written content to professionally edited video,
                 we create the assets your business needs to build credibility and
                 engage your audience.
@@ -147,7 +155,7 @@ export default function ClientContent() {
         <section className="ds-faq-section">
           <div className="ds-faq-shell">
             <div className="ds-faq-head">
-              <Reveal as="span" className="ds-badge ds-badge-sm" delay={0} duration={0.4} yOffset={6} blur="6px">
+              <Reveal as="span" className="ds-badge ds-badge-sm" delay={0.04} duration={0.9} yOffset={10} blur="12px">
                 <svg
                   width="13" height="13" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" strokeWidth="2"
@@ -158,10 +166,14 @@ export default function ClientContent() {
                 </svg>
                 FAQS
               </Reveal>
-              <Reveal as="h2" id="faq-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-                Questions? Answers!
-              </Reveal>
-              <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+              <TextReveal
+                as="h2"
+                id="faq-title"
+                text="Questions? Answers!"
+                delay={0.36}
+                stagger={0.11}
+              />
+              <Reveal as="p" delay={0.86} duration={1.2} yOffset={8} blur="12px">
                 Find some quick answers to the most common questions.
               </Reveal>
             </div>

@@ -1,23 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { motion } from 'motion/react';
 import { buttonHover, buttonTap } from './animation/Reveal';
 
 const FILL_DURATION = 0.5;
 const FILL_EASE = [0.16, 1, 0.3, 1];
 
-/**
- * Hoist motion.create(Link) outside the component so React sees a stable component
- * reference. Otherwise, it remounts every render, breaking animations.
- */
 const MotionLink = motion.create(Link);
 
-/**
- * Compute the diameter of the smallest circle centred at (x, y)
- * that fully covers a rectangle of the given width × height.
- */
 function getCoverDiameter(width, height, x, y) {
   return Math.ceil(
     2 *
@@ -25,18 +17,11 @@ function getCoverDiameter(width, height, x, y) {
         Math.hypot(x, y),
         Math.hypot(width - x, y),
         Math.hypot(x, height - y),
-        Math.hypot(width - x, height - y),
-      ),
+        Math.hypot(width - x, height - y)
+      )
   );
 }
 
-/**
- * VARIANT PALETTE — maps variant names to { fill, text, hoverText }
- *
- *  fill      → colour of the expanding circle
- *  text      → default text colour (only used when no `style.color` override)
- *  hoverText → text colour while the fill is visible
- */
 const VARIANTS = {
   dark: {
     fill: '#f5f5f5',
@@ -65,25 +50,6 @@ const VARIANTS = {
   },
 };
 
-/**
- * OriginButton
- *
- * A button (or link) with a radial-fill hover effect. A circle expands from
- * the pointer's entry point (or from the centre on keyboard focus), filling the
- * button with a contrasting colour while the text inverts.
- *
- * Props
- * ─────
- * variant        "dark" | "light" | "ghost" | "outline-light" | "custom"
- * as             "button" | "a" | "link" (Next.js Link)  — default "button"
- * href           required when as="a" or as="link"
- * fillColor      override the radial fill colour
- * hoverTextColor override the text colour when hovered
- * className      extra class names
- * style          inline style object (merged with base variant styles)
- * children       button content
- * …rest          forwarded to the underlying element
- */
 export default function OriginButton({
   variant = 'dark',
   as = 'button',
@@ -106,29 +72,24 @@ export default function OriginButton({
   const [coverSize, setCoverSize] = useState(0);
 
   const palette = VARIANTS[variant] || VARIANTS.dark;
+
   const activeFill = fillColor || palette.fill;
   const activeHoverText = hoverTextColor || palette.hoverText;
-
   const showFill = !disabled && (hovered || pressed);
 
-  /* ── Pointer helpers ── */
   const updateOriginFromEvent = useCallback((e, fromCenter = false) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    let x, y;
-    if (fromCenter) {
-      x = rect.width / 2;
-      y = rect.height / 2;
-    } else {
-      x = e.clientX - rect.left;
-      y = e.clientY - rect.top;
-    }
+
+    const x = fromCenter ? rect.width / 2 : e.clientX - rect.left;
+    const y = fromCenter ? rect.height / 2 : e.clientY - rect.top;
+
     setOrigin({ x, y });
     setCoverSize(getCoverDiameter(rect.width, rect.height, x, y));
   }, []);
 
-  /* ── Event handlers ── */
   const handlePointerEnter = (e) => {
     if (disabled) return;
+
     updateOriginFromEvent(e);
     setHovered(true);
   };
@@ -140,6 +101,7 @@ export default function OriginButton({
 
   const handlePointerDown = (e) => {
     if (disabled || e.button !== 0) return;
+
     updateOriginFromEvent(e);
     setPressed(true);
     setHovered(true);
@@ -151,6 +113,7 @@ export default function OriginButton({
 
   const handleFocus = (e) => {
     if (disabled) return;
+
     if (e.currentTarget.matches(':focus-visible')) {
       updateOriginFromEvent(e, true);
       setHovered(true);
@@ -164,7 +127,11 @@ export default function OriginButton({
 
   const handleKeyDown = (e) => {
     if (disabled || e.repeat || (e.key !== ' ' && e.key !== 'Enter')) return;
-    if (e.key === ' ') e.preventDefault();
+
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+
     updateOriginFromEvent(e, true);
     setPressed(true);
     setHovered(true);
@@ -173,45 +140,51 @@ export default function OriginButton({
   const handleKeyUp = (e) => {
     if (e.key === ' ' || e.key === 'Enter') {
       setPressed(false);
+
       if (!e.currentTarget.matches(':focus-visible')) {
         setHovered(false);
       }
     }
   };
 
-  /* ── Determine the wrapper element ── */
   let Comp = motion.button;
+
   const extraProps = {};
 
   if (as === 'a') {
     Comp = motion.a;
     extraProps.href = href;
+
     if (target) extraProps.target = target;
     if (rel) extraProps.rel = rel;
   } else if (as === 'link') {
-    Comp = MotionLink; // stable reference — never re-mounts
+    Comp = MotionLink;
     extraProps.href = href || '/';
+
     if (target) extraProps.target = target;
   } else {
     extraProps.type = type || 'button';
     extraProps.disabled = disabled;
   }
 
-  /* ── Merged style ── */
-  const mergedStyle = {
-    position: 'relative',
-    overflow: 'hidden',
-    cursor: disabled ? 'default' : 'pointer',
-    ...style,
-  };
+const mergedStyle = {
+  position: 'relative',
+  overflow: 'hidden',
+  cursor: disabled ? 'default' : 'pointer',
 
-  const fillTransition = { duration: FILL_DURATION, ease: FILL_EASE };
+  ...style,
+
+  outline: 'none',
+  boxShadow: 'none',
+  WebkitTapHighlightColor: 'transparent',
+};
 
   return (
     <Comp
       className={`origin-btn ${className}`}
       style={mergedStyle}
       onClick={onClick}
+       onMouseDown={(e) => e.currentTarget.blur()}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
@@ -220,12 +193,15 @@ export default function OriginButton({
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
-      whileHover={disabled ? undefined : buttonHover}
+      whileHover={
+  disabled || className.includes('footer-submit-button')
+    ? undefined
+    : buttonHover
+}
       whileTap={disabled ? undefined : buttonTap}
       {...extraProps}
       {...rest}
     >
-      {/* Radial fill circle — using pure CSS for bulletproof animation */}
       <span
         aria-hidden
         style={{
@@ -245,7 +221,6 @@ export default function OriginButton({
         }}
       />
 
-      {/* Content — above the fill */}
       <span
         style={{
           position: 'relative',
@@ -256,8 +231,8 @@ export default function OriginButton({
           gap: '8px',
           width: '100%',
           height: '100%',
-          color: showFill ? activeHoverText : (style.color || palette.text),
-          transition: 'color 0.3s cubic-bezier(0.16,1,0.3,1)',
+          color: showFill ? activeHoverText : style.color || palette.text,
+          transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
         {children}
