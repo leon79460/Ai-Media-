@@ -167,17 +167,17 @@ export default function OriginButton({
     extraProps.disabled = disabled;
   }
 
-const mergedStyle = {
-  position: 'relative',
-  overflow: 'hidden',
-  cursor: disabled ? 'default' : 'pointer',
+  const mergedStyle = {
+    position: 'relative',
+    overflow: 'hidden',
+    cursor: disabled ? 'default' : 'pointer',
 
-  ...style,
+    ...style,
 
-  outline: 'none',
-  boxShadow: 'none',
-  WebkitTapHighlightColor: 'transparent',
-};
+    // outline: 'none',
+    // boxShadow: 'none',
+    WebkitTapHighlightColor: 'transparent',
+  };
 
   return (
     <Comp

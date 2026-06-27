@@ -716,7 +716,7 @@ html {
     0 16px 28px rgba(0, 0, 0, 0.26),
     0 5px 10px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  outline: none;
+  /* outline: none; */ 
   transform: translateY(-2px) scale(1);
 }
 
@@ -14773,8 +14773,7 @@ main.careers-page .careers-role-link {
 main.careers-page .careers-role-link.origin-btn > span {
   margin: 0;
   padding: 0;
-  border: 0;
-  box-shadow: none;
+  /* box-shadow: none; */
   font: inherit;
   line-height: inherit;
 }
@@ -15187,7 +15186,7 @@ main.about-page:not(.careers-page) #about-cta-title span {
   transform: scale(1.018) !important;
 }
 
-.origin-btn,
+/* .origin-btn,
 .origin-btn:hover,
 .origin-btn:focus,
 .origin-btn:focus-visible,
@@ -15199,4 +15198,4 @@ main.about-page:not(.careers-page) #about-cta-title span {
 .footer-submit-button:active {
   outline: none !important;
   box-shadow: none !important;
-}
+} */
