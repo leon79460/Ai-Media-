@@ -74,6 +74,7 @@ export function CircularTestimonials({
   const isInView = useInView(containerRef, { amount: 0.3, once: false });
 
   const total = testimonials.length;
+  const activeIndex = total > 0 ? currentIndex % total : 0;
 
   function goNext() {
     if (total <= 1) return;
@@ -94,11 +95,6 @@ export function CircularTestimonials({
 
     return () => clearInterval(interval);
   }, [autoplay, isHovered, isInView, total]);
-
-  useEffect(() => {
-    if (currentIndex < total) return;
-    setCurrentIndex(0);
-  }, [currentIndex, total]);
 
   useEffect(() => {
     const node = imageContainerRef.current;
@@ -127,7 +123,7 @@ export function CircularTestimonials({
     return null;
   }
 
-  const currentTestimonial = testimonials[currentIndex];
+  const currentTestimonial = testimonials[activeIndex];
   const quoteWords = currentTestimonial.quote.split(' ');
 
   const imageTransition = {
@@ -208,11 +204,11 @@ export function CircularTestimonials({
     >
       <div
         ref={imageContainerRef}
-        className="circular-testimonials-stack relative w-[320px] h-[400px] flex items-center justify-center flex-shrink-0"
+        className="circular-testimonials-stack relative w-80 h-100 flex items-center justify-center shrink-0"
         style={{ perspective: '1000px' }}
       >
         {testimonials.map((testimonial, index) => {
-          const imageState = getImageState(index, currentIndex, total, stackBounds);
+          const imageState = getImageState(index, activeIndex, total, stackBounds);
 
           return (
             <motion.div
@@ -241,7 +237,7 @@ export function CircularTestimonials({
       <div className="circular-testimonials-copy flex-1 flex flex-col items-start text-left min-h-[300px] justify-center pl-4 md:pl-12">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentIndex}
+            key={activeIndex}
             variants={textParentVariants}
             initial="exit"
             animate="enter"
