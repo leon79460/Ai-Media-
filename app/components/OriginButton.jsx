@@ -182,7 +182,17 @@ const mergedStyle = {
   return (
     <Comp
       className={`origin-btn ${className}`}
-      style={mergedStyle}
+      style={{
+  ...mergedStyle,
+  backgroundColor:
+    className.includes('footer-submit-button') && showFill
+      ? activeFill
+      : mergedStyle.backgroundColor,
+  color:
+    className.includes('footer-submit-button') && showFill
+      ? activeHoverText
+      : mergedStyle.color,
+}}
       onClick={onClick}
        onMouseDown={(e) => e.currentTarget.blur()}
       onPointerEnter={handlePointerEnter}
@@ -202,24 +212,24 @@ const mergedStyle = {
       {...extraProps}
       {...rest}
     >
-      <span
-        aria-hidden
-        style={{
-          position: 'absolute',
-          left: `${origin.x}px`,
-          top: `${origin.y}px`,
-          width: coverSize ? `${coverSize}px` : 0,
-          height: coverSize ? `${coverSize}px` : 0,
-          marginLeft: coverSize ? `-${coverSize / 2}px` : 0,
-          marginTop: coverSize ? `-${coverSize / 2}px` : 0,
-          borderRadius: '50%',
-          background: activeFill,
-          pointerEvents: 'none',
-          zIndex: 0,
-          transform: `scale(${showFill && coverSize > 0 ? 1 : 0})`,
-          transition: `transform ${FILL_DURATION}s cubic-bezier(0.16, 1, 0.3, 1)`,
-        }}
-      />
+    <span
+      aria-hidden
+      style={{
+        position: 'absolute',
+        left: `${origin.x}px`,
+        top: `${origin.y}px`,
+        width: coverSize ? `${coverSize}px` : 0,
+        height: coverSize ? `${coverSize}px` : 0,
+        marginLeft: coverSize ? `-${coverSize / 2}px` : 0,
+        marginTop: coverSize ? `-${coverSize / 2}px` : 0,
+        borderRadius: '50%',
+        background: activeFill,
+        pointerEvents: 'none',
+        zIndex: 0,
+        transform: `scale(${showFill && coverSize > 0 ? 1 : 0})`,
+        transition: `transform ${FILL_DURATION}s cubic-bezier(0.16, 1, 0.3, 1)`,
+      }}
+    />
 
       <span
         style={{

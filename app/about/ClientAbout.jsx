@@ -462,7 +462,7 @@ export default function ClientAbout() {
                 </Reveal>
                 <TextReveal
                   as="h2"
-                  id="about-cta-title"
+                  id="about-cta-title font-fixed"
                   text="Ready to Build a Smarter Online Presence?"
                   delay={0.36}
                   stagger={0.11}

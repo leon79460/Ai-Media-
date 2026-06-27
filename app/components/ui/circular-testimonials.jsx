@@ -50,7 +50,7 @@ function getImageState(index, currentIndex, total, bounds) {
 
 export function CircularTestimonials({
   testimonials = [],
-  autoplay = false,
+  autoplay = true,
   colors = {
     name: '#0a0a0a',
     designation: '#64748b',
@@ -66,38 +66,39 @@ export function CircularTestimonials({
   },
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [autoplayStopped, setAutoplayStopped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [stackBounds, setStackBounds] = useState({ width: 320, height: 400 });
+
   const containerRef = useRef(null);
   const imageContainerRef = useRef(null);
   const isInView = useInView(containerRef, { amount: 0.3, once: false });
 
-  function handleNext() {
-    setAutoplayStopped(true);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const total = testimonials.length;
+
+  function goNext() {
+    if (total <= 1) return;
+    setCurrentIndex((prev) => (prev + 1) % total);
   }
 
-  function handlePrev() {
-    setAutoplayStopped(true);
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  function goPrev() {
+    if (total <= 1) return;
+    setCurrentIndex((prev) => (prev - 1 + total) % total);
   }
 
   useEffect(() => {
-    if (!autoplay || autoplayStopped || !isInView || testimonials.length <= 1) {
-      return undefined;
-    }
+    if (!autoplay || isHovered || !isInView || total <= 1) return undefined;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      setCurrentIndex((prev) => (prev + 1) % total);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [autoplay, autoplayStopped, isInView, testimonials.length]);
+  }, [autoplay, isHovered, isInView, total]);
 
   useEffect(() => {
-    if (currentIndex < testimonials.length) return;
+    if (currentIndex < total) return;
     setCurrentIndex(0);
-  }, [currentIndex, testimonials.length]);
+  }, [currentIndex, total]);
 
   useEffect(() => {
     const node = imageContainerRef.current;
@@ -128,19 +129,82 @@ export function CircularTestimonials({
 
   const currentTestimonial = testimonials[currentIndex];
   const quoteWords = currentTestimonial.quote.split(' ');
+
   const imageTransition = {
-    duration: 0.8,
-    ease: motionEase,
+    duration: 0.85,
+    ease: [0.16, 1, 0.3, 1],
   };
-  const textTransition = {
-    duration: 0.3,
-    ease: motionEase,
+
+  const textParentVariants = {
+    enter: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.42,
+        ease: [0.16, 1, 0.3, 1],
+        staggerChildren: 0.045,
+        delayChildren: 0.04,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -14,
+      transition: {
+        duration: 0.22,
+        ease: [0.55, 0, 1, 0.45],
+      },
+    },
+  };
+
+  const lineVariants = {
+    enter: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.45,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -12,
+      filter: 'blur(6px)',
+      transition: {
+        duration: 0.2,
+        ease: [0.55, 0, 1, 0.45],
+      },
+    },
+  };
+
+  const wordVariants = {
+    enter: (index) => ({
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.26,
+        ease: [0.16, 1, 0.3, 1],
+        delay: 0.14 + index * 0.018,
+      },
+    }),
+    exit: {
+      opacity: 0,
+      y: -8,
+      filter: 'blur(4px)',
+      transition: {
+        duration: 0.16,
+        ease: [0.55, 0, 1, 0.45],
+      },
+    },
   };
 
   return (
     <div
       ref={containerRef}
       className="circular-testimonials flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto gap-16 py-12"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div
         ref={imageContainerRef}
@@ -148,12 +212,7 @@ export function CircularTestimonials({
         style={{ perspective: '1000px' }}
       >
         {testimonials.map((testimonial, index) => {
-          const imageState = getImageState(
-            index,
-            currentIndex,
-            testimonials.length,
-            stackBounds,
-          );
+          const imageState = getImageState(index, currentIndex, total, stackBounds);
 
           return (
             <motion.div
@@ -180,58 +239,58 @@ export function CircularTestimonials({
       </div>
 
       <div className="circular-testimonials-copy flex-1 flex flex-col items-start text-left min-h-[300px] justify-center pl-4 md:pl-12">
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={textTransition}
+            variants={textParentVariants}
+            initial="exit"
+            animate="enter"
+            exit="exit"
             className="circular-testimonials-text flex flex-col w-full"
             style={{ willChange: 'transform, opacity' }}
           >
             <div className="flex flex-col mb-8">
-              <span
+              <motion.span
+                variants={lineVariants}
                 className="font-bold mb-2"
                 style={{ color: colors.name, fontSize: fontSizes.name }}
               >
                 {currentTestimonial.name}
-              </span>
-              <span
+              </motion.span>
+
+              <motion.span
+                variants={lineVariants}
                 className="font-normal"
                 style={{ color: colors.designation, fontSize: fontSizes.designation }}
               >
                 {currentTestimonial.designation}
-              </span>
+              </motion.span>
             </div>
 
-            <p
+            <motion.p
+              variants={lineVariants}
               className="leading-loose font-normal"
               style={{ color: colors.testimony, fontSize: fontSizes.quote }}
             >
               {quoteWords.map((word, index) => (
                 <motion.span
                   key={`${currentTestimonial.name}-${word}-${index}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.2,
-                    ease: motionEase,
-                    delay: index * 0.02,
-                  }}
+                  custom={index}
+                  variants={wordVariants}
                   style={{ display: 'inline-block' }}
                 >
                   {word}
                   {index < quoteWords.length - 1 ? '\u00a0' : null}
                 </motion.span>
               ))}
-            </p>
+            </motion.p>
           </motion.div>
         </AnimatePresence>
 
         <div className="circular-testimonials-arrows flex gap-4" style={{ marginTop: 20 }}>
           <button
-            onClick={handlePrev}
+            type="button"
+            onClick={goPrev}
             className="w-14 h-14 flex items-center justify-center rounded-full transition-colors duration-300 group shadow-md"
             style={{ backgroundColor: colors.arrowBackground, color: colors.arrowForeground }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.arrowHoverBackground)}
@@ -253,8 +312,10 @@ export function CircularTestimonials({
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
+
           <button
-            onClick={handleNext}
+            type="button"
+            onClick={goNext}
             className="w-14 h-14 flex items-center justify-center rounded-full transition-colors duration-300 group shadow-md"
             style={{ backgroundColor: colors.arrowBackground, color: colors.arrowForeground }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.arrowHoverBackground)}
