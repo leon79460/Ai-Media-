@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
 import { buttonHover, buttonTap } from './animation/Reveal';
 
@@ -64,8 +65,10 @@ export default function OriginButton({
   onClick,
   type,
   disabled = false,
+  disableHoverMotion = false,
   ...rest
 }) {
+  const pathname = usePathname();
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
@@ -76,6 +79,13 @@ export default function OriginButton({
   const activeFill = fillColor || palette.fill;
   const activeHoverText = hoverTextColor || palette.hoverText;
   const showFill = !disabled && (hovered || pressed);
+
+  useEffect(() => {
+    setHovered(false);
+    setPressed(false);
+    setCoverSize(0);
+    setOrigin({ x: 0, y: 0 });
+  }, [pathname]);
 
   const updateOriginFromEvent = useCallback((e, fromCenter = false) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -179,20 +189,20 @@ export default function OriginButton({
     WebkitTapHighlightColor: 'transparent',
   };
 
+  const resolvedStyle = {
+    ...mergedStyle,
+    ...(className.includes('footer-submit-button') && showFill
+      ? {
+          backgroundColor: activeFill,
+          color: activeHoverText,
+        }
+      : {}),
+  };
+
   return (
     <Comp
       className={`origin-btn ${className}`}
-      style={{
-  ...mergedStyle,
-  backgroundColor:
-    className.includes('footer-submit-button') && showFill
-      ? activeFill
-      : mergedStyle.backgroundColor,
-  color:
-    className.includes('footer-submit-button') && showFill
-      ? activeHoverText
-      : mergedStyle.color,
-}}
+      style={resolvedStyle}
       onClick={onClick}
        onMouseDown={(e) => e.currentTarget.blur()}
       onPointerEnter={handlePointerEnter}
@@ -204,7 +214,7 @@ export default function OriginButton({
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       whileHover={
-  disabled || className.includes('footer-submit-button')
+  disabled || className.includes('footer-submit-button') || disableHoverMotion
     ? undefined
     : buttonHover
 }
@@ -241,7 +251,7 @@ export default function OriginButton({
           gap: '8px',
           width: '100%',
           height: '100%',
-          color: showFill ? activeHoverText : style.color || palette.text,
+          color: showFill ? activeHoverText : mergedStyle.color || palette.text,
           transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >

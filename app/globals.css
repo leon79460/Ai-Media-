@@ -7201,7 +7201,7 @@ main.careers-page .careers-process-card p {
 
 .contact-email-note {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 8px;
   margin: 36px 0 0;
@@ -7209,6 +7209,18 @@ main.careers-page .careers-process-card p {
   font-family: var(--font);
   font-size: 13px;
   text-align: center;
+}
+
+.contact-email-note svg {
+  display: block;
+  margin-top: 0 !important;
+}
+
+.contact-email-note-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
 }
 
 .contact-email-note a {
@@ -14542,7 +14554,7 @@ main.careers-page .careers-process-card p {
 
 .contact-email-note {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 8px;
   margin: 36px 0 0;
@@ -14550,6 +14562,18 @@ main.careers-page .careers-process-card p {
   font-family: var(--font);
   font-size: 13px;
   text-align: center;
+}
+
+.contact-email-note svg {
+  display: block;
+  margin-top: 0 !important;
+}
+
+.contact-email-note-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
 }
 
 .contact-email-note a {
@@ -15199,3 +15223,46 @@ main.about-page:not(.careers-page) #about-cta-title span {
   outline: none !important;
   box-shadow: none !important;
 } */
+
+/* About-based section content consistency for Blog and Portfolio pages */
+.portfolio-header .section-sub,
+.blog-index-hero p {
+  font-size: 18px !important;
+  line-height: 1.4em !important;
+}
+
+.portfolio-header .section-title,
+.blog-index-hero h1 {
+  line-height: 1.12 !important;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .portfolio-header .section-title,
+  .blog-index-hero h1 {
+    font-size: 44px !important;
+    line-height: 1.12 !important;
+  }
+
+  .portfolio-header .section-sub,
+  .blog-index-hero p {
+    font-size: 18px !important;
+    line-height: 1.4em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-header .section-title,
+  .blog-index-hero h1 {
+    font-size: 32px !important;
+    line-height: 1.12 !important;
+    overflow-wrap: break-word;
+  }
+
+  .portfolio-header .section-sub,
+  .blog-index-hero p {
+    font-size: 16px !important;
+    line-height: 1.4em !important;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+}

@@ -2,9 +2,11 @@
 
 import Image from 'next/image';
 import { motion, useInView, useReducedMotion } from 'motion/react';
-import { useRef } from 'react';
+import { useRef, useLayoutEffect, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import OriginButton from './OriginButton';
 import { motionEase } from './animation/Reveal';
+import styles from './Hero.module.css';
 
 const HERO_BG_VIDEO = '/video/hero-bg.mp4';
 
@@ -66,6 +68,44 @@ function BlurFade({
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const pathname = usePathname();
+  const aiaBadgeRef = useRef(null);
+  const badgeContainerRef = useRef(null);
+
+  const applyColor = () => {
+    if (badgeContainerRef.current) {
+      badgeContainerRef.current.style.setProperty('color', '#f3f3f3', 'important');
+    }
+    if (aiaBadgeRef.current) {
+      aiaBadgeRef.current.style.setProperty('color', '#f3f3f3', 'important');
+    }
+  };
+
+  useLayoutEffect(() => {
+    // Apply color on mount and when pathname changes
+    applyColor();
+
+    // Use requestAnimationFrame to apply after browser repaint
+    const frameId = requestAnimationFrame(() => {
+      applyColor();
+      // Apply again after a small delay to catch animation overrides
+      setTimeout(applyColor, 50);
+    });
+
+    return () => cancelAnimationFrame(frameId);
+  }, [pathname]);
+
+  useEffect(() => {
+    // Additional effect to catch late-running animations
+    const timers = [
+      setTimeout(applyColor, 100),
+      setTimeout(applyColor, 300),
+      setTimeout(applyColor, 600),
+      setTimeout(applyColor, 1000),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, [pathname]);
 
   function scrollToSection(target) {
     document.getElementById(target)?.scrollIntoView({
@@ -156,6 +196,7 @@ export default function Hero() {
             style={{ position: 'relative', display: 'inline-flex' }}
           >
             <div
+              ref={badgeContainerRef}
               style={{
                 position: 'relative',
                 height: '36px',
@@ -180,6 +221,8 @@ export default function Hero() {
               />
 
               <span
+                ref={aiaBadgeRef}
+                className={`hero-ai-badge-text ${styles.aiaBadgeText}`}
                 style={{
                   fontFamily: 'var(--font-main)',
                   fontSize: '12px',
@@ -273,7 +316,7 @@ export default function Hero() {
                 padding: '0 24px',
                 borderRadius: '7px',
                 border: '1px solid rgba(255,255,255,0.86)',
-                background: 'rgba(255,255,255,0.08)',
+                backgroundColor: 'rgba(255,255,255,0.08)',
                 color: '#fff',
                 fontFamily: 'var(--font-main)',
                 fontWeight: 700,
@@ -301,7 +344,7 @@ export default function Hero() {
                 padding: '0 24px',
                 borderRadius: '7px',
                 border: 0,
-                background: '#f7f7f7',
+                backgroundColor: '#f7f7f7',
                 color: '#060606',
                 fontFamily: 'var(--font-main)',
                 fontWeight: 700,

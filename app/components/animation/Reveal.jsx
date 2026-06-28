@@ -261,7 +261,17 @@ export default function Reveal({
     blur,
     visibleY,
   });
-  const exited = getExitedState(preset.visible);
+  const hiddenVariant = {
+    ...preset.hidden,
+    visibility: 'hidden',
+    pointerEvents: 'none',
+  };
+  const visibleVariant = {
+    ...preset.visible,
+    visibility: 'visible',
+    pointerEvents: 'auto',
+  };
+  const exited = getExitedState(visibleVariant);
   const baseStyle = { ...preset.style, ...style };
   const isInView = inView === false || observedInView;
 
@@ -291,8 +301,8 @@ export default function Reveal({
       initial={shouldReduceMotion ? false : 'hidden'}
       animate={shouldReduceMotion ? undefined : animateState}
       variants={{
-        hidden: preset.hidden,
-        visible: preset.visible,
+        hidden: hiddenVariant,
+        visible: visibleVariant,
         exited,
       }}
       transition={{ duration, ease: motionEase, delay }}

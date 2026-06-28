@@ -211,7 +211,9 @@ export default function Pricing() {
             <p className="section-sub">{SECTION_SUB}</p>
           </Reveal>
 
-          <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />
+          <Reveal delay={1.16} duration={1.2} yOffset={8} blur="12px">
+            <AnimatedPricingToggle isYearly={isYearly} onChange={setIsYearly} />
+          </Reveal>
         </div>
 
         <StaggerContainer className="pricing-grid" delay={0.20} stagger={0.24}>

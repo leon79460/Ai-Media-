@@ -267,6 +267,7 @@ function ProcessCard({ card, index }) {
           href="/contact"
           variant="dark"
           className="process-card-cta"
+          disableHoverMotion
         >
           Contact Us
         </OriginButton>
