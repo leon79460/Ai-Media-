@@ -84,7 +84,7 @@ const TEAM = [
     text: 'Oversees the technical architecture and ensures all our digital products are built for scalability, performance, and future growth.',
   },
   {
-    name: 'Tanvir',
+    name: 'A.S.M. Tanvir Jahan',
     role: 'Software Engineer/ Next.js Developer',
     image: '/about/team-david.png',
     text: 'Develops data-driven strategies that increase visibility, generate qualified leads, and maximize return on investment for our clients.',
