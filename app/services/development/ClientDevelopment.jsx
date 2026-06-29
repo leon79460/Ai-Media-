@@ -9,6 +9,7 @@ import TextReveal from '../../components/animation/TextReveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
 import FaqPro from '../../components/FaqPro';
+import ServiceBenefitsSection from '../../components/ServiceBenefitsSection';
 
 const SOLUTIONS = [
   {
@@ -28,29 +29,36 @@ const SOLUTIONS = [
 const FAQS = [
   {
     id: 'faq-1',
-    question: 'How long does it take to build a website?',
-    answer: 'Most websites are completed within 4 to 8 weeks depending on the scope, number of pages, and integrations required. We share a clear timeline before we start so you know what to expect.',
+    question: 'What type of websites do you build?',
+    answer: 'We build business websites, landing pages, service websites, and conversion-focused websites using WordPress, Elementor, React, or custom development depending on the project.',
   },
   {
     id: 'faq-2',
-    question: 'Will my website be mobile-friendly and SEO ready?',
-    answer: 'Yes. Every website we build is fully responsive across all devices and structured with clean code, fast load times, and on-page SEO foundations to support your search visibility from day one.',
+    question: 'Will the website be mobile responsive?',
+    answer: 'Yes. Every website we build is fully responsive for desktop, tablet, and mobile devices.',
   },
   {
     id: 'faq-3',
-    question: 'Do I need to provide content and images?',
-    answer: 'Not necessarily. We can work with content and images you provide, or assist with content creation and sourcing visuals as part of the project. We will advise what works best for your goals.',
+    question: 'Can we update the website ourselves after delivery?',
+    answer: 'Yes. We build websites with easy content management so your team can update text, images, services, and basic sections.',
   },
   {
     id: 'faq-4',
-    question: 'What does website maintenance include?',
-    answer: 'Our maintenance service covers software and plugin updates, security monitoring, performance checks, and minor content updates so your site stays secure, fast, and up to date.',
+    question: 'Do you handle speed, SEO, and tracking setup?',
+    answer: 'Yes. We can set up performance optimization, basic SEO structure, analytics, tracking pixels, and form integrations.',
   },
   {
     id: 'faq-5',
-    question: 'Can you update my existing website instead of building a new one?',
-    answer: 'Yes. If your current site just needs improvements, we can audit it and make targeted updates to design, speed, structure, or content rather than rebuilding from scratch.',
+    question: 'How long does website development take?',
+    answer: 'Most websites take 3–6 weeks depending on page count, functionality, content readiness, and revision rounds.',
   },
+];
+
+const BENEFITS = [
+  { title: "Fast & Responsive", text: "Smooth websites that load quickly and work beautifully across desktop, tablet, and mobile devices." },
+  { title: "Conversion-Focused", text: "Pages structured to make your message clear and guide visitors toward calls, forms, and sales actions." },
+  { title: "Easy to Manage", text: "Built so your team can update content, services, images, and basic page sections without friction." },
+  { title: "Reliable Foundation", text: "Clean development prepared for SEO, analytics, tracking, integrations, and future website growth." },
 ];
 
 export default function ClientDevelopment() {
@@ -149,6 +157,13 @@ export default function ClientDevelopment() {
         </section>
 
         {/* ── FAQ ── */}
+        <ServiceBenefitsSection
+          badge="Development Benefits"
+          heading="Why Our Development Works"
+          description="Websites built to perform, scale, and turn visitors into leads with a smooth, reliable user experience."
+          cards={BENEFITS}
+        />
+
         <section className="ds-faq-section">
           <div className="ds-faq-shell">
             <div className="ds-faq-head">
@@ -188,7 +203,7 @@ export default function ClientDevelopment() {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               Feel free to mail us for any enquiries :{' '}
-              <a href="mailto:aimedia@support.com">aimedia@support.com</a>
+              <a href="mailto:info@aimedia.design">info@aimedia.design</a>
             </Reveal>
           </div>
         </section>

@@ -1,13 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
 import { buttonHover, buttonTap } from './animation/Reveal';
 
 const FILL_DURATION = 0.5;
-const FILL_EASE = [0.16, 1, 0.3, 1];
 
 const MotionLink = motion.create(Link);
 
@@ -65,12 +64,11 @@ export default function OriginButton({
   onClick,
   type,
   disabled = false,
-  disableHoverMotion = false,
   ...rest
 }) {
   const pathname = usePathname();
-  const [hovered, setHovered] = useState(false);
-  const [pressed, setPressed] = useState(false);
+  const [hoveredPath, setHoveredPath] = useState('');
+  const [pressedPath, setPressedPath] = useState('');
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
   const [coverSize, setCoverSize] = useState(0);
 
@@ -78,14 +76,9 @@ export default function OriginButton({
 
   const activeFill = fillColor || palette.fill;
   const activeHoverText = hoverTextColor || palette.hoverText;
-  const showFill = !disabled && (hovered || pressed);
-
-  useEffect(() => {
-    setHovered(false);
-    setPressed(false);
-    setCoverSize(0);
-    setOrigin({ x: 0, y: 0 });
-  }, [pathname]);
+  const isHovered = hoveredPath === pathname;
+  const isPressed = pressedPath === pathname;
+  const showFill = !disabled && (isHovered || isPressed);
 
   const updateOriginFromEvent = useCallback((e, fromCenter = false) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -101,24 +94,24 @@ export default function OriginButton({
     if (disabled) return;
 
     updateOriginFromEvent(e);
-    setHovered(true);
+    setHoveredPath(pathname);
   };
 
   const handlePointerLeave = () => {
-    setHovered(false);
-    setPressed(false);
+    setHoveredPath('');
+    setPressedPath('');
   };
 
   const handlePointerDown = (e) => {
     if (disabled || e.button !== 0) return;
 
     updateOriginFromEvent(e);
-    setPressed(true);
-    setHovered(true);
+    setPressedPath(pathname);
+    setHoveredPath(pathname);
   };
 
   const handlePointerUp = () => {
-    setPressed(false);
+    setPressedPath('');
   };
 
   const handleFocus = (e) => {
@@ -126,13 +119,13 @@ export default function OriginButton({
 
     if (e.currentTarget.matches(':focus-visible')) {
       updateOriginFromEvent(e, true);
-      setHovered(true);
+      setHoveredPath(pathname);
     }
   };
 
   const handleBlur = () => {
-    setPressed(false);
-    setHovered(false);
+    setPressedPath('');
+    setHoveredPath('');
   };
 
   const handleKeyDown = (e) => {
@@ -143,18 +136,24 @@ export default function OriginButton({
     }
 
     updateOriginFromEvent(e, true);
-    setPressed(true);
-    setHovered(true);
+    setPressedPath(pathname);
+    setHoveredPath(pathname);
   };
 
   const handleKeyUp = (e) => {
     if (e.key === ' ' || e.key === 'Enter') {
-      setPressed(false);
+      setPressedPath('');
 
       if (!e.currentTarget.matches(':focus-visible')) {
-        setHovered(false);
+        setHoveredPath('');
       }
     }
+  };
+
+  const handleClick = (e) => {
+    setHoveredPath('');
+    setPressedPath('');
+    onClick?.(e);
   };
 
   let Comp = motion.button;
@@ -203,8 +202,8 @@ export default function OriginButton({
     <Comp
       className={`origin-btn ${className}`}
       style={resolvedStyle}
-      onClick={onClick}
-       onMouseDown={(e) => e.currentTarget.blur()}
+      onClick={handleClick}
+      onMouseDown={(e) => e.currentTarget.blur()}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
@@ -213,11 +212,7 @@ export default function OriginButton({
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
-      whileHover={
-  disabled || className.includes('footer-submit-button') || disableHoverMotion
-    ? undefined
-    : buttonHover
-}
+      whileHover={disabled || className.includes('footer-submit-button') ? undefined : buttonHover}
       whileTap={disabled ? undefined : buttonTap}
       {...extraProps}
       {...rest}

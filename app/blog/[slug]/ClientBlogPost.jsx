@@ -1,14 +1,40 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   AdReadinessScorecard,
   MarketingBudgetCalculator,
 } from '../components/MarketingBudgetTools';
 import Reveal from '../../components/animation/Reveal';
 import TextReveal from '../../components/animation/TextReveal';
+import OriginButton from '../../components/OriginButton';
+
+const blogButtonStyle = {
+  display: 'inline-flex',
+  width: 'fit-content',
+  maxWidth: '100%',
+  minHeight: '48px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '13px 22px',
+  border: 0,
+  borderRadius: '10px',
+  background: '#000',
+  color: '#fff',
+  fontFamily: 'var(--font)',
+  fontSize: '15px',
+  fontWeight: 700,
+  lineHeight: 1,
+  textAlign: 'center',
+  textDecoration: 'none',
+  boxShadow:
+    '0 14px 17px rgba(0, 0, 0, 0.32), 0 2px 4px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
+};
 
 export default function ClientBlogPost({ post }) {
+  const router = useRouter();
+
   return (
     <main className="blog-post-page">
       <header className="blog-post-hero">
@@ -310,7 +336,14 @@ export default function ClientBlogPost({ post }) {
               SEO/GEO/AEO, content, paid media, creative, tracking, reporting,
               and sales enablement.
             </p>
-            <Link href="/#contact">Request a Growth Budget Review</Link>
+            <OriginButton
+              variant="dark"
+              className="blog-detail-button"
+              style={blogButtonStyle}
+              onClick={() => router.push('/#contact')}
+            >
+              Request a Growth Budget Review
+            </OriginButton>
           </section>
 
           <h2 id="sources">Sources and benchmark notes</h2>

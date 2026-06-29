@@ -124,28 +124,28 @@ const TESTIMONIALS = [
 const FAQS = [
   {
     id: 'faq-1',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'We specialize in AI solutions, including machine learning models, automation, chatbots, predictive analytics, and consulting tailored to your business needs.',
+    question: 'Why was AI Media created?',
+    answer: 'AI Media was founded to help AV integrators and technology businesses build a stronger online presence without the high costs and slow delivery of traditional agencies.',
   },
   {
     id: 'faq-2',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'Most first launches take a few weeks, while larger systems depend on the depth of content, automation, and integrations required.',
+    question: 'What makes AI Media different from other agencies?',
+    answer: 'We combine industry expertise with AI-powered workflows to deliver high-quality websites, marketing, and content faster while maintaining human review and quality control.',
   },
   {
     id: 'faq-3',
-    question: 'Do I need technical expertise to work with you?',
-    answer: 'No. We manage the technical strategy, implementation, and support so you can focus on your business.',
+    question: 'Who do you work with?',
+    answer: 'We primarily work with AV integrators, smart home companies, security businesses, and other technology-focused service providers looking to grow their business online.',
   },
   {
     id: 'faq-4',
-    question: 'Is my data safe when working with your agency?',
-    answer: 'Yes. We design workflows with privacy, access control, and practical data handling standards in mind.',
+    question: 'Do you only build websites?',
+    answer: 'No. We provide complete digital growth solutions including branding, website development, content creation, SEO, social media management, and ongoing marketing support.',
   },
   {
     id: 'faq-5',
-    question: 'Can AI really help my business grow?',
-    answer: 'Yes. Used correctly, AI can speed up production, improve follow-up, clarify reporting, and create more consistent marketing operations.',
+    question: 'Why choose AI Media instead of hiring freelancers?',
+    answer: 'With AI Media, you get a dedicated team covering design, development, marketing, and content under one roof, ensuring every part of your digital presence works together.',
   },
 ];
 

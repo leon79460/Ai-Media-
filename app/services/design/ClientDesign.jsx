@@ -9,6 +9,7 @@ import TextReveal from '../../components/animation/TextReveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
 import FaqPro from '../../components/FaqPro';
+import ServiceBenefitsSection from '../../components/ServiceBenefitsSection';
 
 const SOLUTIONS = [
   {
@@ -34,29 +35,36 @@ const SOLUTIONS = [
 const FAQS = [
   {
     id: 'faq-1',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'We specialize in AI solutions, including machine learning models, automation, chatbots, predictive analytics, and consulting tailored to your business needs.',
+    question: 'What design services do you provide?',
+    answer: 'We create website UI designs, brand identity, landing pages, social media graphics, and marketing visuals that keep your brand consistent and professional.',
   },
   {
     id: 'faq-2',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'Most first launches take a few weeks, while larger systems depend on the depth of content, automation, and integrations required.',
+    question: 'Can you redesign our existing brand or website?',
+    answer: 'Yes. We can improve your current design, refresh your visual identity, and make your website look more modern and conversion-focused.',
   },
   {
     id: 'faq-3',
-    question: 'Do I need technical expertise to work with you?',
-    answer: 'No. We manage the technical strategy, implementation, and support so you can focus on your business.',
+    question: 'Will the design be custom or template-based?',
+    answer: 'Our designs are custom-built around your business, audience, services, and brand direction.',
   },
   {
     id: 'faq-4',
-    question: 'Is my data safe when working with your agency?',
-    answer: 'Yes. We design workflows with privacy, access control, and practical data handling standards in mind.',
+    question: 'Do you provide design files?',
+    answer: 'Yes. We can provide Figma or source files depending on the project scope.',
   },
   {
     id: 'faq-5',
-    question: 'Can AI really help my business grow?',
-    answer: 'Yes. Used correctly, AI can speed up production, improve follow-up, clarify reporting, and create more consistent marketing operations.',
+    question: 'How long does the design process take?',
+    answer: 'Most design projects take 1–3 weeks depending on the number of pages, revisions, and required assets.',
   },
+];
+
+const BENEFITS = [
+  { title: "Increase Trust", text: "Professional visuals that make your business look credible from the first impression and help customers feel confident choosing you." },
+  { title: "Generate More Leads", text: "Layouts designed to guide visitors clearly toward booking calls, requesting quotes, and taking the next step." },
+  { title: "Stand Out From Competitors", text: "Custom design direction built around your market, services, and audience so your brand feels different and memorable." },
+  { title: "Built for Growth", text: "Design systems that stay consistent across your website, ads, social media, and future marketing materials." },
 ];
 
 export default function ClientDesign() {
@@ -155,6 +163,13 @@ export default function ClientDesign() {
         </section>
 
         {/* ── FAQ ── */}
+        <ServiceBenefitsSection
+          badge="Design Benefits"
+          heading="Why Our Design Works"
+          description="Design that helps AV businesses look trusted, professional, and ready to convert."
+          cards={BENEFITS}
+        />
+
         <section className="ds-faq-section">
           <div className="ds-faq-shell">
             <div className="ds-faq-head">
@@ -194,7 +209,7 @@ export default function ClientDesign() {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               Feel free to mail us for any enquiries :{' '}
-              <a href="mailto:aimedia@support.com">aimedia@support.com</a>
+              <a href="mailto:info@aimedia.design">info@aimedia.design</a>
             </Reveal>
           </div>
         </section>

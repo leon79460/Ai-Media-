@@ -9,6 +9,7 @@ import TextReveal from '../../components/animation/TextReveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
 import FaqPro from '../../components/FaqPro';
+import ServiceBenefitsSection from '../../components/ServiceBenefitsSection';
 
 const SOLUTIONS = [
   {
@@ -28,29 +29,36 @@ const SOLUTIONS = [
 const FAQS = [
   {
     id: 'faq-1',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'We specialize in AI solutions, including machine learning models, automation, chatbots, predictive analytics, and consulting tailored to your business needs.',
+    question: 'What type of content do you create?',
+    answer: 'We create social media posts, reels/video concepts, website copy, blog content, ad copy, email content, and branded visuals.',
   },
   {
     id: 'faq-2',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'Most first launches take a few weeks, while larger systems depend on the depth of content, automation, and integrations required.',
+    question: 'Do you also manage posting and scheduling?',
+    answer: 'Yes. We can create, schedule, and manage content across your selected platforms.',
   },
   {
     id: 'faq-3',
-    question: 'Do I need technical expertise to work with you?',
-    answer: 'No. We manage the technical strategy, implementation, and support so you can focus on your business.',
+    question: 'Can you create content if we don’t have photos or videos?',
+    answer: 'Yes. We can use brand assets, stock visuals, AI-assisted content, graphics, and your service information to create professional content.',
   },
   {
     id: 'faq-4',
-    question: 'Is my data safe when working with your agency?',
-    answer: 'Yes. We design workflows with privacy, access control, and practical data handling standards in mind.',
+    question: 'Will the content match our brand voice?',
+    answer: 'Yes. We first understand your business, audience, tone, and goals so the content feels aligned with your brand.',
   },
   {
     id: 'faq-5',
-    question: 'Can AI really help my business grow?',
-    answer: 'Yes. Used correctly, AI can speed up production, improve follow-up, clarify reporting, and create more consistent marketing operations.',
+    question: 'How many posts do you create per month?',
+    answer: 'It depends on your package. We can create weekly or monthly content plans based on your goals and budget.',
   },
+];
+
+const BENEFITS = [
+  { title: "Clear Messaging", text: "Content that explains your services, value, and expertise in a simple way your customers can understand." },
+  { title: "Stronger Brand Presence", text: "Visuals and copy that make your business look active, professional, and consistent across platforms." },
+  { title: "Engaging Media", text: "Posts, videos, and AI-assisted content created to capture attention and keep your audience interested." },
+  { title: "Consistent Output", text: "A repeatable content system that helps your brand show up regularly without overwhelming your team." },
 ];
 
 export default function ClientContent() {
@@ -151,7 +159,15 @@ export default function ClientContent() {
           </div>
         </section>
 
-        {/* ── FAQ ── */}
+        {/* ── Benefits Section ── */}
+        <ServiceBenefitsSection
+          badge="Content Benefits"
+          heading="Why Our Content Works"
+          description="Content designed to capture attention, communicate your value clearly, and support long-term brand growth."
+          cards={BENEFITS}
+        />
+
+        {/* ── FAQ secitons  ── */} 
         <section className="ds-faq-section">
           <div className="ds-faq-shell">
             <div className="ds-faq-head">
@@ -191,7 +207,7 @@ export default function ClientContent() {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               Feel free to mail us for any enquiries :{' '}
-              <a href="mailto:aimedia@support.com">aimedia@support.com</a>
+              <a href="mailto:info@aimedia.design">info@aimedia.design</a>
             </Reveal>
           </div>
         </section>

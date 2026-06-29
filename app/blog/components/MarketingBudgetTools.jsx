@@ -1,6 +1,29 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import OriginButton from '../../components/OriginButton';
+
+const blogButtonStyle = {
+  display: 'inline-flex',
+  width: 'fit-content',
+  maxWidth: '100%',
+  minHeight: '48px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '13px 22px',
+  border: 0,
+  borderRadius: '10px',
+  background: '#000',
+  color: '#fff',
+  fontFamily: 'var(--font)',
+  fontSize: '15px',
+  fontWeight: 700,
+  lineHeight: 1,
+  textAlign: 'center',
+  textDecoration: 'none',
+  boxShadow:
+    '0 14px 17px rgba(0, 0, 0, 0.32), 0 2px 4px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
+};
 
 const modes = {
   stable: {
@@ -244,9 +267,14 @@ export function MarketingBudgetCalculator() {
           : 'Enter annual revenue to calculate a recommended marketing and advertising range for your integration company.'}
       </div>
 
-      <button className="blog-button" type="button" onClick={copySummary}>
+      <OriginButton
+        variant="dark"
+        className="blog-detail-button"
+        style={blogButtonStyle}
+        onClick={copySummary}
+      >
         Copy budget summary
-      </button>
+      </OriginButton>
       {copyStatus && <span className="copy-status">{copyStatus}</span>}
 
       <h3>A practical allocation model based on your revenue</h3>

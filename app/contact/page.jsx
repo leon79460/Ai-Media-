@@ -12,28 +12,28 @@ import FaqPro from '../components/FaqPro';
 const FAQS = [
   {
     id: 'faq-1',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'We specialize in AI solutions, including machine learning models, automation, chatbots, predictive analytics, and consulting tailored to your business needs.',
+    question: 'How do I get started with AI Media?',
+    answer: "Simply fill out our contact form or schedule a discovery call. We'll discuss your goals, understand your business, and recommend the best solution for your needs.",
   },
   {
     id: 'faq-2',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'Most first launches take a few weeks, while larger systems depend on the depth of content, automation, and integrations required.',
+    question: 'Do you work with businesses outside the United States?',
+    answer: 'Yes. We work remotely with clients across the United States, United Kingdom, Australia, and other international markets.',
   },
   {
     id: 'faq-3',
-    question: 'Do I need technical expertise to work with you?',
-    answer: 'No. We manage the technical strategy, implementation, and support so you can focus on your business.',
+    question: 'How quickly will someone respond to my inquiry?',
+    answer: 'Our team typically responds to all inquiries within one business day.',
   },
   {
     id: 'faq-4',
-    question: 'Is my data safe when working with your agency?',
-    answer: 'Yes. We design workflows with privacy, access control, and practical data handling standards in mind.',
+    question: 'Can I request multiple services at once?',
+    answer: 'Absolutely. Many of our clients combine website development, branding, marketing, and content services into one complete growth strategy.',
   },
   {
     id: 'faq-5',
-    question: 'Can AI really help my business grow?',
-    answer: 'Yes. Used correctly, AI can speed up production, improve follow-up, clarify reporting, and create more consistent marketing operations.',
+    question: 'What should I prepare before contacting AI Media?',
+    answer: 'If possible, have your website, social media profiles, business goals, and any project requirements ready. This helps us provide more accurate recommendations during our initial conversation.',
   },
 ];
 

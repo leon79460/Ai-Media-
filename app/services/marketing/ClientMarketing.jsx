@@ -9,6 +9,7 @@ import TextReveal from '../../components/animation/TextReveal';
 import StaggerContainer from '../../components/animation/StaggerContainer';
 import AnimatedCard from '../../components/animation/AnimatedCard';
 import FaqPro from '../../components/FaqPro';
+import ServiceBenefitsSection from '../../components/ServiceBenefitsSection';
 
 const SOLUTIONS = [
   {
@@ -34,29 +35,36 @@ const SOLUTIONS = [
 const FAQS = [
   {
     id: 'faq-1',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'We specialize in AI solutions, including machine learning models, automation, chatbots, predictive analytics, and consulting tailored to your business needs.',
+    question: 'What marketing services do you offer?',
+    answer: 'We help with SEO, paid ads, lead generation, social media strategy, email marketing, and campaign planning.',
   },
   {
     id: 'faq-2',
-    question: 'How long does it take to develop an AI solution?',
-    answer: 'Most first launches take a few weeks, while larger systems depend on the depth of content, automation, and integrations required.',
+    question: 'Can you help us get more qualified leads?',
+    answer: 'Yes. Our marketing approach focuses on reaching the right audience and guiding them toward calls, forms, and sales opportunities.',
   },
   {
     id: 'faq-3',
-    question: 'Do I need technical expertise to work with you?',
-    answer: 'No. We manage the technical strategy, implementation, and support so you can focus on your business.',
+    question: 'Do you manage paid ads?',
+    answer: 'Yes. We can manage paid campaigns on platforms like Google, Meta, LinkedIn, or other channels depending on your audience.',
   },
   {
     id: 'faq-4',
-    question: 'Is my data safe when working with your agency?',
-    answer: 'Yes. We design workflows with privacy, access control, and practical data handling standards in mind.',
+    question: 'Will we receive reports?',
+    answer: 'Yes. We provide clear performance reports showing results, insights, and recommended next steps.',
   },
   {
     id: 'faq-5',
-    question: 'Can AI really help my business grow?',
-    answer: 'Yes. Used correctly, AI can speed up production, improve follow-up, clarify reporting, and create more consistent marketing operations.',
+    question: 'How soon can we see results?',
+    answer: 'Paid ads can generate quicker results, while SEO and organic marketing usually take longer. Most clients start seeing clearer performance trends within 30–90 days.',
   },
+];
+
+const BENEFITS = [
+  { title: "Get Found Online", text: "SEO and visibility improvements that help potential customers discover your business when they search for your services." },
+  { title: "Attract Qualified Leads", text: "Campaigns focused on reaching people who are already interested in your solutions and more likely to convert." },
+  { title: "Build Trust Over Time", text: "Consistent messaging and content that keep your brand active, credible, and top-of-mind." },
+  { title: "Track What Matters", text: "Clear reporting that shows performance, opportunities, and the next steps needed to improve results." },
 ];
 
 export default function ClientMarketing() {
@@ -155,6 +163,13 @@ export default function ClientMarketing() {
         </section>
 
         {/* ── FAQ ── */}
+        <ServiceBenefitsSection
+          badge="Marketing Benefits"
+          heading="Why Our Marketing Works"
+          description="Marketing systems designed to help AV businesses attract the right audience, build trust, and convert more leads."
+          cards={BENEFITS}
+        />
+
         <section className="ds-faq-section">
           <div className="ds-faq-shell">
             <div className="ds-faq-head">
@@ -194,7 +209,7 @@ export default function ClientMarketing() {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               Feel free to mail us for any enquiries :{' '}
-              <a href="mailto:aimedia@support.com">aimedia@support.com</a>
+              <a href="mailto:info@aimedia.design">info@aimedia.design</a>
             </Reveal>
           </div>
         </section>

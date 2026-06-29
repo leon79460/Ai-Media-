@@ -233,26 +233,19 @@ export default function Footer() {
                     pointerEvents: 'auto',
                   }}
                 >
-                  <span
+                  <Image
+                    src="/logos/new-logo.png"
+                    alt="AI Media logo"
+                    width={270}
+                    height={64}
                     style={{
-                      position: 'relative',
+                      width: '160px',
+                      height: '60px',
+                      maxWidth: '270px',
+                      objectFit: 'contain',
                       display: 'block',
-                      width: '170px',
-                      height: '54px',
-                      maxWidth: '170px',
                     }}
-                  >
-                    <Image
-                      src="/logos/logo-2.png"
-                      alt="AI Media"
-                      fill
-                      sizes="170px"
-                      style={{
-                        objectFit: 'contain',
-                        display: 'block',
-                      }}
-                    />
-                  </span>
+                  />
                 </button>
               </div>
 

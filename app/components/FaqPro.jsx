@@ -28,17 +28,13 @@ function ChevronDownIcon({ className, 'aria-hidden': ariaHidden }) {
 }
 
 const PANEL_EASE = [0.16, 1, 0.3, 1];
-const EXPAND_SPRING = {
-  type: 'spring',
-  stiffness: 150,
-  damping: 26,
-  mass: 1.05,
+const PANEL_TRANSITION = {
+  duration: 0.72,
+  ease: PANEL_EASE,
 };
-const COLLAPSE_SPRING = {
-  type: 'spring',
-  stiffness: 190,
-  damping: 30,
-  mass: 1.1,
+const PANEL_CLOSE_TRANSITION = {
+  duration: 0.64,
+  ease: PANEL_EASE,
 };
 
 function getDefaultOpenId(items, defaultOpenFirst) {
@@ -82,7 +78,7 @@ function FaqProRow({
         initial={false}
         role="region"
         transition={{
-          height: isOpen ? EXPAND_SPRING : COLLAPSE_SPRING,
+          height: isOpen ? PANEL_TRANSITION : PANEL_CLOSE_TRANSITION,
         }}
       >
         <motion.div
@@ -96,11 +92,11 @@ function FaqProRow({
           initial={false}
           transition={{
             opacity: {
-              duration: isOpen ? 0.38 : 0.2,
+              duration: isOpen ? 0.54 : 0.3,
               ease: PANEL_EASE,
-              delay: isOpen ? 0.06 : 0,
+              delay: isOpen ? 0.12 : 0,
             },
-            y: isOpen ? EXPAND_SPRING : COLLAPSE_SPRING,
+            y: isOpen ? PANEL_TRANSITION : PANEL_CLOSE_TRANSITION,
           }}
         >
           {item.answer}
