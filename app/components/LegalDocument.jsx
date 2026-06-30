@@ -3,6 +3,7 @@
 import Footer from './Footer';
 import Navbar from './Navbar';
 import Reveal from './animation/Reveal';
+import TextReveal from './animation/TextReveal';
 
 function LegalBadgeIcon() {
   return (
@@ -44,17 +45,21 @@ export default function LegalDocument({
       <Navbar />
       <main className="legal-page">
         <section className="legal-hero" aria-labelledby="legal-title">
-          <Reveal as="span" className="section-badge" delay={0} duration={0.4} yOffset={6} blur="6px">
+          <Reveal as="span" className="section-badge" delay={0.04} duration={0.9} yOffset={10} blur="12px">
             <LegalBadgeIcon />
             {badge}
           </Reveal>
-          <Reveal as="h1" id="legal-title" delay={0.25} duration={0.4} yOffset={6} blur="6px">
-            {title}
-          </Reveal>
-          <Reveal as="p" delay={0.75} duration={0.4} yOffset={6} blur="6px">
+          <TextReveal
+            as="h1"
+            id="legal-title"
+            text={title}
+            delay={0.34}
+            stagger={0.1}
+          />
+          <Reveal as="p" delay={0.86} duration={1.2} yOffset={8} blur="12px">
             {intro}
           </Reveal>
-          <Reveal as="small" delay={0.9} duration={0.4} yOffset={6} blur="6px">
+          <Reveal as="small" delay={1.08} duration={1} yOffset={6} blur="10px">
             Last updated: {lastUpdated}
           </Reveal>
         </section>

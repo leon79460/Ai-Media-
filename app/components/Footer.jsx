@@ -21,10 +21,10 @@ const MENU_LINKS = [
 ];
 
 const SERVICE_LINKS = [
-  { label: 'Design', target: 'services' },
-  { label: 'Development', target: 'services' },
-  { label: 'Marketing', target: 'services' },
-  { label: 'Content', target: 'services' },
+  { label: 'Design', href: '/services/design' },
+  { label: 'Development', href: '/services/development' },
+  { label: 'Marketing', href: '/services/marketing' },
+  { label: 'Content', href: '/services/content' },
 ];
 
 const SOCIAL_LINKS = [
@@ -441,7 +441,7 @@ export default function Footer() {
                       {l.label}
                     </button>
                   ) : (
-                    <a
+                    <Link
                       key={l.label}
                       href={l.href}
                       style={footerLinkStyle}
@@ -449,7 +449,7 @@ export default function Footer() {
                       onMouseLeave={handleFooterLinkLeave}
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ),
                 )}
               </div>

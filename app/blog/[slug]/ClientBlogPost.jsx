@@ -9,6 +9,7 @@ import {
 import Reveal from '../../components/animation/Reveal';
 import TextReveal from '../../components/animation/TextReveal';
 import OriginButton from '../../components/OriginButton';
+import FaqPro from '../../components/FaqPro';
 
 const blogButtonStyle = {
   display: 'inline-flex',
@@ -303,27 +304,26 @@ export default function ClientBlogPost({ post }) {
           </p>
 
           <h2 id="faq">FAQ</h2>
-          <div className="blog-faq">
-            {[
-              [
-                'What percentage of revenue should a systems integrator spend on marketing?',
-                'A prudent range is usually 6% to 10% of annual revenue for total marketing investment. Referral-heavy firms may be closer to 4% to 6%, while aggressive expansion can justify 10% to 15% or more.',
-              ],
-              [
-                'How much of the budget should go to paid ads?',
-                'For a prudent growth plan, paid advertising often falls around 2.5% to 5% of revenue once the website, tracking, CRM, proof, offer, and sales follow-up process can convert demand.',
-              ],
-              [
-                'What should be fixed before increasing ad spend?',
-                'Fix tracking, CRM source attribution, landing pages, service positioning, project proof, reviews, follow-up process, and reporting cadence.',
-              ],
-            ].map(([question, answer]) => (
-              <details key={question}>
-                <summary>{question}</summary>
-                <p>{answer}</p>
-              </details>
-            ))}
-          </div>
+          <FaqPro
+            className="blog-faq"
+            items={[
+              {
+                id: 'blog-faq-1',
+                question: 'What percentage of revenue should a systems integrator spend on marketing?',
+                answer: 'A prudent range is usually 6% to 10% of annual revenue for total marketing investment. Referral-heavy firms may be closer to 4% to 6%, while aggressive expansion can justify 10% to 15% or more.',
+              },
+              {
+                id: 'blog-faq-2',
+                question: 'How much of the budget should go to paid ads?',
+                answer: 'For a prudent growth plan, paid advertising often falls around 2.5% to 5% of revenue once the website, tracking, CRM, proof, offer, and sales follow-up process can convert demand.',
+              },
+              {
+                id: 'blog-faq-3',
+                question: 'What should be fixed before increasing ad spend?',
+                answer: 'Fix tracking, CRM source attribution, landing pages, service positioning, project proof, reviews, follow-up process, and reporting cadence.',
+              },
+            ]}
+          />
 
           <section className="blog-cta" id="cta">
             <h2>

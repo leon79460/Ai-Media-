@@ -42,6 +42,16 @@ html {
   --motion-fast: 0.28s;
   --motion-base: 0.72s;
   --motion-slow: 1s;
+  --document-hero-heading-desktop: 54px;
+  --document-hero-heading-tablet: 44px;
+  --document-hero-heading-phone: 32px;
+  --document-content-heading-desktop: 28px;
+  --document-content-heading-tablet: 26px;
+  --document-content-heading-phone: 24px;
+  --document-hero-heading-line-desktop: 1.6em;
+  --document-hero-heading-line-phone: 1.5em;
+  --document-content-heading-line-desktop: 1.4em;
+  --document-content-heading-line-small: 1.3em;
 }
 
 @property --button-fill-radius {
@@ -3215,6 +3225,33 @@ p {
 
 .blog-faq details p {
   margin-top: 14px;
+}
+
+.blog-post-page .blog-faq.faq-pro-wrapper {
+  max-width: 100% !important;
+  margin: 0 !important;
+  gap: 12px !important;
+}
+
+.blog-post-page .blog-faq .faq-pro-row {
+  border: 1px solid rgba(255, 255, 255, 0.72) !important;
+  border-radius: 15px !important;
+  background: #f5f5f5 !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+.blog-post-page .blog-faq .faq-pro-trigger {
+  padding: 18px 20px !important;
+}
+
+.blog-post-page .blog-faq .faq-pro-question {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+}
+
+.blog-post-page .blog-faq .faq-pro-answer {
+  padding: 0 20px 18px !important;
 }
 
 .blog-cta {
@@ -15076,32 +15113,52 @@ main.about-page .about-faq-section #faq-title.section-title {
 }
 
 .blog-post-page .blog-post-hero h1,
-.blog-post-page .blog-article :where(h1, h2, h3, h4, h5, h6),
-.blog-post-page .blog-tool h2,
-.blog-post-page .blog-cta h2 {
-  font-size: 38px !important;
+.legal-page .legal-hero h1 {
+  font-size: var(--document-hero-heading-desktop) !important;
   font-weight: 500 !important;
   letter-spacing: 0 !important;
-  line-height: 1.4em !important;
+  line-height: var(--document-hero-heading-line-desktop) !important;
+}
+
+.blog-post-page .blog-article :where(h1, h2, h3, h4, h5, h6),
+.blog-post-page .blog-tool h2,
+.blog-post-page .blog-cta h2,
+.legal-page .legal-article :where(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--document-content-heading-desktop) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  line-height: var(--document-content-heading-line-desktop) !important;
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .blog-post-page .blog-post-hero h1,
+  .legal-page .legal-hero h1 {
+    font-size: var(--document-hero-heading-tablet) !important;
+    line-height: var(--document-hero-heading-line-desktop) !important;
+  }
+
   .blog-post-page .blog-article :where(h1, h2, h3, h4, h5, h6),
   .blog-post-page .blog-tool h2,
-  .blog-post-page .blog-cta h2 {
-    font-size: 32px !important;
-    line-height: 1.3em !important;
+  .blog-post-page .blog-cta h2,
+  .legal-page .legal-article :where(h1, h2, h3, h4, h5, h6) {
+    font-size: var(--document-content-heading-tablet) !important;
+    line-height: var(--document-content-heading-line-small) !important;
   }
 }
 
 @media (max-width: 768px) {
   .blog-post-page .blog-post-hero h1,
+  .legal-page .legal-hero h1 {
+    font-size: var(--document-hero-heading-phone) !important;
+    line-height: var(--document-hero-heading-line-phone) !important;
+  }
+
   .blog-post-page .blog-article :where(h1, h2, h3, h4, h5, h6),
   .blog-post-page .blog-tool h2,
-  .blog-post-page .blog-cta h2 {
-    font-size: 28px !important;
-    line-height: 1.3em !important;
+  .blog-post-page .blog-cta h2,
+  .legal-page .legal-article :where(h1, h2, h3, h4, h5, h6) {
+    font-size: var(--document-content-heading-phone) !important;
+    line-height: var(--document-content-heading-line-small) !important;
   }
 }
 
